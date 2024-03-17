@@ -31,12 +31,12 @@
 <p>
 <img src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&locale=en&theme=dark" alt="shadow269" />
 </p>
-<p>🔝 Top Contributed Repo
-![](https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true)
----
-<img src="[![](https://visitcount.itsvg.in/api?id=nwaliaez&icon=0&color=0)](https://visitcount.itsvg.in)"/>
-</p>
 <p>
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=shadow269&theme=dark" alt="shadow269" />
 </p>
+<p>🔝 Top Contributed Repo</p>
+---
+<img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" />
+<hr />
+<a href="https://visitcount.itsvg.in/api?id=nwaliaez&icon=0&color=0"><img src="https://visitcount.itsvg.in/api?id=nwaliaez&icon=0&color=0"/></a>
 
