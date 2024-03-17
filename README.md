@@ -34,4 +34,6 @@
 <p>
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=shadow269&theme=dark" alt="shadow269" />
 </p>
-    
+<p> 
+<img src="https://camo.githubusercontent.com/0c50865……636f6d6…" alt data-canonical-src="https://github-contributor-stats.vercel.app/api?username=nwaliaez&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" style="max-width: 100%;">
+</p>
