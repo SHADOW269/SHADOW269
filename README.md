@@ -34,11 +34,4 @@
 <p>
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=shadow269&theme=dark" alt="shadow269" />
 </p>
-### 🔝 Top Contributed Repo
-![](https://github-contributor-stats.vercel.app/api?username=nwaliaez&limit=5&theme=tokyonight&combine_all_yearly_contributions=true)
-
----
-[![](https://visitcount.itsvg.in/api?id=nwaliaez&icon=0&color=0)](https://visitcount.itsvg.in)
-
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
 ![](https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true)
