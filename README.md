@@ -4,13 +4,13 @@
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> </p>
 <h3 align="left" style="color: #8b949e;">Connect with me:</h3>
     ---
-<a href="https://twitter.com/@shadowking2669" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="@shadowking2669" height="30" width="40" /></a>
+<br><a href="https://twitter.com/@shadowking2669" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="@shadowking2669" height="30" width="40" /></a>
 <a href="https://linkedin.com/in/linkedin.com/in/sakshith-shetty-2375062b3" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="linkedin.com/in/sakshith-shetty-2375062b3" height="30" width="40" /></a>
 <a href="https://instagram.com/sakshithshetty69" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="sakshithshetty69" height="30" width="40" /></a>
 </p>
 <h3 align="left" style="color: #8b949e;">Languages and Tools:</h3>
     ---
-<a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="40" height="40"/> </a> 
+<br><a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="40" height="40"/> </a> 
 <a href="https://www.w3schools.com/cpp/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/cplusplus/cplusplus-original.svg" alt="cplusplus" width="40" height="40"/> 
 </a> <a href="https://www.w3schools.com/cs/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/> </a> 
 <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> 
@@ -24,7 +24,7 @@
 </p>
 <h3>📊 GitHub Stats:</h3>
     ---
-<p align="center">
+<br><p align="center">
 <img src="https://github-readme-stats.vercel.app/api/top-langs?username=shadow269&show_icons=true&locale=en&layout=compact&theme=dark" alt="shadow269" />
 </p>
 <p align="center">
