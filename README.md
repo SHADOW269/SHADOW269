@@ -1,6 +1,5 @@
 <body style="background-color: #0d1117; color: #c9d1d9;">
-    <h1 align="left" style="color: #ffffff;">💫 About Me:</h1>
-    <h3 style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">🔭 I’m currently working on:</h3>
+    <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">💫 About Me: <br> 🔭 I’m currently working on:</h1>
     <h3>Improving on HTML , CSS and Java Script</h3>
     <p align="left"> <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> </p>
     <h3 align="left" style="color: #8b949e;">Connect with me:</h3>
