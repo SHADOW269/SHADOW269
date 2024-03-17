@@ -24,7 +24,6 @@
 </p>
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 GitHub Stats: <br></h1>
 <br>
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> </p>
 <p>
 <img src="https://github-readme-stats.vercel.app/api/top-langs?username=shadow269&show_icons=true&locale=en&layout=compact&theme=dark" alt="shadow269" />
 </p>
@@ -38,4 +37,3 @@
 <img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" />
 <hr />
 <a href="https://visitcount.itsvg.in/api?id=nwaliaez&icon=0&color=0"></a>
----
