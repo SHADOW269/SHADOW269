@@ -34,7 +34,7 @@
 <p>
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=shadow269&theme=dark" alt="shadow269" />
 </p>
-<p>🔝 Top Contributed Repo</p>
+<h3>🔝 Top Contributed Repo</h3>
 ---
 <img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" />
 <hr />
