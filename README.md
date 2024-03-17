@@ -35,7 +35,3 @@
 <p>
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=shadow269&theme=dark" alt="shadow269" />
 </p>
-<p> 
-<img src="https://camo.githubusercontent.com/0c50865……636f6d6…"  style="max-width: 100%;">
-</p>
-
