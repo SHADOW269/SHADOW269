@@ -1,7 +1,7 @@
 <body style="background-color: #0d1117; color: #c9d1d9;">
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">💫 About Me: <br></h1>
 <h3> 🔭 I’m currently working on: <br>Improving on HTML , CSS and Java Script</h3>
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> </p>
+<h3> 🏫 College: <br>Maps College Mangalore</h3>
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;"> 🌐 Connect with me: <br></h1>
 <br><a href="https://twitter.com/@shadowking2669" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="@shadowking2669" height="30" width="40" /></a>
 <a href="https://linkedin.com/in/linkedin.com/in/sakshith-shetty-2375062b3" target="blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="linkedin.com/in/sakshith-shetty-2375062b3" height="30" width="40" /></a>
@@ -23,7 +23,9 @@
 <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> 
 </p>
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 GitHub Stats: <br></h1>
-<br><p>
+<br>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> </p>
+<p>
 <img src="https://github-readme-stats.vercel.app/api/top-langs?username=shadow269&show_icons=true&locale=en&layout=compact&theme=dark" alt="shadow269" />
 </p>
 <p>
