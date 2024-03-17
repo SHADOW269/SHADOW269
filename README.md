@@ -21,13 +21,13 @@
 <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> 
 </p>
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 GitHub Stats: <br></h1>
-<br><p align="center">
+<br><p>
 <img src="https://github-readme-stats.vercel.app/api/top-langs?username=shadow269&show_icons=true&locale=en&layout=compact&theme=dark" alt="shadow269" />
 </p>
-<p align="center">
+<p>
 <img src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&locale=en&theme=dark" alt="shadow269" />
 </p>
-<p align="center">
+<p>
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=shadow269&theme=dark" alt="shadow269" />
 </p>
     
