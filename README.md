@@ -1,5 +1,5 @@
  <body style="background-color: #0d1117; color: #c9d1d9;">
-    <h1 align="left" style="color: #ffffff;">About Me:</h1>
+    <h1 align="left" style="color: #ffffff;">💫 About Me:</h1>
     🔭 I’m currently working on:
 Improving on HTML , CSS and Java Script
     <p align="left"> <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> </p>
