@@ -36,4 +36,4 @@
 
 <h3>🔝 Top Contributed Repo</h3>
 <img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" />
-<a href="https://www.leetcode.com/shadow2669" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="shadow2669" height="30" width="40" /></a>
+<img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> 
