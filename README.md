@@ -29,10 +29,3 @@
 <img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" />
 <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> 
 
-<div align="center">
-  <h2>🐍 My Contributions 🐍</h2>
-  <br>
-  <img alt="snake eating my contributions" src="https://github.com/SHADOW269/SHADOW269/output/github-contribution-grid-snake.svg" />
-  
-  <br/><br/><br/>
-</div>
