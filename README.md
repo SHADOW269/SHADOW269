@@ -1,6 +1,6 @@
 <body style="background-color: #0d1117; color: #c9d1d9;">
 
-<h1 align=""><img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=500&height=70&duration=2500&lines=YO+🤚;+I'm+Sakshith+C+Shetty!;+AKA+SHADOW;" /></h1>
+<h1 align="left"><img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=500&height=70&duration=2500&lines=YO+🤚;+I'm+Sakshith+C+Shetty!;+AKA+SHADOW;" /></h1>
 
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">💫 About Me: <br></h1>
 <h3> 🔭 I’m currently working on: <br>Improving on HTML , CSS and Java Script</h3>
