@@ -21,14 +21,7 @@
 <p> <img src="https://github-readme-stats.vercel.app/api/top-langs?username=shadow269&show_icons=true&locale=en&layout=compact&theme=dark" alt="shadow269" /> </p>
 <p> <img src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&locale=en&theme=dark" alt="shadow269" /> </p>
 <p> <img src="https://github-readme-streak-stats.herokuapp.com/?user=shadow269&theme=dark" alt="shadow269" /> </p>
-<img width=325 align="center" src="https://github-readme-stats-shadow269.vercel.app/api/top-langs/?username=shadow269&hide=HTML&langs_count=8&layout=compact&theme=react&border_radius=10&size_weight=0.5&count_weight=0.5&exclude_repo=github-readme-stats" alt="top langs" />
 
 <h3>🔝 Top Contributed Repo</h3>
 <img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" />
 <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> 
-
-
-<h2 align="center">⚒️ Languages-Frameworks-Tools ⚒️</h2>
-<br/>
-<div align="center"><img src="https://skillicons.dev/icons?i=html,css,javascript,c,java,python,mysql,git,vscode,github" /><br></div>
-<hr/>
