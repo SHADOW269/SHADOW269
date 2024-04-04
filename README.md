@@ -14,7 +14,7 @@
 <a href="https://leetcode.com/SHADOW2669/" target="_blank"><img src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/leet-code.svg" alt="SHADOW2669" height="40" width="50" /></a>
 </p>
 
-<h2 align="">⚒️ Languages-Frameworks-Tools ⚒️</h2><br/>
+<h2 align="">⚒️ Languages-Frameworks-Tools</h2><br/>
 <div align=""><img src="https://skillicons.dev/icons?i=html,css,javascript,c,java,mysql,python,github,git,vscode" /><br></div>
 
 <br/>
