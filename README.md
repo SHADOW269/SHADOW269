@@ -28,5 +28,6 @@
 <h3>🔝 Top Contributed Repo</h3>
 <img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" />
 <img src="https://komarev.com/ghpvc/?username=shadow269&label=Profile%20views&color=0e75b6&style=flat" alt="shadow269" /> 
-
-![snake gif](https://github.com/SHADOW269/SHADOW269/blob/output/github-contribution-grid-snake.svg)
+<div>
+![snake gif](https://github.com/SHADOW269/SHADOW269/blob/output/github-contribution-grid-snake.gif)
+</div>
