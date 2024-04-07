@@ -15,7 +15,8 @@
 </p>
 
 <h2 align="">⚒️ Languages-Frameworks-Tools</h2><br/>
-<div align=""><img src="https://skillicons.dev/icons?i=html,css,javascript,c,cpp,cs,dotnet,java,mysql,python,github,git,vscode,linux" /><br></div>
+<div align=""><img src="https://skillicons.dev/icons?i=html,css,javascript,c,cpp,cs,dotnet" /><br></div>
+<div align=""><img src="https://skillicons.dev/icons?i=java,mysql,python,github,git,vscode,linux" /><br></div>
 
 <br/>
 <hr/>
