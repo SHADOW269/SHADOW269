@@ -28,10 +28,11 @@
 </div>
 <div align="left">
 <h3>🔝 Top Contributed Repo</h3>
-<img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=tokyonight&combine_all_yearly_contributions=true" />
+<img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=dark&combine_all_yearly_contributions=true" />
 </div>
 <img src="https://raw.githubusercontent.com/SHADOW269/SHADOW269/output/snake.svg" alt="Snake animation" />
 
 <div align="center">
   <img src="https://profile-counter.glitch.me/SHADOW269/count.svg?"  />
 </div>
+
