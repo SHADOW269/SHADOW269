@@ -18,21 +18,21 @@
 <div align=""><img src="https://skillicons.dev/icons?i=java,mysql,python,github,git,vscode,linux" /><br></div>
 
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 LeetCode Stats: <br></h1>
-![Leetcode Stats](https://leetcard.jacoblin.cool/shadow269?theme=dark)
+<img src="https://leetcard.jacoblin.cool/shadow269?theme=dark" alt="LeetCode Stats">
+
 
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 GitHub Stats: <br></h1>
-<br>
 <div align="left">
   <img src="https://github-readme-stats.vercel.app/api?username=SHADOW269&hide_title=false&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dark&locale=en&hide_border=false&order=1" height="150" alt="stats graph"  />
   <img src="https://github-readme-stats.vercel.app/api/top-langs?username=SHADOW269&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=5&theme=dark&hide_border=false&order=2" height="150" alt="languages graph"  />
 </div>
+
 <div align="left">
 <h3>🔝 Top Contributed Repo</h3>
 <img src="https://github-contributor-stats.vercel.app/api?username=shadow269&limit=5&theme=dark&combine_all_yearly_contributions=true" />
 </div>
+
 <img src="https://raw.githubusercontent.com/SHADOW269/SHADOW269/output/snake.svg" alt="Snake animation" />
 
-<div align="center">
-  <img src="https://profile-counter.glitch.me/SHADOW269/count.svg?"  />
-</div>
+<div align="left"><img src="https://profile-counter.glitch.me/SHADOW269/count.svg?"  /></div>
 
