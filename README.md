@@ -17,9 +17,9 @@
 <div align=""><img src="https://skillicons.dev/icons?i=html,css,javascript,c,cpp,cs,dotnet" /><br></div>
 <div align=""><img src="https://skillicons.dev/icons?i=java,mysql,python,github,git,vscode,linux" /><br></div>
 
+<h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 LeetCode Stats: <br></h1>
+![Leetcode Stats](https://leetcard.jacoblin.cool/shadow269?theme=dark)
 
-
-<hr/>
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 GitHub Stats: <br></h1>
 <br>
 <div align="left">
