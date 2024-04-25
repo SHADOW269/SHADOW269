@@ -23,8 +23,8 @@
 
 <h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 GitHub Stats: <br></h2>
 <div align="left">
-  <img src="https://github-readme-stats.vercel.app/api?username=SHADOW269&hide_title=true&hide_rank=false&show_icons=true&include_all_commits=true&count_private=true&disable_animations=false&theme=dark&locale=en&hide_border=true&order=1" height="150" alt="stats graph"  />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=SHADOW269&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=10&theme=dark&hide_border=true&order=2" height="150" alt="languages graph"  />
+  <img align="center" src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&locale=en&theme=dark&hide_border=true" alt="shadow269" /><br>
+  <img align="center" src="https://github-readme-stats.vercel.app/api/top-langs?username=SHADOW269&locale=en&hide_title=false&layout=compact&card_width=320&langs_count=10&theme=dark&hide_border=true&order=2" height="175" alt="languages graph"  />
 </div>
 
 <div align="left">
@@ -35,4 +35,3 @@
 <img src="https://raw.githubusercontent.com/SHADOW269/SHADOW269/output/snake.svg" alt="Snake animation" />
 
 <div align="left"><img src="https://profile-counter.glitch.me/SHADOW269/count.svg?"  /></div>
-
