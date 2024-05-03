@@ -18,7 +18,7 @@
 <div align=""><img src="https://skillicons.dev/icons?i=java,mysql,python,github,git,vscode,linux" /><br></div>
 
 <h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 LeetCode Stats: <br></h2>
-<img src="https://leetcard.jacoblin.cool/shadow269?theme=dark" alt="LeetCode Stats">
+<img src="https://leetcard.jacoblin.cool/shadow2669?theme=dark" alt="LeetCode Stats">
 
 
 <h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 GitHub Stats: <br></h2>
