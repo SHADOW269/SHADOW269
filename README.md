@@ -3,7 +3,7 @@
 <h1 align="center"><img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=35&center=true&vCenter=true&width=500&height=70&duration=2500&lines=YO+🤚;+I'm+Sakshith+C+Shetty!;+Also+Know+As+SHADOW;" /></h1>
 
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">💫 About Me: <br></h1>
-<h3> 🔭 I’m currently working on: <br>Improving on HTML , CSS and Java Script</h3>
+<h3> 🔭 I’m currently working on: <br>Improving on PYTHON</h3>
 <h3> 🏫 College: <br>Maps College Mangalore</h3>
 
 <h1 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;"> 🌐 Connect with me: <br></h1>
