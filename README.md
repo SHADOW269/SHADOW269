@@ -31,9 +31,10 @@
 
 <div align="left">
 <h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">🔝 Top Contributed Repo</h2>
-<img src="https://github-contributor-stats.vercel.app/api?username=shadow269&hide_title=true&limit=5&theme=dark&hide_border=true&combine_all_yearly_contributions=true" />
+   <img src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&theme=dark"/><br>
 </div>
 
 <img src="https://raw.githubusercontent.com/SHADOW269/SHADOW269/output/snake.svg" alt="Snake animation" />
 
 <div align="left"><img src="https://profile-counter.glitch.me/SHADOW269/count.svg?"  /></div>
+
