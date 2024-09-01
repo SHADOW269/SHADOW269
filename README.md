@@ -10,7 +10,7 @@
 <a href="https://instagram.com/sakshithshetty69" target="blank"><img src="https://skillicons.dev/icons?i=instagram" /></a>
 <a href="https://twitter.com/@shadowking2669" target="blank"><img src="https://skillicons.dev/icons?i=twitter" /></a>
 <a href="https://linkedin.com/in/sakshith-shetty-mk269/" target="blank"><img src="https://skillicons.dev/icons?i=linkedin" /></a>
-<a href="https://discord.gg/xmQAuu6ZvF" target="blank"><img src="https://skillicons.dev/icons?i=discord" /></a>
+<a href="https://discord.gg/Ma6SX4cQ8e" target="blank"><img src="https://skillicons.dev/icons?i=discord" /></a>
 <a href="https://gitlab.com/shadow4551417" target="_blank"><img src="https://skillicons.dev/icons?i=gitlab" /></a>
 
 <h1 align="">⚒️ Languages-Frameworks-Tools</h1><br/>
