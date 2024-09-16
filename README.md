@@ -27,9 +27,13 @@
   <img src="https://github-readme-stats.vercel.app/api/top-langs?username=SHADOW269&locale=en&hide_title=true&layout=compact&card_width=320&langs_count=6&theme=dark&hide_border=true&order=2" height="150" alt="languages graph"  />
 </div>
 
+<h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">⌨️ Keybr.com [Typing speed] <br></h2>
+<div align="left">
+  <a href="https://www.keybr.com/profile/34zv4gh" target="_blank"> <img src="https://www.keybr.com/cover.png" height="45" /></a>
+</div>
+
 ###
 
 <img src="https://raw.githubusercontent.com/SHADOW269/SHADOW269/output/snake.svg" alt="Snake animation" />
 
 <div align="left"><img src="https://profile-counter.glitch.me/SHADOW269/count.svg?"  /></div>
-
