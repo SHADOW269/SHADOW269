@@ -38,4 +38,6 @@
   <a href="https://discord.gg/Ma6SX4cQ8e" target="blank"><img src="https://skillicons.dev/icons?i=discord" /></a>
   <a href="https://gitlab.com/shadow4551417" target="_blank"><img src="https://skillicons.dev/icons?i=gitlab" /></a>
   <a href="https://www.keybr.com/profile/34zv4gh" target="_blank"><img src="https://www.keybr.com/cover.png" height="45" /></a>
+  <a href="https://monkeytype.com/profile/shadow269" target="_blank"><img src="https://typingstats.com/partners/monkeytype.png" height="45"/></a>
+
 </div>
