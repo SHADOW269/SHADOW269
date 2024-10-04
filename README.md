@@ -39,7 +39,7 @@
   <a href="https://gitlab.com/shadow4551417" target="_blank"><img src="https://skillicons.dev/icons?i=gitlab" /></a>
   <a href="https://www.keybr.com/profile/34zv4gh" target="_blank"><img src="https://www.keybr.com/cover.png" height="45" /></a>
   <a href="https://monkeytype.com/profile/shadow269" target="_blank"><img src="https://typingstats.com/partners/monkeytype.png" height="45"/></a>
-  <a href="https://tryhackme.com/p/shadow269" target="_blank"><img src="https://assets.tryhackme.com/img/THMlogo.png" height="45"/></a>
+  <a href="https://tryhackme.com/p/SHADOW69" target="_blank"><img src="https://assets.tryhackme.com/img/THMlogo.png" height="45"/></a>
 
 </div>
 
