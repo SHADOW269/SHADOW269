@@ -19,8 +19,8 @@
 <div align=""><img src="https://skillicons.dev/icons?i=html,css,javascript,c,cpp,cs,dotnet,git" /><br></div>
 <div align=""><img src="https://skillicons.dev/icons?i=java,mysql,python,r,github,vscode,pycharm,linux" /><br></div>
 
-<h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 LeetCode Stats: <br></h2>
-<img src="https://leetcard.jacoblin.cool/shadow2669?theme=dark" alt="LeetCode Stats">
+<h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 LeetCode & Roadmap.sh Stats: <br></h2>
+<img src="https://leetcard.jacoblin.cool/shadow2669?theme=dark" alt="LeetCode Stats"> <a href="https://roadmap.sh"><img src="https://roadmap.sh/card/wide/6720ee5931d65c235d76799d?variant=dark" alt="roadmap.sh"/></a>
 
 
 <h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 GitHub Stats: <br></h2>
@@ -44,4 +44,3 @@
   <a href="https://tryhackme.com/p/SHADOW69" target="_blank"><img src="https://tryhackme-badges.s3.amazonaws.com/SHADOW69.png" height=""/></a>
 
 </div>
-
