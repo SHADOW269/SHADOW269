@@ -40,6 +40,7 @@
   <a href="https://discord.gg/Ma6SX4cQ8e" target="blank"><img src="https://skillicons.dev/icons?i=discord" /></a>
   <a href="https://www.keybr.com/profile/34zv4gh" target="_blank"><img src="https://www.keybr.com/cover.png" height="45" /></a>
   <a href="https://monkeytype.com/profile/shadow269" target="_blank"><img src="https://typingstats.com/partners/monkeytype.png" height="45"/></a>
+  <a href="https://roadmap.sh/u/shadow269" target="blank"><img src="https://avatars.githubusercontent.com/u/120650344?s=200&v=4" height="45"/></a><br>
   <a href="https://tryhackme.com/p/SHADOW69" target="_blank"><img src="https://tryhackme-badges.s3.amazonaws.com/SHADOW69.png" height=""/></a>
 
 </div>
