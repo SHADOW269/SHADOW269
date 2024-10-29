@@ -16,8 +16,8 @@
 
 
 <h1 align="">⚒️ Languages-Frameworks-Tools</h1><br/>
-<div align=""><img src="https://skillicons.dev/icons?i=html,css,javascript,c,cpp,cs,dotnet" /><br></div>
-<div align=""><img src="https://skillicons.dev/icons?i=java,mysql,python,github,git,vscode,linux" /><br></div>
+<div align=""><img src="https://skillicons.dev/icons?i=html,css,javascript,c,cpp,cs,dotnet,git" /><br></div>
+<div align=""><img src="https://skillicons.dev/icons?i=java,mysql,python,r,github,vscode,pycharm,linux" /><br></div>
 
 <h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">📊 LeetCode Stats: <br></h2>
 <img src="https://leetcard.jacoblin.cool/shadow2669?theme=dark" alt="LeetCode Stats">
