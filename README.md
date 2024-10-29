@@ -32,7 +32,7 @@
 ###
 <img src="https://raw.githubusercontent.com/SHADOW269/SHADOW269/output/snake.svg" alt="Snake animation" />
 
-<div align="left"><img src="https://profile-counter.glitch.me/SHADOW269/count.svg?"  /></div>
+![:view_count](https://count.chiya.dev/get/@shadow269?theme=gelbooru)
 
 
 <h2 align="left" style="color: #ffffff;" style="font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif ;">🎮 HOBBIES / MORE<br></h2>
@@ -44,3 +44,4 @@
   <a href="https://tryhackme.com/p/SHADOW69" target="_blank"><img src="https://tryhackme-badges.s3.amazonaws.com/SHADOW69.png" height=""/></a>
 
 </div>
+
