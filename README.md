@@ -12,7 +12,7 @@
 <a href="https://instagram.com/sakshithshetty69" target="blank"><img src="https://skillicons.dev/icons?i=instagram" /></a>
 <a href="https://x.com/@SHADOW__269" target="blank"><img src="https://skillicons.dev/icons?i=twitter" /></a>
 <a href="https://linkedin.com/in/sakshith-shetty-mk269/" target="blank"><img src="https://skillicons.dev/icons?i=linkedin" /></a>
-<a href="https://discord.gg/Ma6SX4cQ8e" target="blank"><img src="https://skillicons.dev/icons?i=discord" /></a>
+<a href="https://discord.com/users/1051180323058237450" target="blank"><img src="https://skillicons.dev/icons?i=discord" /></a>
 
 
 <h1 align="">⚒️ Languages-Frameworks-Tools</h1><br/>
@@ -47,8 +47,8 @@
 </div>
 <div>
 
-[![Discord](https://dcbadge.vercel.app/api/shield/1051180323058237450)](https://discord.com/users/1051180323058237450)
-[![Discord Server](https://dcbadge.vercel.app/api/server/Ma6SX4cQ8e)](https://discord.com/invite/Ma6SX4cQ8e)
+![](https://dcbadge.limes.pink/api/shield/1051180323058237450)
+
 
 </div>
 
