@@ -46,5 +46,5 @@
 
 </div>
 
-![Discord Badge](https://dcbadge.limes.pink/api/shield/1051180323058237450?style=plastic&?theme=clean-inverted)
-[![Server Badge](https://dcbadge.limes.pink/api/server/https://discord.com/invite/Ma6SX4cQ8e?style=plastic&?theme=clean-inverted  )](https://discord.com/invite/Ma6SX4cQ8e) 
+
+ 
