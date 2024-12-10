@@ -47,7 +47,6 @@
 </div>
 <div>
 
-![](https://dcbadge.limes.pink/api/shield/1051180323058237450)
 
 
 </div>
