@@ -46,9 +46,9 @@
 
 </div>
 <div>
-  
-![User Status Badge](https://dcbadge.limes.pink/api/shield/1051180323058237450?style=plastic&theme=clean-inverted&status=true)
-[![Server Status Badge](https://dcbadge.limes.pink/api/server/https://discord.com/invite/Ma6SX4cQ8e?style=plastic&theme=clean-inverted&status=true)](https://discord.com/invite/Ma6SX4cQ8e)
+
+[![Discord](https://dcbadge.vercel.app/api/shield/1051180323058237450)](https://discord.com/users/1051180323058237450)
+[![Discord Server](https://dcbadge.vercel.app/api/server/Ma6SX4cQ8e)](https://discord.com/invite/Ma6SX4cQ8e)
 
 </div>
 
