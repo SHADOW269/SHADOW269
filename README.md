@@ -45,6 +45,11 @@
   <a href="https://tryhackme.com/p/SHADOW69" target="_blank"><img src="https://tryhackme-badges.s3.amazonaws.com/SHADOW69.png" height=""/></a>
 
 </div>
+<div>
+  
+![User Status Badge](https://dcbadge.limes.pink/api/shield/1051180323058237450?style=plastic&theme=clean-inverted&status=true)
+[![Server Status Badge](https://dcbadge.limes.pink/api/server/https://discord.com/invite/Ma6SX4cQ8e?style=plastic&theme=clean-inverted&status=true)](https://discord.com/invite/Ma6SX4cQ8e)
 
+</div>
 
  
