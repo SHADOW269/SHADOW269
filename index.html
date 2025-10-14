@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHADOW | Cybersecurity Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+   <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/197274423?v=4" type="image/x-icon">
+   <style>
+        :root {
+            --bg-color-sidebar: #1E1E1E;
+            --bg-color-main: #121212;
+            --primary-text: #E0E0E0;
+            --secondary-text: #A0A0A0;
+            --accent-color: #00FFCC;
+            --card-bg: #1A1A1A;
+            --border-color: #333;
+            --header-font: 'Orbitron', sans-serif;
+            --body-font: 'Roboto Mono', monospace;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-color-main); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #00e6b8; }
+        body {
+            background-color: var(--bg-color-main); color: var(--primary-text); font-family: var(--body-font);
+            line-height: 1.6; font-size: 16px; scroll-behavior: smooth; display: flex; min-height: 100vh;
+        }
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px; z-index: -1; animation: moveGrid 20s linear infinite;
+        }
+        body::after {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(0,0,0,0) 0, rgba(0,0,0,0) 2px, rgba(0,255,204,0.08) 3px, rgba(0,255,204,0.08) 4px);
+            pointer-events: none; z-index: 1001; animation: scanlines 8s linear infinite; opacity: 0.3;
+        }
+        @keyframes scanlines { from { background-position: 0 0; } to { background-position: 0 100%; } }
+        @keyframes moveGrid { from { background-position: 0 0; } to { background-position: 40px 40px; } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glitch { 2%,64% { transform: translate(2px,0) skew(0deg); } 4%,60% { transform: translate(-2px,0) skew(0deg); } 62% { transform: translate(0,0) skew(5deg); } }
+        .glitch { animation: glitch 1s linear infinite; }
+        @keyframes glitch-top { 2%,64% { transform: translate(2px,-2px); } 4%,60% { transform: translate(-2px,2px); } 62% { transform: translate(13px,-1px) skew(-13deg); } }
+        .glitch::before { animation: glitch-top 1s linear infinite; }
+        @keyframes glitch-bottom { 2%,64%{transform:translate(-2px,2px)}4%,60%{transform:translate(2px,-2px)}62%{transform:translate(-22px,5px) skew(21deg)} }
+        .glitch::after { animation: glitch-bottom 1.5s linear infinite; }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent-color); } }
+        .sidebar {
+            width: 320px; min-width: 300px; background-color: var(--bg-color-sidebar); padding: 2.5rem 2rem;
+            display: flex; flex-direction: column; align-items: center; position: fixed; height: 100vh;
+            overflow-y: auto; border-right: 1px solid var(--border-color); z-index: 1000;
+        }
+        .profile-pic-container {
+            width: 160px; height: 160px; border-radius: 50%; overflow: hidden;
+            border: 4px solid var(--accent-color); margin-bottom: 1.5rem;
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.4); animation: float 6s ease-in-out infinite;
+        }
+        .profile-pic-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .sidebar h2 {
+            font-family: var(--header-font); color: var(--primary-text); font-size: 2.2rem; margin-bottom: 0.5rem;
+            text-align: center; line-height: 1.2; position: relative;
+        }
+        .sidebar h2.glitch::before, .sidebar h2.glitch::after {
+            content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-color-sidebar);
+        }
+        .sidebar h2.glitch::before { left: 2px; text-shadow: -2px 0 #FF00C1; clip: rect(44px, 450px, 56px, 0); }
+        .sidebar h2.glitch::after { left: -2px; text-shadow: -2px 0 #00E5FF, 2px 2px #FF00C1; clip: rect(85px, 450px, 140px, 0); }
+        .sidebar .title { color: var(--accent-color); font-size: 1.1rem; margin-bottom: 2rem; text-align: center; min-height: 1.2em; }
+        .sidebar .title .typing-cursor { border-right: .15em solid var(--accent-color); animation: blink-caret .75s step-end infinite; }
+        .sidebar-nav { width: 100%; margin-bottom: 2rem; text-align: center; }
+        .sidebar-nav a {
+            display: block; color: var(--secondary-text); padding: 0.75rem 0; font-size: 1.1rem;
+            text-decoration: none; position: relative; transition: color 0.3s ease, letter-spacing 0.3s ease;
+        }
+        .sidebar-nav a:hover { color: var(--accent-color); letter-spacing: 1px; }
+        .sidebar-nav a::before {
+            content: ''; position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
+            width: 0; height: 2px; background-color: var(--accent-color); transition: width 0.3s ease;
+        }
+        .sidebar-nav a:hover::before { width: 50%; }
+        .sidebar-nav a.active { color: var(--accent-color); letter-spacing: 1px; }
+        .sidebar-nav a.active::before { width: 50%; }
+        .social-links { width: 100%; text-align: center; margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+        .social-links a { display: inline-block; margin: 0 1rem; color: var(--secondary-text); transition: color 0.3s ease, transform 0.3s ease; }
+        .social-links a:hover { color: var(--accent-color); transform: translateY(-5px); }
+        .social-links svg { width: 28px; height: 28px; fill: currentColor; }
+        .main-content { margin-left: 320px; flex-grow: 1; padding: 0 3rem; }
+        section { padding: 6rem 0; max-width: 900px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        h1, h3, h4, h5 { font-family: var(--header-font); color: var(--primary-text); font-weight: 700; }
+        h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 1rem; }
+        h1 span { color: var(--accent-color); }
+        h3 { font-size: 2.2rem; margin-bottom: 2.5rem; position: relative; }
+        h3::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 60px; height: 3px; background-color: var(--accent-color); }
+        h4 { font-size: 1.5rem; color: var(--accent-color); }
+        h5 { font-size: 1.2rem; color: var(--primary-text); }
+        p { color: var(--secondary-text); margin-bottom: 1rem; font-size: 1.1rem; }
+        #home p.intro { font-size: 1.2rem; color: var(--accent-color); margin-bottom: 1.5rem; }
+        #home p.tagline { font-size: 1.8rem; color: var(--secondary-text); margin-bottom: 2rem; min-height: 5em; }
+        #home .tagline .typing-cursor { border-right: .2em solid var(--secondary-text); animation: blink-caret 1s step-end infinite; }
+        .cta-button {
+            display: inline-block; border: 2px solid var(--accent-color); padding: 1rem 2rem; border-radius: 4px;
+            margin-top: 1rem; color: var(--accent-color); font-weight: bold; font-size: 1.1rem; text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
+        }
+        .cta-button:hover { background-color: rgba(0, 255, 204, 0.1); transform: translateY(-3px); box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); }
+        #about ul { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
+        #about li { position: relative; padding-left: 25px; }
+        #about li::before { content: "▹"; position: absolute; left: 0; color: var(--accent-color); }
+        .timeline-item {
+            padding: 1.5rem; margin-bottom: 1.5rem; border-left: 3px solid var(--accent-color); background-color: var(--card-bg);
+            border-radius: 8px; position: relative; opacity: 0; animation: fadeInUp 0.8s ease forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .timeline-item:hover { transform: translateX(10px); box-shadow: 0 8px 20px rgba(0, 255, 204, 0.1); }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; } .timeline-item:nth-child(3) { animation-delay: 0.4s; } .timeline-item:nth-child(4) { animation-delay: 0.6s; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -11px; top: 24px; width: 18px; height: 18px;
+            border-radius: 50%; background-color: var(--accent-color); border: 3px solid var(--bg-color-main);
+        }
+        .timeline-item .date { font-weight: bold; color: var(--secondary-text); display: block; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        .timeline-item .location { font-style: italic; color: var(--secondary-text); margin-bottom: 1rem; }
+        .timeline-item ul { list-style-type: '>> '; padding-left: 1.5rem; color: var(--secondary-text); }
+        .timeline-item ul li { padding-left: 0.5rem; margin-bottom: 0.5rem; }
+        .tools-list { margin-top: 1rem; font-size: 0.9rem; } .tools-list strong { color: var(--primary-text); }
+        
+        .skills-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem; margin-top: 2rem;
+        }
+        .skill-category {
+            background-color: var(--card-bg); padding: 1.5rem; border-radius: 8px;
+            border: 1px solid var(--border-color); opacity: 0; animation: fadeInUp 0.8s ease forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .skill-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.15);
+        }
+        .skill-category:nth-child(2) { animation-delay: 0.2s; }
+        .skill-category:nth-child(3) { animation-delay: 0.4s; }
+        .skill-category h4 { margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;}
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+        .skill-tag {
+            background-color: #333; color: var(--secondary-text); padding: 0.5rem 1rem;
+            border-radius: 4px; font-size: 0.9rem; transition: background-color 0.3s, color 0.3s;
+        }
+        .skill-tag:hover { background-color: var(--accent-color); color: var(--bg-color-main); font-weight: bold; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            margin-top: 2rem;
+        }
+        .stat-card {
+            background-color: transparent; padding: 1.5rem; border: 1px solid var(--border-color);
+            border-radius: 8px; opacity: 0; animation: fadeInUp 0.8s ease forwards; position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; display: flex; flex-direction: column;
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 255, 204, 0.15);
+        }
+        .stat-card::before, .stat-card::after {
+            content: ''; position: absolute; width: 25px; height: 25px;
+            border-color: var(--accent-color); border-style: solid;
+        }
+        .stat-card::before { top: -5px; left: -5px; border-width: 2px 0 0 2px; }
+        .stat-card::after { top: -5px; right: -5px; border-width: 2px 2px 0 0; }
+        .stat-card .corner-bottom::before {
+            content: ''; position: absolute; width: 25px; height: 25px;
+            border-color: var(--accent-color); border-style: solid;
+            bottom: -5px; left: -5px; border-width: 0 0 2px 2px;
+        }
+        .stat-card .corner-bottom::after {
+            content: ''; position: absolute; width: 25px; height: 25px;
+            border-color: var(--accent-color); border-style: solid;
+            bottom: -5px; right: -5px; border-width: 0 2px 2px 0;
+        }
+        .stat-card-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; }
+        .stat-card-header img { width: 28px; height: 28px; }
+        .stat-card-header h5 { font-size: 1.3rem; color: var(--accent-color); margin: 0; }
+        .stat-card-body { flex-grow: 1; }
+        .stat-metric { font-size: 2.5rem; font-family: var(--header-font); color: var(--accent-color); margin: 0.5rem 0; min-height: 48px; }
+        .stat-details { display: flex; justify-content: space-around; margin: 1rem 0; }
+        .stat-detail { font-size: 1rem; }
+        .stat-detail span { display: block; font-size: 0.8rem; color: var(--secondary-text); }
+        .stat-card p { font-size: 0.9rem; color: var(--secondary-text); }
+        .stat-card .cta-button { margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.9rem; }
+        
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .project-card {
+            background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px;
+            padding: 1.5rem; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0; animation: fadeInUp 0.8s ease forwards;
+        }
+        .project-card:nth-child(2) { animation-delay: 0.2s; } .project-card:nth-child(3) { animation-delay: 0.4s; } .project-card:nth-child(4) { animation-delay: 0.6s; }
+        .project-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0, 255, 204, 0.15); }
+        .project-card p { flex-grow: 1; }
+        .project-links a { margin-right: 1rem; font-weight: bold; display: inline-block; margin-top: 1rem; color: var(--primary-text); }
+        .project-links a:hover { color: var(--accent-color); }
+        .project-tech { margin-top: auto; padding-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .project-tech-tag {
+            background-color: rgba(0, 255, 204, 0.1); color: var(--accent-color);
+            padding: 0.25rem 0.75rem; border-radius: 15px; font-size: 0.8rem;
+        }
+        #contact { text-align: center; }
+        #contact p { max-width: 600px; margin-left: auto; margin-right: auto; }
+        footer { text-align: center; padding: 2rem; margin-top: 3rem; border-top: 1px solid var(--border-color); color: var(--secondary-text); }
+
+        @media (max-width: 1200px) { .sidebar { width: 280px; min-width: 260px; } .main-content { margin-left: 280px; } }
+        @media (max-width: 992px) {
+            body { flex-direction: column; }
+            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .main-content { margin-left: 0; padding: 0 1.5rem; }
+            section { min-height: auto; padding: 4rem 0; }
+            h1 { font-size: 3rem; }
+        }
+        @media (max-width: 600px) { #about ul { grid-template-columns: 1fr; } h1 { font-size: 2.5rem; } p { font-size: 1rem; } }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="profile-pic-container"><img src="https://avatars.githubusercontent.com/u/197274423?v=4" alt="SHADOW Profile Picture"></div>
+        <h2 class="glitch" data-text="SHADOW">SHADOW</h2>
+        <p class="title"><span id="sidebar-title"></span><span class="typing-cursor"></span></p>
+        <nav class="sidebar-nav">
+            <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a>
+            <a href="#proficiency">Proficiency</a><a href="#projects">Projects</a>
+            <a href="#experience">Experience</a><a href="#contact">Contact</a>
+        </nav>
+        <div class="social-links">
+            <a href="https://github.com/SHADOW2669" target="_blank" title="GitHub"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+            <a href="https://www.linkedin.com/in/shadow269" target="_blank" title="LinkedIn"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+            <a href="mailto:shadow2669king@gmail.com" title="Email"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-20.728C.732 21 0 20.27 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.454 4.64 12 9.548l6.546-4.91 1.527-1.147c1.618-1.214 3.927-.059 3.927 1.964zM12 11.951 3.521 6.28 1.636 7.732v11.634h20.728V7.732L20.479 6.28 12 11.951z"/></svg></a>
+        </div>
+    </aside>
+    <div class="main-content">
+        <main>
+            <section id="home">
+                <p class="intro">Hello, I am</p>
+                <h1><span>S</span>HADOW</h1>
+                <p class="tagline"><span id="tagline-text"></span><span class="typing-cursor"></span></p>
+                <a href="#skills" class="cta-button">Explore My Arsenal</a>
+            </section>
+            
+            <section id="about">
+                <h3>About Me</h3>
+                <p>I’m a technology enthusiast with a deep-seated passion for cybersecurity. My journey through a Bachelor of Computer Applications has equipped me not just with knowledge, but with a mindset: to build, to break, and ultimately, to secure. My curiosity isn't just a trait; it's my primary tool, driving me to dissect systems, uncover vulnerabilities, and engineer stronger defenses.</p>
+                <p>I thrive on the challenge of the ever-evolving digital landscape. From hands-on penetration testing labs to architecting secure networks in my homelab, I am constantly learning, experimenting, and preparing for the next threat on the horizon.</p>
+                <ul>
+                    <li>Ethical Hacking</li><li>Penetration Testing</li><li>Network Security</li><li>Cryptography</li>
+                    <li>Vulnerability Assessment</li><li>Risk Management</li><li>Bug Bounty Hunting</li><li>VAPT</li>
+                    <li>System Hardening</li><li>Automotive Tech</li> 
+                </ul>
+            </section>
+
+            <section id="skills">
+                <h3>Skills & Arsenal</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h4>Offensive Security</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Nmap</span><span class="skill-tag">Burp Suite</span><span class="skill-tag">Metasploit</span>
+                            <span class="skill-tag">Wireshark</span><span class="skill-tag">Hydra</span><span class="skill-tag">Recon-ng</span>
+                            <span class="skill-tag">OWASP Top 10</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Languages & Development</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span><span class="skill-tag">Bash</span><span class="skill-tag">Java</span><span class="skill-tag">C++</span>
+                            <span class="skill-tag">PHP</span><span class="skill-tag">SQL</span><span class="skill-tag">HTML/CSS</span><span class="skill-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h4>Systems & Infrastructure</h4>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Linux (Kali, Ubuntu)</span><span class="skill-tag">Proxmox VE</span><span class="skill-tag">Docker</span>
+                            <span class="skill-tag">AWS</span><span class="skill-tag">Networking (TCP/IP)</span><span class="skill-tag">Active Directory</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="proficiency">
+                <h3>Proven Proficiency</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <img src="https://assets.tryhackme.com/img/favicon.png" alt="TryHackMe Logo"><h5>TryHackMe</h5>
+                        </div>
+                        <div class="stat-card-body">
+                            <p class="stat-metric" id="thm-rank">Loading...</p>
+                            <p>Global Rank</p>
+                            <div class="stat-details">
+                                <div class="stat-detail"><strong id="thm-badges">0</strong><span>Badges</span></div>
+                                <div class="stat-detail"><strong id="thm-rooms">0</strong><span>Rooms</span></div>
+                            </div>
+                        </div>
+                        <a href="https://tryhackme.com/p/shadow2669king" target="_blank" class="cta-button">View Profile</a>
+                        <div class="corner-bottom"></div>
+                    </div>
+                    <div class="stat-card" style="animation-delay: 0.2s;">
+                        <div class="stat-card-header">
+                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEl0vw0EBKctA/company-logo_200_200/company-logo_200_200/0/1736427077568/hackthebox_logo?e=1762992000&v=beta&t=LBnGl5sDgvIKkAj9sCIQyvJ255YHl0OWV65vYAmhw1M" alt="Hack The Box Logo"><h5>Hack The Box</h5>
+                        </div>
+                        <div class="stat-card-body">
+                            <p class="stat-metric" id="htb-rank">Loading...</p>
+                            <p>Global Rank</p>
+                             <div class="stat-details">
+                                <div class="stat-detail"><strong id="htb-owns">0</strong><span>Owns</span></div>
+                                <div class="stat-detail"><strong id="htb-solves">0</strong><span>Solves</span></div>
+                            </div>
+                        </div>
+                        <a href="#" target="_blank" class="cta-button">View Profile</a>
+                        <div class="corner-bottom"></div>
+                    </div>
+                    <div class="stat-card" style="animation-delay: 0.4s;">
+                        <div class="stat-card-header">
+                            <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" style="filter: invert(1);" alt="LeetCode Logo"><h5>LeetCode</h5>
+                        </div>
+                        <div class="stat-card-body">
+                            <p class="stat-metric" id="leetcode-solved">Loading...</p>
+                            <p>Problems Solved</p>
+                            <div class="stat-details">
+                               <div class="stat-detail" style="flex-basis: 100%;"><strong id="leetcode-rank">-</strong><span>Global Rank</span></div>
+                            </div>
+                        </div>
+                        <a href="https://leetcode.com/u/shadowking269/" target="_blank" class="cta-button">View Profile</a>
+                        <div class="corner-bottom"></div>
+                    </div>
+                     <div class="stat-card" style="animation-delay: 0.6s;">
+                        <div class="stat-card-header">
+                            <img src="https://raw.githubusercontent.com/monkeytype-hub/monkeytype-icon/master/monkeytype-icon/svg/cyberspace.svg" alt="Monkeytype Logo"><h5>Monkeytype</h5>
+                        </div>
+                         <div class="stat-card-body">
+                             <p class="stat-metric" id="monkeytype-15s">Loading...</p>
+                             <p>Peak Speed (15s)</p>
+                            <div class="stat-details">
+                                <div class="stat-detail" style="flex-basis: 100%;"><strong id="monkeytype-60s">-</strong><span>Sustained (60s)</span></div>
+                            </div>
+                        </div>
+                        <a href="https://monkeytype.com/profile/SHADOW2669" target="_blank" class="cta-button">View Profile</a>
+                        <div class="corner-bottom"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects">
+                <h3>Featured Projects</h3>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h4>CivicEye (Final Year Project)</h4>
+                        <p>An end-to-end AI helmet violation detection system using a Python/YOLOv8 client and a PHP/MySQL backend for data management.</p>
+                        <div class="project-tech"><span class="project-tech-tag">Python</span><span class="project-tech-tag">YOLOv8</span><span class="project-tech-tag">PHP</span><span class="project-tech-tag">MySQL</span></div>
+                        <div class="project-links"><a href="https://github.com/SHADOW2669/CivicEye" target="_blank">Client Code</a><a href="https://github.com/SHADOW2669/CivicEye-Website-Server" target="_blank">Server Code</a></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>Rig Master</h4>
+                        <p>A conceptual e-commerce site for custom gaming PCs, built in 48 hours using Framer with a CMS for product management.</p>
+                        <div class="project-tech"><span class="project-tech-tag">Framer</span><span class="project-tech-tag">CMS</span><span class="project-tech-tag">UI/UX Design</span></div>
+                        <div class="project-links"><a href="https://rigmaster.framer.website/" target="_blank">Live Site</a></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>PURE ENERGY EV</h4>
+                        <p>A responsive concept website for an electric motorcycle brand, designed and built from scratch in Framer to showcase modern UI/UX principles.</p>
+                        <div class="project-tech"><span class="project-tech-tag">Framer</span><span class="project-tech-tag">Responsive Design</span></div>
+                        <div class="project-links"><a href="https://pure-energy-ev.framer.website/" target="_blank">Live Site</a></div>
+                    </div>
+                    <div class="project-card">
+                        <h4>Cybersapiens Internship</h4>
+                        <p>A repository containing all tasks, scripts, and documentation completed during my cybersecurity internship, demonstrating practical skills.</p>
+                        <div class="project-tech"><span class="project-tech-tag">Recon</span><span class="project-tech-tag">Scripting</span><span class="project-tech-tag">VAPT</span></div>
+                        <div class="project-links"><a href="https://github.com/SHADOW2669/CYBERSAPIENS" target="_blank">GitHub Repo</a></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="experience">
+                <h3>Experience & Education</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <span class="date">Oct 2025 - Present</span>
+                        <h4>Cybersecurity Intern at <span>Cybersapiens</span></h4>
+                        <ul><li>Deep dive into web application security using PortSwigger labs and the Google Cybersecurity Professional Certificate.</li><li>Conducted reconnaissance, scanning, and enumeration based on CEH modules.</li></ul>
+                        <div class="tools-list"><strong>Tools:</strong> Burp Suite, Nmap, knockpy, httpx, subfinder, Postman, Try Hack Me</div>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="date">Feb 2025 - May 2025</span>
+                        <h4>UI/UX Design Intern at <span>Sierra Learning Academy</span></h4>
+                        <p>Focused on UI/UX principles, design systems, and rapid prototyping using Framer.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="date">Mar 2025</span>
+                        <h4>Ethical Hacking Workshop </h4><span class="location">NITK Surathkal</span>
+                        <p>Intensive 2-day workshop on the complete penetration testing lifecycle.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="date">Jun 2022 - Jun 2025</span>
+                        <h4>Bachelor of Computer Applications (BCA)</h4><span class="location">MAPS College, Mangalore</span>
+                        <p>Completed all required coursework for the degree. Gained strong foundational skills in Python, Java, PHP, and MySQL.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact">
+                <h3>Get In Touch</h3>
+                <p>My inbox is always open. Whether you have an opportunity, a question, or just want to connect about the latest in tech and security, feel free to reach out. I'll get back to you as soon as possible.</p>
+                <a href="mailto:shadow2669king@gmail.com" class="cta-button">Say Hello</a>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 SHADOW. Designed & Built with a keyboard and a lot of coffee.</p>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Typing effect for sidebar title
+            function typeEffect(el,text,delay,cb){let i=0;el.innerHTML="";function type(){if(i<text.length){el.innerHTML+=text.charAt(i);i++;setTimeout(type,delay)}else if(cb){cb()}}type()}
+            const sidebarTitleEl = document.getElementById('sidebar-title');
+            const taglineEl = document.getElementById('tagline-text');
+            const titles = ["Ethical Hacker","Security Researcher","Penetration Tester"];
+            let titleIndex = 0;
+            function cycleTitles() {
+                sidebarTitleEl.nextElementSibling.style.display='inline-block';
+                typeEffect(sidebarTitleEl, titles[titleIndex], 100, () => {
+                    setTimeout(() => eraseTitle(), 2000);
+                });
+            }
+            function eraseTitle() {
+                let currentText = sidebarTitleEl.innerHTML;
+                if (currentText.length > 0) {
+                    sidebarTitleEl.innerHTML = currentText.slice(0, -1);
+                    setTimeout(eraseTitle, 50);
+                } else {
+                    titleIndex = (titleIndex + 1) % titles.length;
+                    cycleTitles();
+                }
+            }
+            cycleTitles();
+
+            // Typing effect for main tagline
+            const tagline = "An aspiring cybersecurity professional with a passion for building, breaking, and securing digital systems.";
+            taglineEl.nextElementSibling.style.display = 'inline-block';
+            typeEffect(taglineEl, tagline, 50, () => {
+                taglineEl.nextElementSibling.style.animation = 'none'; // Stop cursor blinking
+            });
+
+            // Active nav link on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.sidebar-nav a');
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.5 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+            sections.forEach(section => { observer.observe(section); });
+
+            // Fetch and display stats
+            async function fetchStats() {
+                try {
+                    // Add a cache-busting parameter to the fetch URL
+                    const response = await fetch(`./stats.json?v=${new Date().getTime()}`);
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const response = await fetch('./stats.json?v=' + new Date().getTime());
+
+                    // TryHackMe
+                    document.getElementById('thm-rank').textContent = stats.tryhackme?.rank || 'N/A';
+                    document.getElementById('thm-badges').textContent = stats.tryhackme?.badges || '0';
+                    document.getElementById('thm-rooms').textContent = stats.tryhackme?.rooms || '0';
+                    
+                    // Hack The Box
+                    document.getElementById('htb-rank').textContent = stats.hackthebox?.rank || 'N/A';
+                    document.getElementById('htb-owns').textContent = stats.hackthebox?.owns || '0';
+                    document.getElementById('htb-solves').textContent = stats.hackthebox?.solves || '0';
+                    
+                    // LeetCode
+                    document.getElementById('leetcode-solved').textContent = `${stats.leetcode?.solved || '0'}+`;
+                    document.getElementById('leetcode-rank').textContent = stats.leetcode?.rank || 'N/A';
+
+                    // Monkeytype
+                    document.getElementById('monkeytype-15s').textContent = `${stats.monkeytype?.wpm_15s || '0'} WPM`;
+                    document.getElementById('monkeytype-60s').textContent = `${stats.monkeytype?.wpm_60s || '0'} WPM`;
+
+                } catch (error) {
+                    console.error("Could not load stats:", error);
+                    document.querySelectorAll('.stat-metric, .stat-detail strong').forEach(el => el.textContent = 'Error');
+                }
+            }
+            fetchStats();
+        });
+    </script>
+</body>
+</html>
