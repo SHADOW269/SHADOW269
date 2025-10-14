@@ -473,10 +473,8 @@
             }, observerOptions);
             sections.forEach(section => { observer.observe(section); });
 
-            // Fetch and display stats
             async function fetchStats() {
                 try {
-                    // Add a cache-busting parameter to the fetch URL
                     const response = await fetch(`./stats.json?v=${new Date().getTime()}`);
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                     
