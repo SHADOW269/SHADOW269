@@ -424,7 +424,6 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Typing effect for sidebar title
             function typeEffect(el,text,delay,cb){let i=0;el.innerHTML="";function type(){if(i<text.length){el.innerHTML+=text.charAt(i);i++;setTimeout(type,delay)}else if(cb){cb()}}type()}
             const sidebarTitleEl = document.getElementById('sidebar-title');
             const taglineEl = document.getElementById('tagline-text');
@@ -448,14 +447,12 @@
             }
             cycleTitles();
 
-            // Typing effect for main tagline
             const tagline = "An aspiring cybersecurity professional with a passion for building, breaking, and securing digital systems.";
             taglineEl.nextElementSibling.style.display = 'inline-block';
             typeEffect(taglineEl, tagline, 50, () => {
                 taglineEl.nextElementSibling.style.animation = 'none'; // Stop cursor blinking
             });
 
-            // Active nav link on scroll
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.sidebar-nav a');
             const observerOptions = { root: null, rootMargin: '0px', threshold: 0.5 };
