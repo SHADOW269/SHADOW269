@@ -5,8 +5,5 @@
         "solved": 1,
         "rank": "5,000,001"
     },
-    "monkeytype": {
-        "wpm_15s": "120+",
-        "wpm_60s": "110+"
-    }
+    "monkeytype": null
 }
