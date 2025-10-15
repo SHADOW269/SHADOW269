@@ -30,7 +30,7 @@ Hello there! I'm SHADOW, an aspiring Cybersecurity Professional at [CYBERSAPIENS
     <td width="50%" valign="top">
       <p align="center">
         <a href="https://github.com/SHADOW2669/CivicEye-Website-Server">
-          <img src="https://shadow2669.github.io/CivicEye_Website/IMAGES/logo1.png" width="180" alt="CivicEye Server Edition Logo"/>
+          <img src="https://shadow2669.github.io/CivicEye-Website/IMAGES/logo1.png" width="180" alt="CivicEye Server Edition Logo"/>
         </a>
       </p>
       <h3 align="left">CivicEye Website/Server</h3>
