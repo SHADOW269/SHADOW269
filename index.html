@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
-   <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/197274423?v=4" type="image/x-icon">
+    <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/197274423?v=4" type="image/x-icon">
    <style>
         :root {
             --bg-color-sidebar: #1E1E1E;
@@ -25,13 +25,14 @@
         ::-webkit-scrollbar-track { background: var(--bg-color-main); }
         ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: #00e6b8; }
+        html { scroll-behavior: smooth; } /* MODIFIED: Moved from body for better cross-browser support */
         body {
             background-color: var(--bg-color-main); color: var(--primary-text); font-family: var(--body-font);
-            line-height: 1.6; font-size: 16px; scroll-behavior: smooth; display: flex; min-height: 100vh;
+            line-height: 1.6; font-size: 16px; display: flex; min-height: 100vh;
         }
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
+            background-image:
                 linear-gradient(to right, rgba(0, 255, 204, 0.05) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
             background-size: 40px 40px; z-index: -1; animation: moveGrid 20s linear infinite;
@@ -52,6 +53,7 @@
         @keyframes glitch-bottom { 2%,64%{transform:translate(-2px,2px)}4%,60%{transform:translate(2px,-2px)}62%{transform:translate(-22px,5px) skew(21deg)} }
         .glitch::after { animation: glitch-bottom 1.5s linear infinite; }
         @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent-color); } }
+        
         .sidebar {
             width: 320px; min-width: 300px; background-color: var(--bg-color-sidebar); padding: 2.5rem 2rem;
             display: flex; flex-direction: column; align-items: center; position: fixed; height: 100vh;
@@ -75,6 +77,16 @@
         .sidebar h2.glitch::after { left: -2px; text-shadow: -2px 0 #00E5FF, 2px 2px #FF00C1; clip: rect(85px, 450px, 140px, 0); }
         .sidebar .title { color: var(--accent-color); font-size: 1.1rem; margin-bottom: 2rem; text-align: center; min-height: 1.2em; }
         .sidebar .title .typing-cursor { border-right: .15em solid var(--accent-color); animation: blink-caret .75s step-end infinite; }
+        
+        /* NEW: Wrapper for mobile navigation content */
+        .mobile-nav-content {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            align-items: center;
+            flex-grow: 1; /* Allows social links to stick to bottom */
+        }
+        
         .sidebar-nav { width: 100%; margin-bottom: 2rem; text-align: center; }
         .sidebar-nav a {
             display: block; color: var(--secondary-text); padding: 0.75rem 0; font-size: 1.1rem;
@@ -85,13 +97,13 @@
             content: ''; position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%);
             width: 0; height: 2px; background-color: var(--accent-color); transition: width 0.3s ease;
         }
-        .sidebar-nav a:hover::before { width: 50%; }
+        .sidebar-nav a:hover::before, .sidebar-nav a.active::before { width: 50%; }
         .sidebar-nav a.active { color: var(--accent-color); letter-spacing: 1px; }
-        .sidebar-nav a.active::before { width: 50%; }
         .social-links { width: 100%; text-align: center; margin-top: auto; padding-top: 2rem; border-top: 1px solid var(--border-color); }
         .social-links a { display: inline-block; margin: 0 1rem; color: var(--secondary-text); transition: color 0.3s ease, transform 0.3s ease; }
         .social-links a:hover { color: var(--accent-color); transform: translateY(-5px); }
         .social-links svg { width: 28px; height: 28px; fill: currentColor; }
+        
         .main-content { margin-left: 320px; flex-grow: 1; padding: 0 3rem; }
         section { padding: 6rem 0; max-width: 900px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
         h1, h3, h4, h5 { font-family: var(--header-font); color: var(--primary-text); font-weight: 700; }
@@ -111,6 +123,8 @@
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
         }
         .cta-button:hover { background-color: rgba(0, 255, 204, 0.1); transform: translateY(-3px); box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); }
+        .cta-button:active { transform: translateY(-1px) scale(0.98); } /* NEW: Touch feedback */
+        
         #about ul { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
         #about li { position: relative; padding-left: 25px; }
         #about li::before { content: "▹"; position: absolute; left: 0; color: var(--accent-color); }
@@ -131,19 +145,13 @@
         .timeline-item ul li { padding-left: 0.5rem; margin-bottom: 0.5rem; }
         .tools-list { margin-top: 1rem; font-size: 0.9rem; } .tools-list strong { color: var(--primary-text); }
         
-        .skills-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem; margin-top: 2rem;
-        }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
         .skill-category {
             background-color: var(--card-bg); padding: 1.5rem; border-radius: 8px;
             border: 1px solid var(--border-color); opacity: 0; animation: fadeInUp 0.8s ease forwards;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 25px rgba(0, 255, 204, 0.15);
-        }
+        .skill-category:hover { transform: translateY(-5px); box-shadow: 0 0 25px rgba(0, 255, 204, 0.15); }
         .skill-category:nth-child(2) { animation-delay: 0.2s; }
         .skill-category:nth-child(3) { animation-delay: 0.4s; }
         .skill-category h4 { margin-bottom: 1.5rem; text-align: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;}
@@ -154,21 +162,13 @@
         }
         .skill-tag:hover { background-color: var(--accent-color); color: var(--bg-color-main); font-weight: bold; }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2.5rem;
-            margin-top: 2rem;
-        }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-top: 2rem; }
         .stat-card {
             background-color: transparent; padding: 1.5rem; border: 1px solid var(--border-color);
             border-radius: 8px; opacity: 0; animation: fadeInUp 0.8s ease forwards; position: relative;
             transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; display: flex; flex-direction: column;
         }
-        .stat-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 255, 204, 0.15);
-        }
+        .stat-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0, 255, 204, 0.15); }
         .stat-card::before, .stat-card::after {
             content: ''; position: absolute; width: 25px; height: 25px;
             border-color: var(--accent-color); border-style: solid;
@@ -216,31 +216,115 @@
         #contact p { max-width: 600px; margin-left: auto; margin-right: auto; }
         footer { text-align: center; padding: 2rem; margin-top: 3rem; border-top: 1px solid var(--border-color); color: var(--secondary-text); }
 
+        /* NEW: Hamburger Menu Toggle Styles */
+        .menu-toggle {
+            display: none; /* Hidden by default */
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 30px;
+            height: 22px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            background: var(--primary-text);
+            border-radius: 3px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        .menu-toggle span:nth-child(1) { top: 0px; }
+        .menu-toggle span:nth-child(2), .menu-toggle span:nth-child(3) { top: 9px; }
+        .menu-toggle span:nth-child(4) { top: 18px; }
+        .sidebar.open .menu-toggle span:nth-child(1) { top: 9px; width: 0%; left: 50%; }
+        .sidebar.open .menu-toggle span:nth-child(2) { transform: rotate(45deg); }
+        .sidebar.open .menu-toggle span:nth-child(3) { transform: rotate(-45deg); }
+        .sidebar.open .menu-toggle span:nth-child(4) { top: 9px; width: 0%; left: 50%; }
+
         @media (max-width: 1200px) { .sidebar { width: 280px; min-width: 260px; } .main-content { margin-left: 280px; } }
+        
+        /* MODIFIED: Mobile Responsiveness */
         @media (max-width: 992px) {
             body { flex-direction: column; }
-            .sidebar { position: relative; width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border-color); }
+            .sidebar {
+                position: relative; width: 100%; height: auto; border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                flex-wrap: wrap; /* Allows items to wrap if needed */
+                padding-bottom: 1.5rem;
+            }
+            .sidebar-header { /* NEW: Wrapper for profile info */
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+            .sidebar-header .profile-pic-container {
+                width: 60px; height: 60px; margin: 0 1.5rem 0 0;
+            }
+             .sidebar-header .header-text {
+                text-align: left;
+            }
+            .sidebar h2 { font-size: 1.8rem; margin-bottom: 0.2rem; }
+            .sidebar .title { font-size: 0.9rem; margin-bottom: 0; text-align: left;}
+
+            .menu-toggle { display: block; } /* Show hamburger */
+            
+            .mobile-nav-content {
+                display: none; /* Hide nav content by default */
+                flex-basis: 100%; /* Take full width */
+                margin-top: 1.5rem;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s ease-in-out;
+            }
+            .sidebar.open .mobile-nav-content {
+                display: flex; /* Show nav content when open */
+                max-height: 100vh; /* A large value to allow content to expand */
+            }
+
             .main-content { margin-left: 0; padding: 0 1.5rem; }
             section { min-height: auto; padding: 4rem 0; }
             h1 { font-size: 3rem; }
         }
-        @media (max-width: 600px) { #about ul { grid-template-columns: 1fr; } h1 { font-size: 2.5rem; } p { font-size: 1rem; } }
+        @media (max-width: 600px) { 
+            #about ul { grid-template-columns: 1fr; } 
+            h1 { font-size: 2.8rem; } /* Slightly reduced */
+            h3 { font-size: 1.8rem; }
+            p { font-size: 1rem; } 
+            .cta-button { padding: 0.8rem 1.5rem; font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
     <aside class="sidebar">
-        <div class="profile-pic-container"><img src="https://avatars.githubusercontent.com/u/197274423?v=4" alt="SHADOW Profile Picture"></div>
-        <h2 class="glitch" data-text="SHADOW">SHADOW</h2>
-        <p class="title"><span id="sidebar-title"></span><span class="typing-cursor"></span></p>
-        <nav class="sidebar-nav">
-            <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a>
-            <a href="#proficiency">Proficiency</a><a href="#projects">Projects</a>
-            <a href="#experience">Experience</a><a href="#contact">Contact</a>
-        </nav>
-        <div class="social-links">
-            <a href="https://github.com/SHADOW2669" target="_blank" title="GitHub"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
-            <a href="https://www.linkedin.com/in/shadow269" target="_blank" title="LinkedIn"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
-            <a href="mailto:contact@shadow269.in" title="Email"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-20.728C.732 21 0 20.27 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.454 4.64 12 9.548l6.546-4.91 1.527-1.147c1.618-1.214 3.927-.059 3.927 1.964zM12 11.951 3.521 6.28 1.636 7.732v11.634h20.728V7.732L20.479 6.28 12 11.951z"/></svg></a>
+        <a id="menu-toggle" class="menu-toggle">
+            <span></span><span></span><span></span><span></span>
+        </a>
+
+        <div class="sidebar-header">
+            <div class="profile-pic-container"><img src="https://avatars.githubusercontent.com/u/197274423?v=4" alt="SHADOW Profile Picture"></div>
+            <div class="header-text">
+                <h2 class="glitch" data-text="SHADOW">SHADOW</h2>
+                <p class="title"><span id="sidebar-title"></span><span class="typing-cursor"></span></p>
+            </div>
+        </div>
+
+        <div class="mobile-nav-content">
+            <nav class="sidebar-nav">
+                <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a>
+                <a href="#proficiency">Proficiency</a><a href="#projects">Projects</a>
+                <a href="#experience">Experience</a><a href="#contact">Contact</a>
+            </nav>
+            <div class="social-links">
+                <a href="https://github.com/SHADOW2669" target="_blank" title="GitHub"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>GitHub</title><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a>
+                <a href="https://www.linkedin.com/in/shadow269" target="_blank" title="LinkedIn"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></a>
+                <a href="mailto:contact@shadow269.in" title="Email"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Email</title><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-20.728C.732 21 0 20.27 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.454 4.64 12 9.548l6.546-4.91 1.527-1.147c1.618-1.214 3.927-.059 3.927 1.964zM12 11.951 3.521 6.28 1.636 7.732v11.634h20.728V7.732L20.479 6.28 12 11.951z"/></svg></a>
+            </div>
         </div>
     </aside>
     <div class="main-content">
@@ -280,8 +364,7 @@
                         <div class="skill-tags">
                             <span class="skill-tag">Python</span><span class="skill-tag">Bash</span><span class="skill-tag">Java</span>
                             <span class="skill-tag">PHP</span><span class="skill-tag">JavaScript</span><span class="skill-tag">C++ / C#</span>
-                            <span class="skill-tag">SQL</span><span class="skill-tag">HTML / css2?family</span>
-                        </div>
+                            <span class="skill-tag">SQL</span><span class="skill-tag">HTML / CSS</span> </div>
                     </div>
                     <div class="skill-category">
                         <h4>Systems & Networking</h4>
@@ -485,27 +568,21 @@
             // Fetch and display stats
             async function fetchStats() {
                 try {
-                    // Add a cache-busting parameter to the fetch URL
                     const response = await fetch(`./stats.json?v=${new Date().getTime()}`);
                     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    
                     const stats = await response.json();
 
-                    // TryHackMe
                     document.getElementById('thm-rank').textContent = stats.tryhackme?.rank || 'N/A';
                     document.getElementById('thm-badges').textContent = stats.tryhackme?.badges || '0';
                     document.getElementById('thm-rooms').textContent = stats.tryhackme?.rooms || '0';
                     
-                    // Hack The Box
                     document.getElementById('htb-rank').textContent = stats.hackthebox?.rank || 'N/A';
                     document.getElementById('htb-owns').textContent = stats.hackthebox?.owns || '0';
                     document.getElementById('htb-solves').textContent = stats.hackthebox?.solves || '0';
                     
-                    // LeetCode
                     document.getElementById('leetcode-solved').textContent = `${stats.leetcode?.solved || '0'}+`;
                     document.getElementById('leetcode-rank').textContent = stats.leetcode?.rank || 'N/A';
 
-                    // Monkeytype
                     document.getElementById('monkeytype-15s').textContent = `${stats.monkeytype?.wpm_15s || '0'} WPM`;
                     document.getElementById('monkeytype-60s').textContent = `${stats.monkeytype?.wpm_60s || '0'} WPM`;
 
@@ -515,6 +592,25 @@
                 }
             }
             fetchStats();
+
+            // NEW: Hamburger Menu Toggle Logic
+            const menuToggle = document.getElementById('menu-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            const mobileNavLinks = document.querySelectorAll('.sidebar-nav a');
+
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('open');
+            });
+            
+            // NEW: Close menu when a link is clicked on mobile
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (sidebar.classList.contains('open')) {
+                        sidebar.classList.remove('open');
+                    }
+                });
+            });
+
         });
     </script>
 </body>
