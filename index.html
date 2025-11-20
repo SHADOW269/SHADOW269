@@ -10,17 +10,22 @@
 
     <meta property="og:title" content="SHADOW | Cybersecurity Professional Portfolio">
     <meta property="og:description" content="Explore the projects, skills, and experience of SHADOW, a cybersecurity and pentesting enthusiast.">
-    <meta property="og:image" content="https://avatars.githubusercontent.com/u/197274423?v=4"> <meta property="og:url" content="https://portfolio.shadow269.in/"> <meta property="og:type" content="website">
+    <meta property="og:image" content="https://avatars.githubusercontent.com/u/197274423?v=4"> 
+    <meta property="og:url" content="https://portfolio.shadow269.in/"> 
+    <meta property="og:type" content="website">
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="SHADOW | Cybersecurity Professional Portfolio">
     <meta name="twitter:description" content="Explore the projects, skills, and experience of SHADOW, a cybersecurity and pentesting enthusiast.">
     <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/197274423?v=4">
-    <meta name="twitter:site" content="https://x.com/SHADOW_2669"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="twitter:site" content="https://x.com/SHADOW_2669"> 
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/197274423?v=4" type="image/x-icon">
-   <style>
+    
+    <style>
         :root {
             --bg-color-sidebar: #1E1E1E;
             --bg-color-main: #121212;
@@ -37,7 +42,7 @@
         ::-webkit-scrollbar-track { background: var(--bg-color-main); }
         ::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 5px; }
         ::-webkit-scrollbar-thumb:hover { background: #00e6b8; }
-        html { scroll-behavior: smooth; } /* MODIFIED: Moved from body for better cross-browser support */
+        html { scroll-behavior: smooth; }
         body {
             background-color: var(--bg-color-main); color: var(--primary-text); font-family: var(--body-font);
             line-height: 1.6; font-size: 16px; display: flex; min-height: 100vh;
@@ -90,13 +95,12 @@
         .sidebar .title { color: var(--accent-color); font-size: 1.1rem; margin-bottom: 2rem; text-align: center; min-height: 1.2em; }
         .sidebar .title .typing-cursor { border-right: .15em solid var(--accent-color); animation: blink-caret .75s step-end infinite; }
         
-        /* NEW: Wrapper for mobile navigation content */
         .mobile-nav-content {
             display: flex;
             flex-direction: column;
             width: 100%;
             align-items: center;
-            flex-grow: 1; /* Allows social links to stick to bottom */
+            flex-grow: 1; 
         }
         
         .sidebar-nav { width: 100%; margin-bottom: 2rem; text-align: center; }
@@ -135,7 +139,7 @@
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 0 10px rgba(0, 255, 204, 0.2);
         }
         .cta-button:hover { background-color: rgba(0, 255, 204, 0.1); transform: translateY(-3px); box-shadow: 0 0 20px rgba(0, 255, 204, 0.4); }
-        .cta-button:active { transform: translateY(-1px) scale(0.98); } /* NEW: Touch feedback */
+        .cta-button:active { transform: translateY(-1px) scale(0.98); } 
         
         #about ul { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1.5rem; }
         #about li { position: relative; padding-left: 25px; }
@@ -174,12 +178,30 @@
         }
         .skill-tag:hover { background-color: var(--accent-color); color: var(--bg-color-main); font-weight: bold; }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2.5rem; margin-top: 2rem; }
-        .stat-card {
-            background-color: transparent; padding: 1.5rem; border: 1px solid var(--border-color);
-            border-radius: 8px; opacity: 0; animation: fadeInUp 0.8s ease forwards; position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center; display: flex; flex-direction: column;
+        /* MODIFIED: Center the cards and content */
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Made slightly wider */
+            gap: 2.5rem; 
+            margin-top: 2rem;
+            justify-content: center; /* Center Grid */
         }
+        
+        .stat-card {
+            background-color: transparent; 
+            padding: 1.5rem; 
+            border: 1px solid var(--border-color);
+            border-radius: 8px; 
+            opacity: 0; 
+            animation: fadeInUp 0.8s ease forwards; 
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            text-align: center; 
+            display: flex; 
+            flex-direction: column;
+            align-items: center; /* Center Items */
+        }
+        
         .stat-card:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0, 255, 204, 0.15); }
         .stat-card::before, .stat-card::after {
             content: ''; position: absolute; width: 25px; height: 25px;
@@ -198,16 +220,43 @@
             bottom: -5px; right: -5px; border-width: 0 2px 2px 0;
         }
         .stat-card-header { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; }
-        .stat-card-header img { width: 28px; height: 28px; }
+        
+        .stat-card-header img { width: 32px; height: 32px; object-fit: contain; }
+        
         .stat-card-header h5 { font-size: 1.3rem; color: var(--accent-color); margin: 0; }
-        .stat-card-body { flex-grow: 1; }
+        
+        /* Content Body */
+        .stat-card-body { 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            width: 100%; 
+        }
+        
         .stat-metric { font-size: 2.5rem; font-family: var(--header-font); color: var(--accent-color); margin: 0.5rem 0; min-height: 48px; }
-        .stat-details { display: flex; justify-content: space-around; margin: 1rem 0; }
+        .stat-details { display: flex; justify-content: space-around; width: 100%; margin: 1rem 0; }
         .stat-detail { font-size: 1rem; }
         .stat-detail span { display: block; font-size: 0.8rem; color: var(--secondary-text); }
         .stat-card p { font-size: 0.9rem; color: var(--secondary-text); }
         .stat-card .cta-button { margin-top: 1.5rem; padding: 0.5rem 1.5rem; font-size: 0.9rem; }
         
+        /* LeetCode Breakdown Styling */
+        .lc-breakdown { display: flex; justify-content: center; gap: 15px; margin-top: 10px; width: 100%; font-size: 0.9rem;}
+        .lc-easy { color: #00b8a3; }
+        .lc-med { color: #ffc01e; }
+        .lc-hard { color: #ff375f; }
+        .lc-item { display: flex; flex-direction: column; align-items: center; }
+        .lc-count { font-weight: bold; font-size: 1.1rem; }
+
+        /* Special Live Badge for Monkeytype */
+        .live-indicator { 
+            display: inline-block; margin-left: 8px; width: 8px; height: 8px; 
+            background-color: red; border-radius: 50%; animation: blink-red 2s infinite; 
+        }
+        @keyframes blink-red { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
         .project-card {
             background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px;
@@ -228,9 +277,8 @@
         #contact p { max-width: 600px; margin-left: auto; margin-right: auto; }
         footer { text-align: center; padding: 2rem; margin-top: 3rem; border-top: 1px solid var(--border-color); color: var(--secondary-text); }
 
-        /* NEW: Hamburger Menu Toggle Styles */
         .menu-toggle {
-            display: none; /* Hidden by default */
+            display: none; 
             position: absolute;
             top: 2rem;
             right: 2rem;
@@ -261,16 +309,15 @@
 
         @media (max-width: 1200px) { .sidebar { width: 280px; min-width: 260px; } .main-content { margin-left: 280px; } }
         
-        /* MODIFIED: Mobile Responsiveness */
         @media (max-width: 992px) {
             body { flex-direction: column; }
             .sidebar {
                 position: relative; width: 100%; height: auto; border-right: none;
                 border-bottom: 1px solid var(--border-color);
-                flex-wrap: wrap; /* Allows items to wrap if needed */
+                flex-wrap: wrap; 
                 padding-bottom: 1.5rem;
             }
-            .sidebar-header { /* NEW: Wrapper for profile info */
+            .sidebar-header { 
                 display: flex;
                 align-items: center;
                 width: 100%;
@@ -284,19 +331,19 @@
             .sidebar h2 { font-size: 1.8rem; margin-bottom: 0.2rem; }
             .sidebar .title { font-size: 0.9rem; margin-bottom: 0; text-align: left;}
 
-            .menu-toggle { display: block; } /* Show hamburger */
+            .menu-toggle { display: block; } 
             
             .mobile-nav-content {
-                display: none; /* Hide nav content by default */
-                flex-basis: 100%; /* Take full width */
+                display: none; 
+                flex-basis: 100%; 
                 margin-top: 1.5rem;
                 max-height: 0;
                 overflow: hidden;
                 transition: max-height 0.5s ease-in-out;
             }
             .sidebar.open .mobile-nav-content {
-                display: flex; /* Show nav content when open */
-                max-height: 100vh; /* A large value to allow content to expand */
+                display: flex; 
+                max-height: 100vh; 
             }
 
             .main-content { margin-left: 0; padding: 0 1.5rem; }
@@ -305,7 +352,7 @@
         }
         @media (max-width: 600px) { 
             #about ul { grid-template-columns: 1fr; } 
-            h1 { font-size: 2.8rem; } /* Slightly reduced */
+            h1 { font-size: 2.8rem; } 
             h3 { font-size: 1.8rem; }
             p { font-size: 1rem; } 
             .cta-button { padding: 0.8rem 1.5rem; font-size: 1rem; }
@@ -398,59 +445,60 @@
             <section id="proficiency">
                 <h3>Proven Proficiency</h3>
                 <div class="stats-grid">
+                    
                     <div class="stat-card">
                         <div class="stat-card-header">
-                            <img src="https://assets.tryhackme.com/img/favicon.png" alt="TryHackMe Logo"><h5>TryHackMe</h5>
+                            <img src="https://assets.tryhackme.com/img/favicon.png" alt="TryHackMe Logo">
+                            <h5>TryHackMe</h5>
                         </div>
-                        <div class="stat-card-body">
-                            <p class="stat-metric" id="thm-rank">Loading...</p>
-                            <p>Global Rank</p>
-                            <div class="stat-details">
-                                <div class="stat-detail"><strong id="thm-badges">0</strong><span>Badges</span></div>
-                                <div class="stat-detail"><strong id="thm-rooms">0</strong><span>Rooms</span></div>
-                            </div>
+                        <div class="stat-card-body" style="width: 100%; display: flex; justify-content: center; align-items: center; flex-direction: column;">
+                            <iframe 
+                                src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=5374580" 
+                                style="width: 100%; max-width: 500px; height: 220px; border: none; overflow: hidden; margin: 0 auto;"
+                                scrolling="no">
+                            </iframe>
                         </div>
-                        <a href="https://tryhackme.com/p/shadow2669king" target="_blank" rel="noopener noreferrer" class="cta-button">View Profile</a>
+                        <a href="https://tryhackme.com/p/shadow2669king" target="_blank" rel="noopener noreferrer" class="cta-button" style="margin-top: 0;">View Profile</a>
                         <div class="corner-bottom"></div>
                     </div>
+
                     <div class="stat-card" style="animation-delay: 0.2s;">
-                        <div class="stat-card-header">
-                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEl0vw0EBKctA/company-logo_200_200/company-logo_200_200/0/1736427077568/hackthebox_logo?e=1762992000&v=beta&t=LBnGl5sDgvIKkAj9sCIQyvJ255YHl0OWV65vYAmhw1M" alt="Hack The Box Logo"><h5>Hack The Box</h5>
+                         <div class="stat-card-header">
+                            <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" style="filter: invert(1);" alt="LeetCode Logo"><h5>LeetCode <span class="live-indicator" title="Live Data"></span></h5>
                         </div>
                         <div class="stat-card-body">
-                            <p class="stat-metric" id="htb-rank">Loading...</p>
-                            <p>Global Rank</p>
-                             <div class="stat-details">
-                                <div class="stat-detail"><strong id="htb-owns">0</strong><span>Owns</span></div>
-                                <div class="stat-detail"><strong id="htb-solves">0</strong><span>Solves</span></div>
-                            </div>
-                        </div>
-                        <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button">View Profile</a>
-                        <div class="corner-bottom"></div>
-                    </div>
-                    <div class="stat-card" style="animation-delay: 0.4s;">
-                        <div class="stat-card-header">
-                            <img src="https://leetcode.com/static/images/LeetCode_logo_rvs.png" style="filter: invert(1);" alt="LeetCode Logo"><h5>LeetCode</h5>
-                        </div>
-                        <div class="stat-card-body">
-                            <p class="stat-metric" id="leetcode-solved">Loading...</p>
-                            <p>Problems Solved</p>
-                            <div class="stat-details">
-                               <div class="stat-detail" style="flex-basis: 100%;"><strong id="leetcode-rank">-</strong><span>Global Rank</span></div>
+                            <p class="stat-metric" id="lc-total">Loading...</p>
+                            <p>Total Solved</p>
+                            <div class="lc-breakdown">
+                                <div class="lc-item"><span class="lc-count lc-easy" id="lc-easy">-</span><span>Easy</span></div>
+                                <div class="lc-item"><span class="lc-count lc-med" id="lc-medium">-</span><span>Med</span></div>
+                                <div class="lc-item"><span class="lc-count lc-hard" id="lc-hard">-</span><span>Hard</span></div>
                             </div>
                         </div>
                         <a href="https://leetcode.com/u/shadowking269/" target="_blank" rel="noopener noreferrer" class="cta-button">View Profile</a>
                         <div class="corner-bottom"></div>
                     </div>
-                     <div class="stat-card" style="animation-delay: 0.6s;">
+
+                    <div class="stat-card" style="animation-delay: 0.4s;">
                         <div class="stat-card-header">
-                            <img src="https://raw.githubusercontent.com/monkeytype-hub/monkeytype-icon/master/monkeytype-icon/svg/cyberspace.svg" alt="Monkeytype Logo"><h5>Monkeytype</h5>
+                            <img src="https://media.licdn.com/dms/image/v2/D4D0BAQEl0vw0EBKctA/company-logo_200_200/company-logo_200_200/0/1736427077568/hackthebox_logo?e=1762992000&v=beta&t=LBnGl5sDgvIKkAj9sCIQyvJ255YHl0OWV65vYAmhw1M" alt="Hack The Box Logo"><h5>Hack The Box</h5>
+                        </div>
+                        <div class="stat-card-body">
+                            <p>Solving advanced machines and engaging in competitive hacking.</p>
+                        </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="cta-button">View Profile</a>
+                        <div class="corner-bottom"></div>
+                    </div>
+
+                    <div class="stat-card" style="animation-delay: 0.6s;">
+                        <div class="stat-card-header">
+                            <img src="https://raw.githubusercontent.com/monkeytype-hub/monkeytype-icon/master/monkeytype-icon/svg/cyberspace.svg" alt="Monkeytype Logo"><h5>Monkeytype <span class="live-indicator" title="Live Data"></span></h5>
                         </div>
                          <div class="stat-card-body">
-                             <p class="stat-metric" id="monkeytype-15s">Loading...</p>
-                             <p>Peak Speed (15s)</p>
+                             <p class="stat-metric" id="mt-wpm">Loading...</p>
+                             <p>Best WPM</p>
                             <div class="stat-details">
-                                <div class="stat-detail" style="flex-basis: 100%;"><strong id="monkeytype-60s">-</strong><span>Sustained (60s)</span></div>
+                                <div class="stat-detail"><strong id="mt-tests">0</strong><span>Total Tests</span></div>
                             </div>
                          </div>
                         <a href="https://monkeytype.com/profile/SHADOW2669" target="_blank" rel="noopener noreferrer" class="cta-button">View Profile</a>
@@ -528,7 +576,7 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Typing effect for sidebar title
+            // Typing effect
             function typeEffect(el,text,delay,cb){let i=0;el.innerHTML="";function type(){if(i<text.length){el.innerHTML+=text.charAt(i);i++;setTimeout(type,delay)}else if(cb){cb()}}type()}
             const sidebarTitleEl = document.getElementById('sidebar-title');
             const taglineEl = document.getElementById('tagline-text');
@@ -550,18 +598,14 @@
                     cycleTitles();
                 }
             }
-            // Start cycling sidebar titles *only if* the default text is present (which it now is)
             if (sidebarTitleEl.innerHTML === "Ethical Hacker") {
-                setTimeout(cycleTitles, 2000); // Give a small delay before starting the cycle
+                setTimeout(cycleTitles, 2000); 
             }
-
-            // Typing effect for main tagline
             const tagline = "An aspiring cybersecurity professional with a passion for building, breaking, and securing digital systems.";
             taglineEl.nextElementSibling.style.display = 'inline-block';
-            // Only run the type effect if the tagline element's text matches the full string
             if (taglineEl.innerHTML === tagline) {
                 typeEffect(taglineEl, tagline, 50, () => {
-                    taglineEl.nextElementSibling.style.animation = 'none'; // Stop cursor blinking
+                    taglineEl.nextElementSibling.style.animation = 'none'; 
                 });
             }
 
@@ -583,44 +627,66 @@
             }, observerOptions);
             sections.forEach(section => { observer.observe(section); });
 
-            // Fetch and display stats
-            async function fetchStats() {
+            // 1. MONKEYTYPE STATS
+            async function fetchMonkeytypeStats() {
+                const username = "SHADOW2669";
+                const url = `https://api.monkeytype.com/users/${username}/profile`;
                 try {
-                    const response = await fetch(`./stats.json?v=${new Date().getTime()}`);
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                    const stats = await response.json();
-
-                    document.getElementById('thm-rank').textContent = stats.tryhackme?.rank || 'N/A';
-                    document.getElementById('thm-badges').textContent = stats.tryhackme?.badges || '0';
-                    document.getElementById('thm-rooms').textContent = stats.tryhackme?.rooms || '0';
-                    
-                    document.getElementById('htb-rank').textContent = stats.hackthebox?.rank || 'N/A';
-                    document.getElementById('htb-owns').textContent = stats.hackthebox?.owns || '0';
-                    document.getElementById('htb-solves').textContent = stats.hackthebox?.solves || '0';
-                    
-                    document.getElementById('leetcode-solved').textContent = `${stats.leetcode?.solved || '0'}+`;
-                    document.getElementById('leetcode-rank').textContent = stats.leetcode?.rank || 'N/A';
-
-                    document.getElementById('monkeytype-15s').textContent = `${stats.monkeytype?.wpm_15s || '0'} WPM`;
-                    document.getElementById('monkeytype-60s').textContent = `${stats.monkeytype?.wpm_60s || '0'} WPM`;
-
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error("API Error");
+                    const json = await response.json();
+                    const data = json.data;
+                    if(data) {
+                        document.getElementById('mt-tests').textContent = data.typingStats.completedTests.toLocaleString();
+                        let maxWpm = 0;
+                        const timeModes = data.personalBests.time;
+                        for (const mode in timeModes) {
+                            const bestInMode = timeModes[mode]; 
+                            if (bestInMode && bestInMode.length > 0) {
+                                const wpm = bestInMode[0].wpm;
+                                if (wpm > maxWpm) maxWpm = wpm;
+                            }
+                        }
+                        document.getElementById('mt-wpm').textContent = Math.round(maxWpm);
+                    }
                 } catch (error) {
-                    console.error("Could not load stats:", error);
-                    document.querySelectorAll('.stat-metric, .stat-detail strong').forEach(el => el.textContent = 'Error');
+                    console.error("Monkeytype Error:", error);
                 }
             }
-            fetchStats();
+            fetchMonkeytypeStats();
 
-            // NEW: Hamburger Menu Toggle Logic
+            // 2. LEETCODE STATS (Using public API wrapper to bypass CORS)
+            // This wraps the exact GraphQL query you provided
+            async function fetchLeetCodeStats() {
+                const username = "shadowking269";
+                const url = `https://leetcode-stats-api.herokuapp.com/${username}`;
+
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error("LeetCode API Error");
+                    
+                    const data = await response.json();
+
+                    if (data.status === "success") {
+                        document.getElementById('lc-total').textContent = data.totalSolved;
+                        document.getElementById('lc-easy').textContent = data.easySolved;
+                        document.getElementById('lc-medium').textContent = data.mediumSolved;
+                        document.getElementById('lc-hard').textContent = data.hardSolved;
+                    }
+                } catch (error) {
+                    console.error("LeetCode Error:", error);
+                    document.getElementById('lc-total').textContent = "Err";
+                }
+            }
+            fetchLeetCodeStats();
+
+            // Hamburger Menu
             const menuToggle = document.getElementById('menu-toggle');
             const sidebar = document.querySelector('.sidebar');
             const mobileNavLinks = document.querySelectorAll('.sidebar-nav a');
-
             menuToggle.addEventListener('click', function() {
                 sidebar.classList.toggle('open');
             });
-            
-            // NEW: Close menu when a link is clicked on mobile
             mobileNavLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (sidebar.classList.contains('open')) {
@@ -628,9 +694,8 @@
                     }
                 });
             });
-
         });
-</script>
+    </script>
 
     <script type="application/ld+json">
     {
@@ -638,35 +703,18 @@
       "@type": "WebPage",
       "name": "SHADOW | Cybersecurity Professional & Ethical Hacker",
       "url": "https://your-domain.com",  "description": "Portfolio for SHADOW, an aspiring cybersecurity professional, ethical hacker, and penetration tester with skills in Burp Suite, Nmap, Python, and more.",
-      
       "mainEntity": {
         "@type": "Person",
         "name": "SHADOW",
         "url": "https://your-domain.com",  "image": "https://avatars.githubusercontent.com/u/197274423?v=4",
         "jobTitle": "Cybersecurity Professional",
-        "alumniOf": {
-          "@type": "CollegeOrUniversity",
-          "name": "MAPS College, Mangalore"
-        },
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "MAPS College, Mangalore" },
         "knowsAbout": ["Cybersecurity", "Ethical Hacking", "Penetration Testing", "Network Security", "Vulnerability Assessment", "Python", "Burp Suite", "Nmap"],
         "sameAs": [
           "https://github.com/SHADOW2669",
           "https://www.linkedin.com/in/shadow269",
           "https://tryhackme.com/p/shadow2669king",
           "https://leetcode.com/u/shadowking269/"
-        ]
-      },
-      
-      "breadcrumb": { 
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://your-domain.com#home" },
-          { "@type": "ListItem", "position": 2, "name": "About", "item": "https://your-domain.com#about" },
-          { "@type": "ListItem", "position": 3, "name": "Skills", "item": "https://your-domain.com#skills" },
-          { "@type": "ListItem", "position": 4, "name": "Proficiency", "item": "https://your-domain.com#proficiency" },
-          { "@type": "ListItem", "position": 5, "name": "Projects", "item": "https://your-domain.com#projects" },
-          { "@type": "ListItem", "position": 6, "name": "Experience", "item": "https://your-domain.com#experience" },
-          { "@type": "ListItem", "position": 7, "name": "Contact", "item": "https://your-domain.com#contact" }
         ]
       }
     }
