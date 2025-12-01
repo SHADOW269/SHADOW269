@@ -1,16 +1,2 @@
-# Allow all standard search engines (like Google, Bing) to crawl the entire site.
 User-agent: *
 Allow: /
-
-# Block common AI training bots (this is the correct, standard way)
-User-agent: GPTBot
-Disallow: /
-
-User-agent: CCBot
-Disallow: /
-
-User-agent: Google-Extended
-Disallow: /
-
-# Specify the location of your sitemap
-Sitemap: https://portfolio.shadow269.in/sitemap.xml
