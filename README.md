@@ -77,6 +77,9 @@ Hello there! I'm SHADOW, an aspiring Cybersecurity Professional at [CYBERSAPIENS
   <a href="https://www.linkedin.com/in/shadow269" target="_blank">
     <img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/linkedin.svg" alt="GitHub" />
   </a>
+  <a href="https://x.com/SHADOW_2669" target="_blank">
+    <img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/twitter.svg" alt="GitHub" />
+  </a>
   <a href="https://www.reddit.com/user/SHADOW_269/" target="_blank">
     <img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/reddit.svg" alt="GitHub" />
   </a>
