@@ -321,6 +321,7 @@
     </style>
 </head>
 <body>
+    <canvas id="snowCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999;"></canvas>
     <aside class="sidebar">
         <a id="menu-toggle" class="menu-toggle">
             <span></span><span></span><span></span><span></span>
@@ -677,6 +678,67 @@
                 });
             });
         });
+        // --- SNOWFALL EFFECT ---
+function initSnow() {
+    const canvas = document.getElementById('snowCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+
+    class Snowflake {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height * -1; // Start above screen
+            this.size = Math.random() * 3 + 1;
+            this.speed = Math.random() * 1 + 0.5;
+            this.velX = Math.random() * 0.5 - 0.25;
+            // Using a slight teal tint to match your theme
+            this.opacity = Math.random() * 0.5 + 0.3;
+        }
+        update() {
+            this.y += this.speed;
+            this.x += this.velX;
+            if (this.y > canvas.height) this.reset();
+        }
+        draw() {
+            ctx.fillStyle = `rgba(0, 255, 204, ${this.opacity})`; // Teal/Cyan snow
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function createParticles() {
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Snowflake());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    createParticles();
+    animate();
+}
+
+// Initialize snow after everything else
+initSnow();
     </script>
 
     <script type="application/ld+json">
