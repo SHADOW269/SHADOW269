@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Sakshith C Shetty</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Bebas+Neue&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="https://avatars.githubusercontent.com/u/197274423?v=4" type="image/x-icon">
+<style>
+  /* ═══════════════════════════════════════════
+     TOKENS (identical to main site)
+  ═══════════════════════════════════════════ */
+  :root {
+    --bg:        #020508;
+    --bg2:       #050b12;
+    --surface:   #07111c;
+    --surface2:  #0a1825;
+    --border:    #0e2236;
+    --border2:   #162f46;
+    --cyan:      #00c8ff;
+    --cyan-dim:  rgba(0,200,255,0.12);
+    --cyan-glow: rgba(0,200,255,0.35);
+    --cyan2:     #00fff7;
+    --orange:    #ff6b00;
+    --orange-dim:rgba(255,107,0,0.12);
+    --text:      #ccdff0;
+    --text2:     #8aaec8;
+    --muted:     #3d5f78;
+    --mono: 'Share Tech Mono', monospace;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'Rajdhani', sans-serif;
+    --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: clamp(14px, 1vw, 20px); }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* Grid bg */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 30% 30%, rgba(0,200,255,0.04) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 80% 70%, rgba(255,107,0,0.025) 0%, transparent 50%),
+      linear-gradient(rgba(0,200,255,0.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,255,0.022) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 52px 52px, 52px 52px;
+    pointer-events: none; z-index: 0;
+  }
+
+  /* Scanlines */
+  body::after {
+    content: ''; position: fixed; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0,200,255,0.01) 3px, rgba(0,200,255,0.01) 4px);
+    pointer-events: none; z-index: 9999;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--cyan); }
+
+  /* ═══════════════════════════════════════════
+     NAV
+  ═══════════════════════════════════════════ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    height: clamp(48px, 4vw, 70px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(20px, 2.5vw, 52px);
+    background: rgba(2,5,8,0.92);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(16px) saturate(1.5);
+    z-index: 100; font-family: var(--mono);
+  }
+  nav::after {
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan), var(--orange), transparent);
+    opacity: 0.3;
+  }
+  .nav-dots { display: flex; gap: 6px; align-items: center; }
+  .dot { width: clamp(9px,.7vw,13px); height: clamp(9px,.7vw,13px); border-radius: 50%; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+  .dot:hover { transform: scale(1.3); }
+  .dot-r { background: #ff5f57; } .dot-r:hover { box-shadow: 0 0 8px #ff5f57; }
+  .dot-y { background: #febc2e; } .dot-y:hover { box-shadow: 0 0 8px #febc2e; }
+  .dot-g { background: #28c840; } .dot-g:hover { box-shadow: 0 0 8px #28c840; }
+
+  .nav-mid { display: flex; align-items: center; gap: clamp(6px,1.5vw,24px); }
+  .nav-logo {
+    font-family: var(--display); font-size: clamp(14px,1.2vw,22px);
+    letter-spacing: 0.1em; color: rgba(255,255,255,0.15);
+    padding-right: clamp(8px,1vw,18px); border-right: 1px solid var(--border);
+    margin-right: clamp(4px,.6vw,12px); user-select: none;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: clamp(14px,1.6vw,32px); }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: clamp(9px,.65vw,13px); transition: color .25s; padding: 4px 0; position: relative;
+  }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--cyan); transition: width .3s var(--ease); }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-links a.active { color: var(--text); }
+  .nav-links a.active::after { width: 100%; }
+  .nav-links a.nav-contact {
+    color: var(--cyan); border: 1px solid rgba(0,200,255,0.25); padding: 3px 10px;
+    transition: all .25s; background: var(--cyan-dim);
+  }
+  .nav-links a.nav-contact::after { display: none; }
+  .nav-links a.nav-contact:hover { border-color: var(--cyan); box-shadow: 0 0 12px var(--cyan-glow); }
+
+  .nav-right { display: flex; align-items: center; gap: 16px; }
+  .nav-status { display: flex; align-items: center; gap: 6px; font-size: clamp(8px,.6vw,11px); color: #28c840; letter-spacing: .1em; }
+  .nav-status::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #28c840; box-shadow: 0 0 6px #28c840; animation: blip 2s ease infinite; }
+  .nav-date { color: var(--muted); letter-spacing: .08em; font-size: clamp(9px,.65vw,12px); }
+  @keyframes blip { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+  /* ═══════════════════════════════════════════
+     PAGE HERO HEADER
+  ═══════════════════════════════════════════ */
+  .page-header {
+    position: relative; z-index: 1;
+    padding: clamp(90px,10vw,140px) clamp(24px,5vw,80px) clamp(40px,4vw,64px);
+    border-bottom: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: clamp(10px,1.2vw,18px);
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: ''; position: absolute; left: 0; top: clamp(90px,10vw,140px);
+    width: 3px; height: clamp(70px,10vw,140px);
+    background: linear-gradient(180deg, var(--cyan), transparent);
+  }
+
+  /* Big ghost text */
+  .page-bg-text {
+    position: absolute; bottom: -0.1em; right: clamp(16px,3vw,48px);
+    font-family: var(--display);
+    font-size: clamp(80px,14vw,240px);
+    letter-spacing: 0.02em;
+    color: rgba(255,255,255,0.025);
+    line-height: 1; user-select: none; pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .page-tag {
+    font-family: var(--mono); font-size: clamp(9px,.7vw,13px);
+    color: var(--cyan); letter-spacing: .22em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 10px; opacity: .9;
+  }
+  .page-tag::before { content: ''; width: clamp(14px,2vw,28px); height: 1px; background: linear-gradient(90deg, var(--cyan), transparent); }
+
+  .page-title {
+    font-family: var(--display);
+    font-size: clamp(52px,7vw,120px);
+    line-height: .95; letter-spacing: .02em; color: #fff;
+    position: relative; z-index: 1;
+  }
+  .page-title .accent {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--cyan);
+    filter: drop-shadow(0 0 20px var(--cyan-glow));
+  }
+
+  .page-desc {
+    font-size: clamp(13px,1vw,17px); color: var(--text2);
+    line-height: 1.8; font-weight: 500; max-width: 540px;
+    padding-left: clamp(12px,1.2vw,20px);
+    border-left: 2px solid var(--cyan);
+    position: relative; z-index: 1;
+  }
+
+  /* ═══════════════════════════════════════════
+     MAIN LAYOUT
+  ═══════════════════════════════════════════ */
+  main {
+    position: relative; z-index: 1;
+    max-width: clamp(900px,88vw,1440px);
+    margin: 0 auto;
+    padding: clamp(48px,5vw,90px) clamp(20px,3vw,60px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(32px,4vw,72px);
+    align-items: start;
+  }
+
+  @media (max-width: 900px) {
+    main { grid-template-columns: 1fr; }
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTION LABEL
+  ═══════════════════════════════════════════ */
+  .sec-label {
+    font-family: var(--mono); font-size: clamp(9px,.65vw,13px);
+    color: var(--cyan); letter-spacing: .18em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: clamp(18px,1.8vw,30px); opacity: .85;
+  }
+  .sec-label::before { content: ''; width: 18px; height: 1px; background: var(--cyan); opacity: .6; }
+  .sec-label::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border2), transparent); }
+
+  /* ═══════════════════════════════════════════
+     CONTACT CARDS GRID
+  ═══════════════════════════════════════════ */
+  .contact-col { display: flex; flex-direction: column; gap: clamp(24px,2.5vw,44px); }
+
+  .contact-grid {
+    display: grid;
+    /* 2 columns — easy to add more cards, wraps naturally */
+    grid-template-columns: repeat(auto-fill, minmax(clamp(180px,16vw,260px), 1fr));
+    gap: clamp(8px,.8vw,14px);
+  }
+
+  .contact-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: clamp(14px,1.4vw,22px) clamp(16px,1.6vw,24px);
+    display: flex; align-items: center; gap: clamp(10px,1vw,16px);
+    text-decoration: none;
+    position: relative; overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    transition: background .3s, border-color .3s;
+    /* Group for hover */
+    cursor: pointer;
+  }
+  .contact-card::before {
+    content: ''; position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--cyan-dim) 0%, transparent 60%);
+    opacity: 0; transition: opacity .3s;
+  }
+  .contact-card::after {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, var(--cyan), transparent 60%);
+    opacity: 0; transition: opacity .3s;
+  }
+  .contact-card:hover { background: var(--surface2); border-color: var(--border2); }
+  .contact-card:hover::before { opacity: 1; }
+  .contact-card:hover::after { opacity: .7; }
+  .contact-card:hover .card-arrow { transform: translateX(3px); opacity: 1; }
+  .contact-card:hover .card-icon { color: var(--cyan); }
+
+  .card-icon-wrap {
+    width: clamp(32px,3vw,48px); height: clamp(32px,3vw,48px);
+    background: var(--surface2); border: 1px solid var(--border2);
+    border-radius: 2px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; position: relative; z-index: 1;
+    transition: border-color .3s, background .3s;
+  }
+  .contact-card:hover .card-icon-wrap { border-color: rgba(0,200,255,0.3); background: rgba(0,200,255,0.06); }
+
+  .card-icon {
+    font-size: clamp(14px,1.4vw,20px); color: var(--text2);
+    transition: color .3s; display: flex; align-items: center; justify-content: center;
+    line-height: 1;
+  }
+
+  .card-body { flex: 1; min-width: 0; position: relative; z-index: 1; }
+  .card-platform {
+    font-family: var(--mono); font-size: clamp(8px,.62vw,12px);
+    color: var(--muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px;
+  }
+  .card-handle {
+    font-size: clamp(12px,.95vw,17px); font-weight: 700;
+    color: var(--text); letter-spacing: .02em; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .card-arrow {
+    font-size: clamp(12px,1vw,16px); color: var(--cyan); opacity: 0;
+    transition: transform .25s var(--ease), opacity .25s;
+    flex-shrink: 0; position: relative; z-index: 1;
+    font-family: var(--mono);
+  }
+
+  /* Category group label */
+  .category-group { display: flex; flex-direction: column; gap: clamp(8px,.8vw,14px); }
+  .cat-label {
+    font-family: var(--mono); font-size: clamp(8px,.6vw,11px);
+    color: var(--orange); letter-spacing: .2em; text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px; margin-bottom: 2px;
+  }
+  .cat-label::before { content: ''; width: 10px; height: 1px; background: var(--orange); opacity: .6; }
+
+  /* ── Special highlight cards (primary platforms) */
+  .contact-card.featured {
+    grid-column: span 2;
+    padding: clamp(16px,1.6vw,26px) clamp(20px,2vw,32px);
+  }
+  @media (max-width: 500px) { .contact-card.featured { grid-column: span 1; } }
+
+  /* Email / direct contact block */
+  .direct-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: clamp(18px,1.8vw,32px) clamp(20px,2vw,36px);
+    position: relative; overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  }
+  .direct-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: linear-gradient(90deg, var(--cyan), var(--orange), transparent);
+  }
+  .direct-label { font-family: var(--mono); font-size: clamp(8px,.6vw,11px); color: var(--cyan); letter-spacing: .2em; margin-bottom: clamp(6px,.6vw,10px); opacity: .7; }
+  .direct-value {
+    font-family: var(--display); font-size: clamp(18px,1.8vw,30px);
+    letter-spacing: .04em; color: #fff; text-decoration: none;
+    transition: color .2s; display: block;
+  }
+  .direct-value:hover { color: var(--cyan); }
+  .direct-sub { font-family: var(--mono); font-size: clamp(9px,.7vw,13px); color: var(--muted); margin-top: 4px; }
+
+  /* Availability badges */
+  .avail-row { display: flex; gap: clamp(8px,.8vw,14px); flex-wrap: wrap; }
+  .avail-badge {
+    display: flex; align-items: center; gap: 7px;
+    font-family: var(--mono); font-size: clamp(8px,.62vw,12px);
+    color: var(--text2); background: var(--surface2);
+    border: 1px solid var(--border2); padding: 6px 14px;
+    letter-spacing: .08em;
+  }
+  .avail-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; animation: blip 2s ease infinite; }
+  .avail-dot.green { background: #28c840; box-shadow: 0 0 6px #28c840; }
+  .avail-dot.cyan  { background: var(--cyan); box-shadow: 0 0 6px var(--cyan-glow); animation-delay: .4s; }
+  .avail-dot.amber { background: #ffbb33; box-shadow: 0 0 6px rgba(255,187,51,0.6); animation-delay: .8s; }
+
+  /* ═══════════════════════════════════════════
+     GLOBE COLUMN
+  ═══════════════════════════════════════════ */
+  .globe-col { display: flex; flex-direction: column; gap: clamp(24px,2.5vw,44px); position: sticky; top: clamp(80px,8vw,120px); }
+
+  .location-card {
+    background: var(--surface); border: 1px solid var(--border);
+    padding: clamp(16px,1.6vw,28px) clamp(20px,2vw,36px);
+    position: relative; overflow: hidden;
+    clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  }
+  .location-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--cyan), transparent 60%); }
+
+  .loc-label { font-family: var(--mono); font-size: clamp(8px,.6vw,11px); color: var(--cyan); letter-spacing: .2em; text-transform: uppercase; margin-bottom: clamp(6px,.6vw,10px); opacity: .7; display: flex; align-items: center; gap: 8px; }
+  .loc-label::before { content: ''; width: 14px; height: 1px; background: var(--cyan); opacity: .5; }
+  .loc-city { font-family: var(--display); font-size: clamp(26px,2.8vw,52px); color: #fff; letter-spacing: .04em; line-height: 1; margin-bottom: 4px; }
+  .loc-country { font-family: var(--mono); font-size: clamp(10px,.82vw,15px); color: var(--text2); letter-spacing: .12em; margin-bottom: clamp(14px,1.4vw,22px); }
+  .loc-coords { font-family: var(--mono); font-size: clamp(9px,.7vw,13px); color: var(--muted); letter-spacing: .1em; display: flex; gap: 18px; flex-wrap: wrap; }
+  .loc-coords span { color: var(--cyan); opacity: .8; }
+
+  /* Globe wrap */
+  .globe-wrap { position: relative; width: 100%; aspect-ratio: 1; max-width: clamp(280px,32vw,520px); margin: 0 auto; }
+  #globe-canvas { width: 100%; height: 100%; display: block; border-radius: 50%; cursor: grab; }
+  #globe-canvas:active { cursor: grabbing; }
+
+  .globe-ring { position: absolute; border-radius: 50%; background: transparent; border: 1px solid rgba(0,200,255,0.1); animation: ringPulse 4s ease-in-out infinite; }
+  .globe-ring:nth-child(1) { inset: -5%; }
+  .globe-ring:nth-child(2) { inset: -11%; border-color: rgba(0,200,255,0.055); animation-delay: .8s; }
+  .globe-ring:nth-child(3) { inset: -19%; border-color: rgba(0,200,255,0.025); animation-delay: 1.6s; }
+  @keyframes ringPulse { 0%,100%{opacity:.6; transform:scale(1)} 50%{opacity:1; transform:scale(1.012)} }
+
+  .globe-tooltip {
+    position: absolute; background: rgba(7,17,28,0.95); border: 1px solid var(--cyan);
+    padding: 8px 14px; font-family: var(--mono); font-size: clamp(9px,.65vw,12px);
+    color: var(--cyan); letter-spacing: .08em; white-space: nowrap; pointer-events: none;
+    opacity: 0; transform: translateY(6px); transition: opacity .25s, transform .25s;
+    z-index: 10; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+    box-shadow: 0 0 20px rgba(0,200,255,0.2);
+  }
+  .globe-tooltip.visible { opacity: 1; transform: translateY(0); }
+  .globe-tooltip::before { content: '◈ '; color: var(--orange); }
+
+  /* ═══════════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════════ */
+  footer {
+    position: relative; z-index: 1; border-top: 1px solid var(--border);
+    padding: clamp(18px,1.8vw,32px) clamp(20px,3vw,60px);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: clamp(8.5px,.68vw,13px);
+    color: var(--muted); gap: 16px; flex-wrap: wrap;
+  }
+  footer a { color: var(--muted); text-decoration: none; transition: color .2s; }
+  footer a:hover { color: var(--cyan); }
+
+  /* ═══════════════════════════════════════════
+     FADE-UP ANIMATION
+  ═══════════════════════════════════════════ */
+  .fade-up { opacity: 0; transform: translateY(20px); }
+  @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+  .d1{animation-delay:.08s} .d2{animation-delay:.16s} .d3{animation-delay:.24s}
+  .d4{animation-delay:.32s} .d5{animation-delay:.40s} .d6{animation-delay:.48s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div style="display:flex;align-items:center;gap:clamp(10px,1.4vw,22px)">
+    <div class="nav-dots">
+      <div class="dot dot-r"></div>
+      <div class="dot dot-y"></div>
+      <div class="dot dot-g"></div>
+    </div>
+    <a href="/" class="nav-logo">SCS</a>
+  </div>
+  <div class="nav-mid">
+    <div class="nav-links">
+      <a href="/">PROFILE</a>
+      <a href="/contact" class="nav-contact active">CONTACT</a>
+    </div>
+  </div>
+  <div class="nav-right">
+    <div class="nav-status">ONLINE</div>
+    <div class="nav-date" id="nav-date"></div>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-bg-text">CONTACT</div>
+  <div class="page-tag fade-up d1">[ Get In Touch ]</div>
+  <h1 class="page-title fade-up d2">LET'S<br><span class="accent">CONNECT</span></h1>
+  <p class="page-desc fade-up d3">
+    Open to penetration testing roles, bug bounty collaborations, and security research. Reach out through any platform below — I respond fastest via email or LinkedIn.
+  </p>
+</div>
+
+<!-- MAIN GRID -->
+<main>
+
+  <!-- ═══ LEFT: CONTACT CARDS ═══ -->
+  <div class="contact-col">
+
+    <!-- Direct contact -->
+    <div class="fade-up d1">
+      <div class="sec-label">Direct Contact</div>
+      <div class="direct-card">
+        <div class="direct-label">Primary Email</div>
+        <a class="direct-value" href="mailto:contact@shadow269.in">contact@shadow269.in</a>
+        <div class="direct-sub"><!--+91 9008144809--> &nbsp;·&nbsp; <!--Mangaluru, India--></div>
+      </div>
+    </div>
+
+    <!-- Availability -->
+    <div class="fade-up d2">
+      <div class="avail-row">
+        <div class="avail-badge"><span class="avail-dot green"></span>Available for Work</div>
+        <div class="avail-badge"><span class="avail-dot cyan"></span>Open to Remote</div>
+        <div class="avail-badge"><span class="avail-dot amber"></span>Bug Bounty Active</div>
+      </div>
+    </div>
+
+    <!-- Professional networks -->
+    <div class="category-group fade-up d2">
+      <div class="sec-label">Professional</div>
+      <div class="contact-grid">
+
+        <a href="https://www.linkedin.com/in/shadow269/" target="_blank" rel="noopener" class="contact-card featured">
+          <div class="card-icon-wrap">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">LinkedIn</div>
+            <div class="card-handle">in/shadow269</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://github.com/shadow269" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">GitHub</div>
+            <div class="card-handle">shadow269</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://gitlab.com/SHADOW269" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 01-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 014.82 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.49h8.1l2.44-7.49a.42.42 0 01.11-.18.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.51L23 13.45a.84.84 0 01-.35.94z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">GitLab</div>
+            <div class="card-handle">SHADOW269</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Security Platforms -->
+    <div class="category-group fade-up d3">
+      <div class="sec-label">Security Platforms</div>
+      <div class="contact-grid">
+
+        <a href="https://hackerone.com/shadow269" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon" style="font-family:var(--display);font-size:clamp(13px,1.2vw,18px);letter-spacing:.05em;color:var(--orange)">H1</div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">HackerOne</div>
+            <div class="card-handle">shadow269</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://bugcrowd.com/h/SHADOW269" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon" style="font-family:var(--display);font-size:clamp(12px,1.1vw,17px);letter-spacing:.05em;color:#e8423f">BC</div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">Bugcrowd</div>
+            <div class="card-handle">SHADOW269</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://tryhackme.com/p/shadow2669king" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon" style="font-family:var(--display);font-size:clamp(12px,1.1vw,17px);letter-spacing:.02em;color:#88cc14">THM</div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">TryHackMe</div>
+            <div class="card-handle">shadow2669king</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://profile.hackthebox.com/profile/019d3997-02bd-710e-835a-b7fe7da90556" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon" style="font-family:var(--display);font-size:clamp(12px,1.1vw,17px);letter-spacing:.02em;color:#9fef00">HTB</div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">Hack The Box</div>
+            <div class="card-handle">Profile</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://portswigger.net/web-security" target="_blank" rel="noopener" class="contact-card featured">
+          <div class="card-icon-wrap">
+            <div class="card-icon" style="font-family:var(--display);font-size:clamp(11px,1vw,16px);letter-spacing:.02em;color:#ff6633">PSW</div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">PortSwigger Web Security Academy</div>
+            <div class="card-handle">Web Security Labs</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Social -->
+    <div class="category-group fade-up d4">
+      <div class="sec-label">Social</div>
+      <div class="contact-grid">
+
+        <a href="https://x.com/SHADOW_2669" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.843L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">X / Twitter</div>
+            <div class="card-handle">SHADOW_2669</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://www.instagram.com/shadow269.in/" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">Instagram</div>
+            <div class="card-handle">shadow269.in</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://www.reddit.com/user/SHADOW_269/" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">Reddit</div>
+            <div class="card-handle">SHADOW_269</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+        <a href="https://discord.com/users/1051180323058237450" target="_blank" rel="noopener" class="contact-card">
+          <div class="card-icon-wrap">
+            <div class="card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963.021-.04.001-.088-.041-.104a13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/></svg>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-platform">Discord</div>
+            <div class="card-handle">shadow269</div>
+          </div>
+          <div class="card-arrow">→</div>
+        </a>
+
+      </div>
+    </div>
+
+  </div><!-- /contact-col -->
+
+  <!-- ═══ RIGHT: GLOBE ═══ -->
+  <div class="globe-col fade-up d2">
+
+    <!-- Location card -->
+    <div class="location-card">
+      <div class="loc-label">Current Base</div>
+      <div class="loc-city">MANGALURU</div>
+      <div class="loc-country">KARNATAKA, INDIA</div>
+      <div class="loc-coords">
+        <div>LAT <span>12.8698° N</span></div>
+        <div>LON <span>74.8430° E</span></div>
+      </div>
+    </div>
+
+    <!-- Globe -->
+    <div class="globe-wrap">
+      <div class="globe-ring"></div>
+      <div class="globe-ring"></div>
+      <div class="globe-ring"></div>
+      <canvas id="globe-canvas" width="600" height="600"></canvas>
+      <div class="globe-tooltip" id="globe-tooltip">Based in Mangaluru, India</div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 SHADOW. &nbsp;·&nbsp; Designed & Built with a keyboard and a lot of coffee.</div>
+  <div>
+    <a href="mailto:contact@shadow269.in">contact@shadow269.in</a>
+    &nbsp;·&nbsp; <a href="https://linkedin.com/in/shadow269" target="_blank">LinkedIn</a>
+    &nbsp;·&nbsp; <a href="/">← Back to Resume</a>
+  </div>
+</footer>
+
+<script>
+  // Live date
+  const d = new Date();
+  document.getElementById('nav-date').textContent =
+    String(d.getDate()).padStart(2,'0') + ' / ' +
+    String(d.getMonth()+1).padStart(2,'0') + ' / ' + d.getFullYear();
+
+  // Fade-up on scroll
+  const fadeObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.7s cubic-bezier(0.23,1,0.32,1) forwards';
+        fadeObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.fade-up').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.animation = 'none';
+    fadeObs.observe(el);
+  });
+
+  // ── GLOBE ──────────────────────────────────────
+  (function() {
+    const canvas = document.getElementById('globe-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const W = canvas.width, H = canvas.height;
+    const cx = W / 2, cy = H / 2;
+    const R = W * 0.46;
+
+    const LAT = 12.8698, LON = 74.8430;
+
+    let rotY = 1.28;
+    let rotX = -0.18;
+    let isDragging = false;
+    let lastMX = 0, lastMY = 0;
+    let velX = 0, velY = 0;
+    let autoSpin = true;
+
+    function latLonTo3D(lat, lon) {
+      const phi = (90 - lat) * Math.PI / 180;
+      const theta = (lon + 180) * Math.PI / 180;
+      return {
+        x: -Math.sin(phi) * Math.cos(theta),
+        y: Math.cos(phi),
+        z: Math.sin(phi) * Math.sin(theta)
+      };
+    }
+
+    function rotate(p, ry, rx) {
+      const x1 = p.x * Math.cos(ry) + p.z * Math.sin(ry);
+      const z1 = -p.x * Math.sin(ry) + p.z * Math.cos(ry);
+      const y1 = p.y;
+      const y2 = y1 * Math.cos(rx) - z1 * Math.sin(rx);
+      const z2 = y1 * Math.sin(rx) + z1 * Math.cos(rx);
+      return { x: x1, y: y2, z: z2 };
+    }
+
+    function project(p) {
+      return { x: cx + p.x * R, y: cy - p.y * R, visible: p.z > -0.05 };
+    }
+
+    const landmasses = [
+      // India
+      [[37.1,73.5],[36.0,76.5],[34.0,78.5],[31.5,78.0],[29.5,77.5],[28.5,77.2],[25.0,68.0],[23.5,68.5],[22.0,68.2],[20.0,72.0],[18.0,73.0],[16.5,73.5],[15.0,74.0],[13.5,74.5],[12.0,75.5],[10.5,76.0],[8.5,77.0],[8.0,77.5],[7.9,78.0],[8.5,80.0],[10.5,80.3],[13.0,80.3],[15.0,80.0],[16.5,81.5],[18.0,84.0],[20.0,86.5],[21.5,87.5],[22.5,88.0],[22.5,89.5],[24.0,89.5],[25.5,88.5],[26.5,88.7],[27.5,88.8],[28.0,87.0],[28.5,88.5],[27.0,89.5],[26.5,90.0],[26.0,92.0],[27.0,95.0],[27.5,97.0],[28.5,97.5],[29.5,95.0],[31.0,93.5],[32.5,93.0],[33.5,94.0],[34.5,73.5],[37.1,73.5]],
+      // Africa
+      [[37,9],[37,-1],[34,-5],[32,-9],[28,-13],[24,-17],[20,-17],[15,-18],[10,-17],[5,-4],[4,1],[3,8],[4,10],[3,14],[4,16],[5,18],[5,22],[7,24],[7,28],[5,30],[3,32],[4,35],[6,38],[8,40],[11,42],[12,44],[14,42],[15,38],[17,38],[20,37],[24,35],[28,34],[30,32],[32,30],[34,25],[30,20],[26,14],[24,7],[20,2],[16,-1],[12,-2],[8,-3],[5,-3],[2,7],[1,9],[-2,10],[-5,12],[-8,13],[-12,14],[-17,16],[-20,14],[-23,15],[-26,14],[-30,15],[-33,19],[-35,20],[-34,26],[-30,30],[-26,33],[-24,33],[-22,34],[-18,36],[-15,36],[-10,40],[-8,40],[-5,37],[0,33],[3,30],[5,25],[5,20],[8,15],[10,8],[5,2],[2,-4],[4,-12],[6,-15],[8,-17],[10,-18],[15,-18],[20,-17],[25,-16],[30,-12],[34,-9],[36,-1],[37,9]],
+      // Europe
+      [[35,26],[36,27],[37,26],[37,22],[38,20],[37,16],[38,14],[40,17],[42,13],[43,16],[44,13],[45,14],[44,15],[44,16],[47,12],[47,8],[47,4],[47,1],[48,-4],[49,-2],[51,0],[51,4],[52,5],[53,8],[54,10],[56,12],[56,14],[57,12],[57,16],[58,16],[60,18],[62,15],[63,17],[65,15],[67,15],[68,17],[70,18],[70,22],[69,26],[70,28],[72,24],[70,20],[71,15],[71,10],[69,10],[67,9],[65,8],[62,6],[60,4],[58,5],[55,8],[53,6],[52,4],[50,2],[49,-2],[48,-5],[46,-1],[44,1],[43,2],[41,2],[41,8],[43,6],[44,8],[44,12],[43,11],[40,13],[38,14],[37,12],[37,8],[37,5],[36,5],[35,8],[35,12],[35,16],[35,24],[35,26]],
+      // Asia/Russia
+      [[70,30],[70,40],[68,50],[65,60],[60,60],[55,60],[50,60],[45,55],[45,60],[50,70],[55,70],[58,68],[60,68],[62,68],[65,70],[66,72],[68,74],[70,72],[71,74],[72,80],[70,85],[66,86],[64,90],[65,95],[66,100],[68,104],[69,110],[70,120],[68,130],[66,132],[64,136],[62,142],[55,140],[52,142],[50,140],[50,135],[48,138],[45,136],[43,134],[43,131],[48,130],[50,120],[52,110],[50,100],[47,92],[48,88],[44,82],[42,78],[40,72],[40,68],[44,63],[44,60],[45,55],[42,50],[42,46],[44,45],[40,40],[39,38],[40,36],[38,30],[36,32],[36,38],[37,44],[38,50],[40,55],[38,56],[38,60],[40,60],[42,60],[45,62],[48,64],[50,70],[55,68],[58,65],[60,62],[62,60],[65,58],[68,50],[70,40],[72,35],[70,30]],
+      // North America
+      [[70,-140],[68,-136],[68,-130],[65,-128],[60,-125],[55,-124],[50,-125],[48,-125],[45,-125],[43,-125],[40,-125],[37,-122],[35,-120],[33,-118],[30,-116],[29,-112],[26,-110],[22,-108],[20,-106],[18,-102],[18,-100],[20,-98],[22,-100],[24,-105],[26,-108],[28,-110],[30,-112],[32,-114],[34,-118],[36,-120],[38,-122],[40,-125],[42,-125],[45,-125],[48,-125],[50,-125],[55,-130],[58,-138],[60,-145],[62,-148],[65,-165],[66,-168],[68,-165],[68,-160],[70,-155],[71,-148],[70,-140]],
+      // South America
+      [[-55,-68],[-54,-66],[-52,-68],[-50,-70],[-48,-66],[-46,-68],[-42,-63],[-40,-62],[-38,-58],[-34,-52],[-30,-50],[-27,-48],[-25,-44],[-22,-42],[-18,-40],[-12,-37],[-8,-35],[-5,-35],[-2,-38],[0,-42],[2,-50],[4,-52],[6,-55],[8,-60],[10,-62],[8,-70],[5,-75],[2,-78],[0,-75],[-3,-73],[-6,-75],[-8,-72],[-10,-75],[-14,-76],[-18,-70],[-20,-68],[-22,-68],[-24,-65],[-26,-65],[-28,-60],[-30,-55],[-32,-52],[-34,-53],[-36,-56],[-38,-60],[-42,-63],[-46,-65],[-50,-68],[-55,-68]],
+      // Australia
+      [[-14,126],[-12,130],[-10,136],[-12,142],[-16,145],[-20,148],[-24,151],[-28,153],[-32,153],[-36,150],[-38,148],[-38,144],[-36,140],[-34,136],[-32,132],[-30,128],[-26,114],[-22,114],[-18,122],[-14,126]],
+      // Greenland
+      [[83,-20],[80,-15],[78,-20],[75,-20],[72,-24],[72,-26],[70,-24],[68,-26],[66,-30],[64,-40],[65,-50],[66,-52],[68,-54],[70,-52],[72,-46],[74,-42],[76,-38],[78,-32],[80,-26],[82,-22],[83,-20]],
+      // Japan
+      [[44,145],[42,143],[40,141],[36,136],[34,132],[33,131],[33,130],[34,131],[36,136],[38,140],[40,140],[42,141],[44,145]],
+      // Southeast Asia
+      [[22,98],[20,100],[18,103],[15,104],[13,103],[10,105],[8,103],[5,100],[3,102],[1,104],[3,106],[5,104],[8,98],[10,99],[12,100],[14,100],[16,102],[18,104],[20,100],[22,98]]
+    ];
+
+    const graticules = [];
+    for (let lat = -80; lat <= 80; lat += 20) {
+      const line = [];
+      for (let lon = -180; lon <= 180; lon += 4) line.push([lat, lon]);
+      graticules.push(line);
+    }
+    for (let lon = -180; lon <= 180; lon += 30) {
+      const line = [];
+      for (let lat = -90; lat <= 90; lat += 4) line.push([lat, lon]);
+      graticules.push(line);
+    }
+
+    function drawGlobe() {
+      ctx.clearRect(0, 0, W, H);
+
+      // Sphere base
+      const grad = ctx.createRadialGradient(cx - R*0.3, cy - R*0.3, R*0.05, cx, cy, R);
+      grad.addColorStop(0, '#0d2235');
+      grad.addColorStop(0.5, '#060e18');
+      grad.addColorStop(1, '#020508');
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+
+      // Atmosphere
+      const atmoGrad = ctx.createRadialGradient(cx, cy, R * 0.92, cx, cy, R * 1.04);
+      atmoGrad.addColorStop(0, 'rgba(0,200,255,0)');
+      atmoGrad.addColorStop(0.5, 'rgba(0,200,255,0.05)');
+      atmoGrad.addColorStop(1, 'rgba(0,200,255,0.18)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, R * 1.04, 0, Math.PI * 2);
+      ctx.fillStyle = atmoGrad;
+      ctx.fill();
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(cx, cy, R - 1, 0, Math.PI * 2);
+      ctx.clip();
+
+      // Graticule
+      for (const line of graticules) {
+        let started = false;
+        ctx.beginPath();
+        for (const [lat, lon] of line) {
+          const p = rotate(latLonTo3D(lat, lon), rotY, rotX);
+          if (p.z < 0) { started = false; continue; }
+          const s = project(p);
+          if (!started) { ctx.moveTo(s.x, s.y); started = true; }
+          else ctx.lineTo(s.x, s.y);
+        }
+        ctx.strokeStyle = 'rgba(0,200,255,0.055)';
+        ctx.lineWidth = 0.4;
+        ctx.stroke();
+      }
+
+      // Landmasses
+      for (const shape of landmasses) {
+        ctx.beginPath();
+        let first = true;
+        for (const [lat, lon] of shape) {
+          const p = rotate(latLonTo3D(lat, lon), rotY, rotX);
+          if (p.z < 0) { first = true; continue; }
+          const s = project(p);
+          if (first) { ctx.moveTo(s.x, s.y); first = false; }
+          else ctx.lineTo(s.x, s.y);
+        }
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(0,200,255,0.09)';
+        ctx.strokeStyle = 'rgba(0,200,255,0.28)';
+        ctx.lineWidth = 0.7;
+        ctx.fill();
+        ctx.stroke();
+      }
+
+      ctx.restore();
+
+      // Specular highlight
+      const shine = ctx.createRadialGradient(cx - R*0.32, cy - R*0.32, R*0.02, cx - R*0.2, cy - R*0.2, R*0.65);
+      shine.addColorStop(0, 'rgba(255,255,255,0.07)');
+      shine.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, R, 0, Math.PI * 2);
+      ctx.fillStyle = shine;
+      ctx.fill();
+
+      // Mangaluru marker
+      const mangP = rotate(latLonTo3D(LAT, LON), rotY, rotX);
+      const mangS = project(mangP);
+      const onFront = mangP.z > 0;
+      const tooltip = document.getElementById('globe-tooltip');
+
+      if (onFront) {
+        const mx = mangS.x, my = mangS.y;
+        const t = Date.now() / 1000;
+
+        // Pulse rings
+        for (let i = 3; i >= 1; i--) {
+          const phase = (t * 1.8 + (i * 0.6)) % 3;
+          const progress = phase / 3;
+          const rad = (6 + i * 9) * progress * (R / 280);
+          const alpha = 0.4 * (1 - progress) * (i === 1 ? 1 : 0.6);
+          ctx.beginPath();
+          ctx.arc(mx, my, Math.max(0.1, rad), 0, Math.PI * 2);
+          ctx.strokeStyle = `rgba(0,200,255,${alpha})`;
+          ctx.lineWidth = 1.2;
+          ctx.stroke();
+        }
+
+        // Soft glow behind dot
+        const glowGrad = ctx.createRadialGradient(mx, my, 0, mx, my, 18 * (R / 280));
+        glowGrad.addColorStop(0, 'rgba(255,107,0,0.35)');
+        glowGrad.addColorStop(1, 'rgba(255,107,0,0)');
+        ctx.beginPath();
+        ctx.arc(mx, my, 18 * (R / 280), 0, Math.PI * 2);
+        ctx.fillStyle = glowGrad;
+        ctx.fill();
+
+        // Orange dot
+        const dotR = 4 * (R / 280);
+        ctx.beginPath();
+        ctx.arc(mx, my, dotR, 0, Math.PI * 2);
+        ctx.fillStyle = '#ff6b00';
+        ctx.shadowColor = '#ff9940';
+        ctx.shadowBlur = 14;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // White core
+        ctx.beginPath();
+        ctx.arc(mx, my, dotR * 0.38, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
+        ctx.fill();
+
+        // Crosshair
+        const ch = 10 * (R / 280);
+        ctx.strokeStyle = 'rgba(255,107,0,0.35)';
+        ctx.lineWidth = 0.8;
+        ctx.beginPath();
+        ctx.moveTo(mx - ch, my); ctx.lineTo(mx - dotR * 1.6, my);
+        ctx.moveTo(mx + dotR * 1.6, my); ctx.lineTo(mx + ch, my);
+        ctx.moveTo(mx, my - ch); ctx.lineTo(mx, my - dotR * 1.6);
+        ctx.moveTo(mx, my + dotR * 1.6); ctx.lineTo(mx, my + ch);
+        ctx.stroke();
+
+        // Tooltip position
+        if (tooltip) {
+          const rect = canvas.getBoundingClientRect();
+          const sx = rect.width / W, sy = rect.height / H;
+          tooltip.style.left = (mx * sx - 100) + 'px';
+          tooltip.style.top = ((my - 50) * sy) + 'px';
+          tooltip.classList.add('visible');
+        }
+      } else {
+        if (tooltip) tooltip.classList.remove('visible');
+      }
+    }
+
+    // Drag
+    canvas.style.cursor = 'grab';
+    canvas.addEventListener('mousedown', e => {
+      isDragging = true; autoSpin = false;
+      lastMX = e.clientX; lastMY = e.clientY;
+      velX = 0; velY = 0;
+      canvas.style.cursor = 'grabbing';
+    });
+    window.addEventListener('mousemove', e => {
+      if (!isDragging) return;
+      const dx = e.clientX - lastMX, dy = e.clientY - lastMY;
+      velY = dx * 0.005; velX = dy * 0.005;
+      rotY += velY; rotX += velX;
+      rotX = Math.max(-1.2, Math.min(1.2, rotX));
+      lastMX = e.clientX; lastMY = e.clientY;
+    });
+    window.addEventListener('mouseup', () => { isDragging = false; canvas.style.cursor = 'grab'; });
+
+    canvas.addEventListener('touchstart', e => {
+      isDragging = true; autoSpin = false;
+      lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY;
+    }, { passive: true });
+    canvas.addEventListener('touchmove', e => {
+      if (!isDragging) return;
+      const dx = e.touches[0].clientX - lastMX, dy = e.touches[0].clientY - lastMY;
+      velY = dx * 0.005; velX = dy * 0.005;
+      rotY += velY; rotX += velX;
+      rotX = Math.max(-1.2, Math.min(1.2, rotX));
+      lastMX = e.touches[0].clientX; lastMY = e.touches[0].clientY;
+    }, { passive: true });
+    canvas.addEventListener('touchend', () => { isDragging = false; });
+
+    function animate() {
+      if (!isDragging) {
+        if (autoSpin) {
+          rotY += 0.003;
+        } else {
+          velY *= 0.94; velX *= 0.94;
+          rotY += velY; rotX += velX;
+          rotX = Math.max(-1.2, Math.min(1.2, rotX));
+        }
+      }
+      drawGlobe();
+      requestAnimationFrame(animate);
+    }
+    animate();
+  })();
+</script>
+</body>
+</html>
