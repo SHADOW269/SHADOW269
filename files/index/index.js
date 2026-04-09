@@ -4,6 +4,225 @@ document.getElementById('nav-date').textContent =
   String(d.getDate()).padStart(2,'0') + ' / ' +
   String(d.getMonth()+1).padStart(2,'0') + ' / ' + d.getFullYear();
 
+
+/* ═══ DISCORD STATUS JS ═══ */
+(function() {
+  const USER_ID = '1051180323058237450';
+  let _countdown = 30;
+  let _timer;
+
+  const STATUS_META = {
+    online:  { label: 'ONLINE',  color: '#23a55a', shadow: '0 0 6px rgba(35,165,90,.8)',  dot: '●', dotClass: 'ds-online',  badgeClass: 'dsb-online'  },
+    idle:    { label: 'IDLE',    color: '#f0b232', shadow: '0 0 6px rgba(240,178,50,.8)', dot: '◐', dotClass: 'ds-idle',    badgeClass: 'dsb-idle'    },
+    dnd:     { label: 'DND',     color: '#f23f43', shadow: '0 0 6px rgba(242,63,67,.8)',  dot: '⊘', dotClass: 'ds-dnd',     badgeClass: 'dsb-dnd'     },
+    offline: { label: 'OFFLINE', color: '#80848e', shadow: 'none',                        dot: '○', dotClass: 'ds-offline', badgeClass: 'dsb-offline' },
+  };
+
+  const ACT_ICON = { 0:'🎮', 1:'📡', 2:'🎵', 3:'👁', 4:'💬', 5:'🤝' };
+
+  function setNav(status) {
+    const m = STATUS_META[status] || STATUS_META['offline'];
+    const dot   = document.getElementById('nav-discord-dot');
+    const text  = document.getElementById('nav-discord-text');
+    const badge = document.getElementById('ndt-badge');
+    if (dot)   { dot.style.background = m.color; dot.style.boxShadow = m.shadow; }
+    if (text)  { text.textContent = m.label; text.style.color = m.color; }
+    if (badge) { badge.textContent = m.dot + ' ' + m.label; badge.className = 'ndt-badge b-' + status; }
+  }
+
+  function updateTooltip(userData, acts) {
+    const nameEl   = document.getElementById('ndt-name');
+    const handleEl = document.getElementById('ndt-handle');
+    const avatarEl = document.getElementById('ndt-avatar');
+
+    if (nameEl)   nameEl.textContent   = userData.displayName || 'SHADOW';
+    if (handleEl) handleEl.textContent = '@' + (userData.username || 'shadow269');
+    if (avatarEl) {
+      if (userData.avatarUrl) {
+        avatarEl.innerHTML = '<img src="' + userData.avatarUrl + '" alt="avatar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">';
+      } else {
+        avatarEl.textContent = (userData.displayName || 'S')[0].toUpperCase();
+      }
+    }
+
+    // Custom status message (type 4)
+    const customAct = acts.find(a => a.type === 4);
+    const customEl  = document.getElementById('ndt-custom-status');
+    const customTxt = document.getElementById('ndt-custom-text');
+    if (customEl && customTxt) {
+      if (customAct && customAct.state) {
+        const emoji = customAct.emoji ? (customAct.emoji.name || '') + ' ' : '';
+        customTxt.textContent = emoji + customAct.state;
+        customEl.classList.add('has-content');
+      } else {
+        customEl.classList.remove('has-content');
+      }
+    }
+
+    // Activities (all non-custom)
+    const ACT_ICON = { 0:'🎮', 1:'📡', 2:'🎵', 3:'👁', 5:'🤝' };
+    const mainActs = acts.filter(a => a.type !== 4);
+    const listEl   = document.getElementById('ndt-acts-list');
+    if (listEl) {
+      if (mainActs.length === 0) {
+        listEl.innerHTML = '<div class="ndt-no-activity">No current activity</div>';
+      } else {
+        listEl.innerHTML = mainActs.map(a => {
+          const icon   = ACT_ICON[a.type] || '📌';
+          const detail = a.details ? '<div class="ndt-act-detail">' + a.details + '</div>' : '';
+          const state  = (a.state && a.state !== a.details) ? '<div class="ndt-act-detail">' + a.state + '</div>' : '';
+          return '<div class="ndt-act-item">'
+            + '<span class="ndt-act-icon">' + icon + '</span>'
+            + '<div class="ndt-act-body">'
+            + '<div class="ndt-act-name">' + (a.name || 'Unknown') + '</div>'
+            + detail + state
+            + '</div></div>';
+        }).join('');
+      }
+    }
+  }
+
+  function setCardStatus(status) {
+    const m = STATUS_META[status] || STATUS_META['offline'];
+    const dot   = document.getElementById('dc-status-dot');
+    const badge = document.getElementById('dc-status-badge');
+    const dotSm = document.getElementById('dc-status-dot-small');
+    const txt   = document.getElementById('dc-status-text');
+    if (dot)   dot.className = 'discord-status-dot ' + m.dotClass;
+    if (badge) badge.className = 'discord-status-badge ' + m.badgeClass;
+    if (dotSm) dotSm.textContent = m.dot;
+    if (txt)   txt.textContent = m.label;
+  }
+
+  function setActivity(acts) {
+    const actEl = document.getElementById('dc-activity');
+    if (!actEl) return;
+    const main = (acts || []).find(a => a.type !== 4) || (acts || [])[0];
+    const custom = (acts || []).find(a => a.type === 4);
+    if (main) {
+      const icon   = ACT_ICON[main.type] || '📌';
+      const detail = main.details || '';
+      const state  = main.state || '';
+      actEl.innerHTML = `
+        <span class="da-icon">${icon}</span>
+        <div class="da-text">
+          <div class="da-name">${main.name || 'Unknown'}</div>
+          ${detail ? `<div class="da-detail">${detail}</div>` : ''}
+          ${(state && state !== detail) ? `<div class="da-detail" style="opacity:.7">${state}</div>` : ''}
+        </div>`;
+    } else if (custom && custom.state) {
+      actEl.innerHTML = `
+        <span class="da-icon">${custom.emoji?.name || '💬'}</span>
+        <div class="da-text">
+          <div class="da-name" style="font-size:clamp(12px,1vw,16px);color:var(--text2)">${custom.state}</div>
+        </div>`;
+    } else {
+      actEl.innerHTML = `<span class="da-icon">💤</span><div class="da-text"><div class="da-name" style="color:var(--muted);font-family:var(--mono);font-size:13px;letter-spacing:.05em">No current activity</div></div>`;
+    }
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('dc-error');
+    if (el) { el.textContent = '⚠ ' + msg; el.style.display = 'block'; }
+  }
+
+  function fallback() {
+    const dot  = document.getElementById('nav-discord-dot');
+    const text = document.getElementById('nav-discord-text');
+    if (dot)  { dot.style.background = '#5865F2'; dot.style.boxShadow = '0 0 6px rgba(88,101,242,.7)'; }
+    if (text) { text.textContent = 'SHADOW'; text.style.color = '#5865F2'; }
+    const badge = document.getElementById('ndt-badge');
+    if (badge) { badge.textContent = '○ OFFLINE'; badge.className = 'ndt-badge b-offline'; }
+    updateTooltip({ displayName: 'SHADOW', username: 'shadow269', avatarUrl: null }, []);
+    setCardStatus('offline');
+    setActivity([]);
+    const h = document.getElementById('dc-handle');
+    if (h) h.textContent = '@shadow269';
+    const u = document.getElementById('dc-username');
+    if (u) u.textContent = 'SHADOW';
+  }
+
+  window.fetchDiscordStatus = async function() {
+    clearInterval(_timer);
+    _countdown = 30;
+    const timerEl = document.getElementById('dc-auto-timer');
+    if (timerEl) timerEl.textContent = 'Auto in 30s';
+    const errEl = document.getElementById('dc-error');
+    if (errEl) errEl.style.display = 'none';
+
+    try {
+      const res = await fetch('https://api.lanyard.rest/v1/users/' + USER_ID);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const json = await res.json();
+
+      if (!json.success) {
+        showError('Not found on Lanyard — join discord.gg/lanyard to enable live status.');
+        fallback();
+        startTimer();
+        return;
+      }
+
+      const d    = json.data;
+      const user = d.discord_user;
+
+      // Avatar
+      const avatarEl = document.getElementById('dc-avatar');
+      if (avatarEl) {
+        if (user.avatar) {
+          avatarEl.innerHTML = '<img src="https://cdn.discordapp.com/avatars/' + USER_ID + '/' + user.avatar + '.png?size=128" alt="avatar" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />';
+        } else {
+          const n = user.global_name || user.username || 'S';
+          avatarEl.textContent = n[0].toUpperCase();
+        }
+      }
+
+      // Username / handle
+      const displayName = user.global_name || user.username || 'SHADOW';
+      const usernameEl = document.getElementById('dc-username');
+      if (usernameEl) usernameEl.textContent = displayName;
+      const handleEl = document.getElementById('dc-handle');
+      if (handleEl) handleEl.textContent = '@' + (user.username || 'shadow269');
+
+      // Status (card + nav)
+      const status = d.discord_status || 'offline';
+      setCardStatus(status);
+      setNav(status);
+
+      // Activity
+      const acts = d.activities || [];
+      setActivity(acts);
+
+      // Update tooltip (avatar, name, custom status, all activities)
+      updateTooltip({
+        displayName: user.global_name || user.username || 'SHADOW',
+        username:    user.username || 'shadow269',
+        avatarUrl:   user.avatar ? 'https://cdn.discordapp.com/avatars/' + USER_ID + '/' + user.avatar + '.png?size=80' : null,
+      }, acts);
+
+    } catch(e) {
+      showError('Could not reach Lanyard API.');
+      fallback();
+    }
+
+    startTimer();
+  };
+
+  function startTimer() {
+    _timer = setInterval(() => {
+      _countdown--;
+      const el = document.getElementById('dc-auto-timer');
+      if (el) el.textContent = 'Auto in ' + _countdown + 's';
+      if (_countdown <= 0) { clearInterval(_timer); window.fetchDiscordStatus(); }
+    }, 1000);
+  }
+
+  // Nav already has default text from HTML — no override needed on init
+
+  // Tooltip stays via CSS :hover on .nav-ds-wrap — no JS toggle needed
+
+  window.fetchDiscordStatus();
+})();
+
 /* ── Hamburger ── */
 const hamburger = document.getElementById('nav-hamburger');
 const drawer = document.getElementById('nav-drawer');

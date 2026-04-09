@@ -33,7 +33,35 @@
     </div>
   </div>
   <div class="nav-right">
-    <div class="nav-status">ONLINE</div>
+    <div id="nav-discord-status" class="nav-ds-wrap">
+      <span id="nav-discord-dot" class="nav-ds-dot"></span>
+      <span id="nav-discord-text" class="nav-ds-label">SHADOW</span>
+      <!-- Hover tooltip -->
+      <div class="nav-ds-tooltip" id="nav-ds-tooltip">
+        <!-- Header: avatar + name + status -->
+        <div class="ndt-header">
+          <a href="https://discord.com/users/1051180323058237450" target="_blank" rel="noopener" class="ndt-avatar-link">
+            <div class="ndt-avatar" id="ndt-avatar">S</div>
+          </a>
+          <div class="ndt-info">
+            <a href="https://discord.com/users/1051180323058237450" target="_blank" rel="noopener" class="ndt-name-link">
+              <div class="ndt-name" id="ndt-name">SHADOW</div>
+            </a>
+            <div class="ndt-username" id="ndt-handle">@shadow269</div>
+            <div class="ndt-badge b-offline" id="ndt-badge">○ OFFLINE</div>
+          </div>
+        </div>
+        <!-- Custom status message -->
+        <div class="ndt-custom-status" id="ndt-custom-status">
+          <div class="ndt-custom-text" id="ndt-custom-text"></div>
+        </div>
+        <!-- Activities -->
+        <div class="ndt-activities">
+          <span class="ndt-sec-label">ACTIVITY</span>
+          <div id="ndt-acts-list"><div class="ndt-no-activity">No current activity</div></div>
+        </div>
+      </div>
+    </div>
     <div class="nav-date" id="nav-date"></div>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -484,7 +512,7 @@
   <div>© 2026 SHADOW. &nbsp;·&nbsp; Designed & Built with a keyboard and a lot of coffee.</div>
   <a href="/contact/" class="footer-contact">GET IN TOUCH →</a>
   <div>
-    <a href="mailto:contact@shadow269.in">contact@shadow269.in</a>
+    <a href="/cdn-cgi/l/email-protection#50333f3e2431332410233831343f276266697e393e"><span class="__cf_email__" data-cfemail="d3b0bcbda7b2b0a793a0bbb2b7bca4e1e5eafdbabd">[email&#160;protected]</span></a>
     &nbsp;·&nbsp; <a href="https://linkedin.com/in/shadow269" target="_blank">LinkedIn</a>
   </div>
 </footer>
@@ -517,5 +545,6 @@
     </div>
   </div>
 </div>
+
 </body>
 </html>
