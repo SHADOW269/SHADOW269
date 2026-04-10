@@ -60,7 +60,6 @@ document.getElementById('nav-date').textContent =
     }
 
     // Activities (all non-custom)
-    const ACT_ICON = { 0:'🎮', 1:'📡', 2:'🎵', 3:'👁', 5:'🤝' };
     const mainActs = acts.filter(a => a.type !== 4);
     const listEl   = document.getElementById('ndt-acts-list');
     if (listEl) {
@@ -216,10 +215,6 @@ document.getElementById('nav-date').textContent =
     }, 1000);
   }
 
-  // Nav already has default text from HTML — no override needed on init
-
-  // Tooltip stays via CSS :hover on .nav-ds-wrap — no JS toggle needed
-
   window.fetchDiscordStatus();
 })();
 
@@ -271,16 +266,6 @@ sections.forEach(s => navObs.observe(s));
 
 /* ══════════════════════════════════════════════════════
    CERT MODAL
-   ─────────────────────────────────────────────────────
-   To show your actual certificate images, set the 'img'
-   field to the path or URL of each certificate image.
-   
-   Examples:
-     img: 'certs/crtom.jpg'           ← relative path
-     img: 'https://i.imgur.com/xxx.jpg' ← hosted URL
-   
-   The modal will display the image full-size and allow
-   zooming. If no image is set, a styled placeholder shows.
 ══════════════════════════════════════════════════════ */
 const certData = {
   crtom: {
@@ -372,7 +357,6 @@ function openCertModal(key) {
   const hintEl = document.getElementById('modal-hint');
 
   if (cert.img) {
-    // Show loading spinner, then image
     container.innerHTML = `<div class="cert-img-loading"><div class="cert-spinner"></div><span>Loading certificate…</span></div>`;
     hintEl.textContent = '';
 
@@ -385,23 +369,19 @@ function openCertModal(key) {
       container.innerHTML = `<div class="cert-no-preview">
         <span class="cert-icon">⬡</span>
         <strong style="color:var(--text2);display:block;margin-bottom:8px;font-size:14px">${cert.title}</strong>
-        <span>Image could not be loaded.<br>Check the file path in <code style="color:var(--cyan)">certData['${key}'].img</code></span>
+        <span>Image could not be loaded.</span>
       </div>`;
     };
     img.src = cert.img;
     img.alt = cert.title;
     img.style.cssText = 'max-width:100%;max-height:70vh;object-fit:contain;display:block;border:1px solid var(--border);box-shadow:0 0 40px rgba(0,200,255,0.08);';
   } else {
-    // Styled placeholder — no image configured yet
     container.innerHTML = `<div class="cert-no-preview">
       <span class="cert-icon">⬡</span>
       <strong style="color:var(--text2);display:block;margin-bottom:12px;font-size:15px;letter-spacing:.02em">${cert.title}</strong>
       <span style="color:var(--muted);font-size:11px;line-height:2">
         ${cert.sub}<br>
         ${cert.id ? `Credential ID: <span style="color:var(--cyan)">${cert.id}</span><br>` : ''}
-        <br>
-        <span style="color:var(--border2)">────────────────────────────────</span><br>
-        <span style="color:var(--muted)">To display your certificate image here,<br>set <code style="color:var(--cyan)">certData['${key}'].img</code> to your certificate URL or file path.</span>
       </span>
     </div>`;
     hintEl.textContent = cert.verifyUrl ? 'Click "Verify" to confirm this credential externally.' : '';
@@ -478,41 +458,117 @@ fetchGitHub();
 
 /* ══════════════════════════════════
    LEETCODE API
+   Uses alfa-leetcode-api (reliable CORS-enabled proxy)
+   with multiple fallback endpoints
 ═══════════════════════════════════ */
 async function fetchLeetCode() {
   const username = 'SHADOW2669';
-  try {
-    const res = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
-    if (data.status !== 'success') throw new Error('bad status');
 
-    const totalEl = document.getElementById('lc-total');
-    totalEl.textContent = data.totalSolved;
-
-    document.getElementById('lc-easy').textContent   = data.easySolved;
-    document.getElementById('lc-medium').textContent = data.mediumSolved;
-    document.getElementById('lc-hard').textContent   = data.hardSolved;
-
-    const easyTotal = 850, medTotal = 1800, hardTotal = 800;
-    const barsWrap = document.getElementById('lc-bars');
-    barsWrap.style.display = 'flex';
-
-    function setBar(fillId, numId, solved, total) {
-      document.getElementById(numId).textContent = `${solved} / ${total}`;
-      setTimeout(() => {
-        document.getElementById(fillId).style.width = Math.min(100, (solved / total) * 100) + '%';
-      }, 500);
+  // Multiple endpoints to try in order
+  const endpoints = [
+    // Primary: alfa-leetcode-api (most reliable)
+    {
+      url: `https://alfa-leetcode-api.onrender.com/${username}/solved`,
+      parse: async (res) => {
+        const data = await res.json();
+        // alfa-leetcode-api returns { solvedProblem, easySolved, mediumSolved, hardSolved }
+        if (data.solvedProblem === undefined) throw new Error('unexpected shape');
+        return {
+          total:  data.solvedProblem,
+          easy:   data.easySolved,
+          medium: data.mediumSolved,
+          hard:   data.hardSolved,
+        };
+      }
+    },
+    // Fallback 1: leetcode-api-faisalshohid
+    {
+      url: `https://leetcode-api-faisalshohid.vercel.app/leetcode/${username}`,
+      parse: async (res) => {
+        const data = await res.json();
+        if (!data.totalSolved && data.totalSolved !== 0) throw new Error('unexpected shape');
+        return {
+          total:  data.totalSolved,
+          easy:   data.easySolved,
+          medium: data.mediumSolved,
+          hard:   data.hardSolved,
+        };
+      }
+    },
+    // Fallback 2: leetcode-stats via another proxy
+    {
+      url: `https://leetcode-stats.yuyx.workers.dev/${username}`,
+      parse: async (res) => {
+        const data = await res.json();
+        if (!data.data) throw new Error('unexpected shape');
+        const sub = data.data.matchedUser?.submitStats?.acSubmissionNum || [];
+        const getCount = (diff) => (sub.find(s => s.difficulty === diff) || {}).count || 0;
+        return {
+          total:  getCount('All'),
+          easy:   getCount('Easy'),
+          medium: getCount('Medium'),
+          hard:   getCount('Hard'),
+        };
+      }
     }
-    setBar('lc-bar-easy', 'lc-bar-easy-num', data.easySolved, easyTotal);
-    setBar('lc-bar-med',  'lc-bar-med-num',  data.mediumSolved, medTotal);
-    setBar('lc-bar-hard', 'lc-bar-hard-num', data.hardSolved, hardTotal);
+  ];
 
-  } catch (err) {
-    const totalEl = document.getElementById('lc-total');
-    totalEl.innerHTML = '<span class="err-badge">⚠ API Offline</span>';
-    ['lc-easy','lc-medium','lc-hard'].forEach(id => document.getElementById(id).textContent = '—');
+  let stats = null;
+  let lastError = '';
+
+  for (const endpoint of endpoints) {
+    try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+      const res = await fetch(endpoint.url, { signal: controller.signal });
+      clearTimeout(timeout);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      stats = await endpoint.parse(res);
+      if (stats && typeof stats.total === 'number') break; // success
+    } catch (err) {
+      lastError = err.message;
+      stats = null;
+      continue;
+    }
   }
+
+  if (!stats) {
+    // All endpoints failed — show error state
+    const totalEl = document.getElementById('lc-total');
+    if (totalEl) totalEl.innerHTML = '<span class="err-badge">⚠ API Offline</span>';
+    ['lc-easy','lc-medium','lc-hard'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = '—';
+    });
+    console.warn('LeetCode: all endpoints failed. Last error:', lastError);
+    return;
+  }
+
+  // Populate totals
+  const totalEl = document.getElementById('lc-total');
+  if (totalEl) totalEl.textContent = stats.total;
+
+  const easyEl  = document.getElementById('lc-easy');
+  const medEl   = document.getElementById('lc-medium');
+  const hardEl  = document.getElementById('lc-hard');
+  if (easyEl)  easyEl.textContent  = stats.easy;
+  if (medEl)   medEl.textContent   = stats.medium;
+  if (hardEl)  hardEl.textContent  = stats.hard;
+
+  // Progress bars (approximate totals from LeetCode platform)
+  const easyTotal = 850, medTotal = 1800, hardTotal = 800;
+  const barsWrap = document.getElementById('lc-bars');
+  if (barsWrap) barsWrap.style.display = 'flex';
+
+  function setBar(fillId, numId, solved, tot) {
+    const numEl  = document.getElementById(numId);
+    const fillEl = document.getElementById(fillId);
+    if (numEl)  numEl.textContent = `${solved} / ${tot}`;
+    if (fillEl) setTimeout(() => { fillEl.style.width = Math.min(100, (solved / tot) * 100) + '%'; }, 500);
+  }
+  setBar('lc-bar-easy', 'lc-bar-easy-num', stats.easy,   easyTotal);
+  setBar('lc-bar-med',  'lc-bar-med-num',  stats.medium, medTotal);
+  setBar('lc-bar-hard', 'lc-bar-hard-num', stats.hard,   hardTotal);
 }
 fetchLeetCode();
 
