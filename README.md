@@ -29,7 +29,13 @@
 }
 ```
 
----
+## `git log --author=shadow269`
+
+<p align="left">
+  <img src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&count_private=true&hide_border=true&bg_color=00000000&title_color=f7f6f9&text_color=f7f6f9&icon_color=58a6ff" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shadow269&layout=compact&hide_border=true&bg_color=00000000&title_color=f7f6f9&text_color=f7f6f9" />
+</p>
+
 
 ## `ls -la ~/projects/`
 
