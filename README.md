@@ -1,8 +1,6 @@
-
-
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com/?font=Righteous&size=34&center=true&vcenter=true&width=600&height=70&duration=2500&color=f7f6f9&lines=ROOT@SHADOW:~$;Accessing+Operator+Profile...;Welcome+to+the+Void." />
-</p>
+<div align="center">
+<img src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:0d1117,100:1f6feb&text=Yo!%20I'm%20Shadow%20👋&textBg=false&desc=Pentester%20|%20Full%20stack%20|%20Tech%20Guy&descAlign=50&descAlignY=72&fontColor=58a6ff&fontAlignY=40&fontSize=42&animation=fadeIn" width="100%" />
+</div>
 
 </div>
 
@@ -32,9 +30,15 @@
 ## `git log --author=shadow269`
 
 <p align="left">
-  <img src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&count_private=true&hide_border=true&bg_color=00000000&title_color=f7f6f9&text_color=f7f6f9&icon_color=58a6ff" />
+  <img src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&count_private=true&hide_border=true&bg_color=00000000&title_color=58a6ff&text_color=c9d1d9&icon_color=58a6ff&cache_seconds=1800" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shadow269&layout=compact&hide_border=true&bg_color=00000000&title_color=f7f6f9&text_color=f7f6f9" />
 </p>
+
+</div>
+
+[![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=shadow269&bg_color=0d1117&color=ffffff&line=418790&point=00ff62&area=true&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
+
+<div align="left">
 
 
 ## `ls -la ~/projects/`
@@ -122,12 +126,14 @@ services:
 ## `cat ~/.social_links`
 
 <p align="center">
+  <a href="https://portfolio.shadow269.in/"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/dribbble.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://github.com/SHADOW269"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/github.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://linkedin.com/in/shadow269"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/linkedin.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://instagram.com/shadow269.in"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/instagram.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://x.com/SHADOW_2669"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/twitter.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://reddit.com/user/SHADOW_269"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/reddit.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://discord.com/users/1051180323058237450"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/discord.svg" width="36"/></a>
+  
 </p>
 
 
