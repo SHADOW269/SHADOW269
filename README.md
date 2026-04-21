@@ -11,19 +11,17 @@
 ```json
 {
   "alias":          "SHADOW",
-  "role":           "Junior Pentester (Web & API )",
+  "role":           "Junior Pentester (Web & API)",
+  "focus":          "Mechanical Keyboard Community Architect",
   "org":            "Bugcrowd",
   "interests": [
     "Threat Detection",
-    "Computer Vision",
     "Self-Hosted Infrastructure",
-    "Network Security"
   ],
-  "stack":          ["Python", "PHP", "MySQL", "YOLOv8", "Proxmox"],
-  "homelab":        true,
+  "stack":          ["TypeScript", "Next.js", "Python", "Full-Stack", "Proxmox", "Cloudflare"],
   "location":       "India 🇮🇳",
-  "motto":          "Hack the planet. Responsibly.",
-  "status":         "open_to_work"
+  "motto":          "The quieter you become, the more you can hear.",
+  "status":         "building_the_directory"
 }
 ```
 
@@ -43,12 +41,15 @@
 
 ## `ls -la ~/projects/`
 
-```
+<pre>
 drwxr-xr-x  projects/
-├── CivicEye-Core/          [Python · YOLOv8]   ● -------
-├── CivicEye-Website-Server/ [PHP · MySQL]       ● -------
-└── Command-Center/          [Docker · Proxmox]     ● -------
-```
+├── <a href="[https://github.com/SHADOW269/App.Keydir.in](https://github.com/SHADOW269/App.Keydir.in)">App.KeyDir.in</a>/          [Next.js · TypeScript]   ○ In-Progress
+├── <a href="[https://github.com/SHADOW269/Keydir.in](https://github.com/SHADOW269/Keydir.in)">KeyDir.in</a>/              [Full Stack]             ● Active
+├── <a href="[https://github.com/SHADOW269/CivicEye](https://github.com/SHADOW269/CivicEye)">CivicEye</a>/               [Python · YOLOv8]        ● Stable
+├── <a href="[https://github.com/SHADOW269/HOMEPAGE](https://github.com/SHADOW269/HOMEPAGE)">Command-Center</a>/         [Docker · Proxmox]       ● Stopped
+├── <a href="[https://github.com/SHADOW269/Cybersapiens](https://github.com/SHADOW269/Cybersapiens)">Cybersapiens</a>/           [Cybersecurity · Log]    ● Completed
+└── <a href="[https://github.com/SHADOW269/Tech-Bazaar](https://github.com/SHADOW269/Tech-Bazaar)">Tech-Bazaar</a>/            [Firebase · TS]          ○ Archive
+</pre>
 
 <table>
 <tr>
