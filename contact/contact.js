@@ -161,7 +161,42 @@ document.querySelectorAll('.fade-up').forEach(el => {
 })();
 
 
-/* ── GLOBE ──────────────────────────────────────── */
+
+/* ── Contact Form Submit UX ── */
+(function () {
+  // Set _next dynamically so it works on any domain (GitHub Pages, custom domain, etc.)
+  const nextInput = document.getElementById('form-next-url');
+  if (nextInput) {
+    nextInput.value = window.location.origin + window.location.pathname + '?sent=true';
+  }
+
+  const form = document.getElementById('contact-form');
+  const btn  = document.getElementById('form-submit-btn');
+  if (!form || !btn) return;
+
+  form.addEventListener('submit', function () {
+    btn.classList.add('sending');
+    btn.querySelector('.submit-label').textContent = 'TRANSMITTING…';
+    btn.querySelector('.submit-arrow').textContent = '⟳';
+  });
+
+  // Show success state if redirected back with ?sent=true
+  if (window.location.search.includes('sent=true')) {
+    const formCard = document.querySelector('.contact-form-card');
+    if (formCard) {
+      formCard.innerHTML = `
+        <div class="form-top-bar"></div>
+        <div class="form-success">
+          <div class="form-success-icon">✓</div>
+          <div class="form-success-title">MESSAGE TRANSMITTED</div>
+          <div class="form-success-sub">Got it — I'll respond within 24–48 hours.</div>
+        </div>`;
+    }
+    // Clean the URL without reload
+    window.history.replaceState({}, '', window.location.pathname);
+  }
+})();
+
 (function() {
   const canvas = document.getElementById('globe-canvas');
   if (!canvas) return;
