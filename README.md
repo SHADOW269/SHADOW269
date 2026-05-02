@@ -10,26 +10,36 @@
 
 ```json
 {
-  "alias":          "SHADOW",
-  "role":           "Junior Pentester (Web & API)",
-  "focus":          "Mechanical Keyboard Community Architect",
-  "org":            "Bugcrowd",
+  "alias": "SHADOW",
+  "role": "Junior Pentester (Web & API)",
+  "focus": "Web, API & Mobile security testing •  side projects",
+  "org": "Bugcrowd",
+  "availability": "Open to work (Remote / India 🌍)",
   "interests": [
     "Threat Detection",
     "Self-Hosted Infrastructure",
+    "Security Automation",
   ],
-  "stack":          ["TypeScript", "Next.js", "Python", "Full-Stack", "Proxmox", "Cloudflare"],
-  "location":       "India 🇮🇳",
-  "motto":          "The quieter you become, the more you can hear.",
-  "status":         "building_the_directory"
+  "stack": [
+    "Python",
+    "Web Application Pentesting",
+    "API Security Testing",
+    "Mobile Security Testing",
+    "Full-Stack Development"
+  ],
+  "location": "India 🇮🇳",
+  "motto": "The quieter you become, the more you can hear.",
+  "status": "Hunting"
 }
+
 ```
 
 ## `git log --author=shadow269`
 
 <p align="left">
-  <img src="https://github-readme-stats.vercel.app/api?username=shadow269&show_icons=true&count_private=true&hide_border=true&bg_color=00000000&title_color=58a6ff&text_color=c9d1d9&icon_color=58a6ff&cache_seconds=1800" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shadow269&layout=compact&hide_border=true&bg_color=00000000&title_color=f7f6f9&text_color=f7f6f9" />
+
+<img src="https://github-readme-stats.shion.dev/api?username=shadow269&show_icons=true&count_private=true&hide_border=true&bg_color=00000000&title_color=58a6ff&text_color=c9d1d9&icon_color=58a6ff&cache_seconds=1800" />
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=shadow269&layout=compact&hide_border=true&bg_color=00000000&title_color=f7f6f9&text_color=f7f6f9" />
 </p>
 
 </div>
@@ -143,3 +153,6 @@ services:
 // "The quieter you become, the more you can hear."
 ```
 <img src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:0d1117,100:1f6feb&section=footer" width="100%" />
+
+
+![view_count](https://count.chiya.dev/get/@shadow269?theme=gelbooru)
