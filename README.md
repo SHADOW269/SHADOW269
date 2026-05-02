@@ -155,4 +155,4 @@ services:
 <img src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:0d1117,100:1f6feb&section=footer" width="100%" />
 
 
-![view_count](https://count.chiya.dev/get/@shadow269?theme=gelbooru)
+![Profile view counter on GitHub](https://komarev.com/ghpvc/?username=shadow269)
