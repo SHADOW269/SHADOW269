@@ -44,9 +44,23 @@
 
 </div>
 
-[![Ashutosh's github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=shadow269&bg_color=0d1117&color=ffffff&line=418790&point=00ff62&area=true&hide_border=true)](https://github.com/ashutosh00710/github-readme-activity-graph)
+![github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=shadow269&bg_color=0d1117&color=ffffff&line=418790&point=00ff62&area=true&hide_border=true)
 
 <div align="left">
+<picture>
+  <source
+    media="(prefers-color-scheme: dark)"
+    srcset="https://raw.githubusercontent.com/shadow269/shadow269/output/pacman-contribution-graph-dark.svg"
+  />
+  <source
+    media="(prefers-color-scheme: light)"
+    srcset="https://raw.githubusercontent.com/shadow269/shadow269/output/pacman-contribution-graph.svg"
+  />
+  <img
+    alt="Pac-Man contribution graph"
+    src="https://raw.githubusercontent.com/shadow269/shadow269/output/pacman-contribution-graph.svg"
+  />
+</picture>
 
 
 ## `ls -la ~/projects/`
