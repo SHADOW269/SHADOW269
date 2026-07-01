@@ -2,18 +2,13 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&height=120&color=0:0d1117,100:1f6feb&text=Yo!%20I'm%20Shadow%20👋&textBg=false&desc=Pentester%20|%20Full%20stack%20|%20Tech%20Guy&descAlign=50&descAlignY=72&fontColor=58a6ff&fontAlignY=40&fontSize=42&animation=fadeIn" width="100%" />
 </div>
 
-</div>
-
----
-
-## `profile.json`
+### `profile.json`
 
 ```json
 {
   "alias": "SHADOW",
   "role": "Junior Pentester (Web & API)",
   "focus": "Web, API & Mobile security testing •  side projects",
-  "org": "Bugcrowd",
   "availability": "Open to work (Remote / India 🌍)",
   "interests": [
     "Threat Detection",
@@ -34,7 +29,7 @@
 
 ```
 
-## `git log --author=shadow269`
+### `git log --author=shadow269`
 
 <p align="left">
   <img src="https://github-readme-stats-fast.vercel.app/api?username=shadow269&show_icons=true&count_private=true&hide_border=true&bg_color=00000000&title_color=58a6ff&text_color=c9d1d9&icon_color=58a6ff" />
@@ -63,7 +58,7 @@
 </picture>
 
 
-## `ls -la ~/projects/`
+### `ls -la ~/projects/`
 
 <pre>
 drwxr-xr-x  projects/
