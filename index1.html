@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sakshith C Shetty — Offensive Security Explorer Workspace</title>
+  <meta name="description" content="Interactive VS Code & Cyber Terminal Workspace portfolio of Sakshith C Shetty (SHADOW-269) — Security Specialist.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Sakshith C Shetty — Developer & Security Workspace">
+  <meta property="og:description" content="Exploiting access control failures, business logic flaws, and microservice vulnerabilities.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/197274423?v=4">
+  <link rel="icon" href="https://avatars.githubusercontent.com/u/197274423?v=4" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --sidebar: #161b22;
+      --panel-dark: #090d13;
+      --tab-inactive: #1f242c;
+      --border: #30363d;
+      --border-glow: rgba(124, 106, 255, 0.25);
+      --text: #c9d1d9;
+      --text-bright: #f0f6fc;
+      --text-muted: #8b949e;
+      --neon-purple: #a371f7;
+      --neon-blue: #58a6ff;
+      --neon-green: #34d399;
+      --neon-orange: #ffa657;
+      --neon-red: #ff7b72;
+      --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+      --font-mono: 'Fira Code', monospace;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    [data-theme="light"] {
+      --bg: #ffffff;
+      --sidebar: #f6f8fa;
+      --panel-dark: #f0f2f5;
+      --tab-inactive: #eaeef2;
+      --border: #d0d7de;
+      --border-glow: rgba(9, 105, 218, 0.2);
+      --text: #24292f;
+      --text-bright: #09111b;
+      --text-muted: #57606a;
+      --neon-purple: #6f42c1;
+      --neon-blue: #0969da;
+      --neon-green: #1a7f37;
+      --neon-orange: #bc4c00;
+      --neon-red: #cf222e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 14px; background: var(--bg); }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow: hidden;
+      line-height: 1.6;
+      transition: background-color 0.3s var(--ease), color 0.3s var(--ease);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; color: inherit; background: none; border: none; cursor: pointer; }
+    *:focus-visible { outline: 2px solid var(--neon-purple); outline-offset: 2px; }
+    #progress-indicator-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue)); z-index: 2000; width: 0%; transition: width 0.1s linear; }
+    .ide-container { display: flex; width: 100vw; height: 100vh; overflow: hidden; position: relative; }
+    .ide-sidebar {
+      width: 360px; min-width: 360px;
+      background-color: var(--sidebar);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      height: 100%; overflow-y: auto; overflow-x: hidden;
+      z-index: 100;
+      transition: transform 0.4s var(--ease), background-color 0.3s;
+    }
+    .ide-sidebar::-webkit-scrollbar { width: 6px; }
+    .ide-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    .ide-workspace { flex: 1; display: flex; flex-direction: column; height: 100%; overflow: hidden; background-color: var(--bg); position: relative; }
+    .sidebar-block { padding: 18px; border-bottom: 1px solid var(--border); transition: border-color 0.3s; }
+    .sidebar-block:hover { border-color: rgba(124, 106, 255, 0.4); }
+    .block-heading { font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-bright); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.07em; font-weight: 700; }
+    .block-heading i { color: var(--neon-purple); font-size: 0.95rem; }
+    .profile-node { display: flex; align-items: center; gap: 14px; }
+    .avatar-wrapper { position: relative; width: 54px; height: 54px; flex-shrink: 0; }
+    .avatar-img { width: 100%; height: 100%; border-radius: 8px; border: 1px solid var(--border); object-fit: cover; background: var(--panel-dark); }
+    .status-dot { position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; background-color: var(--neon-green); border-radius: 50%; border: 2px solid var(--sidebar); box-shadow: 0 0 8px var(--neon-green); }
+    .profile-info { overflow: hidden; }
+    .profile-name { font-size: 1.2rem; font-weight: 700; color: var(--text-bright); white-space: nowrap; text-overflow: ellipsis; overflow: hidden; letter-spacing: -0.02em; }
+    .profile-title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-purple); font-weight: 600; margin-top: 1px; }
+    .profile-quote { font-size: 0.82rem; color: var(--text-muted); font-style: italic; background: rgba(0,0,0,0.15); padding: 8px 12px; border-radius: 6px; border-left: 2px solid var(--border); margin-top: 10px; }
+    .contact-list { display: flex; flex-direction: column; gap: 8px; font-family: var(--font-mono); font-size: 0.8rem; }
+    .contact-item { display: flex; align-items: center; gap: 10px; color: var(--text-muted); transition: color 0.2s; }
+    .contact-item:hover { color: var(--text-bright); }
+    .contact-item i { color: var(--neon-blue); font-size: 0.95rem; width: 16px; text-align: center; }
+    .badge-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+    .stack-badge { font-family: var(--font-mono); font-size: 0.72rem; padding: 4px 10px; background-color: var(--panel-dark); border: 1px solid var(--border); border-radius: 4px; color: var(--text); transition: all 0.25s var(--ease); }
+    .stack-badge:hover { border-color: var(--neon-purple); color: var(--text-bright); background: rgba(163, 113, 247, 0.1); transform: translateY(-1px); box-shadow: 0 2px 8px var(--border-glow); }
+    .highlights-matrix { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .highlight-cell { background-color: var(--panel-dark); border: 1px solid var(--border); padding: 12px; border-radius: 6px; text-align: center; transition: all 0.2s; position: relative; overflow: hidden; }
+    .highlight-cell:hover { border-color: var(--neon-blue); transform: scale(1.02); }
+    .hl-count { font-family: var(--font-mono); font-size: 1.4rem; font-weight: 700; color: var(--text-bright); line-height: 1; margin-bottom: 5px; }
+    .hl-count span { color: var(--neon-blue); font-size: 1.1rem; margin-left: 2px; }
+    .hl-label { font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; font-weight: 600; }
+
+    /* ── GITHUB ACTIVITY PANEL ── */
+    .git-graph-panel { background: var(--panel-dark); border: 1px solid var(--border); border-radius: 6px; padding: 12px; position: relative; transition: border-color 0.3s; }
+    .git-graph-panel:hover { border-color: var(--neon-green); }
+    .git-graph-img-wrapper { position: relative; width: 100%; border-radius: 4px; overflow: hidden; background: #030712; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.02); }
+    .git-graph-img-wrapper img { width: 100%; height: auto; display: block; }
+
+    .checklist-container { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-mono); font-size: 0.82rem; }
+    .checklist-row { display: flex; align-items: flex-start; gap: 8px; color: var(--text-muted); padding: 2px 0; }
+    .checklist-row.checked { color: var(--text-bright); }
+    .checklist-row.checked .chk-box { color: var(--neon-green); font-weight: 700; }
+    .checklist-row.pending .chk-box { color: var(--neon-orange); font-weight: 700; }
+    .chk-txt { line-height: 1.4; }
+    .sidebar-sticky-footer { margin-top: auto; border-top: 1px solid var(--border); padding: 16px; background-color: rgba(22, 27, 34, 0.95); backdrop-filter: blur(8px); position: sticky; bottom: 0; z-index: 10; }
+    .social-matrix-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+    .sidebar-soc-btn { border: 1px solid var(--border); background-color: var(--panel-dark); height: 38px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-radius: 6px; font-size: 1.15rem; transition: all 0.2s var(--ease); position: relative; }
+    .sidebar-soc-btn:hover { border-color: var(--neon-purple); color: var(--text-bright); background-color: var(--bg); transform: translateY(-2px); }
+    .sidebar-soc-btn[data-tooltip]::after { content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%) translateY(4px); background: var(--panel-dark); border: 1px solid var(--border); color: var(--text-bright); font-family: var(--font-mono); font-size: 0.65rem; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.2s var(--ease); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    .sidebar-soc-btn:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .action-cv-btn { display: flex; width: 100%; height: 40px; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--neon-purple), #8c52ff); color: #fff; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; border-radius: 6px; letter-spacing: 0.05em; transition: all 0.25s var(--ease); box-shadow: 0 4px 12px rgba(163, 113, 247, 0.2); }
+    .action-cv-btn:hover { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(163, 113, 247, 0.35); }
+    .ide-tab-bar { display: flex; background-color: var(--sidebar); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
+    .ide-tab-bar::-webkit-scrollbar { display: none; }
+    .editor-tab { display: flex; align-items: center; gap: 8px; padding: 12px 22px; background-color: var(--sidebar); border-right: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted); position: relative; white-space: nowrap; transition: all 0.2s; }
+    .editor-tab i:first-child { color: var(--neon-orange); font-size: 0.95rem; }
+    .editor-tab:hover { background-color: rgba(255,255,255,0.02); color: var(--text); }
+    .editor-tab.active { background-color: var(--bg); color: var(--text-bright); font-weight: 500; }
+    .editor-tab.active::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background-color: var(--neon-purple); }
+    .editor-canvas { flex: 1; padding: 40px; overflow-y: auto; display: none; position: relative; }
+    .editor-canvas.active { display: block; animation: fadeReveal 0.35s var(--ease) forwards; }
+    @keyframes fadeReveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .md-line { display: grid; grid-template-columns: 45px 1fr; gap: 16px; margin-bottom: 6px; font-family: var(--font-mono); font-size: 0.95rem; }
+    .ln-num { text-align: right; color: var(--text-muted); opacity: 0.3; user-select: none; padding-right: 6px; font-weight: 500; }
+    .ln-content { color: var(--text); white-space: pre-wrap; }
+    .ln-content h1, .ln-content h2, .ln-content h3 { font-family: var(--font-sans); color: var(--text-bright); font-weight: 700; margin-top: 8px; margin-bottom: 6px; }
+    .ln-content h1 { font-size: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 24px; color: var(--text-bright); letter-spacing: -0.03em; }
+    .ln-content h2 { font-size: 1.45rem; color: var(--neon-blue); margin-top: 28px; border-bottom: 1px dashed var(--border); padding-bottom: 6px; letter-spacing: -0.01em; }
+    .ln-content p { font-family: var(--font-sans); color: var(--text); line-height: 1.65; margin-bottom: 12px; font-size: 1.05rem; }
+    .ln-content p strong { color: var(--text-bright); font-weight: 600; }
+    .code-block-segment { background-color: var(--panel-dark); border: 1px solid var(--border); padding: 18px; border-radius: 6px; margin: 16px 0; font-family: var(--font-mono); font-size: 0.88rem; color: var(--text); overflow-x: auto; position: relative; box-shadow: inset 0 2px 8px rgba(0,0,0,0.4); }
+    .code-block-segment::before { content: 'BASH / METASPLOIT OUTPUT'; position: absolute; top: 6px; right: 14px; font-size: 0.6rem; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; }
+    .code-keyword { color: var(--neon-purple); font-weight: 600; }
+    .code-string { color: var(--neon-green); }
+    .code-comment { color: var(--text-muted); font-style: italic; }
+    .repo-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 20px; }
+    .repo-card { background-color: var(--panel-dark); border: 1px solid var(--border); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.25s var(--ease); position: relative; }
+    .repo-card:hover { border-color: var(--neon-blue); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 12px var(--border-glow); }
+    .repo-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .repo-title-text { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--text-bright); display: flex; align-items: center; gap: 8px; }
+    .repo-title-text i { color: var(--neon-blue); }
+    .repo-desc-text { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 18px; }
+    .repo-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+    .repo-pills span { font-family: var(--font-mono); font-size: 0.68rem; padding: 3px 8px; background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); }
+    .repo-footer { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 14px; margin-top: auto; }
+    .repo-stats { display: flex; gap: 14px; }
+    .repo-stats span { display: flex; align-items: center; gap: 4px; }
+    .repo-stats i { color: var(--neon-orange); }
+    .repo-actions-links a { display: inline-flex; align-items: center; gap: 4px; color: var(--neon-blue); font-weight: 500; }
+    .repo-actions-links a:hover { text-decoration: underline; color: var(--text-bright); }
+    .vertical-timeline { position: relative; border-left: 2px solid var(--border); padding-left: 30px; margin: 24px 0 24px 12px; }
+    .timeline-node-item { position: relative; margin-bottom: 36px; }
+    .timeline-node-item::before { content: ''; position: absolute; left: -37px; top: 4px; width: 12px; height: 12px; background-color: var(--bg); border: 2px solid var(--neon-purple); border-radius: 50%; box-shadow: 0 0 8px var(--neon-purple); transition: background-color 0.2s; }
+    .timeline-node-item:hover::before { background-color: var(--neon-purple); }
+    .node-timestamp { font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-green); font-weight: 700; display: block; margin-bottom: 4px; letter-spacing: 0.03em; }
+    .node-header-title { font-size: 1.25rem; font-weight: 700; color: var(--text-bright); letter-spacing: -0.01em; }
+    .node-sub-org { font-family: var(--font-mono); font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px; display: block; }
+    .node-body-content { font-family: var(--font-sans); font-size: 0.98rem; color: var(--text); line-height: 1.6; }
+    .node-body-content ul { margin-top: 10px; padding-left: 18px; list-style-type: square; color: var(--text-muted); }
+    .node-body-content li { margin-bottom: 4px; }
+    .blog-controls { display: flex; gap: 16px; margin-bottom: 24px; align-items: center; }
+    .search-input-wrapper { flex: 1; position: relative; }
+    .search-input-field { width: 100%; background-color: var(--panel-dark); border: 1px solid var(--border); padding: 12px 16px 12px 42px; border-radius: 6px; color: #fff; font-family: var(--font-mono); font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+    .search-input-field:focus { border-color: var(--neon-purple); box-shadow: 0 0 12px var(--border-glow); }
+    .search-input-wrapper i { position: absolute; left: 16px; top: 14px; color: var(--text-muted); font-size: 1.1rem; }
+    .blog-cards-grid { display: flex; flex-direction: column; gap: 20px; }
+    .blog-card { display: grid; grid-template-columns: 240px 1fr; border: 1px solid var(--border); background-color: var(--panel-dark); border-radius: 8px; overflow: hidden; transition: all 0.25s var(--ease); cursor: pointer; }
+    .blog-card:hover { border-color: var(--neon-purple); transform: translateX(4px); box-shadow: 0 4px 24px rgba(124,106,255,0.12); }
+    .blog-thumb-frame { width: 100%; height: 100%; background-color: var(--sidebar); border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: var(--text-muted); opacity: 0.6; }
+    .blog-content-block { padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+    .blog-meta-data { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; display: flex; gap: 16px; }
+    .blog-card-title { font-family: var(--font-sans); font-size: 1.35rem; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; line-height: 1.3; }
+    .blog-card-summary { font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 16px; }
+    .blog-tags-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .blog-tag-badge { font-family: var(--font-mono); font-size: 0.68rem; padding: 3px 8px; background-color: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--neon-blue); }
+    .form-blueprint { display: flex; flex-direction: column; gap: 16px; max-width: 700px; }
+    .form-row-split { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .control-group { display: flex; flex-direction: column; gap: 6px; }
+    .field-tag-label { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-bright); text-transform: uppercase; font-weight: 600; letter-spacing: 0.02em; }
+    .brutal-input-field { background-color: var(--panel-dark); border: 1px solid var(--border); padding: 12px 16px; border-radius: 6px; color: #fff; font-family: var(--font-sans); font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+    .brutal-input-field:focus { border-color: var(--neon-purple); box-shadow: 0 0 12px var(--border-glow); }
+    .brutal-input-field::placeholder { color: rgba(255,255,255,0.25); }
+    .terminal-drawer-widget { background-color: var(--panel-dark); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem; height: 240px; display: flex; flex-direction: column; position: relative; z-index: 90; }
+    .term-tabs-row { display: flex; background-color: var(--sidebar); border-bottom: 1px solid var(--border); padding-left: 20px; gap: 18px; }
+    .term-tab-btn { font-size: 0.72rem; text-transform: uppercase; padding: 10px 0; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; position: relative; }
+    .term-tab-btn.active { color: var(--neon-green); }
+    .term-tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background-color: var(--neon-green); }
+    .term-buffer-stream { flex: 1; padding: 16px 24px; overflow-y: auto; line-height: 1.6; color: #e1e1e3; border-bottom: 1px solid rgba(255,255,255,0.02); }
+    .term-buffer-stream::-webkit-scrollbar { width: 6px; }
+    .term-buffer-stream::-webkit-scrollbar-thumb { background: var(--border); }
+    .term-row { margin-bottom: 4px; white-space: pre-wrap; word-break: break-all; }
+    .term-prompt-marker { color: var(--neon-green); font-weight: 700; }
+    .term-interactive-row { display: flex; align-items: center; padding: 4px 24px; background-color: rgba(0,0,0,0.2); }
+    .term-input-field-entry { flex: 1; background: transparent; border: none; outline: none; color: var(--neon-green); font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 8px; }
+    .ide-footer-status-bar { height: 24px; background-color: var(--neon-purple); color: #000; font-family: var(--font-mono); font-size: 0.72rem; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; position: relative; z-index: 150; font-weight: 600; }
+    .footer-left-node, .footer-right-node { display: flex; align-items: center; gap: 14px; }
+    .footer-clickable-item:hover { background-color: rgba(255,255,255,0.2); cursor: pointer; padding: 0 4px; margin: 0 -4px; border-radius: 2px; }
+    .palette-modal-overlay { position: fixed; inset: 0; background-color: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 5000; display: none; align-items: flex-start; justify-content: center; padding-top: 10vh; }
+    .palette-modal-overlay.active { display: flex; }
+    .palette-box-frame { background-color: var(--sidebar); border: 1px solid var(--neon-purple); border-radius: 8px; width: 100%; max-width: 540px; box-shadow: 0 16px 48px rgba(0,0,0,0.7), 0 0 20px rgba(163, 113, 247, 0.2); overflow: hidden; animation: paletteScaleIn 0.2s var(--ease) forwards; }
+    @keyframes paletteScaleIn { from { transform: scale(0.97) translateY(-8px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+    .palette-input-row { display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border); background-color: var(--bg); }
+    .palette-input-row i { color: var(--neon-purple); font-size: 1.1rem; }
+    .palette-search-field { flex: 1; background: transparent; border: none; outline: none; color: #fff; font-family: var(--font-mono); font-size: 0.9rem; }
+    .palette-results-list { max-height: 280px; overflow-y: auto; padding: 6px 0; }
+    .palette-option-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted); cursor: pointer; }
+    .palette-option-item.selected, .palette-option-item:hover { background-color: var(--panel-dark); color: var(--text-bright); }
+    .palette-shortcut-hint { font-size: 0.68rem; padding: 2px 6px; background-color: var(--border); border-radius: 4px; color: var(--text-muted); }
+    .mobile-nav-scroll-wrapper { display: none; background-color: var(--sidebar); border-bottom: 1px solid var(--border); padding: 4px; overflow-x: auto; scrollbar-width: none; }
+    .mobile-menu-toggle-trigger { display: none; width: 44px; height: 44px; border-radius: 50%; background-color: var(--neon-purple); color: #fff; position: fixed; bottom: 44px; right: 20px; z-index: 1000; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 4px 16px rgba(124,106,255,0.4); }
+    @media (max-width: 1100px) {
+      .ide-sidebar { position: fixed; top: 0; left: 0; bottom: 24px; transform: translateX(-100%); width: 340px; min-width: 340px; box-shadow: 12px 0 40px rgba(0,0,0,0.6); }
+      .ide-sidebar.open { transform: translateX(0); }
+      .mobile-nav-scroll-wrapper { display: flex; }
+      .mobile-menu-toggle-trigger { display: flex; }
+      .editor-canvas { padding: 24px; }
+      .blog-card { grid-template-columns: 1fr; }
+      .blog-thumb-frame { height: 130px; border-right: none; border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 600px) {
+      .form-row-split { grid-template-columns: 1fr; }
+      .editor-canvas { padding: 16px; }
+      .vertical-timeline { padding-left: 22px; }
+      .timeline-node-item::before { left: -29px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="progress-indicator-bar" aria-hidden="true"></div>
+  <div class="ide-container">
+    <aside class="ide-sidebar" id="ide-sidebar-node" role="complementary" aria-label="System Metrics Workspace Panel">
+      <div class="sidebar-block profile-node">
+        <div class="avatar-wrapper">
+          <img class="avatar-img" src="https://avatars.githubusercontent.com/u/197274423?v=4" alt="Sakshith C Shetty Avatar">
+          <div class="status-dot" id="status-dot-indicator" title="System Matrix: Operator Active"></div>
+        </div>
+        <div class="profile-info">
+          <h1 class="profile-name">Sakshith C Shetty</h1>
+          <div class="profile-title">Offensive Security Operator</div>
+        </div>
+      </div>
+      <div class="sidebar-block" style="padding: 10px 18px;">
+        <p class="profile-quote">"Hunting multi-tenant authorization bypass logic parameters anomalies at scale across production networks."</p>
+      </div>
+      <div class="sidebar-block">
+        <div class="block-heading"><i class="ri-git-repository-private-line"></i> Ingress_Channels</div>
+        <div class="contact-list" role="list">
+          <div class="contact-item" role="listitem"><i class="ri-mail-send-line"></i> contact@shadow269.in</div>
+          <div class="contact-item" role="listitem"><i class="ri-map-pin-user-line"></i> Mangaluru, Karnataka, IN</div>
+          <div class="contact-item" role="listitem"><i class="ri-shield-user-line"></i> Handle: SHADOW-269</div>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <div class="block-heading"><i class="ri-cpu-line"></i> Ingested_Modules</div>
+        <div class="badge-cloud">
+          <span class="stack-badge">JavaScript</span><span class="stack-badge">TypeScript</span>
+          <span class="stack-badge">Go Lang</span><span class="stack-badge">Python Core</span>
+          <span class="stack-badge">Docker API</span><span class="stack-badge">PostgreSQL</span>
+          <span class="stack-badge">Frida Engine</span><span class="stack-badge">Burp Suite Pro</span>
+          <span class="stack-badge">OWASP Matrix</span><span class="stack-badge">Linux Kernel</span>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <div class="block-heading"><i class="ri-focus-3-line"></i> ACTIVE_THREADS</div>
+        <div class="badge-cloud">
+          <span class="stack-badge" style="border-style:dashed;">Security Research</span>
+          <span class="stack-badge" style="border-style:dashed;">Web Application Security</span>
+          <span class="stack-badge" style="border-style:dashed;">API Security Testing</span>
+          <span class="stack-badge" style="border-style:dashed;">Bug Bounty Learning</span>
+          <span class="stack-badge" style="border-style:dashed;">Linux Automation</span>
+          <span class="stack-badge" style="border-style:dashed;">OSINT Research</span>
+        </div>
+      </div>
+      <div class="sidebar-block">
+        <div class="block-heading"><i class="ri-pulse-line"></i> SECURITY_PROFILE_STATS</div>
+        <div class="highlights-matrix">
+          <div class="highlight-cell"><div class="hl-count">6<span>M</span></div><div class="hl-label">Internship Exp</div></div>
+          <div class="highlight-cell"><div class="hl-count">8+</div><div class="hl-label">Certs Earned</div></div>
+          <div class="highlight-cell"><div class="hl-count">25+</div><div class="hl-label">Labs & CTFs</div></div>
+          <div class="highlight-cell"><div class="hl-count" id="live-git-stars-counter">—<span>★</span></div><div class="hl-label">Repo Stars</div></div>
+        </div>
+      </div>
+
+      <!-- ── GITHUB ACTIVITY LOG with live graph + live stats ── -->
+      <div class="sidebar-block">
+        <div class="block-heading"><i class="ri-github-line"></i> GITHUB_ACTIVITY</div>
+        <div class="git-graph-panel">
+          <div class="git-graph-img-wrapper">
+            <img
+              src="https://github-readme-activity-graph.vercel.app/graph?username=shadow269&bg_color=030712&color=10b981&line=10b981&point=06b6d4&area=true&hide_border=true"
+              alt="SHADOW269 Dynamic Contribution Graph"
+              loading="lazy"
+              style="width:100%; height:auto; display:block;">
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-sticky-footer">
+        <div class="social-matrix-grid" role="list" aria-label="Social Matrix Communication Access Layers">
+          <a href="https://github.com/shadow269" target="_blank" rel="noopener noreferrer" class="sidebar-soc-btn" data-tooltip="GitHub Endpoint Vector" role="listitem"><i class="ri-github-fill"></i></a>
+          <a href="https://linkedin.com/in/shadow269" target="_blank" rel="noopener noreferrer" class="sidebar-soc-btn" data-tooltip="LinkedIn Tunnel Gateway" role="listitem"><i class="ri-linkedin-box-fill"></i></a>
+          <a href="mailto:contact@shadow269.in" class="sidebar-soc-btn" data-tooltip="Direct SMTP Connection Mail" role="listitem"><i class="ri-mail-fill"></i></a>
+          <button onclick="toggleCommandPaletteModalWindow()" class="sidebar-soc-btn" data-tooltip="Shell Command Palette Engine Ctrl+K"><i class="ri-terminal-box-line"></i></button>
+        </div>
+        <button onclick="executeTerminalCommandSimulation('cat README.md')" class="action-cv-btn"><i class="ri-file-code-line"></i> cat README.md</button>
+      </div>
+    </aside>
+
+    <main class="ide-workspace" role="main">
+      <div class="mobile-nav-scroll-wrapper" id="mobile-tabs-row" aria-label="Mobile Navigation Buffer Shortcuts Matrix"></div>
+      <div class="ide-tab-bar" id="editor-tabs-header-container" role="tablist" aria-label="Workspace Active Code Document Sheets Index"></div>
+
+      <section class="editor-canvas" id="canvas-about_md" role="tabpanel" aria-label="Workspace Context Source: about.md">
+        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Operational Registry Profile</h1></div></div>
+        <div class="md-line"><div class="ln-num">2</div><div class="ln-content"><p>I am Sakshith C Shetty — a specialized computer applications background graduate who turned core software construction understanding into an adversarial logic breakdown model. Operating inside wild cloud configurations landscapes under user tag registration handle <strong>SHADOW-269</strong> on bug bounty ecosystems.</p></div></div>
+        <div class="md-line"><div class="ln-num">3</div><div class="ln-content"><h2>## Architectural Assessment Methodology</h2></div></div>
+        <div class="md-line"><div class="ln-num">4</div><div class="ln-content"><p>Traditional vulnerability scanning systems map superficial parameter patterns. My strategy centers completely around breaking underlying business rules. By intercepting nested API microservice call routes, manipulating structure serialization states, and isolating broken tenant isolation profiles, I surface serious logical security gaps before malicious threat entities capitalize on them.</p></div></div>
+        <div class="md-line"><div class="ln-num">5</div><div class="ln-content">
+          <div class="code-block-segment">
+<span class="code-keyword">import</span> security_ops
+<span class="code-comment"># Active Environment Target Handshake Initialization parameters mapping loop trace</span>
+target_node = security_ops.IngestTarget("production.infrastructure.map")
+target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True</span>)
+          </div>
+        </div>
+      </section>
+
+      <section class="editor-canvas" id="canvas-projects_md" role="tabpanel" aria-label="Workspace Context Source: projects.md">
+        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Compiled Repositories Artifacts Log</h1></div></div>
+        <div class="md-line"><div class="ln-num">2</div><div class="ln-content"><p>A directory tracking software libraries, secure backend development modules, and custom automation validation pipelines structured over assessment intervals.</p></div></div>
+        <div class="repo-cards-grid" id="projects-target-injection-viewport-grid"></div>
+      </section>
+
+      <section class="editor-canvas" id="canvas-journey_md" role="tabpanel" aria-label="Workspace Context Source: journey.md">
+        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Structural Chronology History Track</h1></div></div>
+        <div class="md-line"><div class="ln-num">2</div><div class="ln-content"><p>A documented history path log mapping the path from systems design theories study layers to live adversarial operations execution.</p></div></div>
+        <div class="vertical-timeline" id="journey-timeline-target-injection-viewport"></div>
+      </section>
+
+      <section class="editor-canvas" id="canvas-blog_md" role="tabpanel" aria-label="Workspace Context Source: blog.md">
+        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Adversarial Threat Technical Writeups</h1></div></div>
+        <div class="blog-controls">
+          <div class="search-input-wrapper">
+            <i class="ri-search-eye-line" aria-hidden="true"></i>
+            <input type="text" class="search-input-field" id="blog-search-field-input" placeholder="Search writeups database parameters index..." aria-label="Query database content filtering string entry">
+          </div>
+        </div>
+        <div class="blog-cards-grid" id="blog-posts-target-injection-viewport-grid"></div>
+      </section>
+
+      <section class="editor-canvas" id="canvas-contact_md" role="tabpanel" aria-label="Workspace Context Source: contact.md">
+        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Connect Secure Communication Parameters</h1></div></div>
+        <div class="md-line"><div class="ln-num">2</div><div class="ln-content"><p>Submit scope coordinates, private bug bounty program invites, or custom contract consulting requests directly to the operational ingestion routing center queue.</p></div></div>
+        <div class="md-line"><div class="ln-num">3</div><div class="ln-content" style="margin-top: 20px;">
+          <form class="form-blueprint" id="secure-outbound-form-blueprint" novalidate>
+            <div class="form-row-split">
+              <div class="control-group">
+                <label class="field-tag-label" for="f-name">Origin Identity Tag</label>
+                <input type="text" id="f-name" class="brutal-input-field" placeholder="Identification Tag Signature" required>
+              </div>
+              <div class="control-group">
+                <label class="field-tag-label" for="f-email">Return Routing Vector</label>
+                <input type="email" id="f-email" class="brutal-input-field" placeholder="identity@domain.local" required autocomplete="email">
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="field-tag-label" for="f-msg">Context Parameter Payload Log Details</label>
+              <textarea id="f-msg" class="brutal-input-field" rows="6" style="resize:vertical;" placeholder="Detail verification boundaries definitions, target environment sizes metrics..." required></textarea>
+            </div>
+            <button type="submit" class="action-cv-btn" style="width: max-content; padding: 0 32px;"><i class="ri-send-plane-fill"></i> Dispatch Handshake Packet</button>
+            <div id="form-execution-feedback-log-node" style="font-family:var(--font-mono); font-size:0.82rem; color:var(--neon-green); display:none; margin-top:10px;" role="status"></div>
+          </form>
+        </div>
+      </section>
+
+      <div class="terminal-drawer-widget" role="region" aria-label="Interactive Monitor Terminal Window Log">
+        <div class="term-tabs-row" role="tablist">
+          <button class="term-tab-btn active" role="tab" id="t-tab-log" aria-selected="true">Operational_Terminal_Buffer.sh</button>
+          <button class="term-tab-btn" role="tab" id="t-tab-commits" aria-selected="false">Recent_Git_Commits.log</button>
+        </div>
+        <div class="term-buffer-stream" id="terminal-screen-buffer-stream" aria-live="polite"></div>
+        <div class="term-interactive-row">
+          <span class="term-prompt-marker" aria-hidden="true">guest@shadow269_ops:~$</span>
+          <input type="text" class="term-input-field-entry" id="terminal-keyboard-input-element" placeholder="Input analytical directive command flag parameter..." autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Console Ingestion Input Stream Area">
+        </div>
+      </div>
+
+      <footer class="ide-footer-status-bar" role="contentinfo">
+        <div class="footer-left-node">
+          <span class="footer-clickable-item" onclick="toggleThemeSwitcherPattern()"><i class="ri-contrast-line"></i> Style_Theme: Cyber_Dark</span>
+          <span class="footer-clickable-item" onclick="toggleCommandPaletteModalWindow()"><i class="ri-command-line"></i> Ctrl+K Palette</span>
+        </div>
+        <div class="footer-right-node">
+          <span>Encoding: UTF-8</span>
+          <span>Spaces: 2</span>
+          <span>Log State: Active_Sync ✓</span>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <div class="palette-modal-overlay" id="palette-modal-overlay-viewport" role="dialog" aria-modal="true">
+    <div class="palette-box-frame">
+      <div class="palette-input-row">
+        <i class="ri-terminal-box-line" aria-hidden="true"></i>
+        <input type="text" class="palette-search-field" id="palette-search-field-input" placeholder="Type a control navigation target parameter string..." autocomplete="off" autocorrect="off" spellcheck="false">
+      </div>
+      <div class="palette-results-list" id="palette-results-target-injection-viewport-list" role="listbox"></div>
+    </div>
+  </div>
+
+  <button class="mobile-menu-toggle-trigger" id="mobile-drawer-toggle-btn" aria-label="Toggle structural metadata panel"><i class="ri-menu-unfold-line"></i></button>
+
+  <script>
+    const WORKSPACE_SHEETS_CONFIG = [
+      { key: 'about_md', label: 'about.md', icon: 'ri-markdown-line' },
+      { key: 'projects_md', label: 'projects.md', icon: 'ri-file-code-line' },
+      { key: 'journey_md', label: 'journey.md', icon: 'ri-history-line' },
+      { key: 'blog_md', label: 'blog.md', icon: 'ri-git-merge-line' },
+      { key: 'contact_md', label: 'contact.md', icon: 'ri-mail-open-line' }
+    ];
+
+    const REPOSITORIES_PROJECTS_METADATA = [
+      { name: 'CivicEye-Platform-Core', desc: 'Real-time video edge parsing classification pipeline using YOLOv8 frameworks linked into explicitly validation-hardened multi-role relational PHP datastore nodes.', tech: ['YOLOv8 Core', 'PHP', 'MySQL', 'Python Processors'], stars: 8, forks: 2, updated: 'May 2025' },
+      { name: 'CyberSapiens-Audit-Toolkit', desc: 'Centralized production code repositories tracking custom parsing engine filters scripts, regex sanitization bypass models, and target bound automation templates used during enterprise infrastructure VAPT tasks.', tech: ['Python', 'Bash Scripts', 'Burp Extensions Engine'], stars: 6, forks: 1, updated: 'March 2026' },
+      { name: 'RigMaster-Configurator-UX', desc: 'High-density computational hardware configuration selector prototype designed inside Framer utilizing optimized schema models hooks to provide sub-140ms asset redrawing metrics.', tech: ['Framer UI', 'JavaScript Logic', 'Data Schema Models'], stars: 3, forks: 0, updated: 'April 2025' }
+    ];
+
+    const CHRONOLOGY_TIMELINE_METADATA = [
+      { time: 'MARCH 2026 — PRESENT', role: 'Penetration Tester Operator', org: 'Bugcrowd Security Evaluation Networks', body: 'Isolating logical token vulnerabilities, broken state tracking conditions, and multi-tenant information exposure boundaries in wild production deployment platforms.' },
+      { time: 'JULY 2025 — MARCH 2026 (6 MONTHS)', role: 'Cybersecurity VAPT Specialist Intern', org: 'CyberSapiens Enterprise Risk Advisory Labs', body: 'Conducted architecture security audits testing distributed web APIs layers and target mobile platform installations archives package reversing tasks.', points: ['Automated validation routines tracking JWT verification bypass sequences.', 'Bypassed perimeter transport controls by injecting localized Frida orchestration scripts wrappers.'] },
+      { time: '2022 — 2025', role: 'Bachelor of Computer Applications Graduate', org: 'Mangalore University Computer Studies Faculty', body: 'Acquired absolute baseline theoretical tracking parameters modeling algorithmic systems execution steps, structured network patterns design, and microservice query data optimization configurations.' }
+    ];
+
+    const BLOG_POSTS_METADATA = [
+      { id: 'bp-01', title: 'Chaining Authorization Errors to Evade Multi-Tenant Data Boundaries', date: 'May 27, 2026', time: '12 min read', excerpt: 'Deep-dive analytical review tracking how flawed claims mapping validations inside structural authentication workflows permit adjacent resource extraction maps compilation.', tags: ['security', 'cloud', 'system-design'] },
+      { id: 'bp-02', title: 'Dynamic Frida Hooks Ingestion: Overriding Transport Layer Security Controls', date: 'January 14, 2026', time: '9 min read', excerpt: 'A clear guide explaining how to hook, instrument, and intercept runtime execution tracking arrays inside native Android components to trace encryption keys generation cycles.', tags: ['android', 'reverse-engineering', 'security'] }
+    ];
+
+    const PALETTE_NAVIGATION_COMMANDS_MATRIX = [
+      { label: 'Navigate: Go to about.md file layer view', target: 'about_md', type: 'nav' },
+      { label: 'Navigate: Go to projects.md repositories inventory code', target: 'projects_md', type: 'nav' },
+      { label: 'Navigate: Go to journey.md timeline log records', target: 'journey_md', type: 'nav' },
+      { label: 'Navigate: Go to blog.md research writeups metrics', target: 'blog_md', type: 'nav' },
+      { label: 'Navigate: Go to contact.md secure communication pipeline', target: 'contact_md', type: 'nav' },
+      { label: 'Action: Clear active execution terminal shell screen memory', action: 'clear_terminal', type: 'cmd' },
+      { label: 'Action: Run default profile cat README.md tracking script', action: 'readme_simulation', type: 'cmd' }
+    ];
+
+    function escapeDOMInjectionStringText(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ════════════════  LIVE GITHUB STARS FETCH  ════════════════
+    // Only total stars are fetched via the client-side GitHub API.
+    // Commits, streak, and top-language stats are served as accurate
+    // server-rendered SVG images (github-readme-stats + streak-stats.demolab.com)
+    // in the GITHUB_ACTIVITY.LOG panel, so no client-side API calls are needed for them.
+    const GH_USER = 'shadow269';
+
+    async function fetchGitHubLiveStats() {
+      try {
+        const reposRes = await fetch(`https://api.github.com/users/${GH_USER}/repos?per_page=100`);
+        if (!reposRes.ok) throw new Error('Repos fetch failed');
+        const repos = await reposRes.json();
+        const totalStars = repos.reduce((sum, r) => sum + (r.stargazers_count || 0), 0);
+        const starsEl = document.getElementById('live-git-stars-counter');
+        if (starsEl) starsEl.innerHTML = `${totalStars}<span>★</span>`;
+      } catch (err) {
+        console.warn('[GH Stars Fetch Failed]', err);
+        // Leave the default — dash — if fetch fails
+      }
+    }
+
+    // ════════════════  WORKSPACE COMPILE  ════════════════
+    function executeWorkspaceCoreArchitectureCompilation() {
+      const desktopHeaderTabsRowContainerElement = document.getElementById('editor-tabs-header-container');
+      const mobileTabsScrollRowContainerElement = document.getElementById('mobile-tabs-row');
+      const tabsHtmlStringBlock = WORKSPACE_SHEETS_CONFIG.map(sheet => `
+        <button class="editor-tab" role="tab" id="tab-selector_target-${sheet.key}" aria-selected="false" aria-controls="canvas-${sheet.key}" onclick="activateWorkspaceSheetTabContainerInstance('${sheet.key}')">
+          <i class="${escapeDOMInjectionStringText(sheet.icon)}" aria-hidden="true"></i> ${escapeDOMInjectionStringText(sheet.label)}
+        </button>
+      `).join('');
+      desktopHeaderTabsRowContainerElement.innerHTML = tabsHtmlStringBlock;
+      mobileTabsScrollRowContainerElement.innerHTML = tabsHtmlStringBlock;
+
+      document.getElementById('projects-target-injection-viewport-grid').innerHTML = REPOSITORIES_PROJECTS_METADATA.map(repo => `
+        <div class="repo-card" role="listitem">
+          <div>
+            <div class="repo-head">
+              <div class="repo-title-text"><i class="ri-git-repository-line" aria-hidden="true"></i> ${escapeDOMInjectionStringText(repo.name)}</div>
+              <i class="ri-git-branch-line" style="color:var(--text-muted); font-size:0.9rem;" aria-hidden="true"></i>
+            </div>
+            <p class="repo-desc-text">${escapeDOMInjectionStringText(repo.desc)}</p>
+            <div class="repo-pills">${repo.tech.map(t => `<span>${escapeDOMInjectionStringText(t)}</span>`).join('')}</div>
+          </div>
+          <div class="repo-footer">
+            <div class="repo-stats">
+              <span><i class="ri-star-line"></i> ${repo.stars}</span>
+              <span><i class="ri-git-fork-line" style="color:var(--neon-blue);"></i> ${repo.forks}</span>
+            </div>
+            <div class="repo-actions-links">
+              <a href="https://github.com/shadow269" target="_blank" rel="noopener noreferrer">Inspect_Node Key →</a>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      document.getElementById('journey-timeline-target-injection-viewport').innerHTML = CHRONOLOGY_TIMELINE_METADATA.map(node => `
+        <div class="timeline-node-item" role="listitem">
+          <span class="node-timestamp">${escapeDOMInjectionStringText(node.time)}</span>
+          <h3 class="node-header-title">${escapeDOMInjectionStringText(node.role)}</h3>
+          <span class="node-sub-org">${escapeDOMInjectionStringText(node.org)}</span>
+          <p class="node-body-content">${escapeDOMInjectionStringText(node.body)}</p>
+          ${node.points ? `<div class="node-body-content"><ul>${node.points.map(pt => `<li>${escapeDOMInjectionStringText(pt)}</li>`).join('')}</ul></div>` : ''}
+        </div>
+      `).join('');
+
+      compileThreatBlogPostsViewportCanvas();
+
+      document.getElementById('palette-results-target-injection-viewport-list').innerHTML = PALETTE_NAVIGATION_COMMANDS_MATRIX.map((cmd, idx) => `
+        <div class="palette-option-item ${idx === 0 ? 'selected' : ''}" role="option" id="palette-option-idx-${idx}" onclick="executePaletteOptionCommandCallbackIndexReference(${idx})">
+          <span>${escapeDOMInjectionStringText(cmd.label)}</span>
+          <span class="palette-shortcut-hint">${cmd.type === 'nav' ? 'Navigation' : 'Shell Routine'}</span>
+        </div>
+      `).join('');
+    }
+
+    function compileThreatBlogPostsViewportCanvas(filterQueryTextKeywordString = '') {
+      const filtered = filterQueryTextKeywordString === ''
+        ? BLOG_POSTS_METADATA
+        : BLOG_POSTS_METADATA.filter(p => p.title.toLowerCase().includes(filterQueryTextKeywordString.toLowerCase()) || p.excerpt.toLowerCase().includes(filterQueryTextKeywordString.toLowerCase()));
+      const container = document.getElementById('blog-posts-target-injection-viewport-grid');
+      if (filtered.length) {
+        container.innerHTML = filtered.map(post => `
+          <div class="blog-card" role="listitem" onclick="executeTerminalCommandSimulation('cat blog/posts/${post.id}.md')">
+            <div class="blog-thumb-frame" aria-hidden="true"><i class="ri-article-line"></i></div>
+            <div class="blog-content-block">
+              <div>
+                <div class="blog-meta-data">
+                  <span><i class="ri-calendar-todo-line"></i> ${escapeDOMInjectionStringText(post.date)}</span>
+                  <span><i class="ri-time-line"></i> ${escapeDOMInjectionStringText(post.time)}</span>
+                </div>
+                <h3 class="blog-card-title">${escapeDOMInjectionStringText(post.title)}</h3>
+                <p class="blog-card-summary">${escapeDOMInjectionStringText(post.excerpt)}</p>
+              </div>
+              <div class="blog-tags-row">${post.tags.map(t => `<span class="blog-tag-badge">#${escapeDOMInjectionStringText(t)}</span>`).join('')}</div>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        container.innerHTML = '<div style="padding:40px; text-align:center; font-family:var(--font-mono); color:var(--text-muted);">No logs writeups match criteria query bounds.</div>';
+      }
+    }
+
+    function activateWorkspaceSheetTabContainerInstance(key) {
+      document.querySelectorAll('.editor-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+      document.querySelectorAll('.editor-canvas').forEach(c => c.classList.remove('active'));
+      const desktopTab = document.getElementById(`tab-selector_target-${key}`);
+      const mobileTab = document.getElementById('mobile-tabs-row').querySelector(`#tab-selector_target-${key}`);
+      const canvas = document.getElementById(`canvas-${key}`);
+      if (desktopTab) { desktopTab.classList.add('active'); desktopTab.setAttribute('aria-selected', 'true'); }
+      if (mobileTab) mobileTab.classList.add('active');
+      if (canvas) canvas.classList.add('active');
+      recalculateReadingScrollProgressTrackingMetrics();
+    }
+
+    // ════════════════  TERMINAL  ════════════════
+    const SHELL_MOCK = {
+      help() {
+        return ["Operational Framework Virtual Shell Registry - Executable Routines:", "  help               — Output system core operational directives indexes maps.", "  cat README.md      — Execute local data ingestion and initialization parsing run.", "  ls projects/       — Display active blueprint configuration schemas values list.", "  clear              — Purge current visual interface console terminal buffer tracker lines."];
+      },
+      ['cat readme.md']() {
+        return ["Ingesting Sakshith C Shetty Network Node variable context maps parameters...", "  -> Handle Identifier String Verified: SHADOW-269 (Bugcrowd Active Matrix Evaluation)", "  -> Ingest Pipeline Target Vectors  : Web Application Bounds Bypassing // RESTful Intercepts", "  -> Inception Status Code Tracker  : Reception arrays open for target assessments execution loops."];
+      },
+      ['ls projects/']() {
+        return ["Directory: contents/blueprints/exploits/ (3 objects array items context trace located):", "  [Obj Ref 0] -> CivicEye-Platform-Core (YOLOv8 Relational Backend Security Context Map)", "  [Obj Ref 1] -> CyberSapiens-Audit-Toolkit (Automation payload checking processing modules code)", "  [Obj Ref 2] -> RigMaster-Configurator-UX (Latency redrawing layout model engine components configuration)"];
+      }
+    };
+
+    const termBuf = document.getElementById('terminal-screen-buffer-stream');
+    const termInput = document.getElementById('terminal-keyboard-input-element');
+
+    function executeTerminalCommandSimulation(raw) {
+      const cmd = raw.trim();
+      if (!cmd) return;
+      const echo = document.createElement('div');
+      echo.className = 'term-row';
+      echo.innerHTML = `<span class="term-prompt-marker">guest@shadow269_ops:~$</span> <span style="color:#fff;"></span>`;
+      echo.querySelector('span:last-child').textContent = cmd;
+      termBuf.appendChild(echo);
+      const key = cmd.toLowerCase().replace(/\s+/g, ' ');
+      if (key === 'clear') { termBuf.innerHTML = ''; return; }
+      const out = document.createElement('div');
+      out.className = 'term-row';
+      if (SHELL_MOCK[key]) {
+        out.innerHTML = SHELL_MOCK[key]().map(l => escapeDOMInjectionStringText(l)).join('\n');
+      } else if (key.startsWith('cat blog/posts/')) {
+        out.innerHTML = `[INGEST SYSTEM] Opening structural writeup content path... Complete.`;
+      } else {
+        out.innerHTML = `<span style="color:var(--neon-red);">Shell Exception Code 404: Input flag matches no known executive routing pointer. Execute 'help'.</span>`;
+      }
+      termBuf.appendChild(out);
+      termBuf.scrollTop = termBuf.scrollHeight;
+    }
+
+    termInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && termInput.value.trim()) {
+        executeTerminalCommandSimulation(termInput.value);
+        termInput.value = '';
+      }
+    });
+
+    // ════════════════  COMMAND PALETTE  ════════════════
+    const paletteOverlay = document.getElementById('palette-modal-overlay-viewport');
+    const paletteField = document.getElementById('palette-search-field-input');
+    let paletteIdx = 0;
+
+    function toggleCommandPaletteModalWindow() {
+      const open = paletteOverlay.classList.toggle('active');
+      if (open) { paletteField.value = ''; paletteIdx = 0; syncPaletteSelection(); setTimeout(() => paletteField.focus(), 50); }
+    }
+
+    function syncPaletteSelection() {
+      document.querySelectorAll('#palette-results-target-injection-viewport-list .palette-option-item').forEach((el, i) => {
+        el.classList.toggle('selected', i === paletteIdx);
+        if (i === paletteIdx) el.scrollIntoView({ block: 'nearest' });
+      });
+    }
+
+    function executePaletteOptionCommandCallbackIndexReference(idx) {
+      const cmd = PALETTE_NAVIGATION_COMMANDS_MATRIX[idx];
+      if (!cmd) return;
+      toggleCommandPaletteModalWindow();
+      if (cmd.type === 'nav') activateWorkspaceSheetTabContainerInstance(cmd.target);
+      else if (cmd.action === 'clear_terminal') executeTerminalCommandSimulation('clear');
+      else if (cmd.action === 'readme_simulation') executeTerminalCommandSimulation('cat README.md');
+    }
+
+    window.addEventListener('keydown', e => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); toggleCommandPaletteModalWindow(); }
+      if (paletteOverlay.classList.contains('active')) {
+        const n = PALETTE_NAVIGATION_COMMANDS_MATRIX.length;
+        if (e.key === 'ArrowDown') { e.preventDefault(); paletteIdx = (paletteIdx + 1) % n; syncPaletteSelection(); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); paletteIdx = (paletteIdx - 1 + n) % n; syncPaletteSelection(); }
+        else if (e.key === 'Enter') { e.preventDefault(); executePaletteOptionCommandCallbackIndexReference(paletteIdx); }
+        else if (e.key === 'Escape') { toggleCommandPaletteModalWindow(); }
+      }
+    });
+
+    paletteOverlay.addEventListener('click', e => { if (e.target === paletteOverlay) toggleCommandPaletteModalWindow(); });
+
+    function toggleThemeSwitcherPattern() {
+      const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+    }
+
+    function recalculateReadingScrollProgressTrackingMetrics() {
+      const canvas = document.querySelector('.editor-canvas.active');
+      const bar = document.getElementById('progress-indicator-bar');
+      if (!canvas) { bar.style.width = '0%'; return; }
+      canvas.removeEventListener('scroll', handleScroll);
+      canvas.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll.call(canvas);
+    }
+
+    function handleScroll() {
+      const pct = this.scrollHeight - this.clientHeight > 0 ? Math.round((this.scrollTop / (this.scrollHeight - this.clientHeight)) * 100) : 0;
+      document.getElementById('progress-indicator-bar').style.width = `${pct}%`;
+    }
+
+    document.getElementById('secure-outbound-form-blueprint').addEventListener('submit', e => {
+      e.preventDefault();
+      const fb = document.getElementById('form-execution-feedback-log-node');
+      fb.style.display = 'block';
+      fb.textContent = 'Transmitting handshake verification log traces...';
+      setTimeout(() => { fb.textContent = '✓ Communication envelope transmitted to host gateway. Node receiver allocation verified successfully.'; e.target.reset(); }, 800);
+    });
+
+    document.getElementById('mobile-drawer-toggle-btn').addEventListener('click', () => {
+      const open = document.getElementById('ide-sidebar-node').classList.toggle('open');
+      document.getElementById('mobile-drawer-toggle-btn').querySelector('i').className = open ? 'ri-menu-fold-line' : 'ri-menu-unfold-line';
+    });
+
+    document.getElementById('blog-search-field-input').addEventListener('input', e => compileThreatBlogPostsViewportCanvas(e.target.value));
+
+    document.addEventListener('DOMContentLoaded', () => {
+      executeWorkspaceCoreArchitectureCompilation();
+      activateWorkspaceSheetTabContainerInstance('about_md');
+      executeTerminalCommandSimulation('help');
+      fetchGitHubLiveStats();
+    });
+  </script>
+</body>
+</html>
