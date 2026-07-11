@@ -148,6 +148,22 @@
     #progress-indicator-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue)); z-index: 2000; width: 0%; transition: width 0.1s linear; }
     .ide-container { display: flex; width: 100vw; height: 100vh; overflow: hidden; position: relative; }
 
+    .sidebar-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 95;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s var(--ease);
+    }
+    .sidebar-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     /* ════════════════  SIDEBAR  ════════════════ */
     .ide-sidebar {
       width: 360px; min-width: 360px;
@@ -295,11 +311,16 @@
     .node-tech-tags span { font-family: var(--font-mono); font-size: 0.65rem; padding: 3px 8px; background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); transition: border-color 0.2s; }
     .node-tech-tags span:hover { border-color: var(--neon-purple); color: var(--text-bright); }
 
-    .terminal-drawer-widget { background-color: var(--panel-dark); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem; height: 220px; display: flex; flex-direction: column; position: relative; z-index: 90; }
-    .term-tabs-row { display: flex; background-color: var(--sidebar); border-bottom: 1px solid var(--border); padding-left: 20px; gap: 18px; }
-    .term-tab-btn { font-size: 0.72rem; text-transform: uppercase; padding: 10px 0; color: var(--neon-green); font-weight: 700; letter-spacing: 0.05em; position: relative; transition: color 0.2s; }
+    .terminal-drawer-widget { background-color: var(--panel-dark); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem; height: 220px; display: flex; flex-direction: column; position: relative; z-index: 90; transition: height 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
+    .terminal-drawer-widget.collapsed { height: 35px !important; }
+    .terminal-drawer-widget.collapsed .term-buffer-stream { display: none !important; }
+    .term-tabs-row { display: flex; background-color: var(--sidebar); border-bottom: 1px solid var(--border); padding-left: 20px; gap: 18px; align-items: center; }
+    .term-tab-btn { font-size: 0.72rem; text-transform: uppercase; padding: 10px 0; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; position: relative; transition: color 0.2s; cursor: pointer; border: none; background: transparent; }
+    .term-tab-btn:hover { color: var(--text-bright); }
     .term-tab-btn.active { color: var(--neon-green); }
     .term-tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background-color: var(--neon-green); }
+    .term-collapse-btn { background: transparent; border: none; color: var(--text-muted); cursor: pointer; padding: 0 16px; margin-left: auto; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: color 0.2s; height: 100%; }
+    .term-collapse-btn:hover { color: var(--text-bright); }
     .term-buffer-stream { flex: 1; padding: 10px 20px; overflow-y: auto; line-height: 1.7; color: #e1e1e3; border-bottom: 1px solid rgba(255,255,255,0.02); }
     .term-buffer-stream::-webkit-scrollbar { width: 6px; }
     .term-buffer-stream::-webkit-scrollbar-thumb { background: var(--border); }
@@ -317,13 +338,15 @@
     .term-bold { font-weight: 700; }
     .term-header { color: var(--neon-purple); font-weight: 700; margin-bottom: 2px; }
     .term-divider { color: var(--text-muted); opacity: 0.4; }
+    .term-git-stats-container { display: flex; flex-wrap: wrap; gap: 15px; align-items: flex-start; margin-top: 10px; }
+    .term-git-stats-container img { max-height: 120px; object-fit: contain; }
     .term-cursor { display: inline-block; width: 8px; height: 1.1em; background: var(--neon-green); animation: termBlink 1s step-end infinite; vertical-align: text-bottom; margin-left: 1px; }
     @keyframes termBlink { 50% { opacity: 0; } }
 
     .ide-footer-status-bar { height: 24px; background-color: var(--neon-purple); color: #000; font-family: var(--font-mono); font-size: 0.72rem; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; position: relative; z-index: 150; font-weight: 600; }
     .footer-left-node, .footer-right-node { display: flex; align-items: center; gap: 14px; }
     .footer-clickable-item:hover { background-color: rgba(255,255,255,0.2); cursor: pointer; padding: 0 4px; margin: 0 -4px; border-radius: 2px; }
-    .theme-dropdown-select { background: transparent; border: none; color: #000; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; cursor: pointer; outline: none; padding: 0 4px; margin-left: 2px; }
+    .theme-dropdown-select { background: transparent; border: none; color: #000; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; cursor: pointer; outline: none; padding: 0 14px 0 2px; margin-left: 2px; height: 18px; line-height: 18px; -webkit-appearance: none; -moz-appearance: none; appearance: none; background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2712%27%20height%3D%2712%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27%23000000%27%3E%3Cpath%20d%3D%27M7%2010l5%205%205-5z%27%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right center; background-size: 10px; }
     .theme-dropdown-select option { background-color: var(--sidebar); color: var(--text-bright); font-family: var(--font-mono); }
     
     .palette-modal-overlay { position: fixed; inset: 0; background-color: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 5000; display: none; align-items: flex-start; justify-content: center; padding-top: 10vh; }
@@ -558,8 +581,9 @@
       .cert-grid-new { grid-template-columns: repeat(4, 1fr); }
     }
     @media (max-width: 1100px) {
-      .ide-sidebar { position: fixed; top: 0; left: 0; bottom: 24px; transform: translateX(-100%); width: 340px; min-width: 340px; box-shadow: 12px 0 40px rgba(0,0,0,0.6); }
+      .ide-sidebar { position: fixed; top: 0; left: 0; bottom: 24px; transform: translateX(-100%); width: 300px; min-width: 300px; box-shadow: 12px 0 40px rgba(0,0,0,0.6); z-index: 100; border-right: 1px solid var(--border); }
       .ide-sidebar.open { transform: translateX(0); }
+      .ide-tab-bar { display: none !important; }
       .mobile-nav-scroll-wrapper { display: flex; }
       .mobile-menu-toggle-trigger { display: flex; }
       .editor-canvas { padding: 24px; }
@@ -582,13 +606,15 @@
       .terminal-drawer-widget { height: 200px; }
     }
     @media (max-width: 600px) {
-      .ide-sidebar { width: 100%; min-width: 100%; }
+      .footer-label-text, .footer-right-item { display: none; }
+      .footer-left-node, .footer-right-node { gap: 8px; }
+      .ide-sidebar { width: 280px; min-width: 280px; }
       .editor-canvas { padding: 16px 12px; }
       .vertical-timeline { grid-template-columns: 48px 1fr; }
       .timeline-icon { width: 24px; height: 24px; }
       .timeline-icon i { font-size: 0.6rem; }
       .timeline-content { padding-left: 12px; }
-      .ndw-hover-card { width: 280px; left: 10px !important; right: 10px !important; }
+      .ndw-hover-card { width: auto !important; left: 16px !important; right: 16px !important; }
       .cert-grid-new { grid-template-columns: 1fr; }
       .cert-card-new { height: auto; min-height: 280px; padding: 16px; }
       .cert-stats-row { grid-template-columns: repeat(2, 1fr); }
@@ -614,6 +640,7 @@
 </head>
 <body>
   <div id="progress-indicator-bar" aria-hidden="true"></div>
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebarMobile(false)"></div>
   <div class="ide-container">
     <aside class="ide-sidebar" id="ide-sidebar-node" role="complementary" aria-label="System Metrics Workspace Panel">
       <div class="sidebar-block profile-node">
@@ -973,6 +1000,7 @@
       <div class="terminal-drawer-widget" role="region" aria-label="Integrated Terminal">
         <div class="term-tabs-row" role="tablist">
           <button class="term-tab-btn active" role="tab" aria-selected="true">TERMINAL</button>
+          <button class="term-collapse-btn" id="term-collapse-toggle" onclick="toggleTerminalCollapse()" aria-label="Toggle Terminal Panel"><i class="ri-subtract-line"></i></button>
         </div>
         <div class="term-buffer-stream" id="term-buffer" aria-live="polite">
           <div class="term-interactive-row" id="term-interactive-row">
@@ -985,7 +1013,7 @@
       <footer class="ide-footer-status-bar" role="contentinfo">
         <div class="footer-left-node">
           <span class="footer-clickable-item" style="display: flex; align-items: center; gap: 4px;">
-            <i class="ri-contrast-line"></i> Style_Theme:
+            <i class="ri-contrast-line"></i> <span class="footer-label-text">Style_Theme:</span>
             <select id="theme-dropdown" class="theme-dropdown-select" onchange="changeThemeFromDropdownPattern(this.value)">
               <option value="dark">Cyber_Dark</option>
               <option value="light">Clean_Light</option>
@@ -994,11 +1022,11 @@
               <option value="cyberpunk">Cyberpunk_Neon</option>
             </select>
           </span>
-          <span class="footer-clickable-item" onclick="toggleCommandPaletteModalWindow()"><i class="ri-command-line"></i> Ctrl+K Palette</span>
+          <span class="footer-clickable-item" onclick="toggleCommandPaletteModalWindow()"><i class="ri-command-line"></i> <span class="footer-label-text">Ctrl+K Palette</span></span>
         </div>
         <div class="footer-right-node">
-          <span>Encoding: UTF-8</span>
-          <span>Spaces: 2</span>
+          <span class="footer-right-item">Encoding: UTF-8</span>
+          <span class="footer-right-item">Spaces: 2</span>
           <span>Log State: Active_Sync ✓</span>
         </div>
       </footer>
@@ -1570,12 +1598,7 @@
       if (canvas) canvas.classList.add('active');
       recalculateReadingScrollProgressTrackingMetrics();
 
-      const sidebar = document.getElementById('ide-sidebar-node');
-      if (sidebar.classList.contains('open')) {
-        sidebar.classList.remove('open');
-        const btn = document.getElementById('mobile-drawer-toggle-btn');
-        if (btn) btn.querySelector('i').className = 'ri-menu-unfold-line';
-      }
+      toggleSidebarMobile(false);
 
       if (key === 'certs_md') animateCertCounters();
     }
@@ -1691,6 +1714,7 @@
         ], 'term-warning');
       }
     }
+
 
     async function executeTerminalCommandSimulation(raw) {
       const cmd = raw.trim();
@@ -1842,9 +1866,32 @@
       document.getElementById('progress-indicator-bar').style.width = `${pct}%`;
     }
 
+    function toggleSidebarMobile(forceState) {
+      const sidebar = document.getElementById('ide-sidebar-node');
+      const overlay = document.getElementById('sidebar-overlay');
+      const btn = document.getElementById('mobile-drawer-toggle-btn');
+      if (!sidebar) return;
+
+      let isOpen;
+      if (typeof forceState === 'boolean') {
+        isOpen = forceState;
+        if (isOpen) sidebar.classList.add('open');
+        else sidebar.classList.remove('open');
+      } else {
+        isOpen = sidebar.classList.toggle('open');
+      }
+
+      if (overlay) {
+        if (isOpen) overlay.classList.add('active');
+        else overlay.classList.remove('active');
+      }
+      if (btn) {
+        btn.querySelector('i').className = isOpen ? 'ri-menu-fold-line' : 'ri-menu-unfold-line';
+      }
+    }
+
     document.getElementById('mobile-drawer-toggle-btn').addEventListener('click', () => {
-      const open = document.getElementById('ide-sidebar-node').classList.toggle('open');
-      document.getElementById('mobile-drawer-toggle-btn').querySelector('i').className = open ? 'ri-menu-fold-line' : 'ri-menu-unfold-line';
+      toggleSidebarMobile();
     });
 
     const LANYARD_USER_ID = '1051180323058237450';
@@ -1996,7 +2043,7 @@
       const card = document.getElementById('ndw-hover-card');
       if (!profileNode || !card) return;
 
-      profileNode.style.cursor = 'default';
+      profileNode.style.cursor = 'pointer';
       profileNode.addEventListener('mouseenter', () => {
         clearTimeout(ndwHoverTimeout);
         ndwHoverTimeout = setTimeout(ndwShowHoverCard, 300);
@@ -2011,6 +2058,33 @@
       card.addEventListener('mouseleave', () => {
         ndwHideHoverCard();
       });
+
+      profileNode.addEventListener('click', e => {
+        if (e.target.closest('.profile-status')) return;
+        if (card.classList.contains('visible')) {
+          card.classList.remove('visible');
+        } else {
+          ndwShowHoverCard();
+        }
+      });
+
+      document.addEventListener('click', e => {
+        if (card.classList.contains('visible')) {
+          if (!card.contains(e.target) && !profileNode.contains(e.target)) {
+            card.classList.remove('visible');
+          }
+        }
+      });
+    }
+
+    function toggleTerminalCollapse() {
+      const widget = document.querySelector('.terminal-drawer-widget');
+      const btn = document.getElementById('term-collapse-toggle');
+      if (!widget) return;
+      const isCollapsed = widget.classList.toggle('collapsed');
+      if (btn) {
+        btn.innerHTML = isCollapsed ? '<i class="ri-arrow-up-s-line"></i>' : '<i class="ri-subtract-line"></i>';
+      }
     }
 
     function initializeDiscordPresenceUpdater() {
