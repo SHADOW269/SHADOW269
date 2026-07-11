@@ -4367,6 +4367,18 @@
       termBuf.scrollTop = termBuf.scrollHeight;
     });
 
+    termBuf.addEventListener('click', (e) => {
+      if (e.target !== termInput) {
+        termInput.focus();
+      }
+    });
+
+    document.querySelector('.terminal-drawer-widget').addEventListener('click', (e) => {
+      if (!e.target.closest('.term-collapse-btn') && !e.target.closest('.term-tab-btn')) {
+        termInput.focus();
+      }
+    });
+
     const paletteOverlay = document.getElementById('palette-modal-overlay-viewport');
     const paletteField = document.getElementById('palette-search-field-input');
     let paletteIdx = 0;
