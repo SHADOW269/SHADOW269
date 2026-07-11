@@ -4,28 +4,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sakshith C Shetty — Offensive Security Specialist & Full-Stack Developer</title>
+  <title>Sakshith C Shetty — Security Analyst & Full-Stack Developer</title>
   <meta name="description"
-    content="Professional portfolio of Sakshith C Shetty (SHADOW-269), a Junior Security Analyst and Full-Stack Developer specializing in offensive security, pentesting, and API security.">
+    content="Portfolio of Sakshith C Shetty (SHADOW-269) — Security Analyst & Full-Stack Developer specializing in offensive security, pentesting, and API security.">
   <link rel="canonical" href="https://portfolio.shadow269.in/">
   <meta name="robots" content="index, follow">
+  <link rel="sitemap" type="application/xml" href="sitemap.xml">
   <script defer src="https://cloud.umami.is/script.js" data-website-id="5c934024-7e25-43c4-baa9-fb91d7cb45a1"></script>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://portfolio.shadow269.in/">
-  <meta property="og:title" content="Sakshith C Shetty — Developer & Security Workspace">
+  <meta property="og:title" content="Sakshith C Shetty — Security Analyst & Full-Stack Developer">
   <meta property="og:description"
-    content="Interactive terminal workspace highlighting professional security certifications, projects, and penetration testing modules.">
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/197274423?v=4&s=250">
+    content="Portfolio of Sakshith C Shetty (SHADOW-269) — Security Analyst & Full-Stack Developer specializing in offensive security, pentesting, and API security.">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/197274423?v=4&s=500">
+  <meta property="og:site_name" content="Sakshith C Shetty Portfolio">
+  <meta property="og:locale" content="en_IN">
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@SHADOW_2669">
+  <meta name="twitter:creator" content="@SHADOW_2669">
   <meta name="twitter:url" content="https://portfolio.shadow269.in/">
-  <meta name="twitter:title" content="Sakshith C Shetty — Developer & Security Workspace">
+  <meta name="twitter:title" content="Sakshith C Shetty — Security Analyst & Full-Stack Developer">
   <meta name="twitter:description"
-    content="Interactive terminal workspace highlighting professional security certifications, projects, and penetration testing modules.">
-  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/197274423?v=4&s=250">
+    content="Portfolio of Sakshith C Shetty (SHADOW-269) — Security Analyst & Full-Stack Developer specializing in offensive security, pentesting, and API security.">
+  <meta name="twitter:image" content="https://avatars.githubusercontent.com/u/197274423?v=4&s=500">
 
   <!-- Structured Data / JSON-LD -->
   <script type="application/ld+json">
@@ -38,13 +43,36 @@
     "image": "https://avatars.githubusercontent.com/u/197274423?v=4",
     "sameAs": [
       "https://github.com/shadow269",
-      "https://www.linkedin.com/in/sakshithshetty/"
+      "https://gitlab.com/SHADOW269",
+      "https://www.linkedin.com/in/sakshithshetty/",
+      "https://x.com/SHADOW_2669",
+      "https://www.instagram.com/shadow269.in/"
     ],
     "jobTitle": "Junior Security Analyst & Full-Stack Developer",
     "worksFor": {
       "@type": "Organization",
       "name": "Freelance"
     },
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Mangaluru",
+      "addressRegion": "Karnataka",
+      "addressCountry": "IN"
+    },
+    "knowsAbout": [
+      "Offensive Security",
+      "Penetration Testing",
+      "API Security",
+      "Full-Stack Development",
+      "Web Application Security",
+      "Bug Bounty",
+      "JavaScript",
+      "TypeScript",
+      "Python",
+      "Go",
+      "Docker",
+      "PostgreSQL"
+    ],
     "description": "Junior Security Analyst and Full-Stack Developer from Mangaluru, India specializing in offensive security, penetration testing, and secure web application development."
   }
   </script>
@@ -177,6 +205,26 @@
       --neon-orange: #ff9f00;
       --neon-red: #ff003c;
       --bg-panel: #0d0214;
+    }
+
+    .skip-to-content {
+      position: absolute;
+      top: -100%;
+      left: 16px;
+      z-index: 10000;
+      padding: 8px 16px;
+      background: var(--neon-green);
+      color: #000;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      border-radius: 0 0 6px 6px;
+      transition: top 0.2s;
+    }
+
+    .skip-to-content:focus {
+      top: 0;
     }
 
     *,
@@ -810,7 +858,7 @@
     }
 
     .ln-content h2 {
-      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-size: clamp(1.3rem, 3vw, 1.75rem);
       color: var(--neon-blue);
       margin-top: 28px;
       border-bottom: 1px dashed var(--border);
@@ -2112,6 +2160,28 @@
       min-height: 0;
     }
 
+    .cert-thumb {
+      width: 100%;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      background: var(--sidebar);
+      border: 1px solid var(--border);
+    }
+
+    .cert-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .cert-card-new:hover .cert-thumb img {
+      transform: scale(1.05);
+    }
+
     .cert-badge-row {
       display: flex;
       align-items: center;
@@ -2328,6 +2398,16 @@
       font-weight: 700;
       color: var(--text);
       margin-bottom: 6px;
+    }
+
+    .cert-modal-image {
+      margin-bottom: 16px;
+    }
+
+    .cert-modal-image img {
+      width: 100%;
+      border-radius: 6px;
+      display: block;
     }
 
     .cert-modal-issuer {
@@ -2993,29 +3073,29 @@
 </head>
 
 <body>
+  <a href="#main-content" class="skip-to-content">Skip to main content</a>
   <div id="progress-indicator-bar" aria-hidden="true"></div>
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebarMobile(false)"></div>
   <div class="ide-container">
-    <aside class="ide-sidebar" id="ide-sidebar-node" role="complementary" aria-label="System Metrics Workspace Panel">
+    <aside class="ide-sidebar" id="ide-sidebar-node" aria-label="Profile and Navigation Sidebar">
       <div class="sidebar-block profile-node">
         <div class="avatar-wrapper">
           <img class="avatar-img" id="ndt-avatar" src="https://avatars.githubusercontent.com/u/197274423?v=4&s=120"
             alt="Sakshith C Shetty Avatar" width="54" height="54">
-          <div class="status-dot" id="nav-discord-dot" title="System Matrix: Operator Active"></div>
+          <div class="status-dot" id="nav-discord-dot" title="Available"></div>
         </div>
         <div class="profile-info">
           <h1 class="profile-name">Sakshith C Shetty</h1>
-          <div class="profile-title">Offensive Security Operator</div>
+          <div class="profile-title">Security Analyst & Full-Stack Developer</div>
           <div class="profile-status" onclick="activateWorkspaceSheetTabContainerInstance('contact_md')"><span
               class="status-badge-green"><span class="status-badge-dot"></span> Open to Work</span></div>
         </div>
       </div>
       <div class="sidebar-block" style="padding: 10px 18px;">
-        <p class="profile-quote">"Hunting multi-tenant authorization bypass logic parameters anomalies at scale across
-          production networks."</p>
+        <p class="profile-quote">Building secure web applications and testing them for vulnerabilities.</p>
       </div>
       <div class="sidebar-block">
-        <div class="block-heading"><i class="ri-git-repository-private-line"></i> Ingress_Channels</div>
+        <div class="block-heading"><i class="ri-git-repository-private-line"></i> Contact</div>
         <div class="contact-list" role="list">
           <div class="contact-item" role="listitem"><i class="ri-mail-send-line"></i> contact@shadow269.in</div>
           <div class="contact-item" role="listitem"><i class="ri-map-pin-user-line"></i> Mangaluru, Karnataka, IN</div>
@@ -3023,28 +3103,28 @@
         </div>
       </div>
       <div class="sidebar-block">
-        <div class="block-heading"><i class="ri-cpu-line"></i> Ingested_Modules</div>
+        <div class="block-heading"><i class="ri-cpu-line"></i> Tech Stack</div>
         <div class="badge-cloud">
           <span class="stack-badge">JavaScript</span><span class="stack-badge">TypeScript</span>
-          <span class="stack-badge">Go Lang</span><span class="stack-badge">Python Core</span>
-          <span class="stack-badge">Docker API</span><span class="stack-badge">PostgreSQL</span>
-          <span class="stack-badge">Frida Engine</span><span class="stack-badge">Burp Suite Pro</span>
-          <span class="stack-badge">OWASP Matrix</span><span class="stack-badge">Linux Kernel</span>
+          <span class="stack-badge">Go</span><span class="stack-badge">Python</span>
+          <span class="stack-badge">Docker</span><span class="stack-badge">PostgreSQL</span>
+          <span class="stack-badge">Frida</span><span class="stack-badge">Burp Suite</span>
+          <span class="stack-badge">OWASP</span><span class="stack-badge">Linux</span>
         </div>
       </div>
       <div class="sidebar-block">
-        <div class="block-heading"><i class="ri-focus-3-line"></i> ACTIVE_THREADS</div>
+        <div class="block-heading"><i class="ri-focus-3-line"></i> Current Focus</div>
         <div class="badge-cloud">
           <span class="stack-badge" style="border-style:dashed;">Security Research</span>
           <span class="stack-badge" style="border-style:dashed;">Web Application Security</span>
           <span class="stack-badge" style="border-style:dashed;">API Security Testing</span>
-          <span class="stack-badge" style="border-style:dashed;">Bug Bounty Learning</span>
-          <span class="stack-badge" style="border-style:dashed;">Linux Automation</span>
-          <span class="stack-badge" style="border-style:dashed;">OSINT Research</span>
+          <span class="stack-badge" style="border-style:dashed;">Bug Bounty</span>
+          <span class="stack-badge" style="border-style:dashed;">Linux Administration</span>
+          <span class="stack-badge" style="border-style:dashed;">OSINT</span>
         </div>
       </div>
       <div class="sidebar-block">
-        <div class="block-heading"><i class="ri-pulse-line"></i> SECURITY_PROFILE_STATS</div>
+        <div class="block-heading"><i class="ri-pulse-line"></i> Quick Stats</div>
         <div class="highlights-matrix">
           <div class="highlight-cell">
             <div class="hl-count">6<span>M</span></div>
@@ -3065,9 +3145,9 @@
         </div>
       </div>
 
-      <!-- ── GITHUB ACTIVITY LOG with live graph + live stats ── -->
+      <!-- GitHub Activity Graph -->
       <div class="sidebar-block">
-        <div class="block-heading"><i class="ri-github-line"></i> GITHUB_ACTIVITY</div>
+        <div class="block-heading"><i class="ri-github-line"></i> GitHub Activity</div>
         <div class="git-graph-panel">
           <div class="git-graph-img-wrapper">
             <img
@@ -3078,128 +3158,113 @@
       </div>
 
       <div class="sidebar-sticky-footer">
-        <div class="social-matrix-grid" aria-label="Social Matrix Communication Access Layers">
+        <div class="social-matrix-grid" aria-label="Social Links">
           <a href="https://github.com/shadow269" target="_blank" rel="noopener noreferrer" class="sidebar-soc-btn"
-            data-tooltip="GitHub Endpoint Vector" aria-label="GitHub Profile"><i class="ri-github-fill"></i></a>
+            data-tooltip="GitHub" aria-label="GitHub Profile"><i class="ri-github-fill"></i></a>
           <a href="https://www.linkedin.com/in/sakshithshetty/" target="_blank" rel="noopener noreferrer" class="sidebar-soc-btn"
-            data-tooltip="LinkedIn Tunnel Gateway" aria-label="LinkedIn Profile"><i class="ri-linkedin-box-fill"></i></a>
-          <a href="mailto:contact@shadow269.in" class="sidebar-soc-btn" data-tooltip="Direct SMTP Connection Mail"
+            data-tooltip="LinkedIn" aria-label="LinkedIn Profile"><i class="ri-linkedin-box-fill"></i></a>
+          <a href="mailto:contact@shadow269.in" class="sidebar-soc-btn" data-tooltip="Email"
             aria-label="Send Email"><i class="ri-mail-fill"></i></a>
           <button onclick="toggleCommandPaletteModalWindow()" class="sidebar-soc-btn"
-            data-tooltip="Shell Command Palette Engine Ctrl+K" aria-label="Open Command Palette"><i class="ri-terminal-box-line"></i></button>
+            data-tooltip="Command Palette (Ctrl+K)" aria-label="Open Command Palette"><i class="ri-terminal-box-line"></i></button>
         </div>
         <a href="files/RESUME.pdf" download class="action-cv-btn" style="text-decoration: none;"><i
             class="ri-download-line"></i> Download Resume</a>
       </div>
     </aside>
 
-    <main class="ide-workspace" role="main">
-      <div class="mobile-nav-scroll-wrapper" id="mobile-tabs-row" role="tablist"
-        aria-label="Mobile Navigation Buffer Shortcuts Matrix"></div>
-      <div class="ide-tab-bar" id="editor-tabs-header-container" role="tablist"
-        aria-label="Workspace Active Code Document Sheets Index"></div>
+    <main class="ide-workspace" id="main-content">
+      <nav aria-label="Main navigation">
+        <div class="mobile-nav-scroll-wrapper" id="mobile-tabs-row" role="tablist"
+          aria-label="Mobile Navigation"></div>
+        <div class="ide-tab-bar" id="editor-tabs-header-container" role="tablist"
+          aria-label="Section tabs"></div>
+      </nav>
 
       <section class="editor-canvas active" id="canvas-about_md" role="tabpanel"
-        aria-label="Workspace Context Source: about.md">
+        aria-label="About section">
         <div class="md-line">
           <div class="ln-content">
-            <h1># About Me</h1>
+            <h2>About</h2>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>I'm Sakshith C Shetty, a Junior Security Analyst and Full-Stack Developer from Mangaluru, India.</p>
+            <p>I am a junior security analyst and full-stack developer based in Mangaluru, India. I build web applications with Next.js, TypeScript, and PostgreSQL, and perform manual penetration testing focused on business logic and API security vulnerabilities.</p>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>I enjoy building modern web applications with a strong focus on performance, usability, and security.
-              Alongside development, I'm continuously expanding my cybersecurity knowledge through bug bounty programs,
-              Capture The Flag (CTF) challenges, hands-on labs, and security research.</p>
+            <p>Over the past 6 months at CyberSapiens EdTech, I performed manual web and API penetration testing, identifying vulnerabilities including BOPLA, BFLA, Mass Assignment, SSRF, Blind SQL Injection, and authentication bypass flaws. I produced structured vulnerability reports with technical details, business impact, and remediation guidance.</p>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>I believe that secure software starts with thoughtful engineering. My approach combines clean development
-              practices with a security-first mindset to build applications that are reliable, maintainable, and
-              resilient.</p>
+            <p>Outside of security testing, I have built and deployed 3 production applications: an order management platform for KeebForge, a community keyboard vendor directory (KeyDir.in), and a business website. I also hold CEH, CRTOM, CRPO, and ISO 27001 certifications.</p>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <h2>## What I Do</h2>
+            <h3>Technical Skills &amp; Expertise</h3>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>I design and develop full-stack web applications using modern technologies while continuously improving
-              my understanding of application security and secure software architecture.</p>
+            <p>&bull; Web Application &amp; API Penetration Testing<br>&bull; Full-Stack Development (Next.js, TypeScript, PostgreSQL)<br>&bull; Authentication &amp; Authorization Security<br>&bull; Bug Bounty Programs (Bugcrowd, HackerOne)<br>&bull; Docker &amp; Linux Administration<br>&bull; Security Tooling &amp; Automation</p>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>My primary areas of interest include:</p>
+            <h3>Currently Learning</h3>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>&bull; Full-Stack Web Development<br>&bull; Application &amp; API Security<br>&bull; Secure Software
-              Development<br>&bull; Business Logic &amp; Access Control Testing<br>&bull; Bug Bounty &amp; Vulnerability
-              Research<br>&bull; UI/UX Design and Developer Experience</p>
-          </div>
-        </div>
-        <div class="md-line">
-          <div class="ln-content">
-            <p>Whether I'm building a client project, contributing to a community platform, or researching security
-              vulnerabilities, my goal is to create software that is practical, secure, and delivers a great user
-              experience.</p>
+            <p>&bull; Advanced exploitation techniques<br>&bull; Cloud security architecture (AWS)<br>&bull; Go for security tooling<br>&bull; Reverse engineering with Frida</p>
           </div>
         </div>
       </section>
 
       <section class="editor-canvas" id="canvas-projects_md" role="tabpanel"
-        aria-label="Workspace Context Source: projects.md">
+        aria-label="Projects section">
         <div class="md-line">
           <div class="ln-content">
-            <h1># Compiled Repositories Artifacts Log</h1>
+            <h2>Projects</h2>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>A directory tracking software libraries, secure backend development modules, and custom automation
-              validation pipelines structured over assessment intervals.</p>
+            <p>Production applications, client projects, and open-source work. Each project includes the problem, solution, tech stack, and impact.</p>
           </div>
         </div>
         <div class="repo-cards-grid" id="projects-target-injection-viewport-grid"></div>
       </section>
 
       <section class="editor-canvas" id="canvas-journey_md" role="tabpanel"
-        aria-label="Workspace Context Source: journey.md">
+        aria-label="Experience section">
         <div class="md-line">
           <div class="ln-content">
-            <h1># Structural Chronology History Track</h1>
+            <h2>Experience</h2>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>A documented history path log mapping the path from systems design theories study layers to live
-              adversarial operations execution.</p>
+            <p>Professional experience and education timeline.</p>
           </div>
         </div>
         <div class="vertical-timeline" id="journey-timeline-target-injection-viewport"></div>
       </section>
 
       <section class="editor-canvas" id="canvas-certs_md" role="tabpanel"
-        aria-label="Workspace Context Source: certs.md">
+        aria-label="Certifications section">
         <div class="md-line">
           <div class="ln-content">
-            <h1># Professional Certifications Registry</h1>
+            <h2>Certifications</h2>
           </div>
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>Professional certifications, industry training, and hands-on programs completed across offensive
-              security, cloud security, information security management, and product development.</p>
+            <p>Industry certifications in offensive security, cloud security, and information security management.</p>
           </div>
         </div>
 
@@ -3258,13 +3323,11 @@
       </section>
 
       <section class="editor-canvas" id="canvas-contact_md" role="tabpanel"
-        aria-label="Workspace Context Source: connect.md">
+        aria-label="Contact section">
         <div class="md-line">
           <div class="ln-content">
-            <h1># Professional Network Registry</h1>
-            <p class="connect-intro-text"><strong>Feel free to connect for full-stack development, application security,
-                bug bounty discussions, open-source collaboration, or technical networking. All profiles listed below
-                are actively maintained.</strong></p>
+            <h2>Contact</h2>
+            <p class="connect-intro-text"><strong>Available for security consulting, full-stack development, and collaboration. All profiles are actively maintained.</strong></p>
           </div>
         </div>
 
@@ -3280,7 +3343,7 @@
                     <a href="https://github.com/shadow269" target="_blank" rel="noopener"
                       class="connect-card github-card featured">
                       <div class="card-icon-wrap">
-                        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path
                               d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
                           </svg></div>
@@ -3291,17 +3354,17 @@
                       </div>
                       <div class="card-arrow">&#x2197;</div>
                     </a>
-                    <a href="https://gitlab.com/SHADOW269" target="_blank" rel="noopener"
+                    <a href="https://gitlab.com/shadow269" target="_blank" rel="noopener"
                       class="connect-card gitlab-card">
                       <div class="card-icon-wrap">
-                        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path
                               d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 01-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 014.82 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.49h8.1l2.44-7.49a.42.42 0 01.11-.18.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.51L23 13.45a.84.84 0 01-.35.94z" />
                           </svg></div>
                       </div>
                       <div class="card-body">
                         <div class="card-platform">GitLab</div>
-                        <div class="card-handle">gitlab.com/SHADOW269</div>
+                        <div class="card-handle">gitlab.com/shadow269</div>
                       </div>
                       <div class="card-arrow">&#x2197;</div>
                     </a>
@@ -3311,7 +3374,7 @@
                 <div class="category-group">
                   <div class="sec-label">Security & Bug Bounty</div>
                   <div class="connect-card-grid">
-                    <a href="https://bugcrowd.com/h/SHADOW269" target="_blank" rel="noopener"
+                    <a href="https://bugcrowd.com/h/shadow269" target="_blank" rel="noopener"
                       class="connect-card bugcrowd-card featured">
                       <div class="card-icon-wrap">
                         <div class="card-icon"
@@ -3320,7 +3383,7 @@
                       </div>
                       <div class="card-body">
                         <div class="card-platform">Bugcrowd</div>
-                        <div class="card-handle">bugcrowd.com/h/SHADOW269</div>
+                        <div class="card-handle">bugcrowd.com/h/shadow269</div>
                       </div>
                       <div class="card-arrow">&#x2197;</div>
                     </a>
@@ -3391,7 +3454,7 @@
                     <a href="https://www.linkedin.com/in/sakshithshetty/" target="_blank" rel="noopener noreferrer"
                       class="connect-card linkedin-card featured">
                       <div class="card-icon-wrap">
-                        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path
                               d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
                           </svg></div>
@@ -3405,7 +3468,7 @@
                     <a href="https://discord.com/users/1051180323058237450" target="_blank" rel="noopener"
                       class="connect-card discord-card featured">
                       <div class="card-icon-wrap">
-                        <div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path
                               d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963.021-.04.001-.088-.041-.104a13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z" />
                           </svg></div>
@@ -3418,7 +3481,7 @@
                     </a>
                     <a href="https://x.com/SHADOW_2669" target="_blank" rel="noopener" class="connect-card x-card">
                       <div class="card-icon-wrap">
-                        <div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path
                               d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.843L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                           </svg></div>
@@ -3432,7 +3495,7 @@
                     <a href="https://www.instagram.com/shadow269.in/" target="_blank" rel="noopener"
                       class="connect-card instagram-card">
                       <div class="card-icon-wrap">
-                        <div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path
                               d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
                           </svg></div>
@@ -3446,7 +3509,7 @@
                     <a href="https://www.reddit.com/user/SHADOW_269/" target="_blank" rel="noopener"
                       class="connect-card reddit-card">
                       <div class="card-icon-wrap">
-                        <div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                             <path
                               d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z" />
                           </svg></div>
@@ -3523,7 +3586,7 @@
 
                       <div class="form-footer">
                         <button type="submit" class="form-submit" id="form-submit-btn">
-                          <span class="submit-label">TRANSMIT</span>
+                          <span class="submit-label">Send Message</span>
                           <span class="submit-arrow">→</span>
                           <div class="submit-glow"></div>
                         </button>
@@ -3539,41 +3602,41 @@
         </div>
       </section>
 
-      <div class="terminal-drawer-widget" role="region" aria-label="Integrated Terminal">
+      <div class="terminal-drawer-widget" aria-label="Interactive terminal">
         <div class="term-tabs-row">
           <button class="term-tab-btn active">TERMINAL</button>
           <button class="term-collapse-btn" id="term-collapse-toggle" onclick="toggleTerminalCollapse()"
-            aria-label="Toggle Terminal Panel"><i class="ri-subtract-line"></i></button>
+            aria-label="Toggle terminal"><i class="ri-subtract-line"></i></button>
         </div>
         <div class="term-buffer-stream" id="term-buffer" aria-live="polite">
           <div class="term-interactive-row" id="term-interactive-row">
             <span class="term-prompt-marker" aria-hidden="true">guest@shadow269:~$</span>
             <input type="text" class="term-input-field-entry" id="term-input" placeholder="" autocomplete="off"
-              autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Terminal input">
+              autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Terminal command input">
           </div>
         </div>
       </div>
 
-      <footer class="ide-footer-status-bar" role="contentinfo">
+      <footer class="ide-footer-status-bar">
         <div class="footer-left-node">
           <span class="footer-clickable-item" style="display: flex; align-items: center; gap: 4px;">
-            <i class="ri-contrast-line"></i> <span class="footer-label-text">Style_Theme:</span>
+            <i class="ri-contrast-line"></i> <span class="footer-label-text">Theme:</span>
             <select id="theme-dropdown" class="theme-dropdown-select"
               onchange="changeThemeFromDropdownPattern(this.value)" aria-label="Select color theme style">
-              <option value="dark">Cyber_Dark</option>
-              <option value="light">Clean_Light</option>
+              <option value="dark">Dark</option>
+              <option value="light">Light</option>
               <option value="dracula">Dracula</option>
-              <option value="nord">Nordic_Ice</option>
-              <option value="cyberpunk">Cyberpunk_Neon</option>
+              <option value="nord">Nord</option>
+              <option value="cyberpunk">Neon</option>
             </select>
           </span>
           <span class="footer-clickable-item" onclick="toggleCommandPaletteModalWindow()"><i
               class="ri-command-line"></i> <span class="footer-label-text">Ctrl+K Palette</span></span>
         </div>
         <div class="footer-right-node">
-          <span class="footer-right-item">Encoding: UTF-8</span>
-          <span class="footer-right-item">Spaces: 2</span>
-          <span>Log State: Active_Sync ✓</span>
+          <span class="footer-right-item">UTF-8</span>
+          <span class="footer-right-item">EN</span>
+          <span>Portfolio v2.0</span>
         </div>
       </footer>
     </main>
@@ -3584,7 +3647,7 @@
       <div class="palette-input-row">
         <i class="ri-terminal-box-line" aria-hidden="true"></i>
         <input type="text" class="palette-search-field" id="palette-search-field-input"
-          placeholder="Type a control navigation target parameter string..." autocomplete="off" autocorrect="off"
+          placeholder="Search sections..." autocomplete="off" autocorrect="off"
           spellcheck="false" aria-label="Command search entry field">
       </div>
       <div class="palette-results-list" id="palette-results-target-injection-viewport-list" role="listbox"></div>
@@ -3592,7 +3655,7 @@
   </div>
 
   <button class="mobile-menu-toggle-trigger" id="mobile-drawer-toggle-btn"
-    aria-label="Toggle structural metadata panel"><i class="ri-menu-unfold-line"></i></button>
+    aria-label="Toggle information panel"><i class="ri-menu-unfold-line"></i></button>
 
   <div class="ndw-hover-card" id="ndw-hover-card">
     <div class="ndw-card-banner" id="ndw-card-banner"></div>
@@ -3635,6 +3698,7 @@
   <div class="cert-modal-overlay" id="cert-modal-overlay">
     <div class="cert-modal-box">
       <button class="cert-modal-close" onclick="closeCertModal()">&times;</button>
+      <div class="cert-modal-image" id="cert-modal-image"></div>
       <div class="cert-modal-title" id="cert-modal-title"></div>
       <div class="cert-modal-issuer" id="cert-modal-issuer"></div>
       <div class="cert-modal-meta" id="cert-modal-meta"></div>
@@ -3647,9 +3711,9 @@
     const WORKSPACE_SHEETS_CONFIG = [
       { key: 'about_md', label: 'about.md', icon: 'ri-markdown-line' },
       { key: 'projects_md', label: 'projects.md', icon: 'ri-file-code-line' },
-      { key: 'journey_md', label: 'journey.md', icon: 'ri-history-line' },
+      { key: 'journey_md', label: 'experience.md', icon: 'ri-history-line' },
       { key: 'certs_md', label: 'certs.md', icon: 'ri-award-line' },
-      { key: 'contact_md', label: 'connect.md', icon: 'ri-links-line' }
+      { key: 'contact_md', label: 'contact.md', icon: 'ri-links-line' }
     ];
 
     const REPOSITORIES_PROJECTS_METADATA = [
@@ -3658,7 +3722,7 @@
         subtitle: 'Client Project',
         badge: 'PRODUCTION',
         featured: true,
-        desc: 'Designed and developed a full-stack order management and customer tracking platform for a custom mechanical keyboard workshop. The platform streamlines order management, production workflows, warranty tracking, and customer communication while allowing customers to securely track their orders in real time.',
+        desc: 'Full-stack order management platform for a custom keyboard workshop. Handles order tracking, production workflows, warranty management, and customer communication.',
         tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Supabase'],
         highlights: ['Admin dashboard', 'Customer order tracking', 'Production workflow management', 'Warranty management', 'Analytics dashboard', 'Secure authentication'],
         url: 'https://order.keebforge.in/'
@@ -3668,7 +3732,7 @@
         subtitle: 'Client Project',
         badge: 'PRODUCTION',
         featured: true,
-        desc: 'Designed and developed a responsive business website for a custom mechanical keyboard workshop, showcasing products, repair services, custom builds, and company information with a modern, performance-focused user experience.',
+        desc: 'Responsive business website for a custom mechanical keyboard workshop. Product showcase, repair services, and company information.',
         tech: ['HTML', 'CSS', 'JavaScript'],
         highlights: ['Responsive design', 'Product & service showcase', 'Modern UI/UX', 'SEO optimized', 'Performance optimized'],
         url: 'https://keebforge.in/'
@@ -3678,7 +3742,7 @@
         subtitle: 'Community Project',
         badge: 'ACTIVE',
         featured: true,
-        desc: 'Built and maintain a community-driven directory of Indian mechanical keyboard vendors, builders, and brands. The platform helps enthusiasts discover trusted stores, compare vendors, and explore the growing mechanical keyboard ecosystem in India.',
+        desc: 'Community-driven directory of Indian mechanical keyboard vendors, builders, and brands. Helps enthusiasts discover and compare keyboard stores across India.',
         tech: ['HTML', 'CSS', 'JavaScript'],
         highlights: ['Vendor directory', 'Brand discovery', 'Builder listings', 'Community resource', 'SEO optimized', 'Performance optimized'],
         url: 'https://keydir.in/'
@@ -3687,35 +3751,35 @@
         name: 'CivicEye',
         subtitle: 'Final Year Project',
         badge: 'ARCHIVED',
-        desc: 'Developed an AI-powered traffic monitoring system that detects traffic violations using CCTV footage. The platform leverages the YOLOv8 object detection model to identify helmet violations and automate traffic monitoring.',
+        desc: 'AI-powered traffic monitoring system using YOLOv8 for helmet violation detection from CCTV footage. Built as final year project.',
         tech: ['Python', 'YOLOv8', 'OpenCV', 'Docker'],
         highlights: ['Helmet detection', 'AI-powered object detection', 'Real-time processing', 'Docker deployment', 'Cross-platform support'],
-        url: 'https://github.com/SHADOW269/CivicEye'
+        url: 'https://github.com/shadow269/CivicEye'
       },
       {
         name: 'CivicEye Web Interface',
         subtitle: 'Frontend & Management Portal',
         badge: 'DEMO',
-        desc: 'Developed the web interface for CivicEye to manage authentication, user sessions, detection history, and administrative functions. The AI detection engine runs locally while the web application handles user interaction and database management.',
+        desc: 'Web interface for CivicEye managing authentication, detection history, and administrative functions. Detection engine runs locally.',
         tech: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript'],
         highlights: ['User authentication', 'Detection history', 'Dashboard interface', 'Contact management', 'MySQL integration'],
         url: 'https://civiceye-demo.shadow269.in/',
-        secondaryUrl: 'https://github.com/SHADOW269/CivicEye-Website-Server'
+        secondaryUrl: 'https://github.com/shadow269/CivicEye-Website-Server'
       },
       {
         name: 'Homelab Dashboard',
         subtitle: 'Personal Infrastructure',
         badge: 'SELF HOSTED',
-        desc: 'Built a centralized dashboard for managing self-hosted services, network infrastructure, and media applications. The dashboard provides a clean interface for monitoring and accessing homelab resources.',
+        desc: 'Centralized dashboard for managing self-hosted services and network infrastructure.',
         tech: ['Homepage', 'CSS'],
         highlights: ['Self-hosted service management', 'Infrastructure overview', 'Responsive dashboard', 'Service monitoring', 'Quick access portal'],
-        url: 'https://github.com/SHADOW269/Homepage'
+        url: 'https://github.com/shadow269/Homepage'
       },
       {
         name: 'Sierra Design Projects',
         subtitle: 'UI/UX Design Internship',
         badge: 'DESIGN',
-        desc: 'Designed and deployed responsive website concepts during my internship, focusing on user experience, responsive layouts, design systems, and modern interface design for commercial concepts.',
+        desc: 'Responsive website concepts designed during UI/UX internship using Framer.',
         tech: ['Framer'],
         responsibilities: ['Product Design', 'UI/UX Design', 'Responsive layouts', 'Design systems', 'Interactive prototypes', 'Rapid concept development'],
         links: [
@@ -3808,6 +3872,21 @@
 
     const CERTIFICATIONS_METADATA = [
       {
+        key: 'ceh',
+        name: 'Certified Ethical Hacker (CEH)',
+        issuer: 'CyberSapiens EdTech',
+        date: 'Dec 2025',
+        year: '2025',
+        id: null,
+        category: 'offensive',
+        categoryLabel: 'Offensive Security',
+        difficulty: 'Intermediate',
+        featured: true,
+        desc: 'Comprehensive ethical hacking certification covering penetration testing methodologies, vulnerability assessment, and exploitation techniques.',
+        verifyUrl: null,
+        image: 'files/CEH.jpeg'
+      },
+      {
         key: 'crtom',
         name: 'Certified Red Team Operations Management (CRTOM)',
         issuer: 'Red Team Leaders',
@@ -3819,7 +3898,8 @@
         difficulty: 'Professional',
         featured: true,
         desc: 'Advanced red team operations certification covering offensive security management, threat simulation, and adversarial tactics.',
-        verifyUrl: null
+        verifyUrl: null,
+        image: 'files/CRTOM.png'
       },
       {
         key: 'crpo',
@@ -3833,7 +3913,8 @@
         difficulty: 'Advanced',
         featured: true,
         desc: 'Specialized certification in ransomware defense strategies, incident response, and organizational protection frameworks.',
-        verifyUrl: null
+        verifyUrl: null,
+        image: 'files/CRPO.jpeg'
       },
       {
         key: 'iso27001',
@@ -3847,7 +3928,8 @@
         difficulty: 'Intermediate',
         featured: true,
         desc: 'Information Security Management System (ISMS) certification aligned with ISO/IEC 27001:2022 international standard.',
-        verifyUrl: null
+        verifyUrl: null,
+        image: 'files/ISO-IEC-27001:2022 -INFORMATION-SECURITY-ASSOCIATE.jpeg'
       },
       {
         key: 'aws',
@@ -3861,21 +3943,8 @@
         difficulty: 'Advanced',
         featured: false,
         desc: 'AWS Security Specialty domain review covering cloud security architecture, threat detection, and incident response on AWS.',
-        verifyUrl: null
-      },
-      {
-        key: 'ceh',
-        name: 'Certified Ethical Hacker (CEH)',
-        issuer: 'CyberSapiens EdTech',
-        date: 'Dec 2025',
-        year: '2025',
-        id: null,
-        category: 'offensive',
-        categoryLabel: 'Offensive Security',
-        difficulty: 'Intermediate',
-        featured: true,
-        desc: 'Comprehensive ethical hacking certification covering penetration testing methodologies, vulnerability assessment, and exploitation techniques.',
-        verifyUrl: null
+        verifyUrl: null,
+        image: 'files/SCS-C03.jpeg'
       },
       {
         key: 'datacom',
@@ -3889,7 +3958,8 @@
         difficulty: 'Foundation',
         featured: false,
         desc: 'SOC operations simulation covering threat analysis, incident response workflows, and security monitoring in enterprise environments.',
-        verifyUrl: null
+        verifyUrl: null,
+        image: 'files/Cyber-Security-Operations-Job -Simulation.jpeg'
       },
       {
         key: 'remarkskill',
@@ -3903,7 +3973,8 @@
         difficulty: 'Foundation',
         featured: false,
         desc: '2-day hands-on workshop covering fake application awareness, TOR anonymity basics, encryption concepts, and attacker techniques.',
-        verifyUrl: null
+        verifyUrl: null,
+        image: 'files/REMARKSKILL-ETHICAL-HACKING-WORKSHOP.jpeg'
       },
       {
         key: 'business',
@@ -3917,18 +3988,18 @@
         difficulty: 'Foundation',
         featured: false,
         desc: "Business fundamentals and entrepreneurship foundations certification from SkillFront's accredited learning program.",
-        verifyUrl: null
+        verifyUrl: null,
+        image: 'files/FOUNDATIONS-OF-BUSINESS-AND-ENTREPRENEURSHIP.jpeg'
       }
     ];
 
     const PALETTE_NAVIGATION_COMMANDS_MATRIX = [
-      { label: 'Navigate: Go to about.md file layer view', target: 'about_md', type: 'nav' },
-      { label: 'Navigate: Go to projects.md repositories inventory code', target: 'projects_md', type: 'nav' },
-      { label: 'Navigate: Go to journey.md timeline log records', target: 'journey_md', type: 'nav' },
-      { label: 'Navigate: Go to certs.md professional certifications registry', target: 'certs_md', type: 'nav' },
-      { label: 'Navigate: Go to connect.md professional network registry', target: 'contact_md', type: 'nav' },
-      { label: 'Action: Clear active execution terminal shell screen memory', action: 'clear_terminal', type: 'cmd' },
-      { label: 'Action: Run whoami profile script', action: 'whoami_simulation', type: 'cmd' }
+      { label: 'Go to About', target: 'about_md', type: 'nav' },
+      { label: 'Go to Projects', target: 'projects_md', type: 'nav' },
+      { label: 'Go to Experience', target: 'journey_md', type: 'nav' },
+      { label: 'Go to Certifications', target: 'certs_md', type: 'nav' },
+      { label: 'Go to Contact', target: 'contact_md', type: 'nav' },
+      { label: 'Clear terminal', action: 'clear_terminal', type: 'cmd' }
     ];
 
     function escapeDOMInjectionStringText(s) {
@@ -4078,7 +4149,7 @@
             </div>
           </div>
           <div class="cert-actions">
-            <button class="btn-cert primary-cert" onclick="openCertModal('${c.key}')"><span>⬡ View Certificate</span></button>
+            <button class="btn-cert primary-cert" onclick="openCertModal('${c.key}')"><span>View Certificate</span></button>
             ${verifyBtn}
           </div>
         </div>`;
@@ -4136,7 +4207,7 @@
       document.getElementById('palette-results-target-injection-viewport-list').innerHTML = PALETTE_NAVIGATION_COMMANDS_MATRIX.map((cmd, idx) => `
         <div class="palette-option-item ${idx === 0 ? 'selected' : ''}" role="option" id="palette-option-idx-${idx}" onclick="executePaletteOptionCommandCallbackIndexReference(${idx})">
           <span>${escapeDOMInjectionStringText(cmd.label)}</span>
-          <span class="palette-shortcut-hint">${cmd.type === 'nav' ? 'Navigation' : 'Shell Routine'}</span>
+          <span class="palette-shortcut-hint">${cmd.type === 'nav' ? 'Navigate' : 'Command'}</span>
         </div>
       `).join('');
     }
@@ -4179,6 +4250,14 @@
     function openCertModal(key) {
       const cert = CERTIFICATIONS_METADATA.find(c => c.key === key);
       if (!cert) return;
+      const imgEl = document.getElementById('cert-modal-image');
+      if (cert.image) {
+        imgEl.innerHTML = '<img src="' + cert.image + '" alt="' + cert.name + ' certificate">';
+        imgEl.style.display = 'block';
+      } else {
+        imgEl.innerHTML = '';
+        imgEl.style.display = 'none';
+      }
       document.getElementById('cert-modal-title').textContent = cert.name;
       document.getElementById('cert-modal-issuer').textContent = cert.issuer;
       document.getElementById('cert-modal-meta').innerHTML = `<span>Date: ${cert.date}</span>${cert.id ? '<span>ID: ' + cert.id + '</span>' : ''}<span>${cert.categoryLabel}</span><span>${cert.difficulty}</span>`;
@@ -4201,7 +4280,7 @@
     let termHistoryIdx = -1;
     let termBusy = false;
 
-    const TERM_COMMANDS = ['whoami', 'clear'];
+    const TERM_COMMANDS = ['clear'];
 
     function termEscape(s) {
       return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -4245,32 +4324,6 @@
       termBusy = false;
     }
 
-    async function fetchVisitorData() {
-      const header = [
-        'Visitor Information',
-        '───────────────────────────'
-      ];
-      try {
-        const res = await fetch('https://ipapi.co/json/');
-        if (!res.ok) throw new Error();
-        const d = await res.json();
-        await termTypeLines(header, 'term-info', 20);
-        await termTypeLines(['Public IP : ' + d.ip], 'term-info', 30);
-        termAppendLines([
-          'ISP       : ' + (d.org || 'Unknown'),
-          'Location  : ' + (d.city || 'Unknown') + ', ' + (d.country_code || '??'),
-          ''
-        ], 'term-info');
-      } catch {
-        await termTypeLines(header, 'term-warning', 20);
-        termAppendLines([
-          'Public IP : Hidden',
-          'ISP       : Unknown',
-          'Location  : Unknown',
-          ''
-        ], 'term-warning');
-      }
-    }
 
 
     async function executeTerminalCommandSimulation(raw) {
@@ -4291,10 +4344,6 @@
         return;
       }
 
-      if (key === 'whoami') {
-        await fetchVisitorData();
-        return;
-      }
       const firstWord = cmd.split(' ')[0];
       termAppendText('bash: ' + firstWord + ': command not found');
     }
@@ -4401,7 +4450,6 @@
       toggleCommandPaletteModalWindow();
       if (cmd.type === 'nav') activateWorkspaceSheetTabContainerInstance(cmd.target);
       else if (cmd.action === 'clear_terminal') executeTerminalCommandSimulation('clear');
-      else if (cmd.action === 'whoami_simulation') executeTerminalCommandSimulation('whoami');
     }
 
     window.addEventListener('keydown', e => {
@@ -4466,7 +4514,7 @@
     });
 
     const LANYARD_USER_ID = '1051180323058237450';
-    const LANYARD_POLL_INTERVAL = 30000;
+    const LANYARD_POLL_INTERVAL = 0;
     let ndwHoverTimeout = null;
     let ndwCardHoverTimeout = null;
 
@@ -4660,7 +4708,7 @@
 
     function initializeDiscordPresenceUpdater() {
       ndwPollLanyardStatus();
-      setInterval(ndwPollLanyardStatus, LANYARD_POLL_INTERVAL);
+      if (LANYARD_POLL_INTERVAL > 0) setInterval(ndwPollLanyardStatus, LANYARD_POLL_INTERVAL);
       ndwInitHoverListeners();
     }
 
