@@ -32,7 +32,36 @@
       --neon-red: #ff7b72;
       --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
       --font-mono: 'Fira Code', monospace;
+      --mono: 'Fira Code', monospace;
+      --muted: #8b949e;
+      --bg-panel: #090d13;
+      --accent-bg: rgba(163, 113, 247, 0.08);
+      --glow-purple: rgba(163, 113, 247, 0.3);
+      --radius: 6px;
+      --orange: #ffa657;
       --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+      --ds-card-bg: var(--panel-dark);
+      --ds-card-border: 1px solid var(--border);
+      --ds-card-radius: var(--radius);
+      --ds-card-padding: 20px;
+      --ds-card-hover-border: var(--neon-purple);
+      --ds-card-hover-shadow: 0 2px 12px rgba(0,0,0,0.25), 0 0 8px var(--border-glow);
+      --ds-card-transition: all 0.2s var(--ease);
+      --ds-gap-xs: 4px;
+      --ds-gap-sm: 8px;
+      --ds-gap-md: 12px;
+      --ds-gap-lg: 16px;
+      --ds-gap-xl: 24px;
+      --ds-section-gap: 32px;
+      --ds-btn-radius: 4px;
+      --ds-btn-padding: 7px 14px;
+      --ds-btn-font: var(--font-mono);
+      --ds-btn-size: 0.75rem;
+      --ds-badge-radius: 4px;
+      --ds-badge-padding: 3px 8px;
+      --ds-badge-font: var(--font-mono);
+      --ds-badge-size: 0.68rem;
     }
     [data-theme="light"] {
       --bg: #ffffff;
@@ -49,9 +78,61 @@
       --neon-green: #1a7f37;
       --neon-orange: #bc4c00;
       --neon-red: #cf222e;
+      --bg-panel: #f0f2f5;
+    }
+    [data-theme="dracula"] {
+      --bg: #282a36;
+      --sidebar: #21222c;
+      --panel-dark: #1d1f27;
+      --tab-inactive: #191a21;
+      --border: #44475a;
+      --border-glow: rgba(189, 147, 249, 0.3);
+      --text: #f8f8f2;
+      --text-bright: #ffffff;
+      --text-muted: #6272a4;
+      --neon-purple: #bd93f9;
+      --neon-blue: #8be9fd;
+      --neon-green: #50fa7b;
+      --neon-orange: #ffb86c;
+      --neon-red: #ff5555;
+      --bg-panel: #1d1f27;
+    }
+    [data-theme="nord"] {
+      --bg: #2e3440;
+      --sidebar: #242933;
+      --panel-dark: #20242c;
+      --tab-inactive: #1b1e25;
+      --border: #3b4252;
+      --border-glow: rgba(136, 192, 208, 0.3);
+      --text: #d8dee9;
+      --text-bright: #eceff4;
+      --text-muted: #4c566a;
+      --neon-purple: #b48ead;
+      --neon-blue: #88c0d0;
+      --neon-green: #a3be8c;
+      --neon-orange: #d08770;
+      --neon-red: #bf616a;
+      --bg-panel: #20242c;
+    }
+    [data-theme="cyberpunk"] {
+      --bg: #12041c;
+      --sidebar: #1c072b;
+      --panel-dark: #0d0214;
+      --tab-inactive: #25093a;
+      --border: #f300b4;
+      --border-glow: rgba(0, 240, 255, 0.35);
+      --text: #00f0ff;
+      --text-bright: #fff200;
+      --text-muted: #a300a3;
+      --neon-purple: #f300b4;
+      --neon-blue: #00f0ff;
+      --neon-green: #39ff14;
+      --neon-orange: #ff9f00;
+      --neon-red: #ff003c;
+      --bg-panel: #0d0214;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 14px; background: var(--bg); }
+    html { scroll-behavior: smooth; font-size: clamp(13px, 0.85vw + 10px, 14px); background: var(--bg); }
     body {
       background-color: var(--bg);
       color: var(--text);
@@ -66,6 +147,8 @@
     *:focus-visible { outline: 2px solid var(--neon-purple); outline-offset: 2px; }
     #progress-indicator-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue)); z-index: 2000; width: 0%; transition: width 0.1s linear; }
     .ide-container { display: flex; width: 100vw; height: 100vh; overflow: hidden; position: relative; }
+
+    /* ════════════════  SIDEBAR  ════════════════ */
     .ide-sidebar {
       width: 360px; min-width: 360px;
       background-color: var(--sidebar);
@@ -85,15 +168,24 @@
     .profile-node { display: flex; align-items: center; gap: 14px; }
     .avatar-wrapper { position: relative; width: 54px; height: 54px; flex-shrink: 0; }
     .avatar-img { width: 100%; height: 100%; border-radius: 8px; border: 1px solid var(--border); object-fit: cover; background: var(--panel-dark); }
-    .status-dot { position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; background-color: var(--neon-green); border-radius: 50%; border: 2px solid var(--sidebar); box-shadow: 0 0 8px var(--neon-green); }
-    .profile-info { overflow: hidden; }
+    .status-dot { position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; background-color: var(--neon-green); border-radius: 50%; border: 2px solid var(--sidebar); box-shadow: 0 0 8px var(--neon-green); transition: background-color 0.3s, box-shadow 0.3s; }
+    .status-dot.online { background-color: var(--neon-green); box-shadow: 0 0 6px var(--neon-green); animation: statusPulse 2s ease-in-out infinite; }
+    .status-dot.idle { background-color: var(--neon-orange); box-shadow: 0 0 6px var(--neon-orange); }
+    .status-dot.dnd { background-color: var(--neon-red); box-shadow: 0 0 6px var(--neon-red); }
+    .status-dot.offline { background-color: var(--text-muted); box-shadow: none; }
+    @keyframes statusPulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.2); opacity: 0.8; } }
+    .profile-info { overflow: hidden; min-width: 0; }
     .profile-name { font-size: 1.2rem; font-weight: 700; color: var(--text-bright); white-space: nowrap; text-overflow: ellipsis; overflow: hidden; letter-spacing: -0.02em; }
     .profile-title { font-family: var(--font-mono); font-size: 0.75rem; color: var(--neon-purple); font-weight: 600; margin-top: 1px; }
+    .profile-status { margin-top: 3px; display: flex; align-items: center; cursor: pointer; width: fit-content; }
+    .status-badge-green { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; color: var(--neon-green); background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 4px; padding: 2px 6px; text-transform: uppercase; letter-spacing: 0.04em; transition: border-color 0.2s, background-color 0.2s; }
+    .status-badge-green:hover { border-color: var(--neon-green); background: rgba(52, 211, 153, 0.2); }
+    .status-badge-dot { width: 4px; height: 4px; border-radius: 50%; background-color: var(--neon-green); display: inline-block; box-shadow: 0 0 6px var(--neon-green); animation: pulseGreenDot 2s infinite; }
     .profile-quote { font-size: 0.82rem; color: var(--text-muted); font-style: italic; background: rgba(0,0,0,0.15); padding: 8px 12px; border-radius: 6px; border-left: 2px solid var(--border); margin-top: 10px; }
     .contact-list { display: flex; flex-direction: column; gap: 8px; font-family: var(--font-mono); font-size: 0.8rem; }
-    .contact-item { display: flex; align-items: center; gap: 10px; color: var(--text-muted); transition: color 0.2s; }
+    .contact-item { display: flex; align-items: center; gap: 10px; color: var(--text-muted); transition: color 0.2s; word-break: break-word; overflow-wrap: anywhere; }
     .contact-item:hover { color: var(--text-bright); }
-    .contact-item i { color: var(--neon-blue); font-size: 0.95rem; width: 16px; text-align: center; }
+    .contact-item i { color: var(--neon-blue); font-size: 0.95rem; width: 16px; text-align: center; flex-shrink: 0; }
     .badge-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
     .stack-badge { font-family: var(--font-mono); font-size: 0.72rem; padding: 4px 10px; background-color: var(--panel-dark); border: 1px solid var(--border); border-radius: 4px; color: var(--text); transition: all 0.25s var(--ease); }
     .stack-badge:hover { border-color: var(--neon-purple); color: var(--text-bright); background: rgba(163, 113, 247, 0.1); transform: translateY(-1px); box-shadow: 0 2px 8px var(--border-glow); }
@@ -104,114 +196,139 @@
     .hl-count span { color: var(--neon-blue); font-size: 1.1rem; margin-left: 2px; }
     .hl-label { font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em; font-weight: 600; }
 
-    /* ── GITHUB ACTIVITY PANEL ── */
     .git-graph-panel { background: var(--panel-dark); border: 1px solid var(--border); border-radius: 6px; padding: 12px; position: relative; transition: border-color 0.3s; }
     .git-graph-panel:hover { border-color: var(--neon-green); }
     .git-graph-img-wrapper { position: relative; width: 100%; border-radius: 4px; overflow: hidden; background: #030712; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.02); }
     .git-graph-img-wrapper img { width: 100%; height: auto; display: block; }
 
-    .checklist-container { display: flex; flex-direction: column; gap: 6px; font-family: var(--font-mono); font-size: 0.82rem; }
-    .checklist-row { display: flex; align-items: flex-start; gap: 8px; color: var(--text-muted); padding: 2px 0; }
-    .checklist-row.checked { color: var(--text-bright); }
-    .checklist-row.checked .chk-box { color: var(--neon-green); font-weight: 700; }
-    .checklist-row.pending .chk-box { color: var(--neon-orange); font-weight: 700; }
-    .chk-txt { line-height: 1.4; }
     .sidebar-sticky-footer { margin-top: auto; border-top: 1px solid var(--border); padding: 16px; background-color: rgba(22, 27, 34, 0.95); backdrop-filter: blur(8px); position: sticky; bottom: 0; z-index: 10; }
     .social-matrix-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
-    .sidebar-soc-btn { border: 1px solid var(--border); background-color: var(--panel-dark); height: 38px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-radius: 6px; font-size: 1.15rem; transition: all 0.2s var(--ease); position: relative; }
+    .sidebar-soc-btn { border: 1px solid var(--border); background-color: var(--panel-dark); height: 38px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); border-radius: 6px; font-size: 1.15rem; transition: all 0.25s var(--ease); position: relative; }
     .sidebar-soc-btn:hover { border-color: var(--neon-purple); color: var(--text-bright); background-color: var(--bg); transform: translateY(-2px); }
-    .sidebar-soc-btn[data-tooltip]::after { content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%) translateY(4px); background: var(--panel-dark); border: 1px solid var(--border); color: var(--text-bright); font-family: var(--font-mono); font-size: 0.65rem; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.2s var(--ease); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    .sidebar-soc-btn[data-tooltip]::after { content: attr(data-tooltip); position: absolute; bottom: 125%; left: 50%; transform: translateX(-50%) translateY(4px); background: var(--panel-dark); border: 1px solid var(--border); color: var(--text-bright); font-family: var(--font-mono); font-size: 0.65rem; padding: 4px 8px; border-radius: 4px; white-space: nowrap; opacity: 0; pointer-events: none; transition: all 0.2s var(--ease); box-shadow: 0 4px 12px rgba(0,0,0,0.5); z-index: 20; }
     .sidebar-soc-btn:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
     .action-cv-btn { display: flex; width: 100%; height: 40px; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--neon-purple), #8c52ff); color: #fff; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; border-radius: 6px; letter-spacing: 0.05em; transition: all 0.25s var(--ease); box-shadow: 0 4px 12px rgba(163, 113, 247, 0.2); }
     .action-cv-btn:hover { opacity: 0.95; transform: translateY(-1px); box-shadow: 0 6px 16px rgba(163, 113, 247, 0.35); }
+
     .ide-tab-bar { display: flex; background-color: var(--sidebar); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
     .ide-tab-bar::-webkit-scrollbar { display: none; }
-    .editor-tab { display: flex; align-items: center; gap: 8px; padding: 12px 22px; background-color: var(--sidebar); border-right: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted); position: relative; white-space: nowrap; transition: all 0.2s; }
+    .editor-tab { display: flex; align-items: center; gap: 8px; padding: 12px 22px; background-color: var(--sidebar); border-right: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted); position: relative; white-space: nowrap; transition: all 0.15s; }
     .editor-tab i:first-child { color: var(--neon-orange); font-size: 0.95rem; }
     .editor-tab:hover { background-color: rgba(255,255,255,0.02); color: var(--text); }
     .editor-tab.active { background-color: var(--bg); color: var(--text-bright); font-weight: 500; }
     .editor-tab.active::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background-color: var(--neon-purple); }
-    .editor-canvas { flex: 1; padding: 40px; overflow-y: auto; display: none; position: relative; }
+    .editor-canvas { flex: 1; padding: 32px; overflow-y: auto; display: none; position: relative; }
     .editor-canvas.active { display: block; animation: fadeReveal 0.35s var(--ease) forwards; }
     @keyframes fadeReveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-    .md-line { display: grid; grid-template-columns: 45px 1fr; gap: 16px; margin-bottom: 6px; font-family: var(--font-mono); font-size: 0.95rem; }
-    .ln-num { text-align: right; color: var(--text-muted); opacity: 0.3; user-select: none; padding-right: 6px; font-weight: 500; }
+    .md-line { margin-bottom: 6px; font-family: var(--font-mono); font-size: 0.95rem; max-width: 1500px; }
+    .md-line:has(.repo-cards-grid),
+    .md-line:has(.cert-stats-row),
+    .md-line:has(.cert-filter-row),
+    .md-line:has(.cert-grid-new),
+    .md-line:has(.vertical-timeline),
+    .md-line:has(.contact-layout-col-split),
+    .md-line:has(.cert-philosophy-block),
+    .md-line:has(.highlights-matrix) { max-width: 100%; }
     .ln-content { color: var(--text); white-space: pre-wrap; }
+    .ln-content:has(div), .md-line:has(div) .ln-content { white-space: normal !important; }
     .ln-content h1, .ln-content h2, .ln-content h3 { font-family: var(--font-sans); color: var(--text-bright); font-weight: 700; margin-top: 8px; margin-bottom: 6px; }
-    .ln-content h1 { font-size: 2.2rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 24px; color: var(--text-bright); letter-spacing: -0.03em; }
-    .ln-content h2 { font-size: 1.45rem; color: var(--neon-blue); margin-top: 28px; border-bottom: 1px dashed var(--border); padding-bottom: 6px; letter-spacing: -0.01em; }
+    .ln-content h1 { font-size: clamp(1.5rem, 3vw, 2.2rem); border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 24px; color: var(--text-bright); letter-spacing: -0.03em; }
+    .ln-content h2 { font-size: clamp(1.1rem, 2.5vw, 1.45rem); color: var(--neon-blue); margin-top: 28px; border-bottom: 1px dashed var(--border); padding-bottom: 6px; letter-spacing: -0.01em; }
     .ln-content p { font-family: var(--font-sans); color: var(--text); line-height: 1.65; margin-bottom: 12px; font-size: 1.05rem; }
     .ln-content p strong { color: var(--text-bright); font-weight: 600; }
-    .code-block-segment { background-color: var(--panel-dark); border: 1px solid var(--border); padding: 18px; border-radius: 6px; margin: 16px 0; font-family: var(--font-mono); font-size: 0.88rem; color: var(--text); overflow-x: auto; position: relative; box-shadow: inset 0 2px 8px rgba(0,0,0,0.4); }
-    .code-block-segment::before { content: 'BASH / METASPLOIT OUTPUT'; position: absolute; top: 6px; right: 14px; font-size: 0.6rem; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; }
-    .code-keyword { color: var(--neon-purple); font-weight: 600; }
-    .code-string { color: var(--neon-green); }
-    .code-comment { color: var(--text-muted); font-style: italic; }
-    .repo-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 20px; }
-    .repo-card { background-color: var(--panel-dark); border: 1px solid var(--border); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; transition: all 0.25s var(--ease); position: relative; }
-    .repo-card:hover { border-color: var(--neon-blue); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35), 0 0 12px var(--border-glow); }
-    .repo-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .repo-title-text { font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700; color: var(--text-bright); display: flex; align-items: center; gap: 8px; }
-    .repo-title-text i { color: var(--neon-blue); }
-    .repo-desc-text { font-family: var(--font-sans); font-size: 0.9rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 18px; }
-    .repo-pills { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
-    .repo-pills span { font-family: var(--font-mono); font-size: 0.68rem; padding: 3px 8px; background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); }
-    .repo-footer { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid var(--border); padding-top: 14px; margin-top: auto; }
-    .repo-stats { display: flex; gap: 14px; }
-    .repo-stats span { display: flex; align-items: center; gap: 4px; }
-    .repo-stats i { color: var(--neon-orange); }
-    .repo-actions-links a { display: inline-flex; align-items: center; gap: 4px; color: var(--neon-blue); font-weight: 500; }
-    .repo-actions-links a:hover { text-decoration: underline; color: var(--text-bright); }
-    .vertical-timeline { position: relative; border-left: 2px solid var(--border); padding-left: 30px; margin: 24px 0 24px 12px; }
-    .timeline-node-item { position: relative; margin-bottom: 36px; }
-    .timeline-node-item::before { content: ''; position: absolute; left: -37px; top: 4px; width: 12px; height: 12px; background-color: var(--bg); border: 2px solid var(--neon-purple); border-radius: 50%; box-shadow: 0 0 8px var(--neon-purple); transition: background-color 0.2s; }
-    .timeline-node-item:hover::before { background-color: var(--neon-purple); }
-    .node-timestamp { font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-green); font-weight: 700; display: block; margin-bottom: 4px; letter-spacing: 0.03em; }
-    .node-header-title { font-size: 1.25rem; font-weight: 700; color: var(--text-bright); letter-spacing: -0.01em; }
-    .node-sub-org { font-family: var(--font-mono); font-size: 0.88rem; color: var(--text-muted); margin-bottom: 10px; display: block; }
-    .node-body-content { font-family: var(--font-sans); font-size: 0.98rem; color: var(--text); line-height: 1.6; }
-    .node-body-content ul { margin-top: 10px; padding-left: 18px; list-style-type: square; color: var(--text-muted); }
-    .node-body-content li { margin-bottom: 4px; }
-    .blog-controls { display: flex; gap: 16px; margin-bottom: 24px; align-items: center; }
-    .search-input-wrapper { flex: 1; position: relative; }
-    .search-input-field { width: 100%; background-color: var(--panel-dark); border: 1px solid var(--border); padding: 12px 16px 12px 42px; border-radius: 6px; color: #fff; font-family: var(--font-mono); font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
-    .search-input-field:focus { border-color: var(--neon-purple); box-shadow: 0 0 12px var(--border-glow); }
-    .search-input-wrapper i { position: absolute; left: 16px; top: 14px; color: var(--text-muted); font-size: 1.1rem; }
-    .blog-cards-grid { display: flex; flex-direction: column; gap: 20px; }
-    .blog-card { display: grid; grid-template-columns: 240px 1fr; border: 1px solid var(--border); background-color: var(--panel-dark); border-radius: 8px; overflow: hidden; transition: all 0.25s var(--ease); cursor: pointer; }
-    .blog-card:hover { border-color: var(--neon-purple); transform: translateX(4px); box-shadow: 0 4px 24px rgba(124,106,255,0.12); }
-    .blog-thumb-frame { width: 100%; height: 100%; background-color: var(--sidebar); border-right: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: var(--text-muted); opacity: 0.6; }
-    .blog-content-block { padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
-    .blog-meta-data { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); margin-bottom: 8px; display: flex; gap: 16px; }
-    .blog-card-title { font-family: var(--font-sans); font-size: 1.35rem; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; line-height: 1.3; }
-    .blog-card-summary { font-family: var(--font-sans); font-size: 0.95rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 16px; }
-    .blog-tags-row { display: flex; flex-wrap: wrap; gap: 6px; }
-    .blog-tag-badge { font-family: var(--font-mono); font-size: 0.68rem; padding: 3px 8px; background-color: var(--bg); border: 1px solid var(--border); border-radius: 4px; color: var(--neon-blue); }
-    .form-blueprint { display: flex; flex-direction: column; gap: 16px; max-width: 700px; }
-    .form-row-split { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .control-group { display: flex; flex-direction: column; gap: 6px; }
-    .field-tag-label { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text-bright); text-transform: uppercase; font-weight: 600; letter-spacing: 0.02em; }
-    .brutal-input-field { background-color: var(--panel-dark); border: 1px solid var(--border); padding: 12px 16px; border-radius: 6px; color: #fff; font-family: var(--font-sans); font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
-    .brutal-input-field:focus { border-color: var(--neon-purple); box-shadow: 0 0 12px var(--border-glow); }
-    .brutal-input-field::placeholder { color: rgba(255,255,255,0.25); }
-    .terminal-drawer-widget { background-color: var(--panel-dark); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem; height: 240px; display: flex; flex-direction: column; position: relative; z-index: 90; }
+
+    .repo-cards-grid { display: grid; grid-template-columns: 1fr; gap: var(--ds-gap-xl); margin-top: var(--ds-gap-xl); align-items: stretch; }
+    .repo-card { background-color: var(--ds-card-bg); border: var(--ds-card-border); border-radius: var(--ds-card-radius); padding: 22px; display: flex; flex-direction: column; height: 400px; transition: var(--ds-card-transition); position: relative; overflow: hidden; }
+    .repo-card:hover { border-color: var(--ds-card-hover-border); transform: translateY(-4px); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 14px var(--border-glow); }
+    .repo-card--featured { border-left: 3px solid var(--neon-purple); }
+    .repo-card--featured:hover { border-left-color: var(--neon-purple); border-color: var(--neon-purple); box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 14px rgba(163, 113, 247, 0.25); }
+    .repo-card-body { flex: 1; display: flex; flex-direction: column; min-height: 0; gap: var(--ds-gap-sm); }
+    .repo-featured-tag { display: inline-block; font-family: var(--font-mono); font-size: 0.55rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neon-purple); background: rgba(163, 113, 247, 0.1); border: 1px solid rgba(163, 113, 247, 0.3); border-radius: 3px; padding: 1px 6px; width: fit-content; flex-shrink: 0; height: 16px; line-height: 14px; box-sizing: content-box; }
+    .repo-featured-tag.is-placeholder { visibility: hidden; }
+    .repo-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; flex-shrink: 0; }
+    .repo-title-block { min-width: 0; }
+    .repo-title-text { font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; color: var(--text-bright); line-height: 1.3; }
+    .repo-subtitle { font-family: var(--font-mono); font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .repo-badge { font-family: var(--font-mono); font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px; border-radius: 4px; border: 1px solid var(--border); color: var(--text-muted); background: var(--sidebar); white-space: nowrap; flex-shrink: 0; }
+    .repo-desc-text { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; margin: 0; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex-shrink: 0; }
+    .repo-highlights { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; max-height: 88px; overflow: hidden; flex-shrink: 0; }
+    .repo-highlights li { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); padding-left: 14px; position: relative; line-height: 1.4; }
+    .repo-highlights li::before { content: ''; position: absolute; left: 0; top: 6px; width: 4px; height: 4px; border-radius: 50%; background: var(--neon-green); }
+    .repo-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; padding-top: var(--ds-gap-sm); flex-shrink: 0; }
+    .repo-pills span { font-family: var(--font-mono); font-size: 0.62rem; padding: 2px 7px; background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 3px; color: var(--text-muted); transition: border-color 0.2s; }
+    .repo-pills span:hover { border-color: var(--neon-purple); color: var(--text-bright); }
+    .repo-actions { display: flex; gap: 8px; margin-top: var(--ds-gap-md); padding-top: var(--ds-gap-md); border-top: 1px solid var(--border); flex-shrink: 0; flex-wrap: wrap; }
+    .repo-action-btn { display: inline-flex; align-items: center; gap: 6px; font-family: var(--ds-btn-font); font-size: var(--ds-btn-size); font-weight: 600; padding: var(--ds-btn-padding); border-radius: var(--ds-btn-radius); text-decoration: none; transition: var(--ds-card-transition); }
+    .repo-action-demo { background: rgba(88, 166, 255, 0.1); border: 1px solid var(--neon-blue); color: var(--neon-blue); }
+    .repo-action-demo:hover { background: rgba(88, 166, 255, 0.18); color: var(--text-bright); transform: translateY(-1px); }
+    .repo-action-code { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .repo-action-code:hover { border-color: var(--text-muted); color: var(--text-bright); }
+
+    .timeline-section-header { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-bright); margin-bottom: 28px; margin-top: 48px; display: flex; align-items: center; gap: 8px; }
+    .timeline-section-header:first-child { margin-top: 0; }
+    .timeline-section-header i { color: var(--neon-purple); font-size: 1rem; }
+    .vertical-timeline { display: grid; grid-template-columns: 60px 1fr; margin: 0 0 20px; }
+    .timeline-node-item { display: contents; }
+    .timeline-marker { display: flex; flex-direction: column; align-items: center; position: relative; padding-top: 0; }
+    .timeline-marker::after { content: ''; position: absolute; top: 14px; bottom: 0; left: 50%; width: 2px; background: var(--border); transform: translateX(-50%); }
+    .timeline-node-item:last-child .timeline-marker::after, .timeline-marker.no-line::after { display: none !important; }
+    .timeline-icon { width: 28px; height: 28px; background: var(--bg); border: 2px solid var(--neon-purple); border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; transition: background-color 0.2s, box-shadow 0.2s; box-shadow: 0 0 6px rgba(163,113,247,0.3); flex-shrink: 0; }
+    .timeline-icon i { font-size: 0.75rem; color: var(--neon-purple); }
+    .timeline-node-item:hover .timeline-icon { background: var(--neon-purple); box-shadow: 0 0 10px rgba(163,113,247,0.5); }
+    .timeline-node-item:hover .timeline-icon i { color: var(--bg); }
+    .timeline-content { padding: 0 0 32px 16px; }
+    .timeline-node-item:last-child .timeline-content { padding-bottom: 0; }
+    .node-top-row { display: flex; align-items: center; gap: 10px; margin-bottom: 4px; flex-wrap: wrap; }
+    .node-timestamp { font-family: var(--font-mono); font-size: 0.78rem; color: var(--neon-green); font-weight: 700; letter-spacing: 0.03em; }
+    .node-current-badge { font-family: var(--font-mono); font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--neon-green); background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.25); border-radius: 4px; padding: 2px 8px; }
+    .node-header-title { font-size: 1.1rem; font-weight: 700; color: var(--text-bright); letter-spacing: -0.01em; margin-bottom: 2px; }
+    .node-sub-org { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .node-sub-org i { font-size: 0.8rem; color: var(--neon-blue); }
+    .node-location { display: inline-flex; align-items: center; gap: 3px; }
+    .node-location i { color: var(--text-muted) !important; font-size: 0.75rem !important; }
+    .node-field { font-family: var(--font-mono); font-size: 0.72rem; color: var(--neon-orange); font-weight: 600; display: inline-block; margin-bottom: 6px; }
+    .node-body-content { font-family: var(--font-sans); font-size: 0.92rem; color: var(--text); line-height: 1.6; }
+    .node-points { list-style: none; padding: 0; margin: 10px 0 0; display: flex; flex-direction: column; gap: 5px; }
+    .node-points li { font-family: var(--font-sans); font-size: 0.88rem; color: var(--text-muted); padding-left: 14px; position: relative; line-height: 1.5; }
+    .node-points li::before { content: ''; position: absolute; left: 0; top: 7px; width: 5px; height: 5px; border-radius: 50%; background: var(--neon-green); }
+    .node-tech-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .node-tech-tags span { font-family: var(--font-mono); font-size: 0.65rem; padding: 3px 8px; background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 4px; color: var(--text-muted); transition: border-color 0.2s; }
+    .node-tech-tags span:hover { border-color: var(--neon-purple); color: var(--text-bright); }
+
+    .terminal-drawer-widget { background-color: var(--panel-dark); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem; height: 220px; display: flex; flex-direction: column; position: relative; z-index: 90; }
     .term-tabs-row { display: flex; background-color: var(--sidebar); border-bottom: 1px solid var(--border); padding-left: 20px; gap: 18px; }
-    .term-tab-btn { font-size: 0.72rem; text-transform: uppercase; padding: 10px 0; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em; position: relative; }
+    .term-tab-btn { font-size: 0.72rem; text-transform: uppercase; padding: 10px 0; color: var(--neon-green); font-weight: 700; letter-spacing: 0.05em; position: relative; transition: color 0.2s; }
     .term-tab-btn.active { color: var(--neon-green); }
     .term-tab-btn.active::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 2px; background-color: var(--neon-green); }
-    .term-buffer-stream { flex: 1; padding: 16px 24px; overflow-y: auto; line-height: 1.6; color: #e1e1e3; border-bottom: 1px solid rgba(255,255,255,0.02); }
+    .term-buffer-stream { flex: 1; padding: 10px 20px; overflow-y: auto; line-height: 1.7; color: #e1e1e3; border-bottom: 1px solid rgba(255,255,255,0.02); }
     .term-buffer-stream::-webkit-scrollbar { width: 6px; }
     .term-buffer-stream::-webkit-scrollbar-thumb { background: var(--border); }
     .term-row { margin-bottom: 4px; white-space: pre-wrap; word-break: break-all; }
     .term-prompt-marker { color: var(--neon-green); font-weight: 700; }
-    .term-interactive-row { display: flex; align-items: center; padding: 4px 24px; background-color: rgba(0,0,0,0.2); }
-    .term-input-field-entry { flex: 1; background: transparent; border: none; outline: none; color: var(--neon-green); font-family: var(--font-mono); font-size: 0.85rem; padding: 4px 8px; }
+    .term-interactive-row { display: flex; align-items: center; padding: 0; background: transparent; }
+    .term-input-field-entry { flex: 1; background: transparent; border: none; outline: none; color: var(--neon-green); font-family: var(--font-mono); font-size: 0.85rem; padding: 0 8px; caret-color: var(--neon-green); }
+    .term-input-field-entry::placeholder { color: transparent; }
+    .term-output-text { color: #e1e1e3; }
+    .term-success { color: var(--neon-green); }
+    .term-warning { color: var(--neon-orange); }
+    .term-error { color: var(--neon-red); }
+    .term-info { color: var(--neon-blue); }
+    .term-dim { color: var(--text-muted); }
+    .term-bold { font-weight: 700; }
+    .term-header { color: var(--neon-purple); font-weight: 700; margin-bottom: 2px; }
+    .term-divider { color: var(--text-muted); opacity: 0.4; }
+    .term-cursor { display: inline-block; width: 8px; height: 1.1em; background: var(--neon-green); animation: termBlink 1s step-end infinite; vertical-align: text-bottom; margin-left: 1px; }
+    @keyframes termBlink { 50% { opacity: 0; } }
+
     .ide-footer-status-bar { height: 24px; background-color: var(--neon-purple); color: #000; font-family: var(--font-mono); font-size: 0.72rem; display: flex; justify-content: space-between; align-items: center; padding: 0 16px; position: relative; z-index: 150; font-weight: 600; }
     .footer-left-node, .footer-right-node { display: flex; align-items: center; gap: 14px; }
     .footer-clickable-item:hover { background-color: rgba(255,255,255,0.2); cursor: pointer; padding: 0 4px; margin: 0 -4px; border-radius: 2px; }
+    .theme-dropdown-select { background: transparent; border: none; color: #000; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 600; cursor: pointer; outline: none; padding: 0 4px; margin-left: 2px; }
+    .theme-dropdown-select option { background-color: var(--sidebar); color: var(--text-bright); font-family: var(--font-mono); }
+    
     .palette-modal-overlay { position: fixed; inset: 0; background-color: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 5000; display: none; align-items: flex-start; justify-content: center; padding-top: 10vh; }
     .palette-modal-overlay.active { display: flex; }
-    .palette-box-frame { background-color: var(--sidebar); border: 1px solid var(--neon-purple); border-radius: 8px; width: 100%; max-width: 540px; box-shadow: 0 16px 48px rgba(0,0,0,0.7), 0 0 20px rgba(163, 113, 247, 0.2); overflow: hidden; animation: paletteScaleIn 0.2s var(--ease) forwards; }
+    .palette-box-frame { background-color: var(--sidebar); border: 1px solid var(--neon-purple); border-radius: var(--radius); width: 100%; max-width: 540px; box-shadow: 0 16px 48px rgba(0,0,0,0.7), 0 0 16px rgba(163, 113, 247, 0.2); overflow: hidden; animation: paletteScaleIn 0.2s var(--ease) forwards; }
     @keyframes paletteScaleIn { from { transform: scale(0.97) translateY(-8px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
     .palette-input-row { display: flex; align-items: center; gap: 12px; padding: 14px 20px; border-bottom: 1px solid var(--border); background-color: var(--bg); }
     .palette-input-row i { color: var(--neon-purple); font-size: 1.1rem; }
@@ -220,22 +337,278 @@
     .palette-option-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; font-family: var(--font-mono); font-size: 0.82rem; color: var(--text-muted); cursor: pointer; }
     .palette-option-item.selected, .palette-option-item:hover { background-color: var(--panel-dark); color: var(--text-bright); }
     .palette-shortcut-hint { font-size: 0.68rem; padding: 2px 6px; background-color: var(--border); border-radius: 4px; color: var(--text-muted); }
+    
     .mobile-nav-scroll-wrapper { display: none; background-color: var(--sidebar); border-bottom: 1px solid var(--border); padding: 4px; overflow-x: auto; scrollbar-width: none; }
-    .mobile-menu-toggle-trigger { display: none; width: 44px; height: 44px; border-radius: 50%; background-color: var(--neon-purple); color: #fff; position: fixed; bottom: 44px; right: 20px; z-index: 1000; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 4px 16px rgba(124,106,255,0.4); }
+    .mobile-menu-toggle-trigger { display: none; width: 44px; height: 44px; border-radius: 50%; background-color: var(--neon-purple); color: #fff; position: fixed; bottom: 44px; right: 20px; z-index: 1000; align-items: center; justify-content: center; font-size: 1.3rem; box-shadow: 0 4px 12px rgba(124,106,255,0.3); transition: transform 0.2s var(--ease); }
+    .mobile-menu-toggle-trigger:hover { transform: scale(1.05); }
+
+    .ndw-hover-card {
+      position: fixed; z-index: 4000; width: 320px;
+      background: var(--sidebar); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 0; overflow: hidden;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.7), 0 0 1px rgba(163,113,247,0.3);
+      opacity: 0; pointer-events: none;
+      transform: translateY(4px);
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease);
+    }
+    .ndw-hover-card.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .ndw-card-banner { height: 60px; background: linear-gradient(135deg, #5b21b6, #7c3aed, #6d28d9); position: relative; }
+    .ndw-card-banner.offline-banner { background: linear-gradient(135deg, #374151, #4b5563, #374151); }
+    .ndw-card-avatar-row { display: flex; align-items: flex-end; gap: 12px; padding: 0 16px; margin-top: -26px; position: relative; z-index: 1; }
+    .ndw-card-avatar { width: 64px; height: 64px; border-radius: 50%; border: 3px solid var(--sidebar); object-fit: cover; background: var(--panel-dark); flex-shrink: 0; }
+    .ndw-card-body { padding: 14px 16px 16px; }
+    .ndw-card-status-row { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+    .ndw-card-status-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .ndw-card-status-dot.online { background: var(--neon-green); box-shadow: 0 0 6px var(--neon-green); }
+    .ndw-card-status-dot.idle { background: var(--neon-orange); box-shadow: 0 0 6px var(--neon-orange); }
+    .ndw-card-status-dot.dnd { background: var(--neon-red); box-shadow: 0 0 6px var(--neon-red); }
+    .ndw-card-status-dot.offline { background: var(--text-muted); }
+    .ndw-card-status-text { font-family: var(--font-mono); font-size: 0.78rem; text-transform: uppercase; font-weight: 600; letter-spacing: 0.04em; }
+    .ndw-card-status-text.online { color: var(--neon-green); }
+    .ndw-card-status-text.idle { color: var(--neon-orange); }
+    .ndw-card-status-text.dnd { color: var(--neon-red); }
+    .ndw-card-status-text.offline { color: var(--text-muted); }
+    .ndw-card-section { margin-bottom: 12px; }
+    .ndw-card-section:last-child { margin-bottom: 0; }
+    .ndw-card-section-heading { font-family: var(--font-mono); font-size: 0.65rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.08em; font-weight: 700; margin-bottom: 6px; }
+    .ndw-card-activity-name { font-family: var(--font-sans); font-size: 0.88rem; font-weight: 600; color: var(--text-bright); margin-bottom: 2px; }
+    .ndw-card-activity-detail { font-family: var(--font-sans); font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+    .ndw-card-spotify-row { display: flex; align-items: center; gap: 10px; }
+    .ndw-card-spotify-art { width: 42px; height: 42px; border-radius: 4px; object-fit: cover; flex-shrink: 0; }
+    .ndw-card-spotify-info { min-width: 0; }
+    .ndw-card-spotify-song { font-family: var(--font-sans); font-size: 0.82rem; font-weight: 600; color: var(--text-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ndw-card-spotify-artist { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); }
+    .ndw-card-custom-status { font-family: var(--font-sans); font-size: 0.82rem; color: var(--text); display: flex; align-items: center; gap: 6px; }
+    .ndw-card-custom-status-emoji { width: 18px; height: 18px; flex-shrink: 0; }
+    .ndw-card-updated { font-family: var(--font-mono); font-size: 0.62rem; color: var(--text-muted); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); text-align: right; }
+    .ndw-card-discord-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 14px; padding: 10px 0; background: transparent; border: 1px solid var(--neon-blue); border-radius: var(--radius); color: var(--neon-blue); font-family: var(--font-mono); font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; text-decoration: none; transition: all 0.2s var(--ease); cursor: pointer; }
+    .ndw-card-discord-btn:hover { background: rgba(88, 166, 255, 0.08); box-shadow: 0 0 10px rgba(88, 166, 255, 0.2); color: var(--text-bright); border-color: var(--neon-blue); transform: translateY(-1px); }
+    .ndw-card-discord-btn i { font-size: 1rem; }
+    .repo-card:hover, .highlight-cell:hover { transform: translateY(-2px); }
+    .highlight-cell:hover { transform: none; }
+
+    /* ════════════════  CERTIFICATIONS SECTION  ════════════════ */
+    .cert-stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--ds-gap-md); margin: 0 0 var(--ds-gap-xl); }
+    .cert-stat-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 10px; text-align: center; display: flex; flex-direction: column; gap: 2px; transition: all 0.2s var(--ease); }
+    .cert-stat-card:hover { border-color: var(--neon-purple); box-shadow: 0 2px 10px rgba(0,0,0,0.2), 0 0 6px var(--border-glow); transform: translateY(-2px); }
+    .cert-stat-count { font-size: 1.4rem; font-weight: 700; color: var(--neon-purple); font-family: var(--mono); line-height: 1; }
+    .cert-stat-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1px; }
+
+    .cert-controls-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-gap-lg); flex-wrap: wrap; margin: 0 0 var(--ds-gap-xl); padding-bottom: var(--ds-gap-md); border-bottom: 1px dashed var(--border); }
+    .cert-filter-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .cert-filter-chip { background: transparent; border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; color: var(--muted); font-family: var(--mono); font-size: 0.68rem; cursor: pointer; transition: all 0.2s ease; }
+    .cert-filter-chip:hover { border-color: var(--neon-purple); color: var(--text); }
+    .cert-filter-chip.active { background: var(--accent-bg); border-color: var(--neon-purple); color: var(--neon-purple); }
+
+    .cert-timeline-sidebar { display: flex; align-items: center; gap: 8px; flex-shrink: 0; padding-left: var(--ds-gap-lg); border-left: 1px solid var(--border); }
+    .cert-year-marker { font-family: var(--mono); font-size: 0.7rem; font-weight: 600; color: var(--muted); padding: 4px 12px; border-radius: 20px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s ease; }
+    .cert-year-marker:hover, .cert-year-marker.active { color: var(--neon-purple); border-color: var(--neon-purple); background: var(--accent-bg); }
+    .cert-year-line { width: 20px; height: 1px; background: var(--border); }
+
+    .cert-grid-new { display: grid; grid-template-columns: 1fr; gap: var(--ds-gap-lg); margin: 0 0 var(--ds-gap-xl); align-items: stretch; }
+    .cert-card-new { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; height: auto; min-height: 210px; transition: all 0.2s var(--ease); animation: certFadeIn 0.3s ease; position: relative; overflow: hidden; }
+    @keyframes certFadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+    .cert-card-new:hover { border-color: var(--neon-purple); box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 10px var(--border-glow); transform: translateY(-3px); }
+    .cert-card-new.featured-cert { border-color: rgba(163, 113, 247, 0.5); }
+    .cert-card-new.featured-cert::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--neon-purple), var(--neon-blue)); }
+
+    .cert-card-inner { display: flex; flex-direction: column; gap: 6px; flex: 1; min-height: 0; }
+    .cert-badge-row { display: flex; align-items: center; gap: 8px; }
+    .cert-diamond { width: 9px; height: 9px; background: var(--neon-purple); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); flex-shrink: 0; }
+    .cert-issuer-tag { font-size: 0.66rem; color: var(--neon-blue); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+    .cert-name-new { font-size: 0.95rem; font-weight: 700; color: var(--text-bright); line-height: 1.35; }
+    .cert-meta-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .cert-date { font-size: 0.7rem; color: var(--muted); font-family: var(--mono); }
+    .cert-id { font-size: 0.62rem; color: var(--muted); font-family: var(--mono); opacity: 0.6; }
+    .cert-id::before { content: '•'; margin-right: 8px; opacity: 0.6; }
+    .cert-desc { font-size: 0.79rem; color: var(--muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: 1px; }
+
+    .cert-badges-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; padding-top: 6px; }
+    .cert-badge-tag { font-size: 0.58rem; padding: 3px 8px; border-radius: 4px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
+    .cert-badge-cat { background: rgba(163, 113, 247, 0.12); color: var(--neon-purple); border: 1px solid rgba(163, 113, 247, 0.25); }
+    .cert-badge-diff { background: rgba(88, 166, 255, 0.12); color: var(--neon-blue); border: 1px solid rgba(88, 166, 255, 0.25); }
+    .cert-badge-featured { background: rgba(52, 211, 153, 0.12); color: var(--neon-green); border: 1px solid rgba(52, 211, 153, 0.25); }
+
+    .cert-actions { display: flex; gap: 8px; margin-top: var(--ds-gap-md); padding-top: var(--ds-gap-sm); border-top: 1px solid var(--border); flex-shrink: 0; justify-content: flex-end; }
+    .btn-cert { padding: 4px 10px; border-radius: 4px; font-family: var(--mono); font-size: 0.65rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; border: 1px solid var(--border); background: transparent; color: var(--muted); }
+    .btn-cert:hover { border-color: var(--neon-purple); color: var(--neon-purple); }
+    .btn-cert.primary-cert { background: var(--accent-bg); border-color: var(--neon-purple); color: var(--neon-purple); }
+    .btn-cert.primary-cert:hover { background: rgba(163, 113, 247, 0.15); box-shadow: 0 0 8px var(--glow-purple); }
+
+    .cert-philosophy-block { background: var(--bg-panel); border: 1px solid var(--border); border-left: 3px solid var(--neon-purple); border-radius: var(--radius); padding: 18px 20px; margin: 0; }
+    .cert-philosophy-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--neon-purple); margin-bottom: 8px; font-weight: 700; }
+    .cert-philosophy-text { font-size: 0.85rem; color: var(--muted); line-height: 1.6; font-style: italic; }
+
+    .cert-modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; align-items: center; justify-content: center; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+    .cert-modal-overlay.visible { opacity: 1; visibility: visible; }
+    .cert-modal-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; padding: 24px; position: relative; }
+    .cert-modal-close { position: absolute; top: 12px; right: 12px; background: none; border: none; color: var(--muted); font-size: 1.2rem; cursor: pointer; }
+    .cert-modal-close:hover { color: var(--text); }
+    .cert-modal-title { font-size: 1.1rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .cert-modal-issuer { font-size: 0.8rem; color: var(--neon-purple); margin-bottom: 12px; }
+    .cert-modal-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; }
+    .cert-modal-meta span { font-size: 0.75rem; color: var(--muted); }
+    .cert-modal-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+    .cert-modal-actions { display: flex; gap: 10px; }
+
+    #canvas-certs_md h1 { border-bottom: 1px solid var(--border) !important; padding-bottom: 10px !important; margin-bottom: 16px !important; margin-top: 0 !important; }
+    #canvas-certs_md .ln-content p { margin-bottom: 40px !important; }
+    #canvas-certs_md .cert-stats-row { margin: 0 0 40px 0 !important; }
+    #canvas-certs_md .cert-controls-bar { margin: 0 0 40px 0 !important; padding-bottom: 0 !important; border-bottom: none !important; }
+    #canvas-certs_md .cert-grid-new { margin: 0 0 40px 0 !important; }
+
+    #canvas-contact_md h1 { border-bottom: none !important; padding-bottom: 0 !important; margin-bottom: 24px !important; margin-top: 0 !important; }
+    .connect-intro-text { font-family: var(--font-sans); font-size: 0.92rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 20px !important; padding-bottom: 20px !important; border-bottom: 1px solid var(--border) !important; }
+    .contact-layout-col-split { display: flex; flex-direction: column; gap: 40px !important; align-items: stretch; }
+    .connect-cards-col { width: 100%; }
+    .contact-form-column { width: 100%; max-width: 600px; }
+    .contact-form-card { background-color: var(--panel-dark); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; position: relative; }
+    .form-top-bar { position: absolute; top: 0; left: 0; right: 0; height: 3px; background-color: var(--neon-purple); border-top-left-radius: var(--radius); border-top-right-radius: var(--radius); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 8px; }
+    .form-row { display: flex; gap: 16px; }
+    .form-group { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+    .form-label { font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.05em; }
+    .form-label-prefix { color: var(--neon-orange); }
+    .form-input-wrap { position: relative; width: 100%; }
+    .form-input { width: 100%; background-color: rgba(0, 0, 0, 0.15); border: 1px solid var(--border); border-radius: 4px; color: var(--text-bright); padding: 10px 14px; font-family: var(--font-sans); font-size: 0.88rem; outline: none; box-sizing: border-box; transition: border-color 0.2s, background-color 0.2s; }
+    .form-input:focus { border-color: var(--neon-purple); background-color: rgba(0, 0, 0, 0.25); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 12px; }
+    .form-note { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .form-note-dot { width: 6px; height: 6px; border-radius: 50%; background-color: var(--neon-green); display: inline-block; box-shadow: 0 0 8px var(--neon-green); animation: pulseGreenDot 2s infinite; }
+    @keyframes pulseGreenDot { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+    .form-submit { display: inline-flex; align-items: center; gap: 8px; background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 4px; color: var(--text-bright); padding: 8px 16px; font-family: var(--font-mono); font-size: 0.78rem; font-weight: 700; cursor: pointer; transition: background-color 0.2s, border-color 0.2s; }
+    .form-submit:hover { background-color: rgba(163, 113, 247, 0.1); border-color: var(--neon-purple); }
+    .submit-arrow { color: var(--neon-purple); }
+    .category-group { margin-bottom: 40px !important; padding-bottom: 0 !important; border-bottom: none !important; }
+    .category-group:last-child { margin-bottom: 0 !important; padding-bottom: 0 !important; border-bottom: none !important; }
+    .sec-label { font-family: var(--font-mono); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--neon-purple); font-weight: 700; margin-bottom: 12px !important; display: flex; align-items: center; gap: 8px; }
+    .connect-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px !important; align-items: stretch; }
+    .connect-card {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 20px;
+      height: 80px !important;
+      background: var(--panel-dark);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-decoration: none;
+      color: var(--text);
+      transition: none !important;
+      overflow: hidden;
+    }
+    .connect-card:hover {
+      border-color: var(--neon-purple) !important;
+      background-color: var(--tab-inactive) !important;
+    }
+    .connect-card.featured { border-left: 3px solid var(--neon-purple) !important; }
+    
+    
+    .card-icon-wrap { flex-shrink: 0; }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-bright);
+      transition: none !important;
+    }
+    .connect-card:hover .card-icon {
+      border-color: var(--neon-purple) !important;
+    }
+    
+    /* Subtly colored platform icons */
+    .connect-card.linkedin-card .card-icon { color: #0a66c2; }
+    .connect-card.github-card .card-icon { color: #ffffff; }
+    .connect-card.gitlab-card .card-icon { color: #fc6d26; }
+    .connect-card.bugcrowd-card .card-icon { color: #f05023; }
+    .connect-card.hackerone-card .card-icon { color: #00ff00; }
+    .connect-card.htb-card .card-icon { color: #9fef00; }
+    .connect-card.thm-card .card-icon { color: #88cc14; }
+    .connect-card.portswigger-card .card-icon { color: #ff6633; }
+    .connect-card.discord-card .card-icon { color: #5865f2; }
+    .connect-card.x-card .card-icon { color: #ffffff; }
+    .connect-card.instagram-card .card-icon { color: #e1306c; }
+    .connect-card.reddit-card .card-icon { color: #ff4500; }
+    
+    .card-body { min-width: 0; flex: 1; }
+    .card-platform { font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--text-bright); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-handle { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .card-arrow { font-size: 1.1rem; color: var(--text-muted); flex-shrink: 0; }
+    .connect-card:hover .card-arrow { color: var(--neon-purple); }
+    
+
+    /* Responsive Breakpoints Rules */
+    @media (min-width: 768px) {
+      .repo-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .cert-grid-new { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1400px) {
+      .editor-canvas { padding: 36px 48px; }
+      .cert-grid-new { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 1600px) {
+      .repo-cards-grid { grid-template-columns: repeat(3, 1fr); }
+      .cert-grid-new { grid-template-columns: repeat(4, 1fr); }
+    }
     @media (max-width: 1100px) {
       .ide-sidebar { position: fixed; top: 0; left: 0; bottom: 24px; transform: translateX(-100%); width: 340px; min-width: 340px; box-shadow: 12px 0 40px rgba(0,0,0,0.6); }
       .ide-sidebar.open { transform: translateX(0); }
       .mobile-nav-scroll-wrapper { display: flex; }
       .mobile-menu-toggle-trigger { display: flex; }
       .editor-canvas { padding: 24px; }
-      .blog-card { grid-template-columns: 1fr; }
-      .blog-thumb-frame { height: 130px; border-right: none; border-bottom: 1px solid var(--border); }
+    }
+    @media (max-width: 1024px) {
+      .contact-layout-col-split { flex-direction: column; align-items: stretch; gap: 32px !important; }
+      .connect-globe-col { position: static; width: 100%; min-width: 0; }
+    }
+    @media (max-width: 768px) {
+      .editor-canvas { padding: 20px 16px; }
+      .ln-content h1 { font-size: clamp(1.4rem, 4vw, 2rem); }
+      .ln-content h2 { font-size: clamp(1.1rem, 3vw, 1.4rem); }
+      .ln-content p { font-size: 0.95rem; }
+      .md-line { font-size: 0.88rem; max-width: 100%; }
+      .repo-card { padding: 18px; height: 380px; }
+      .cert-grid-new { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .cert-card-new { height: auto; min-height: 300px; padding: 18px; }
+      .cert-stats-row { grid-template-columns: repeat(2, 1fr); }
+      .highlights-matrix { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .terminal-drawer-widget { height: 200px; }
     }
     @media (max-width: 600px) {
-      .form-row-split { grid-template-columns: 1fr; }
-      .editor-canvas { padding: 16px; }
-      .vertical-timeline { padding-left: 22px; }
-      .timeline-node-item::before { left: -29px; }
+      .ide-sidebar { width: 100%; min-width: 100%; }
+      .editor-canvas { padding: 16px 12px; }
+      .vertical-timeline { grid-template-columns: 48px 1fr; }
+      .timeline-icon { width: 24px; height: 24px; }
+      .timeline-icon i { font-size: 0.6rem; }
+      .timeline-content { padding-left: 12px; }
+      .ndw-hover-card { width: 280px; left: 10px !important; right: 10px !important; }
+      .cert-grid-new { grid-template-columns: 1fr; }
+      .cert-card-new { height: auto; min-height: 280px; padding: 16px; }
+      .cert-stats-row { grid-template-columns: repeat(2, 1fr); }
+      .repo-card { padding: 16px; height: 340px; }
+      .repo-actions { flex-direction: column; }
+      .repo-action-btn { width: 100%; justify-content: center; }
+      .social-matrix-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .sidebar-soc-btn { height: 36px; font-size: 1.1rem; }
+      .mobile-menu-toggle-trigger { width: 40px; height: 40px; font-size: 1.1rem; bottom: 32px; right: 16px; }
+      .palette-box-frame { max-width: 95vw; margin: 0 10px; }
+      .term-buffer-stream { padding: 10px 16px; }
+      .term-interactive-row { padding: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+      html { scroll-behavior: auto; }
+    }
+    @media (hover: none) and (pointer: coarse) {
+      .sidebar-soc-btn[data-tooltip]::after { display: none; }
+      .repo-card:hover { transform: none; box-shadow: none; }
     }
   </style>
 </head>
@@ -245,12 +618,13 @@
     <aside class="ide-sidebar" id="ide-sidebar-node" role="complementary" aria-label="System Metrics Workspace Panel">
       <div class="sidebar-block profile-node">
         <div class="avatar-wrapper">
-          <img class="avatar-img" src="https://avatars.githubusercontent.com/u/197274423?v=4" alt="Sakshith C Shetty Avatar">
-          <div class="status-dot" id="status-dot-indicator" title="System Matrix: Operator Active"></div>
+          <img class="avatar-img" id="ndt-avatar" src="https://avatars.githubusercontent.com/u/197274423?v=4" alt="Sakshith C Shetty Avatar">
+          <div class="status-dot" id="nav-discord-dot" title="System Matrix: Operator Active"></div>
         </div>
         <div class="profile-info">
           <h1 class="profile-name">Sakshith C Shetty</h1>
           <div class="profile-title">Offensive Security Operator</div>
+          <div class="profile-status" onclick="activateWorkspaceSheetTabContainerInstance('contact_md')"><span class="status-badge-green"><span class="status-badge-dot"></span> Open to Work</span></div>
         </div>
       </div>
       <div class="sidebar-block" style="padding: 10px 18px;">
@@ -316,7 +690,7 @@
           <a href="mailto:contact@shadow269.in" class="sidebar-soc-btn" data-tooltip="Direct SMTP Connection Mail" role="listitem"><i class="ri-mail-fill"></i></a>
           <button onclick="toggleCommandPaletteModalWindow()" class="sidebar-soc-btn" data-tooltip="Shell Command Palette Engine Ctrl+K"><i class="ri-terminal-box-line"></i></button>
         </div>
-        <button onclick="executeTerminalCommandSimulation('cat README.md')" class="action-cv-btn"><i class="ri-file-code-line"></i> cat README.md</button>
+        <a href="files/RESUME.pdf" download class="action-cv-btn" style="text-decoration: none;"><i class="ri-download-line"></i> Download Resume</a>
       </div>
     </aside>
 
@@ -325,83 +699,301 @@
       <div class="ide-tab-bar" id="editor-tabs-header-container" role="tablist" aria-label="Workspace Active Code Document Sheets Index"></div>
 
       <section class="editor-canvas" id="canvas-about_md" role="tabpanel" aria-label="Workspace Context Source: about.md">
-        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Operational Registry Profile</h1></div></div>
-        <div class="md-line"><div class="ln-num">2</div><div class="ln-content"><p>I am Sakshith C Shetty — a specialized computer applications background graduate who turned core software construction understanding into an adversarial logic breakdown model. Operating inside wild cloud configurations landscapes under user tag registration handle <strong>SHADOW-269</strong> on bug bounty ecosystems.</p></div></div>
-        <div class="md-line"><div class="ln-num">3</div><div class="ln-content"><h2>## Architectural Assessment Methodology</h2></div></div>
-        <div class="md-line"><div class="ln-num">4</div><div class="ln-content"><p>Traditional vulnerability scanning systems map superficial parameter patterns. My strategy centers completely around breaking underlying business rules. By intercepting nested API microservice call routes, manipulating structure serialization states, and isolating broken tenant isolation profiles, I surface serious logical security gaps before malicious threat entities capitalize on them.</p></div></div>
-        <div class="md-line"><div class="ln-num">5</div><div class="ln-content">
-          <div class="code-block-segment">
-<span class="code-keyword">import</span> security_ops
-<span class="code-comment"># Active Environment Target Handshake Initialization parameters mapping loop trace</span>
-target_node = security_ops.IngestTarget("production.infrastructure.map")
-target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True</span>)
-          </div>
-        </div>
+        <div class="md-line"><div class="ln-content"><h1># About Me</h1></div></div>
+        <div class="md-line"><div class="ln-content"><p>I'm Sakshith C Shetty, a Junior Security Analyst and Full-Stack Developer from Mangaluru, India.</p></div></div>
+        <div class="md-line"><div class="ln-content"><p>I enjoy building modern web applications with a strong focus on performance, usability, and security. Alongside development, I'm continuously expanding my cybersecurity knowledge through bug bounty programs, Capture The Flag (CTF) challenges, hands-on labs, and security research.</p></div></div>
+        <div class="md-line"><div class="ln-content"><p>I believe that secure software starts with thoughtful engineering. My approach combines clean development practices with a security-first mindset to build applications that are reliable, maintainable, and resilient.</p></div></div>
+        <div class="md-line"><div class="ln-content"><h2>## What I Do</h2></div></div>
+        <div class="md-line"><div class="ln-content"><p>I design and develop full-stack web applications using modern technologies while continuously improving my understanding of application security and secure software architecture.</p></div></div>
+        <div class="md-line"><div class="ln-content"><p>My primary areas of interest include:</p></div></div>
+        <div class="md-line"><div class="ln-content"><p>&bull; Full-Stack Web Development<br>&bull; Application &amp; API Security<br>&bull; Secure Software Development<br>&bull; Business Logic &amp; Access Control Testing<br>&bull; Bug Bounty &amp; Vulnerability Research<br>&bull; UI/UX Design and Developer Experience</p></div></div>
+        <div class="md-line"><div class="ln-content"><p>Whether I'm building a client project, contributing to a community platform, or researching security vulnerabilities, my goal is to create software that is practical, secure, and delivers a great user experience.</p></div></div>
       </section>
 
       <section class="editor-canvas" id="canvas-projects_md" role="tabpanel" aria-label="Workspace Context Source: projects.md">
-        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Compiled Repositories Artifacts Log</h1></div></div>
-        <div class="md-line"><div class="ln-num">2</div><div class="ln-content"><p>A directory tracking software libraries, secure backend development modules, and custom automation validation pipelines structured over assessment intervals.</p></div></div>
+        <div class="md-line"><div class="ln-content"><h1># Compiled Repositories Artifacts Log</h1></div></div>
+        <div class="md-line"><div class="ln-content"><p>A directory tracking software libraries, secure backend development modules, and custom automation validation pipelines structured over assessment intervals.</p></div></div>
         <div class="repo-cards-grid" id="projects-target-injection-viewport-grid"></div>
       </section>
 
       <section class="editor-canvas" id="canvas-journey_md" role="tabpanel" aria-label="Workspace Context Source: journey.md">
-        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Structural Chronology History Track</h1></div></div>
-        <div class="md-line"><div class="ln-num">2</div><div class="ln-content"><p>A documented history path log mapping the path from systems design theories study layers to live adversarial operations execution.</p></div></div>
+        <div class="md-line"><div class="ln-content"><h1># Structural Chronology History Track</h1></div></div>
+        <div class="md-line"><div class="ln-content"><p>A documented history path log mapping the path from systems design theories study layers to live adversarial operations execution.</p></div></div>
         <div class="vertical-timeline" id="journey-timeline-target-injection-viewport"></div>
       </section>
 
-      <section class="editor-canvas" id="canvas-blog_md" role="tabpanel" aria-label="Workspace Context Source: blog.md">
-        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Adversarial Threat Technical Writeups</h1></div></div>
-        <div class="blog-controls">
-          <div class="search-input-wrapper">
-            <i class="ri-search-eye-line" aria-hidden="true"></i>
-            <input type="text" class="search-input-field" id="blog-search-field-input" placeholder="Search writeups database parameters index..." aria-label="Query database content filtering string entry">
+      <section class="editor-canvas" id="canvas-certs_md" role="tabpanel" aria-label="Workspace Context Source: certs.md">
+        <div class="md-line"><div class="ln-content"><h1># Professional Certifications Registry</h1></div></div>
+        <div class="md-line"><div class="ln-content"><p>Professional certifications, industry training, and hands-on programs completed across offensive security, cloud security, information security management, and product development.</p></div></div>
+
+        <div class="md-line"><div class="ln-content">
+          <div class="cert-stats-row" id="cert-stats-row">
+            <div class="cert-stat-card"><div class="cert-stat-count" data-target="8">0</div><div class="cert-stat-label">Total Certifications</div></div>
+            <div class="cert-stat-card"><div class="cert-stat-count" data-target="6">0</div><div class="cert-stat-label">Security Certifications</div></div>
+            <div class="cert-stat-card"><div class="cert-stat-count" data-target="1">0</div><div class="cert-stat-label">Workshops</div></div>
+            <div class="cert-stat-card"><div class="cert-stat-count" data-target="1">0</div><div class="cert-stat-label">Job Simulations</div></div>
           </div>
-        </div>
-        <div class="blog-cards-grid" id="blog-posts-target-injection-viewport-grid"></div>
+        </div></div>
+
+        <div class="md-line"><div class="ln-content">
+          <div class="cert-controls-bar">
+            <div class="cert-filter-row" id="cert-filter-row">
+              <button class="cert-filter-chip active" data-filter="all">All</button>
+              <button class="cert-filter-chip" data-filter="offensive">Offensive Security</button>
+              <button class="cert-filter-chip" data-filter="cloud">Cloud Security</button>
+              <button class="cert-filter-chip" data-filter="infosec">Information Security</button>
+              <button class="cert-filter-chip" data-filter="workshop">Workshops</button>
+              <button class="cert-filter-chip" data-filter="simulation">Simulations</button>
+              <button class="cert-filter-chip" data-filter="business">Business</button>
+            </div>
+            <div class="cert-timeline-sidebar" id="cert-timeline-sidebar">
+              <div class="cert-year-marker active" data-year="all">All</div>
+              <div class="cert-year-line"></div>
+              <div class="cert-year-marker" data-year="2026">2026</div>
+              <div class="cert-year-line"></div>
+              <div class="cert-year-marker" data-year="2025">2025</div>
+            </div>
+          </div>
+        </div></div>
+
+        <div class="md-line"><div class="ln-content">
+          <div class="cert-grid-new" id="cert-cards-viewport"></div>
+        </div></div>
+
       </section>
 
-      <section class="editor-canvas" id="canvas-contact_md" role="tabpanel" aria-label="Workspace Context Source: contact.md">
-        <div class="md-line"><div class="ln-num">1</div><div class="ln-content"><h1># Connect Secure Communication Parameters</h1></div></div>
-        <div class="md-line"><div class="ln-num">2</div><div class="ln-content"><p>Submit scope coordinates, private bug bounty program invites, or custom contract consulting requests directly to the operational ingestion routing center queue.</p></div></div>
-        <div class="md-line"><div class="ln-num">3</div><div class="ln-content" style="margin-top: 20px;">
-          <form class="form-blueprint" id="secure-outbound-form-blueprint" novalidate>
-            <div class="form-row-split">
-              <div class="control-group">
-                <label class="field-tag-label" for="f-name">Origin Identity Tag</label>
-                <input type="text" id="f-name" class="brutal-input-field" placeholder="Identification Tag Signature" required>
+      <section class="editor-canvas" id="canvas-contact_md" role="tabpanel" aria-label="Workspace Context Source: connect.md">
+        <div class="md-line"><div class="ln-content">
+          <h1># Professional Network Registry</h1>
+          <p class="connect-intro-text"><strong>Feel free to connect for full-stack development, application security, bug bounty discussions, open-source collaboration, or technical networking. All profiles listed below are actively maintained.</strong></p>
+        </div></div>
+
+        <div class="md-line"><div class="ln-content">
+          <div class="contact-layout-col-split">
+
+            <div class="connect-cards-col">
+
+              <div class="category-group">
+                <div class="sec-label">Development Profiles</div>
+                <div class="connect-card-grid">
+                  <a href="https://github.com/shadow269" target="_blank" rel="noopener" class="connect-card github-card featured">
+                    <div class="card-icon-wrap"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div></div>
+                    <div class="card-body"><div class="card-platform">GitHub</div><div class="card-handle">github.com/shadow269</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                  <a href="https://gitlab.com/SHADOW269" target="_blank" rel="noopener" class="connect-card gitlab-card">
+                    <div class="card-icon-wrap"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22.65 14.39L12 22.13 1.35 14.39a.84.84 0 01-.3-.94l1.22-3.78 2.44-7.51A.42.42 0 014.82 2a.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.49h8.1l2.44-7.49a.42.42 0 01.11-.18.43.43 0 01.58 0 .42.42 0 01.11.18l2.44 7.51L23 13.45a.84.84 0 01-.35.94z"/></svg></div></div>
+                    <div class="card-body"><div class="card-platform">GitLab</div><div class="card-handle">gitlab.com/SHADOW269</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                </div>
               </div>
-              <div class="control-group">
-                <label class="field-tag-label" for="f-email">Return Routing Vector</label>
-                <input type="email" id="f-email" class="brutal-input-field" placeholder="identity@domain.local" required autocomplete="email">
+
+              <div class="category-group">
+                <div class="sec-label">Security & Bug Bounty</div>
+                <div class="connect-card-grid">
+                  <a href="https://bugcrowd.com/h/SHADOW269" target="_blank" rel="noopener" class="connect-card bugcrowd-card featured">
+                    <div class="card-icon-wrap"><div class="card-icon" style="font-family:var(--font-mono);font-size:16px;font-weight:bold;letter-spacing:.05em;">BC</div></div>
+                    <div class="card-body"><div class="card-platform">Bugcrowd</div><div class="card-handle">bugcrowd.com/h/SHADOW269</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                  <a href="https://hackerone.com/shadow269" target="_blank" rel="noopener" class="connect-card hackerone-card">
+                    <div class="card-icon-wrap"><div class="card-icon" style="font-family:var(--font-mono);font-size:16px;font-weight:bold;letter-spacing:.05em;">H1</div></div>
+                    <div class="card-body"><div class="card-platform">HackerOne</div><div class="card-handle">hackerone.com/shadow269</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="category-group">
+                <div class="sec-label">Labs & Training</div>
+                <div class="connect-card-grid">
+                  <a href="https://profile.hackthebox.com/profile/019d3997-02bd-710e-835a-b7fe7da90556" target="_blank" rel="noopener" class="connect-card htb-card">
+                    <div class="card-icon-wrap"><div class="card-icon" style="font-family:var(--font-mono);font-size:15px;font-weight:bold;letter-spacing:.02em;">HTB</div></div>
+                    <div class="card-body"><div class="card-platform">Hack The Box</div><div class="card-handle">profile/shadow269</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                  <a href="https://tryhackme.com/p/shadow2669king" target="_blank" rel="noopener" class="connect-card thm-card">
+                    <div class="card-icon-wrap"><div class="card-icon" style="font-family:var(--font-mono);font-size:15px;font-weight:bold;letter-spacing:.02em;">THM</div></div>
+                    <div class="card-body"><div class="card-platform">TryHackMe</div><div class="card-handle">tryhackme.com/p/shadow2669king</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                  <a href="https://portswigger.net/web-security" target="_blank" rel="noopener" class="connect-card portswigger-card">
+                    <div class="card-icon-wrap"><div class="card-icon" style="font-family:var(--font-mono);font-size:14px;font-weight:bold;letter-spacing:.02em;">PSW</div></div>
+                    <div class="card-body"><div class="card-platform">PortSwigger</div><div class="card-handle">web-security/labs</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                </div>
+              </div>
+
+              <div class="category-group">
+                <div class="sec-label">Community & Social</div>
+                <div class="connect-card-grid">
+                  <a href="https://www.linkedin.com/in/shadow269/" target="_blank" rel="noopener" class="connect-card linkedin-card featured">
+                    <div class="card-icon-wrap"><div class="card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div></div>
+                    <div class="card-body"><div class="card-platform">LinkedIn</div><div class="card-handle">linkedin.com/in/shadow269</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                  <a href="https://discord.com/users/1051180323058237450" target="_blank" rel="noopener" class="connect-card discord-card featured">
+                    <div class="card-icon-wrap"><div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963.021-.04.001-.088-.041-.104a13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028zM8.02 15.278c-1.182 0-2.157-1.069-2.157-2.38 0-1.312.956-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.956 2.38-2.157 2.38zm7.975 0c-1.183 0-2.157-1.069-2.157-2.38 0-1.312.955-2.38 2.157-2.38 1.21 0 2.176 1.077 2.157 2.38 0 1.312-.946 2.38-2.157 2.38z"/></svg></div></div>
+                    <div class="card-body"><div class="card-platform">Discord</div><div class="card-handle">@shadow269</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                  <a href="https://x.com/SHADOW_2669" target="_blank" rel="noopener" class="connect-card x-card">
+                    <div class="card-icon-wrap"><div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.843L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div></div>
+                    <div class="card-body"><div class="card-platform">X / Twitter</div><div class="card-handle">x.com/SHADOW_2669</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                  <a href="https://www.instagram.com/shadow269.in/" target="_blank" rel="noopener" class="connect-card instagram-card">
+                    <div class="card-icon-wrap"><div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div></div>
+                    <div class="card-body"><div class="card-platform">Instagram</div><div class="card-handle">instagram.com/shadow269.in</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                  <a href="https://www.reddit.com/user/SHADOW_269/" target="_blank" rel="noopener" class="connect-card reddit-card">
+                    <div class="card-icon-wrap"><div class="card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg></div></div>
+                    <div class="card-body"><div class="card-platform">Reddit</div><div class="card-handle">reddit.com/user/SHADOW_269</div></div>
+                    <div class="card-arrow">&#x2197;</div>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="contact-form-column">
+              <div class="fade-up d2">
+                <div class="sec-label">Send a Message</div>
+                <div class="contact-form-card">
+                  <div class="form-top-bar"></div>
+                  <form
+                    action="https://formsubmit.co/contact@shadow269.in"
+                    method="POST"
+                    class="contact-form"
+                    id="contact-form"
+                  >
+                    <!-- Formsubmit.co config -->
+                    <input type="hidden" name="_subject" value="New message from shadow269.in contact form">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" id="form-next-url" value="">
+                    <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label class="form-label" for="cf-name">
+                          <span class="form-label-prefix">01 /</span> NAME
+                        </label>
+                        <div class="form-input-wrap">
+                          <input
+                            type="text"
+                            id="cf-name"
+                            name="name"
+                            class="form-input"
+                            placeholder="John Doe"
+                            required
+                            autocomplete="off"
+                          >
+                          <div class="form-input-border"></div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-label" for="cf-email">
+                          <span class="form-label-prefix">02 /</span> EMAIL
+                        </label>
+                        <div class="form-input-wrap">
+                          <input
+                            type="email"
+                            id="cf-email"
+                            name="email"
+                            class="form-input"
+                            placeholder="you@example.com"
+                            required
+                            autocomplete="off"
+                          >
+                          <div class="form-input-border"></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="cf-subject">
+                        <span class="form-label-prefix">03 /</span> SUBJECT
+                      </label>
+                      <div class="form-input-wrap">
+                        <input
+                          type="text"
+                          id="cf-subject"
+                          name="subject"
+                          class="form-input"
+                          placeholder="Penetration Testing Inquiry / Bug Bounty / Other"
+                          required
+                          autocomplete="off"
+                        >
+                        <div class="form-input-border"></div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-label" for="cf-message">
+                        <span class="form-label-prefix">04 /</span> MESSAGE
+                      </label>
+                      <div class="form-input-wrap">
+                        <textarea
+                          id="cf-message"
+                          name="message"
+                          class="form-input form-textarea"
+                          placeholder="Describe your project, scope, or inquiry…"
+                          rows="5"
+                          required
+                        ></textarea>
+                        <div class="form-input-border"></div>
+                      </div>
+                    </div>
+
+                    <div class="form-footer">
+                      <div class="form-note">
+                        <span class="form-note-dot"></span>
+                        Replies within 24–48 hrs
+                      </div>
+                      <button type="submit" class="form-submit" id="form-submit-btn">
+                        <span class="submit-label">TRANSMIT</span>
+                        <span class="submit-arrow">→</span>
+                        <div class="submit-glow"></div>
+                      </button>
+                    </div>
+
+                  </form>
+                </div>
               </div>
             </div>
-            <div class="control-group">
-              <label class="field-tag-label" for="f-msg">Context Parameter Payload Log Details</label>
-              <textarea id="f-msg" class="brutal-input-field" rows="6" style="resize:vertical;" placeholder="Detail verification boundaries definitions, target environment sizes metrics..." required></textarea>
-            </div>
-            <button type="submit" class="action-cv-btn" style="width: max-content; padding: 0 32px;"><i class="ri-send-plane-fill"></i> Dispatch Handshake Packet</button>
-            <div id="form-execution-feedback-log-node" style="font-family:var(--font-mono); font-size:0.82rem; color:var(--neon-green); display:none; margin-top:10px;" role="status"></div>
-          </form>
-        </div>
+
+          </div>
+        </div></div>
       </section>
 
-      <div class="terminal-drawer-widget" role="region" aria-label="Interactive Monitor Terminal Window Log">
+      <div class="terminal-drawer-widget" role="region" aria-label="Integrated Terminal">
         <div class="term-tabs-row" role="tablist">
-          <button class="term-tab-btn active" role="tab" id="t-tab-log" aria-selected="true">Operational_Terminal_Buffer.sh</button>
-          <button class="term-tab-btn" role="tab" id="t-tab-commits" aria-selected="false">Recent_Git_Commits.log</button>
+          <button class="term-tab-btn active" role="tab" aria-selected="true">TERMINAL</button>
         </div>
-        <div class="term-buffer-stream" id="terminal-screen-buffer-stream" aria-live="polite"></div>
-        <div class="term-interactive-row">
-          <span class="term-prompt-marker" aria-hidden="true">guest@shadow269_ops:~$</span>
-          <input type="text" class="term-input-field-entry" id="terminal-keyboard-input-element" placeholder="Input analytical directive command flag parameter..." autocomplete="off" autocorrect="off" spellcheck="false" aria-label="Console Ingestion Input Stream Area">
+        <div class="term-buffer-stream" id="term-buffer" aria-live="polite">
+          <div class="term-interactive-row" id="term-interactive-row">
+            <span class="term-prompt-marker" aria-hidden="true">guest@shadow269:~$</span>
+            <input type="text" class="term-input-field-entry" id="term-input" placeholder="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Terminal input">
+          </div>
         </div>
       </div>
 
       <footer class="ide-footer-status-bar" role="contentinfo">
         <div class="footer-left-node">
-          <span class="footer-clickable-item" onclick="toggleThemeSwitcherPattern()"><i class="ri-contrast-line"></i> Style_Theme: Cyber_Dark</span>
+          <span class="footer-clickable-item" style="display: flex; align-items: center; gap: 4px;">
+            <i class="ri-contrast-line"></i> Style_Theme:
+            <select id="theme-dropdown" class="theme-dropdown-select" onchange="changeThemeFromDropdownPattern(this.value)">
+              <option value="dark">Cyber_Dark</option>
+              <option value="light">Clean_Light</option>
+              <option value="dracula">Dracula</option>
+              <option value="nord">Nordic_Ice</option>
+              <option value="cyberpunk">Cyberpunk_Neon</option>
+            </select>
+          </span>
           <span class="footer-clickable-item" onclick="toggleCommandPaletteModalWindow()"><i class="ri-command-line"></i> Ctrl+K Palette</span>
         </div>
         <div class="footer-right-node">
@@ -425,51 +1017,345 @@ target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True
 
   <button class="mobile-menu-toggle-trigger" id="mobile-drawer-toggle-btn" aria-label="Toggle structural metadata panel"><i class="ri-menu-unfold-line"></i></button>
 
+  <div class="ndw-hover-card" id="ndw-hover-card">
+    <div class="ndw-card-banner" id="ndw-card-banner"></div>
+    <div class="ndw-card-avatar-row">
+      <img class="ndw-card-avatar" id="ndw-card-avatar" src="https://avatars.githubusercontent.com/u/197274423?v=4" alt="Discord Large Avatar">
+    </div>
+    <div class="ndw-card-body">
+      <div class="ndw-card-status-row">
+        <div class="ndw-card-status-dot offline" id="ndw-card-status-dot"></div>
+        <span class="ndw-card-status-text offline" id="ndw-card-status-text">OFFLINE</span>
+      </div>
+      <div id="ndw-card-custom-status-section" class="ndw-card-section" style="display:none;">
+        <div class="ndw-card-section-heading">Custom Status</div>
+        <div class="ndw-card-custom-status" id="ndw-card-custom-status"></div>
+      </div>
+      <div id="ndw-card-activity-section" class="ndw-card-section" style="display:none;">
+        <div class="ndw-card-section-heading">Activity</div>
+        <div class="ndw-card-activity-name" id="ndw-card-activity-name"></div>
+        <div class="ndw-card-activity-detail" id="ndw-card-activity-detail"></div>
+      </div>
+      <div id="ndw-card-spotify-section" class="ndw-card-section" style="display:none;">
+        <div class="ndw-card-section-heading">Listening on Spotify</div>
+        <div class="ndw-card-spotify-row">
+          <img class="ndw-card-spotify-art" id="ndw-card-spotify-art" src="" alt="Album Art">
+          <div class="ndw-card-spotify-info">
+            <div class="ndw-card-spotify-song" id="ndw-card-spotify-song"></div>
+            <div class="ndw-card-spotify-artist" id="ndw-card-spotify-artist"></div>
+          </div>
+        </div>
+      </div>
+      <div class="ndw-card-updated" id="ndw-card-updated">Last updated: never</div>
+      <a class="ndw-card-discord-btn" href="https://discord.com/users/1051180323058237450" target="_blank" rel="noopener noreferrer">
+        <i class="ri-discord-fill"></i> Open Discord Profile
+      </a>
+    </div>
+  </div>
+
+  <div class="cert-modal-overlay" id="cert-modal-overlay">
+    <div class="cert-modal-box">
+      <button class="cert-modal-close" onclick="closeCertModal()">&times;</button>
+      <div class="cert-modal-title" id="cert-modal-title"></div>
+      <div class="cert-modal-issuer" id="cert-modal-issuer"></div>
+      <div class="cert-modal-meta" id="cert-modal-meta"></div>
+      <div class="cert-modal-desc" id="cert-modal-desc"></div>
+      <div class="cert-modal-actions" id="cert-modal-actions"></div>
+    </div>
+  </div>
+
   <script>
     const WORKSPACE_SHEETS_CONFIG = [
       { key: 'about_md', label: 'about.md', icon: 'ri-markdown-line' },
       { key: 'projects_md', label: 'projects.md', icon: 'ri-file-code-line' },
       { key: 'journey_md', label: 'journey.md', icon: 'ri-history-line' },
-      { key: 'blog_md', label: 'blog.md', icon: 'ri-git-merge-line' },
-      { key: 'contact_md', label: 'contact.md', icon: 'ri-mail-open-line' }
+      { key: 'certs_md', label: 'certs.md', icon: 'ri-award-line' },
+      { key: 'contact_md', label: 'connect.md', icon: 'ri-links-line' }
     ];
 
     const REPOSITORIES_PROJECTS_METADATA = [
-      { name: 'CivicEye-Platform-Core', desc: 'Real-time video edge parsing classification pipeline using YOLOv8 frameworks linked into explicitly validation-hardened multi-role relational PHP datastore nodes.', tech: ['YOLOv8 Core', 'PHP', 'MySQL', 'Python Processors'], stars: 8, forks: 2, updated: 'May 2025' },
-      { name: 'CyberSapiens-Audit-Toolkit', desc: 'Centralized production code repositories tracking custom parsing engine filters scripts, regex sanitization bypass models, and target bound automation templates used during enterprise infrastructure VAPT tasks.', tech: ['Python', 'Bash Scripts', 'Burp Extensions Engine'], stars: 6, forks: 1, updated: 'March 2026' },
-      { name: 'RigMaster-Configurator-UX', desc: 'High-density computational hardware configuration selector prototype designed inside Framer utilizing optimized schema models hooks to provide sub-140ms asset redrawing metrics.', tech: ['Framer UI', 'JavaScript Logic', 'Data Schema Models'], stars: 3, forks: 0, updated: 'April 2025' }
+      {
+        name: 'KeebForge Order Management Platform',
+        subtitle: 'Client Project',
+        badge: 'PRODUCTION',
+        featured: true,
+        desc: 'Designed and developed a full-stack order management and customer tracking platform for a custom mechanical keyboard workshop. The platform streamlines order management, production workflows, warranty tracking, and customer communication while allowing customers to securely track their orders in real time.',
+        tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Supabase'],
+        highlights: ['Admin dashboard', 'Customer order tracking', 'Production workflow management', 'Warranty management', 'Analytics dashboard', 'Secure authentication'],
+        url: 'https://order.keebforge.in/'
+      },
+      {
+        name: 'KeebForge Website',
+        subtitle: 'Client Project',
+        badge: 'PRODUCTION',
+        featured: true,
+        desc: 'Designed and developed a responsive business website for a custom mechanical keyboard workshop, showcasing products, repair services, custom builds, and company information with a modern, performance-focused user experience.',
+        tech: ['HTML', 'CSS', 'JavaScript'],
+        highlights: ['Responsive design', 'Product & service showcase', 'Modern UI/UX', 'SEO optimized', 'Performance optimized'],
+        url: 'https://keebforge.in/'
+      },
+      {
+        name: 'KeyDir.in',
+        subtitle: 'Community Project',
+        badge: 'ACTIVE',
+        featured: true,
+        desc: 'Built and maintain a community-driven directory of Indian mechanical keyboard vendors, builders, and brands. The platform helps enthusiasts discover trusted stores, compare vendors, and explore the growing mechanical keyboard ecosystem in India.',
+        tech: ['HTML', 'CSS', 'JavaScript'],
+        highlights: ['Vendor directory', 'Brand discovery', 'Builder listings', 'Community resource', 'SEO optimized', 'Performance optimized'],
+        url: 'https://keydir.in/'
+      },
+      {
+        name: 'CivicEye',
+        subtitle: 'Final Year Project',
+        badge: 'ARCHIVED',
+        desc: 'Developed an AI-powered traffic monitoring system that detects traffic violations using CCTV footage. The platform leverages the YOLOv8 object detection model to identify helmet violations and automate traffic monitoring.',
+        tech: ['Python', 'YOLOv8', 'OpenCV', 'Docker'],
+        highlights: ['Helmet detection', 'AI-powered object detection', 'Real-time processing', 'Docker deployment', 'Cross-platform support'],
+        url: 'https://github.com/SHADOW269/CivicEye'
+      },
+      {
+        name: 'CivicEye Web Interface',
+        subtitle: 'Frontend & Management Portal',
+        badge: 'DEMO',
+        desc: 'Developed the web interface for CivicEye to manage authentication, user sessions, detection history, and administrative functions. The AI detection engine runs locally while the web application handles user interaction and database management.',
+        tech: ['PHP', 'MySQL', 'HTML', 'CSS', 'JavaScript'],
+        highlights: ['User authentication', 'Detection history', 'Dashboard interface', 'Contact management', 'MySQL integration'],
+        url: 'https://civiceye-demo.shadow269.in/',
+        secondaryUrl: 'https://github.com/SHADOW269/CivicEye-Website-Server'
+      },
+      {
+        name: 'Homelab Dashboard',
+        subtitle: 'Personal Infrastructure',
+        badge: 'SELF HOSTED',
+        desc: 'Built a centralized dashboard for managing self-hosted services, network infrastructure, and media applications. The dashboard provides a clean interface for monitoring and accessing homelab resources.',
+        tech: ['Homepage', 'CSS'],
+        highlights: ['Self-hosted service management', 'Infrastructure overview', 'Responsive dashboard', 'Service monitoring', 'Quick access portal'],
+        url: 'https://github.com/SHADOW269/Homepage'
+      },
+      {
+        name: 'Sierra Design Projects',
+        subtitle: 'UI/UX Design Internship',
+        badge: 'DESIGN',
+        desc: 'Designed and deployed responsive website concepts during my internship, focusing on user experience, responsive layouts, design systems, and modern interface design for commercial concepts.',
+        tech: ['Framer'],
+        responsibilities: ['Product Design', 'UI/UX Design', 'Responsive layouts', 'Design systems', 'Interactive prototypes', 'Rapid concept development'],
+        links: [
+          { label: 'Pure Energy EV', url: 'https://pure-energy-ev.framer.website/' },
+          { label: 'RigMaster', url: 'https://rigmaster.framer.website/' }
+        ]
+      }
     ];
 
-    const CHRONOLOGY_TIMELINE_METADATA = [
-      { time: 'MARCH 2026 — PRESENT', role: 'Penetration Tester Operator', org: 'Bugcrowd Security Evaluation Networks', body: 'Isolating logical token vulnerabilities, broken state tracking conditions, and multi-tenant information exposure boundaries in wild production deployment platforms.' },
-      { time: 'JULY 2025 — MARCH 2026 (6 MONTHS)', role: 'Cybersecurity VAPT Specialist Intern', org: 'CyberSapiens Enterprise Risk Advisory Labs', body: 'Conducted architecture security audits testing distributed web APIs layers and target mobile platform installations archives package reversing tasks.', points: ['Automated validation routines tracking JWT verification bypass sequences.', 'Bypassed perimeter transport controls by injecting localized Frida orchestration scripts wrappers.'] },
-      { time: '2022 — 2025', role: 'Bachelor of Computer Applications Graduate', org: 'Mangalore University Computer Studies Faculty', body: 'Acquired absolute baseline theoretical tracking parameters modeling algorithmic systems execution steps, structured network patterns design, and microservice query data optimization configurations.' }
+    const TIMELINE_EXPERIENCE = [
+      {
+        role: 'Full-Stack Developer & Security Engineer',
+        org: 'Self-Employed',
+        time: 'March 2026 – Present',
+        location: 'Remote',
+        current: true,
+        desc: 'Building and deploying modern full-stack web applications while expanding expertise in offensive security and secure software development.',
+        points: [
+          'Designed, developed, and deployed full-stack web applications from planning to production.',
+          'Built and maintained community and client projects including KEYDIR.in and KeebForge.',
+          'Designed scalable databases and backend architectures using modern web technologies.',
+          'Managed deployments, hosting, domain configuration, and ongoing maintenance.',
+          'Continuously improve cybersecurity skills through Bugcrowd, HackerOne, CTF platforms, and hands-on security labs.',
+          'Research web application vulnerabilities, secure coding practices, and modern attack techniques.'
+        ],
+        tech: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Docker', 'Linux', 'JavaScript'],
+        icon: 'ri-code-s-slash-line'
+      },
+      {
+        role: 'Cybersecurity Intern',
+        org: 'CyberSapiens EdTech',
+        time: 'July 2025 – March 2026',
+        location: 'Mangaluru',
+        desc: 'Performed manual security assessments for web applications and APIs with an emphasis on business logic vulnerabilities and modern web security.',
+        points: [
+          'Performed manual web and API penetration testing beyond automated vulnerability scanning.',
+          'Identified API vulnerabilities including BOPLA, BFLA, and Mass Assignment.',
+          'Assessed access control weaknesses and privilege escalation scenarios.',
+          'Tested SSRF, Blind SQL Injection, CORS misconfigurations, and authentication bypasses.',
+          'Evaluated modern applications protected by WAFs and hardened authentication mechanisms.',
+          'Produced structured vulnerability reports with technical details, business impact, and remediation guidance.'
+        ],
+        tech: ['Burp Suite', 'OWASP API Security', 'Nuclei', 'Postman', 'Linux'],
+        icon: 'ri-shield-keyhole-line'
+      },
+      {
+        role: 'UI/UX Design Intern',
+        org: 'Sierra Learning Academy Pvt. Ltd.',
+        time: 'February 2025 – May 2025',
+        location: 'Mangaluru',
+        desc: 'Designed and developed responsive product showcase websites while creating reusable design systems and high-fidelity prototypes using Framer.',
+        points: [
+          'Designed responsive multi-page websites using Framer.',
+          'Created reusable component libraries and lightweight design systems.',
+          'Built e-commerce and EV platform concepts.',
+          'Developed CMS-driven marketplace layouts and product showcases.',
+          'Produced interactive high-fidelity prototypes.',
+          'Delivered complete design concepts under tight project timelines.'
+        ],
+        tech: ['Framer', 'UI Design', 'UX Design', 'Design Systems', 'Prototyping', 'Responsive Design'],
+        icon: 'ri-palette-line'
+      }
     ];
 
-    const BLOG_POSTS_METADATA = [
-      { id: 'bp-01', title: 'Chaining Authorization Errors to Evade Multi-Tenant Data Boundaries', date: 'May 27, 2026', time: '12 min read', excerpt: 'Deep-dive analytical review tracking how flawed claims mapping validations inside structural authentication workflows permit adjacent resource extraction maps compilation.', tags: ['security', 'cloud', 'system-design'] },
-      { id: 'bp-02', title: 'Dynamic Frida Hooks Ingestion: Overriding Transport Layer Security Controls', date: 'January 14, 2026', time: '9 min read', excerpt: 'A clear guide explaining how to hook, instrument, and intercept runtime execution tracking arrays inside native Android components to trace encryption keys generation cycles.', tags: ['android', 'reverse-engineering', 'security'] }
+    const TIMELINE_EDUCATION = [
+      {
+        role: 'Bachelor of Computer Applications (BCA)',
+        org: 'Maps College, Mangalore',
+        time: 'June 2022 – June 2025',
+        field: 'Computer Programming',
+        desc: 'Completed undergraduate studies with a focus on programming fundamentals, software development, databases, networking, operating systems, and web technologies.',
+        icon: 'ri-graduation-cap-line'
+      },
+      {
+        role: 'Class XII',
+        org: 'St. Aloysius (Deemed to be University), Mangaluru',
+        time: 'May 2020 – May 2022',
+        field: 'Computer Science',
+        desc: 'Completed higher secondary education specializing in Computer Science with a strong foundation in programming and mathematics.',
+        icon: 'ri-book-open-line'
+      },
+      {
+        role: 'Secondary Education',
+        org: 'Milagres College, Mangalore',
+        time: 'April 2009 – April 2020',
+        desc: 'Completed primary and secondary education while developing a strong interest in technology, computers, and software development.',
+        icon: 'ri-school-line'
+      }
+    ];
+
+    const CERTIFICATIONS_METADATA = [
+      {
+        key: 'crtom',
+        name: 'Certified Red Team Operations Management (CRTOM)',
+        issuer: 'Red Team Leaders',
+        date: 'Jan 2026',
+        year: '2026',
+        id: 'c87309042f132211',
+        category: 'offensive',
+        categoryLabel: 'Offensive Security',
+        difficulty: 'Professional',
+        featured: true,
+        desc: 'Advanced red team operations certification covering offensive security management, threat simulation, and adversarial tactics.',
+        verifyUrl: null
+      },
+      {
+        key: 'crpo',
+        name: 'Certified Ransomware Protection Officer (CRPO)',
+        issuer: 'ICTTF',
+        date: 'Dec 2025',
+        year: '2025',
+        id: '64d63660ac9488bbf50f3e76',
+        category: 'infosec',
+        categoryLabel: 'Information Security',
+        difficulty: 'Advanced',
+        featured: true,
+        desc: 'Specialized certification in ransomware defense strategies, incident response, and organizational protection frameworks.',
+        verifyUrl: null
+      },
+      {
+        key: 'iso27001',
+        name: 'ISO/IEC 27001:2022 Information Security Associate',
+        issuer: 'SkillFront',
+        date: 'Dec 2025',
+        year: '2025',
+        id: null,
+        category: 'infosec',
+        categoryLabel: 'Information Security',
+        difficulty: 'Intermediate',
+        featured: true,
+        desc: 'Information Security Management System (ISMS) certification aligned with ISO/IEC 27001:2022 international standard.',
+        verifyUrl: null
+      },
+      {
+        key: 'aws',
+        name: 'AWS Security Specialty – Domain 1 Review',
+        issuer: 'AWS Training',
+        date: 'Dec 2025',
+        year: '2025',
+        id: '0056e6e1-4262-42b6-a1a0-231feb648aa8',
+        category: 'cloud',
+        categoryLabel: 'Cloud Security',
+        difficulty: 'Advanced',
+        featured: false,
+        desc: 'AWS Security Specialty domain review covering cloud security architecture, threat detection, and incident response on AWS.',
+        verifyUrl: null
+      },
+      {
+        key: 'ceh',
+        name: 'Certified Ethical Hacker (CEH)',
+        issuer: 'CyberSapiens EdTech',
+        date: 'Dec 2025',
+        year: '2025',
+        id: null,
+        category: 'offensive',
+        categoryLabel: 'Offensive Security',
+        difficulty: 'Intermediate',
+        featured: true,
+        desc: 'Comprehensive ethical hacking certification covering penetration testing methodologies, vulnerability assessment, and exploitation techniques.',
+        verifyUrl: null
+      },
+      {
+        key: 'datacom',
+        name: 'Datacom Cyber Security Operations Job Simulation',
+        issuer: 'Forage',
+        date: 'Dec 2025',
+        year: '2025',
+        id: 'NQzgatgizSKMQr7Wk',
+        category: 'simulation',
+        categoryLabel: 'Simulation',
+        difficulty: 'Foundation',
+        featured: false,
+        desc: 'SOC operations simulation covering threat analysis, incident response workflows, and security monitoring in enterprise environments.',
+        verifyUrl: null
+      },
+      {
+        key: 'remarkskill',
+        name: 'REMARKSKILL Ethical Hacking Workshop',
+        issuer: 'Remarkskill',
+        date: 'Mar 2025',
+        year: '2025',
+        id: null,
+        category: 'workshop',
+        categoryLabel: 'Workshop',
+        difficulty: 'Foundation',
+        featured: false,
+        desc: '2-day hands-on workshop covering fake application awareness, TOR anonymity basics, encryption concepts, and attacker techniques.',
+        verifyUrl: null
+      },
+      {
+        key: 'business',
+        name: 'Foundations of Business and Entrepreneurship',
+        issuer: 'SkillFront',
+        date: 'Dec 2025',
+        year: '2025',
+        id: null,
+        category: 'business',
+        categoryLabel: 'Business',
+        difficulty: 'Foundation',
+        featured: false,
+        desc: "Business fundamentals and entrepreneurship foundations certification from SkillFront's accredited learning program.",
+        verifyUrl: null
+      }
     ];
 
     const PALETTE_NAVIGATION_COMMANDS_MATRIX = [
       { label: 'Navigate: Go to about.md file layer view', target: 'about_md', type: 'nav' },
       { label: 'Navigate: Go to projects.md repositories inventory code', target: 'projects_md', type: 'nav' },
       { label: 'Navigate: Go to journey.md timeline log records', target: 'journey_md', type: 'nav' },
-      { label: 'Navigate: Go to blog.md research writeups metrics', target: 'blog_md', type: 'nav' },
-      { label: 'Navigate: Go to contact.md secure communication pipeline', target: 'contact_md', type: 'nav' },
+      { label: 'Navigate: Go to certs.md professional certifications registry', target: 'certs_md', type: 'nav' },
+      { label: 'Navigate: Go to connect.md professional network registry', target: 'contact_md', type: 'nav' },
       { label: 'Action: Clear active execution terminal shell screen memory', action: 'clear_terminal', type: 'cmd' },
-      { label: 'Action: Run default profile cat README.md tracking script', action: 'readme_simulation', type: 'cmd' }
+      { label: 'Action: Run whoami profile script', action: 'whoami_simulation', type: 'cmd' }
     ];
 
     function escapeDOMInjectionStringText(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
-    // ════════════════  LIVE GITHUB STARS FETCH  ════════════════
-    // Only total stars are fetched via the client-side GitHub API.
-    // Commits, streak, and top-language stats are served as accurate
-    // server-rendered SVG images (github-readme-stats + streak-stats.demolab.com)
-    // in the GITHUB_ACTIVITY.LOG panel, so no client-side API calls are needed for them.
     const GH_USER = 'shadow269';
 
     async function fetchGitHubLiveStats() {
@@ -482,11 +1368,9 @@ target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True
         if (starsEl) starsEl.innerHTML = `${totalStars}<span>★</span>`;
       } catch (err) {
         console.warn('[GH Stars Fetch Failed]', err);
-        // Leave the default — dash — if fetch fails
       }
     }
 
-    // ════════════════  WORKSPACE COMPILE  ════════════════
     function executeWorkspaceCoreArchitectureCompilation() {
       const desktopHeaderTabsRowContainerElement = document.getElementById('editor-tabs-header-container');
       const mobileTabsScrollRowContainerElement = document.getElementById('mobile-tabs-row');
@@ -498,39 +1382,174 @@ target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True
       desktopHeaderTabsRowContainerElement.innerHTML = tabsHtmlStringBlock;
       mobileTabsScrollRowContainerElement.innerHTML = tabsHtmlStringBlock;
 
-      document.getElementById('projects-target-injection-viewport-grid').innerHTML = REPOSITORIES_PROJECTS_METADATA.map(repo => `
-        <div class="repo-card" role="listitem">
-          <div>
+      document.getElementById('projects-target-injection-viewport-grid').innerHTML = REPOSITORIES_PROJECTS_METADATA.map(repo => {
+        const featuredClass = repo.featured ? ' repo-card--featured' : '';
+        const featuredBadge = '<span class="repo-featured-tag' + (repo.featured ? '' : ' is-placeholder') + '">Featured</span>';
+        const featureItems = (repo.highlights || repo.responsibilities || []).slice(0, 5);
+        const featuresHtml = featureItems.length
+          ? '<ul class="repo-highlights">' + featureItems.map(h => '<li>' + escapeDOMInjectionStringText(h) + '</li>').join('') + '</ul>'
+          : '<ul class="repo-highlights"></ul>';
+        const actionButtons = [];
+        if (repo.url) {
+          actionButtons.push('<a href="' + repo.url + '" target="_blank" rel="noopener noreferrer" class="repo-action-btn repo-action-demo"><i class="ri-external-link-line"></i> View Project</a>');
+        }
+        if (repo.secondaryUrl) {
+          actionButtons.push('<a href="' + repo.secondaryUrl + '" target="_blank" rel="noopener noreferrer" class="repo-action-btn repo-action-code"><i class="ri-github-fill"></i> Repository</a>');
+        }
+        if (Array.isArray(repo.links)) {
+          repo.links.forEach(link => {
+            actionButtons.push('<a href="' + link.url + '" target="_blank" rel="noopener noreferrer" class="repo-action-btn repo-action-demo"><i class="ri-external-link-line"></i> ' + escapeDOMInjectionStringText(link.label) + '</a>');
+          });
+        }
+        const actionsHtml = actionButtons.join('');
+        return `
+        <div class="repo-card${featuredClass}" role="listitem">
+          <div class="repo-card-body">
+            ${featuredBadge}
             <div class="repo-head">
-              <div class="repo-title-text"><i class="ri-git-repository-line" aria-hidden="true"></i> ${escapeDOMInjectionStringText(repo.name)}</div>
-              <i class="ri-git-branch-line" style="color:var(--text-muted); font-size:0.9rem;" aria-hidden="true"></i>
+              <div class="repo-title-block">
+                <div class="repo-title-text">${escapeDOMInjectionStringText(repo.name)}</div>
+                <div class="repo-subtitle">${escapeDOMInjectionStringText(repo.subtitle || '')}</div>
+              </div>
+              <span class="repo-badge">${escapeDOMInjectionStringText(repo.badge || '')}</span>
             </div>
             <p class="repo-desc-text">${escapeDOMInjectionStringText(repo.desc)}</p>
-            <div class="repo-pills">${repo.tech.map(t => `<span>${escapeDOMInjectionStringText(t)}</span>`).join('')}</div>
+            ${featuresHtml}
+            <div class="repo-pills">${repo.tech.map(t => '<span>' + escapeDOMInjectionStringText(t) + '</span>').join('')}</div>
           </div>
-          <div class="repo-footer">
-            <div class="repo-stats">
-              <span><i class="ri-star-line"></i> ${repo.stars}</span>
-              <span><i class="ri-git-fork-line" style="color:var(--neon-blue);"></i> ${repo.forks}</span>
+          ${actionsHtml ? '<div class="repo-actions">' + actionsHtml + '</div>' : ''}
+        </div>`;
+      }).join('');
+
+      const journeyViewport = document.getElementById('journey-timeline-target-injection-viewport');
+      journeyViewport.className = 'vertical-timeline';
+      journeyViewport.style.display = 'grid';
+
+      journeyViewport.innerHTML = `
+        <div style="grid-column: 1 / -1; display: block; clear: both; font-family: var(--font-sans); font-size: 1.45rem; font-weight: 700; color: var(--text-bright); margin: 0 0 24px 0; padding: 0;">
+          <span style="display: flex; align-items: center; gap: 10px;">
+            <i class="ri-briefcase-line" style="color: var(--neon-purple); font-size: 1.6rem;"></i> Experience
+          </span>
+        </div>
+
+        ${TIMELINE_EXPERIENCE.map((node, index) => {
+          const isLastExperience = index === TIMELINE_EXPERIENCE.length - 1;
+          const currentBadge = node.current ? '<span class="node-current-badge">Current</span>' : '';
+          const techHtml = node.tech ? '<div class="node-tech-tags">' + node.tech.map(t => '<span>' + escapeDOMInjectionStringText(t) + '</span>').join('') + '</div>' : '';
+          const pointsHtml = node.points ? '<ul class="node-points">' + node.points.map(pt => '<li>' + escapeDOMInjectionStringText(pt) + '</li>').join('') + '</ul>' : '';
+          const fieldHtml = node.field ? '<span class="node-field">' + escapeDOMInjectionStringText(node.field) + '</span>' : '';
+          return `
+          <div class="timeline-node-item" role="listitem">
+            <div class="timeline-marker ${isLastExperience ? 'no-line' : ''}"><div class="timeline-icon"><i class="${node.icon || 'ri-record-circle-line'}"></i></div></div>
+            <div class="timeline-content">
+              <div class="node-top-row">
+                <span class="node-timestamp">${escapeDOMInjectionStringText(node.time)}</span>
+                ${currentBadge}
+              </div>
+              <h3 class="node-header-title">${escapeDOMInjectionStringText(node.role)}</h3>
+              <span class="node-sub-org"><i class="ri-building-line"></i> ${escapeDOMInjectionStringText(node.org)}${node.location ? ' <span class="node-location"><i class="ri-map-pin-line"></i> ' + escapeDOMInjectionStringText(node.location) + '</span>' : ''}</span>
+              ${fieldHtml}
+              <p class="node-body-content">${escapeDOMInjectionStringText(node.desc)}</p>
+              ${pointsHtml}
+              ${techHtml}
             </div>
-            <div class="repo-actions-links">
-              <a href="https://github.com/shadow269" target="_blank" rel="noopener noreferrer">Inspect_Node Key →</a>
+          </div>`;
+        }).join('')}
+
+        <div style="grid-column: 1 / -1; display: block; clear: both; font-family: var(--font-sans); font-size: 1.45rem; font-weight: 700; color: var(--text-bright); margin: 56px 0 24px 0; padding: 0;">
+          <span style="display: flex; align-items: center; gap: 10px;">
+            <i class="ri-graduation-cap-line" style="color: var(--neon-purple); font-size: 1.6rem;"></i> Education
+          </span>
+        </div>
+
+        ${TIMELINE_EDUCATION.map(node => {
+          const fieldHtml = node.field ? '<span class="node-field">' + escapeDOMInjectionStringText(node.field) + '</span>' : '';
+          return `
+          <div class="timeline-node-item" role="listitem">
+            <div class="timeline-marker"><div class="timeline-icon"><i class="${node.icon || 'ri-record-circle-line'}"></i></div></div>
+            <div class="timeline-content">
+              <span class="node-timestamp">${escapeDOMInjectionStringText(node.time)}</span>
+              <h3 class="node-header-title">${escapeDOMInjectionStringText(node.role)}</h3>
+              <span class="node-sub-org"><i class="ri-building-line"></i> ${escapeDOMInjectionStringText(node.org)}</span>
+              ${fieldHtml}
+              <p class="node-body-content">${escapeDOMInjectionStringText(node.desc)}</p>
+            </div>
+          </div>`;
+        }).join('')}`;
+
+      document.getElementById('cert-cards-viewport').innerHTML = CERTIFICATIONS_METADATA.map(c => {
+        const featuredClass = c.featured ? 'featured-cert' : '';
+        const idHtml = c.id ? '<span class="cert-id">ID: ' + escapeDOMInjectionStringText(c.id) + '</span>' : '';
+        const featuredBadge = c.featured ? '<span class="cert-badge-tag cert-badge-featured">Featured</span>' : '';
+        const verifyBtn = c.verifyUrl ? '<button class="btn-cert" onclick="window.open(\'' + c.verifyUrl + '\',\'_blank\')"><span>Verify</span></button>' : '';
+        return `
+        <div class="cert-card-new ${featuredClass}" data-category="${c.category}" data-year="${c.year}">
+          <div class="cert-card-inner">
+            <div class="cert-badge-row"><div class="cert-diamond"></div><span class="cert-issuer-tag">${escapeDOMInjectionStringText(c.issuer)}</span></div>
+            <div class="cert-name-new">${escapeDOMInjectionStringText(c.name)}</div>
+            <div class="cert-meta-row"><span class="cert-date">${escapeDOMInjectionStringText(c.date)}</span>${idHtml}</div>
+            <p class="cert-desc">${escapeDOMInjectionStringText(c.desc)}</p>
+            <div class="cert-badges-row">
+              <span class="cert-badge-tag cert-badge-cat">${escapeDOMInjectionStringText(c.categoryLabel)}</span>
+              <span class="cert-badge-tag cert-badge-diff">${escapeDOMInjectionStringText(c.difficulty)}</span>
+              ${featuredBadge}
             </div>
           </div>
-        </div>
-      `).join('');
+          <div class="cert-actions">
+            <button class="btn-cert primary-cert" onclick="openCertModal('${c.key}')"><span>⬡ View Certificate</span></button>
+            ${verifyBtn}
+          </div>
+        </div>`;
+      }).join('');
 
-      document.getElementById('journey-timeline-target-injection-viewport').innerHTML = CHRONOLOGY_TIMELINE_METADATA.map(node => `
-        <div class="timeline-node-item" role="listitem">
-          <span class="node-timestamp">${escapeDOMInjectionStringText(node.time)}</span>
-          <h3 class="node-header-title">${escapeDOMInjectionStringText(node.role)}</h3>
-          <span class="node-sub-org">${escapeDOMInjectionStringText(node.org)}</span>
-          <p class="node-body-content">${escapeDOMInjectionStringText(node.body)}</p>
-          ${node.points ? `<div class="node-body-content"><ul>${node.points.map(pt => `<li>${escapeDOMInjectionStringText(pt)}</li>`).join('')}</ul></div>` : ''}
-        </div>
-      `).join('');
+      const certFilterChips = document.querySelectorAll('.cert-filter-chip');
+      const certYearMarkers = document.querySelectorAll('.cert-year-marker');
 
-      compileThreatBlogPostsViewportCanvas();
+      certFilterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+          certFilterChips.forEach(c => c.classList.remove('active'));
+          chip.classList.add('active');
+          
+          // Reset year markers to 'All'
+          certYearMarkers.forEach(m => {
+            if (m.dataset.year === 'all') m.classList.add('active');
+            else m.classList.remove('active');
+          });
+
+          const filterVal = chip.dataset.filter;
+          document.querySelectorAll('.cert-card-new').forEach(card => {
+            if (filterVal === 'all' || card.dataset.category === filterVal) {
+              card.style.display = '';
+              card.style.animation = 'certFadeIn 0.3s ease';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      certYearMarkers.forEach(marker => {
+        marker.addEventListener('click', () => {
+          certYearMarkers.forEach(m => m.classList.remove('active'));
+          marker.classList.add('active');
+
+          // Reset category chips to 'All'
+          certFilterChips.forEach(c => {
+            if (c.dataset.filter === 'all') c.classList.add('active');
+            else c.classList.remove('active');
+          });
+
+          const yearVal = marker.dataset.year;
+          document.querySelectorAll('.cert-card-new').forEach(card => {
+            if (yearVal === 'all' || card.dataset.year === yearVal) {
+              card.style.display = '';
+              card.style.animation = 'certFadeIn 0.3s ease';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
 
       document.getElementById('palette-results-target-injection-viewport-list').innerHTML = PALETTE_NAVIGATION_COMMANDS_MATRIX.map((cmd, idx) => `
         <div class="palette-option-item ${idx === 0 ? 'selected' : ''}" role="option" id="palette-option-idx-${idx}" onclick="executePaletteOptionCommandCallbackIndexReference(${idx})">
@@ -538,33 +1557,6 @@ target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True
           <span class="palette-shortcut-hint">${cmd.type === 'nav' ? 'Navigation' : 'Shell Routine'}</span>
         </div>
       `).join('');
-    }
-
-    function compileThreatBlogPostsViewportCanvas(filterQueryTextKeywordString = '') {
-      const filtered = filterQueryTextKeywordString === ''
-        ? BLOG_POSTS_METADATA
-        : BLOG_POSTS_METADATA.filter(p => p.title.toLowerCase().includes(filterQueryTextKeywordString.toLowerCase()) || p.excerpt.toLowerCase().includes(filterQueryTextKeywordString.toLowerCase()));
-      const container = document.getElementById('blog-posts-target-injection-viewport-grid');
-      if (filtered.length) {
-        container.innerHTML = filtered.map(post => `
-          <div class="blog-card" role="listitem" onclick="executeTerminalCommandSimulation('cat blog/posts/${post.id}.md')">
-            <div class="blog-thumb-frame" aria-hidden="true"><i class="ri-article-line"></i></div>
-            <div class="blog-content-block">
-              <div>
-                <div class="blog-meta-data">
-                  <span><i class="ri-calendar-todo-line"></i> ${escapeDOMInjectionStringText(post.date)}</span>
-                  <span><i class="ri-time-line"></i> ${escapeDOMInjectionStringText(post.time)}</span>
-                </div>
-                <h3 class="blog-card-title">${escapeDOMInjectionStringText(post.title)}</h3>
-                <p class="blog-card-summary">${escapeDOMInjectionStringText(post.excerpt)}</p>
-              </div>
-              <div class="blog-tags-row">${post.tags.map(t => `<span class="blog-tag-badge">#${escapeDOMInjectionStringText(t)}</span>`).join('')}</div>
-            </div>
-          </div>
-        `).join('');
-      } else {
-        container.innerHTML = '<div style="padding:40px; text-align:center; font-family:var(--font-mono); color:var(--text-muted);">No logs writeups match criteria query bounds.</div>';
-      }
     }
 
     function activateWorkspaceSheetTabContainerInstance(key) {
@@ -577,55 +1569,223 @@ target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True
       if (mobileTab) mobileTab.classList.add('active');
       if (canvas) canvas.classList.add('active');
       recalculateReadingScrollProgressTrackingMetrics();
+
+      const sidebar = document.getElementById('ide-sidebar-node');
+      if (sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+        const btn = document.getElementById('mobile-drawer-toggle-btn');
+        if (btn) btn.querySelector('i').className = 'ri-menu-unfold-line';
+      }
+
+      if (key === 'certs_md') animateCertCounters();
     }
 
-    // ════════════════  TERMINAL  ════════════════
-    const SHELL_MOCK = {
-      help() {
-        return ["Operational Framework Virtual Shell Registry - Executable Routines:", "  help               — Output system core operational directives indexes maps.", "  cat README.md      — Execute local data ingestion and initialization parsing run.", "  ls projects/       — Display active blueprint configuration schemas values list.", "  clear              — Purge current visual interface console terminal buffer tracker lines."];
-      },
-      ['cat readme.md']() {
-        return ["Ingesting Sakshith C Shetty Network Node variable context maps parameters...", "  -> Handle Identifier String Verified: SHADOW-269 (Bugcrowd Active Matrix Evaluation)", "  -> Ingest Pipeline Target Vectors  : Web Application Bounds Bypassing // RESTful Intercepts", "  -> Inception Status Code Tracker  : Reception arrays open for target assessments execution loops."];
-      },
-      ['ls projects/']() {
-        return ["Directory: contents/blueprints/exploits/ (3 objects array items context trace located):", "  [Obj Ref 0] -> CivicEye-Platform-Core (YOLOv8 Relational Backend Security Context Map)", "  [Obj Ref 1] -> CyberSapiens-Audit-Toolkit (Automation payload checking processing modules code)", "  [Obj Ref 2] -> RigMaster-Configurator-UX (Latency redrawing layout model engine components configuration)"];
-      }
-    };
+    function animateCertCounters() {
+      document.querySelectorAll('.cert-stat-count').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        let current = 0;
+        const increment = Math.max(1, Math.floor(target / 20));
+        const interval = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(interval);
+          }
+          el.textContent = current;
+        }, 30);
+      });
+    }
 
-    const termBuf = document.getElementById('terminal-screen-buffer-stream');
-    const termInput = document.getElementById('terminal-keyboard-input-element');
+    function openCertModal(key) {
+      const cert = CERTIFICATIONS_METADATA.find(c => c.key === key);
+      if (!cert) return;
+      document.getElementById('cert-modal-title').textContent = cert.name;
+      document.getElementById('cert-modal-issuer').textContent = cert.issuer;
+      document.getElementById('cert-modal-meta').innerHTML = `<span>Date: ${cert.date}</span>${cert.id ? '<span>ID: ' + cert.id + '</span>' : ''}<span>${cert.categoryLabel}</span><span>${cert.difficulty}</span>`;
+      document.getElementById('cert-modal-desc').textContent = cert.desc;
+      document.getElementById('cert-modal-actions').innerHTML = cert.verifyUrl ? `<button class="btn-cert primary-cert" onclick="window.open('${cert.verifyUrl}','_blank')"><span>Verify Credential</span></button>` : '';
+      document.getElementById('cert-modal-overlay').classList.add('visible');
+    }
 
-    function executeTerminalCommandSimulation(raw) {
-      const cmd = raw.trim();
-      if (!cmd) return;
-      const echo = document.createElement('div');
-      echo.className = 'term-row';
-      echo.innerHTML = `<span class="term-prompt-marker">guest@shadow269_ops:~$</span> <span style="color:#fff;"></span>`;
-      echo.querySelector('span:last-child').textContent = cmd;
-      termBuf.appendChild(echo);
-      const key = cmd.toLowerCase().replace(/\s+/g, ' ');
-      if (key === 'clear') { termBuf.innerHTML = ''; return; }
-      const out = document.createElement('div');
-      out.className = 'term-row';
-      if (SHELL_MOCK[key]) {
-        out.innerHTML = SHELL_MOCK[key]().map(l => escapeDOMInjectionStringText(l)).join('\n');
-      } else if (key.startsWith('cat blog/posts/')) {
-        out.innerHTML = `[INGEST SYSTEM] Opening structural writeup content path... Complete.`;
-      } else {
-        out.innerHTML = `<span style="color:var(--neon-red);">Shell Exception Code 404: Input flag matches no known executive routing pointer. Execute 'help'.</span>`;
-      }
-      termBuf.appendChild(out);
+    function closeCertModal() {
+      document.getElementById('cert-modal-overlay').classList.remove('visible');
+    }
+
+    document.getElementById('cert-modal-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeCertModal();
+    });
+
+    const termBuf = document.getElementById('term-buffer');
+    const termInput = document.getElementById('term-input');
+    let termHistory = [];
+    let termHistoryIdx = -1;
+    let termBusy = false;
+
+    const TERM_COMMANDS = ['whoami', 'clear'];
+
+    function termEscape(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    function termAppendHTML(html) {
+      const row = document.createElement('div');
+      row.className = 'term-row';
+      row.innerHTML = html;
+      const interactiveRow = document.getElementById('term-interactive-row');
+      termBuf.insertBefore(row, interactiveRow);
       termBuf.scrollTop = termBuf.scrollHeight;
     }
 
+    function termAppendText(text, cls) {
+      const c = cls ? ' class="' + cls + '"' : '';
+      termAppendHTML('<span' + c + '>' + termEscape(text) + '</span>');
+    }
+
+    function termAppendLines(lines, cls) {
+      lines.forEach(l => termAppendText(l, cls));
+    }
+
+    async function termTypeLines(lines, cls, delay) {
+      termBusy = true;
+      delay = delay || 18;
+      const interactiveRow = document.getElementById('term-interactive-row');
+      for (let i = 0; i < lines.length; i++) {
+        const row = document.createElement('div');
+        row.className = 'term-row';
+        termBuf.insertBefore(row, interactiveRow);
+        const text = lines[i];
+        for (let j = 0; j < text.length; j++) {
+          row.innerHTML = '<span' + (cls ? ' class="' + cls + '"' : '') + '>' + termEscape(text.substring(0, j + 1)) + '</span><span class="term-cursor"></span>';
+          termBuf.scrollTop = termBuf.scrollHeight;
+          await new Promise(r => setTimeout(r, delay));
+        }
+        row.innerHTML = '<span' + (cls ? ' class="' + cls + '"' : '') + '>' + termEscape(text) + '</span>';
+        termBuf.scrollTop = termBuf.scrollHeight;
+      }
+      termBusy = false;
+    }
+
+    async function fetchVisitorData() {
+      const header = [
+        'Visitor Information',
+        '───────────────────────────'
+      ];
+      try {
+        const res = await fetch('https://ipapi.co/json/');
+        if (!res.ok) throw new Error();
+        const d = await res.json();
+        await termTypeLines(header, 'term-info', 20);
+        await termTypeLines(['Public IP : ' + d.ip], 'term-info', 30);
+        termAppendLines([
+          'ISP       : ' + (d.org || 'Unknown'),
+          'Location  : ' + (d.city || 'Unknown') + ', ' + (d.country_code || '??'),
+          ''
+        ], 'term-info');
+      } catch {
+        await termTypeLines(header, 'term-warning', 20);
+        termAppendLines([
+          'Public IP : Hidden',
+          'ISP       : Unknown',
+          'Location  : Unknown',
+          ''
+        ], 'term-warning');
+      }
+    }
+
+    async function executeTerminalCommandSimulation(raw) {
+      const cmd = raw.trim();
+      if (!cmd) return;
+
+      termAppendHTML('<span class="term-prompt-marker">guest@shadow269:~$</span> <span class="term-output-text">' + termEscape(cmd) + '</span>');
+
+      const key = cmd.toLowerCase().replace(/\s+/g, ' ');
+
+      if (key === 'clear') {
+        const interactiveRow = document.getElementById('term-interactive-row');
+        Array.from(termBuf.children).forEach(child => {
+          if (child !== interactiveRow) {
+            termBuf.removeChild(child);
+          }
+        });
+        return;
+      }
+
+      if (key === 'whoami') {
+        await fetchVisitorData();
+        return;
+      }
+      const firstWord = cmd.split(' ')[0];
+      termAppendText('bash: ' + firstWord + ': command not found');
+    }
+
     termInput.addEventListener('keydown', e => {
-      if (e.key === 'Enter' && termInput.value.trim()) {
-        executeTerminalCommandSimulation(termInput.value);
+      if (termBusy) { e.preventDefault(); return; }
+
+      if (e.key === 'Enter') {
+        const val = termInput.value;
+        if (val.trim()) {
+          termHistory.push(val);
+          termHistoryIdx = termHistory.length;
+        }
         termInput.value = '';
+        executeTerminalCommandSimulation(val);
+        return;
+      }
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (termHistoryIdx > 0) {
+          termHistoryIdx--;
+          termInput.value = termHistory[termHistoryIdx];
+        }
+        return;
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (termHistoryIdx < termHistory.length - 1) {
+          termHistoryIdx++;
+          termInput.value = termHistory[termHistoryIdx];
+        } else {
+          termHistoryIdx = termHistory.length;
+          termInput.value = '';
+        }
+        return;
+      }
+
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const partial = termInput.value.trim().toLowerCase();
+        if (partial) {
+          const matches = TERM_COMMANDS.filter(c => c.startsWith(partial));
+          if (matches.length === 1) {
+            termInput.value = matches[0];
+          } else if (matches.length > 1) {
+            termAppendHTML('<span class="term-prompt-marker">guest@shadow269:~$</span> <span class="term-output-text">' + termEscape(termInput.value) + '</span>');
+            termAppendText(matches.join('  '), 'term-info');
+          }
+        }
+        return;
+      }
+
+      if ((e.ctrlKey || e.metaKey) && e.key === 'l') {
+        e.preventDefault();
+        termBuf.innerHTML = '';
+        return;
+      }
+
+      if (e.ctrlKey && e.key === 'c') {
+        e.preventDefault();
+        termAppendHTML('<span class="term-prompt-marker">guest@shadow269:~$</span> <span class="term-output-text">' + termEscape(termInput.value) + '^C</span>');
+        termInput.value = '';
+        return;
       }
     });
 
-    // ════════════════  COMMAND PALETTE  ════════════════
+    termInput.addEventListener('focus', () => {
+      termBuf.scrollTop = termBuf.scrollHeight;
+    });
+
     const paletteOverlay = document.getElementById('palette-modal-overlay-viewport');
     const paletteField = document.getElementById('palette-search-field-input');
     let paletteIdx = 0;
@@ -648,7 +1808,7 @@ target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True
       toggleCommandPaletteModalWindow();
       if (cmd.type === 'nav') activateWorkspaceSheetTabContainerInstance(cmd.target);
       else if (cmd.action === 'clear_terminal') executeTerminalCommandSimulation('clear');
-      else if (cmd.action === 'readme_simulation') executeTerminalCommandSimulation('cat README.md');
+      else if (cmd.action === 'whoami_simulation') executeTerminalCommandSimulation('whoami');
     }
 
     window.addEventListener('keydown', e => {
@@ -664,9 +1824,8 @@ target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True
 
     paletteOverlay.addEventListener('click', e => { if (e.target === paletteOverlay) toggleCommandPaletteModalWindow(); });
 
-    function toggleThemeSwitcherPattern() {
-      const cur = document.documentElement.getAttribute('data-theme') || 'dark';
-      document.documentElement.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+    function changeThemeFromDropdownPattern(val) {
+      document.documentElement.setAttribute('data-theme', val);
     }
 
     function recalculateReadingScrollProgressTrackingMetrics() {
@@ -683,26 +1842,191 @@ target_node.execute_logic_fuzzing_pipeline(depth=<span class="code-keyword">True
       document.getElementById('progress-indicator-bar').style.width = `${pct}%`;
     }
 
-    document.getElementById('secure-outbound-form-blueprint').addEventListener('submit', e => {
-      e.preventDefault();
-      const fb = document.getElementById('form-execution-feedback-log-node');
-      fb.style.display = 'block';
-      fb.textContent = 'Transmitting handshake verification log traces...';
-      setTimeout(() => { fb.textContent = '✓ Communication envelope transmitted to host gateway. Node receiver allocation verified successfully.'; e.target.reset(); }, 800);
-    });
-
     document.getElementById('mobile-drawer-toggle-btn').addEventListener('click', () => {
       const open = document.getElementById('ide-sidebar-node').classList.toggle('open');
       document.getElementById('mobile-drawer-toggle-btn').querySelector('i').className = open ? 'ri-menu-fold-line' : 'ri-menu-unfold-line';
     });
 
-    document.getElementById('blog-search-field-input').addEventListener('input', e => compileThreatBlogPostsViewportCanvas(e.target.value));
+    const LANYARD_USER_ID = '1051180323058237450';
+    const LANYARD_POLL_INTERVAL = 30000;
+    let ndwHoverTimeout = null;
+    let ndwCardHoverTimeout = null;
+
+    const DISCORD_STATUS_COLORS = {
+      online: 'online', idle: 'idle', dnd: 'dnd', offline: 'offline'
+    };
+
+    function ndwSetWidgetState(status, username, avatarUrl) {
+      const dot = document.getElementById('nav-discord-dot');
+      const avatarEl = document.getElementById('ndt-avatar');
+      const state = DISCORD_STATUS_COLORS[status] || 'offline';
+
+      if (dot) { dot.className = 'status-dot ' + state; }
+      if (avatarEl && avatarUrl) { avatarEl.src = avatarUrl; }
+    }
+
+    function ndwPopulateHoverCard(data) {
+      const user = data.discord_user || {};
+      const status = data.discord_status || 'offline';
+      const state = DISCORD_STATUS_COLORS[status] || 'offline';
+      const statusLabel = status === 'dnd' ? 'DO NOT DISTURB' : status.toUpperCase();
+      const avatarUrl = user.avatar
+        ? 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png?size=128'
+        : 'https://avatars.githubusercontent.com/u/197274423?v=4';
+      const banner = document.getElementById('ndw-card-banner');
+      const cardAvatar = document.getElementById('ndw-card-avatar');
+      const statusDot = document.getElementById('ndw-card-status-dot');
+      const statusText = document.getElementById('ndw-card-status-text');
+      const customSection = document.getElementById('ndw-card-custom-status-section');
+      const customStatus = document.getElementById('ndw-card-custom-status');
+      const activitySection = document.getElementById('ndw-card-activity-section');
+      const activityName = document.getElementById('ndw-card-activity-name');
+      const activityDetail = document.getElementById('ndw-card-activity-detail');
+      const spotifySection = document.getElementById('ndw-card-spotify-section');
+      const spotifyArt = document.getElementById('ndw-card-spotify-art');
+      const spotifySong = document.getElementById('ndw-card-spotify-song');
+      const spotifyArtist = document.getElementById('ndw-card-spotify-artist');
+      const updated = document.getElementById('ndw-card-updated');
+
+      banner.className = 'ndw-card-banner' + (status === 'offline' ? ' offline-banner' : '');
+      cardAvatar.src = avatarUrl;
+      statusDot.className = 'ndw-card-status-dot ' + state;
+      statusText.className = 'ndw-card-status-text ' + state;
+      statusText.textContent = statusLabel;
+
+      const customAct = (data.activities || []).find(a => a.type === 4);
+      if (customAct && (customAct.state || customAct.name)) {
+        customSection.style.display = '';
+        let html = '';
+        if (customAct.emoji && customAct.emoji.id) {
+          const url = customAct.emoji.animated
+            ? 'https://cdn.discordapp.com/emojis/' + customAct.emoji.id + '.gif'
+            : 'https://cdn.discordapp.com/emojis/' + customAct.emoji.id + '.png';
+          html += '<img class="ndw-card-custom-status-emoji" src="' + url + '" alt="' + (customAct.emoji.name || '') + '">';
+        } else if (customAct.emoji && customAct.emoji.name) {
+          html += '<span>' + customAct.emoji.name + '</span>';
+        }
+        html += '<span>' + escapeDOMInjectionStringText(customAct.state || customAct.name || '') + '</span>';
+        customStatus.innerHTML = html;
+      } else {
+        customSection.style.display = 'none';
+      }
+
+      if (data.spotify) {
+        spotifySection.style.display = '';
+        spotifyArt.src = data.spotify.album_art_url || '';
+        spotifyArt.alt = data.spotify.album || 'Album Art';
+        spotifySong.textContent = data.spotify.song || '';
+        spotifyArtist.textContent = data.spotify.artist || '';
+      } else {
+        spotifySection.style.display = 'none';
+      }
+
+      const gameAct = (data.activities || []).find(a => a.type === 0 || a.type === 2 || a.type === 3);
+      if (gameAct) {
+        activitySection.style.display = '';
+        activityName.textContent = gameAct.name || '';
+        const parts = [];
+        if (gameAct.details) parts.push(gameAct.details);
+        if (gameAct.state) parts.push(gameAct.state);
+        activityDetail.textContent = parts.join(' · ');
+      } else {
+        activitySection.style.display = 'none';
+      }
+
+      const now = new Date();
+      updated.textContent = 'Last updated: ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    async function ndwPollLanyardStatus() {
+      if (LANYARD_USER_ID === 'YOUR_DISCORD_USER_ID') return;
+      try {
+        const res = await fetch('https://api.lanyard.rest/v1/users/' + LANYARD_USER_ID);
+        if (!res.ok) throw new Error('Lanyard HTTP ' + res.status);
+        const json = await res.json();
+        if (json.success && json.data) {
+          const d = json.data;
+          const user = d.discord_user || {};
+          const avatarUrl = user.avatar
+            ? 'https://cdn.discordapp.com/avatars/' + user.id + '/' + user.avatar + '.png?size=128'
+            : null;
+          ndwSetWidgetState(d.discord_status, user.global_name || user.username, avatarUrl);
+          ndwPopulateHoverCard(d);
+        } else {
+          ndwSetWidgetState('offline', 'SHADOW269', null);
+        }
+      } catch (err) {
+        console.warn('[Discord Presence] Lanyard fetch failed:', err);
+        ndwSetWidgetState('offline', 'SHADOW269', null);
+      }
+    }
+
+    function ndwPositionHoverCard() {
+      const profileNode = document.querySelector('.sidebar-block.profile-node');
+      const card = document.getElementById('ndw-hover-card');
+      if (!profileNode || !card) return;
+      const rect = profileNode.getBoundingClientRect();
+      const sidebar = document.getElementById('ide-sidebar-node');
+      const sidebarRect = sidebar ? sidebar.getBoundingClientRect() : { right: 360 };
+      let left = sidebarRect.right + 12;
+      let top = rect.top;
+      if (left + 320 > window.innerWidth) left = sidebarRect.right - 320 - 12;
+      if (left < 8) left = 8;
+      if (top + 420 > window.innerHeight) top = window.innerHeight - 428;
+      if (top < 8) top = 8;
+      card.style.left = left + 'px';
+      card.style.top = top + 'px';
+    }
+
+    function ndwShowHoverCard() {
+      clearTimeout(ndwCardHoverTimeout);
+      const card = document.getElementById('ndw-hover-card');
+      ndwPositionHoverCard();
+      card.classList.add('visible');
+    }
+
+    function ndwHideHoverCard() {
+      ndwCardHoverTimeout = setTimeout(() => {
+        document.getElementById('ndw-hover-card').classList.remove('visible');
+      }, 150);
+    }
+
+    function ndwInitHoverListeners() {
+      const profileNode = document.querySelector('.sidebar-block.profile-node');
+      const card = document.getElementById('ndw-hover-card');
+      if (!profileNode || !card) return;
+
+      profileNode.style.cursor = 'default';
+      profileNode.addEventListener('mouseenter', () => {
+        clearTimeout(ndwHoverTimeout);
+        ndwHoverTimeout = setTimeout(ndwShowHoverCard, 300);
+      });
+      profileNode.addEventListener('mouseleave', () => {
+        clearTimeout(ndwHoverTimeout);
+        ndwHideHoverCard();
+      });
+      card.addEventListener('mouseenter', () => {
+        clearTimeout(ndwCardHoverTimeout);
+      });
+      card.addEventListener('mouseleave', () => {
+        ndwHideHoverCard();
+      });
+    }
+
+    function initializeDiscordPresenceUpdater() {
+      ndwPollLanyardStatus();
+      setInterval(ndwPollLanyardStatus, LANYARD_POLL_INTERVAL);
+      ndwInitHoverListeners();
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
       executeWorkspaceCoreArchitectureCompilation();
       activateWorkspaceSheetTabContainerInstance('about_md');
-      executeTerminalCommandSimulation('help');
       fetchGitHubLiveStats();
+      initializeDiscordPresenceUpdater();
+
+      const formNextUrl = document.getElementById('form-next-url');
+      if (formNextUrl) formNextUrl.value = window.location.href;
     });
   </script>
 </body>
