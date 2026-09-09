@@ -571,14 +571,14 @@
 
     .highlights-matrix {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
     }
 
     .highlight-cell {
       background-color: var(--panel-dark);
       border: 1px solid var(--border);
-      padding: 12px;
+      padding: 8px;
       border-radius: 6px;
       text-align: center;
       transition: all 0.2s;
@@ -593,24 +593,24 @@
 
     .hl-count {
       font-family: var(--font-mono);
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--text-bright);
       line-height: 1;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
     .hl-count span {
       color: var(--neon-blue);
-      font-size: 1.1rem;
+      font-size: 0.95rem;
       margin-left: 2px;
     }
 
     .hl-label {
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       text-transform: uppercase;
       color: var(--text-muted);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
       font-weight: 600;
     }
 
@@ -1532,6 +1532,34 @@
       50% {
         opacity: 0;
       }
+    }
+
+    .term-line-in {
+      animation: termLineIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes termLineIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    .term-link {
+      color: var(--neon-blue);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .term-link:hover {
+      color: var(--text-bright);
     }
 
     .ide-footer-status-bar {
@@ -2931,8 +2959,8 @@
       }
 
       .highlights-matrix {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
       }
 
       .terminal-drawer-widget {
@@ -3069,6 +3097,101 @@
         box-shadow: none;
       }
     }
+
+    .icon-cloud-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 32px 0 24px;
+      padding: 24px 0;
+    }
+
+    .icon-cloud-scene {
+      width: 230px;
+      height: 230px;
+      perspective: 600px;
+      position: relative;
+    }
+
+    .icon-cloud-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+    }
+
+    .icon-cloud-item {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      left: 50%;
+      top: 50%;
+      margin: -16px 0 0 -16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 5px;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+      backface-visibility: hidden;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    .icon-cloud-item:hover {
+      border-color: var(--neon-purple);
+      box-shadow: 0 0 12px rgba(163, 113, 247, 0.35), 0 1px 4px rgba(0, 0, 0, 0.25);
+      z-index: 10;
+    }
+
+    .icon-cloud-item img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .icon-cloud-item:hover img {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.25));
+    }
+
+    [data-theme="light"] .icon-cloud-item {
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.12);
+    }
+
+    [data-theme="light"] .icon-cloud-item img {
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+    }
+
+    [data-theme="light"] .icon-cloud-item:hover img {
+      transform: scale(1.15);
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.2));
+    }
+
+    @media (max-width: 600px) {
+      .icon-cloud-scene {
+        width: 173px;
+        height: 173px;
+      }
+
+      .icon-cloud-item {
+        width: 25px;
+        height: 25px;
+        margin: -12.5px 0 0 -12.5px;
+        padding: 4px;
+        border-radius: 6px;
+      }
+
+      .icon-cloud-item img {
+        width: 18px;
+        height: 18px;
+      }
+    }
   </style>
 </head>
 
@@ -3099,7 +3222,6 @@
         <div class="contact-list" role="list">
           <div class="contact-item" role="listitem"><i class="ri-mail-send-line"></i> contact@shadow269.in</div>
           <div class="contact-item" role="listitem"><i class="ri-map-pin-user-line"></i> Mangaluru, Karnataka, IN</div>
-          <div class="contact-item" role="listitem"><i class="ri-shield-user-line"></i> Handle: SHADOW-269</div>
         </div>
       </div>
       <div class="sidebar-block">
@@ -3128,27 +3250,22 @@
         <div class="highlights-matrix">
           <div class="highlight-cell">
             <div class="hl-count">6<span>M</span></div>
-            <div class="hl-label">Internship Exp</div>
+            <div class="hl-label">Internship</div>
           </div>
           <div class="highlight-cell">
             <div class="hl-count">8+</div>
-            <div class="hl-label">Certs Earned</div>
+            <div class="hl-label">Certs</div>
           </div>
           <div class="highlight-cell">
             <div class="hl-count">25+</div>
-            <div class="hl-label">Labs & CTFs</div>
+            <div class="hl-label">Labs</div>
           </div>
           <div class="highlight-cell">
             <div class="hl-count" id="live-git-stars-counter">—<span>★</span></div>
-            <div class="hl-label">Repo Stars</div>
+            <div class="hl-label">Repo</div>
           </div>
         </div>
-      </div>
-
-      <!-- GitHub Activity Graph -->
-      <div class="sidebar-block">
-        <div class="block-heading"><i class="ri-github-line"></i> GitHub Activity</div>
-        <div class="git-graph-panel">
+        <div class="git-graph-panel" style="margin-top: 12px;">
           <div class="git-graph-img-wrapper">
             <picture>
               <source
@@ -3164,6 +3281,13 @@
                 alt="shadow269's GitHub Contributions" loading="lazy" style="width:100%; height:auto; display:block;" width="322" height="120">
             </picture>
           </div>
+        </div>
+      </div>
+
+      <div class="sidebar-block">
+        <div class="block-heading"><i class="ri-cloud-line"></i> Tech Cloud</div>
+        <div class="icon-cloud-wrapper" style="margin: 8px 0 4px; padding: 0;">
+          <div class="icon-cloud-scene" id="icon-cloud-scene"></div>
         </div>
       </div>
 
@@ -3244,7 +3368,7 @@
         </div>
         <div class="md-line">
           <div class="ln-content">
-            <p>Production applications, client projects, and open-source work. Each project includes the problem, solution, tech stack, and impact.</p>
+            <p>Selected projects I've built and deployed, including client work, community projects, and production applications.</p>
           </div>
         </div>
         <div class="repo-cards-grid" id="projects-target-injection-viewport-grid"></div>
@@ -3728,34 +3852,44 @@
 
     const REPOSITORIES_PROJECTS_METADATA = [
       {
-        name: 'KeebForge Order Management Platform',
+        name: 'KeebForge E-commerce Platform',
         subtitle: 'Client Project',
         badge: 'PRODUCTION',
         featured: true,
-        desc: 'Full-stack order management platform for a custom keyboard workshop. Handles order tracking, production workflows, warranty management, and customer communication.',
+        desc: 'Full-stack e-commerce platform built for a custom mechanical keyboard business, replacing the earlier static website and order workflow with a Next.js-based application.',
         tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Supabase'],
-        highlights: ['Admin dashboard', 'Customer order tracking', 'Production workflow management', 'Warranty management', 'Analytics dashboard', 'Secure authentication'],
-        url: 'https://order.keebforge.in/'
-      },
-      {
-        name: 'KeebForge Website',
-        subtitle: 'Client Project',
-        badge: 'PRODUCTION',
-        featured: true,
-        desc: 'Responsive business website for a custom mechanical keyboard workshop. Product showcase, repair services, and company information.',
-        tech: ['HTML', 'CSS', 'JavaScript'],
-        highlights: ['Responsive design', 'Product & service showcase', 'Modern UI/UX', 'SEO optimized', 'Performance optimized'],
+        highlights: ['Full e-commerce storefront', 'Product catalogue and product pages', 'Shopping and order workflow', 'Customer-facing web application', 'Next.js-based architecture'],
         url: 'https://keebforge.in/'
       },
       {
-        name: 'KeyDir.in',
+        name: 'KeyDir Application',
         subtitle: 'Community Project',
         badge: 'ACTIVE',
         featured: true,
-        desc: 'Community-driven directory of Indian mechanical keyboard vendors, builders, and brands. Helps enthusiasts discover and compare keyboard stores across India.',
+        desc: 'Next.js-based application for discovering mechanical keyboard products, vendors, brands, and builders in India, with product price tracking and historical pricing.',
+        tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Supabase'],
+        highlights: ['Product discovery', 'Vendor directory', 'Brand discovery', 'Product price tracking', 'Price history'],
+        url: 'https://app.keydir.in/'
+      },
+      {
+        name: 'KeyDir.in — Static Directory',
+        subtitle: 'Community Project',
+        badge: 'ACTIVE',
+        featured: false,
+        desc: 'Static directory for discovering mechanical keyboard vendors, brands, and builders in India.',
         tech: ['HTML', 'CSS', 'JavaScript'],
-        highlights: ['Vendor directory', 'Brand discovery', 'Builder listings', 'Community resource', 'SEO optimized', 'Performance optimized'],
+        highlights: ['Vendor directory', 'Brand discovery', 'Builder listings', 'Community resource'],
         url: 'https://keydir.in/'
+      },
+      {
+        name: 'KeebForge Website — Legacy Static Version',
+        subtitle: 'Client Project',
+        badge: 'COMPLETED',
+        featured: false,
+        desc: 'Production business website built with vanilla HTML, CSS, and JavaScript. The site presented KeebForge\'s products and services and used FormSubmit to collect customer orders.',
+        tech: ['HTML', 'CSS', 'JavaScript', 'FormSubmit'],
+        highlights: ['Static HTML/CSS/JavaScript implementation', 'Product and service presentation', 'Customer order form', 'FormSubmit-based order handling', 'Responsive design', 'Production deployment'],
+        url: 'https://shop.keebforge.in/'
       },
       {
         name: 'CivicEye',
@@ -3801,53 +3935,50 @@
 
     const TIMELINE_EXPERIENCE = [
       {
-        role: 'Full-Stack Developer & Security Engineer',
+        role: 'Freelance IT & Web Operations',
         org: 'Self-Employed',
-        time: 'March 2026 – Present',
-        location: 'Remote',
-        current: true,
-        desc: 'Building and deploying modern full-stack web applications while expanding expertise in offensive security and secure software development.',
+        time: '2026 – Present',
+        location: 'Mangaluru, India',
+        desc: 'Managing independent web and business technology projects involving website administration, domain configuration, system and tool setup, feature implementation, issue tracking, and ongoing maintenance.',
         points: [
-          'Designed, developed, and deployed full-stack web applications from planning to production.',
-          'Built and maintained community and client projects including KEYDIR.in and KeebForge.',
-          'Designed scalable databases and backend architectures using modern web technologies.',
-          'Managed deployments, hosting, domain configuration, and ongoing maintenance.',
-          'Continuously improve cybersecurity skills through Bugcrowd, HackerOne, CTF platforms, and hands-on security labs.',
-          'Research web application vulnerabilities, secure coding practices, and modern attack techniques.'
+          'KeyDir: Scaled a community-driven platform to approximately 5,000 visitors and 13,000 views in under five months.',
+          'Managed GitHub issues and pull requests, community feedback, feature requests, and feature rollouts.',
+          'Reviewed changes and improvements to maintain platform quality and reliability.',
+          'KeebForge: Developed and launched an e-commerce platform for a small business.',
+          'Configured domains, business tools, integrations, and operational workflows based on business requirements.',
+          'Managed ongoing website maintenance, integrations, feature implementation, and technical improvements.',
+          'Contributed to a 120% increase in order volume.'
         ],
-        tech: ['Next.js', 'TypeScript', 'Supabase', 'PostgreSQL', 'Docker', 'Linux', 'JavaScript'],
-        icon: 'ri-code-s-slash-line'
+        tech: ['HTML', 'CSS', 'JavaScript', 'GitHub', 'Domain Configuration', 'Linux'],
+        icon: 'ri-briefcase-line'
       },
       {
-        role: 'Cybersecurity Intern',
-        org: 'CyberSapiens EdTech',
-        time: 'July 2025 – March 2026',
-        location: 'Mangaluru',
-        desc: 'Performed manual security assessments for web applications and APIs with an emphasis on business logic vulnerabilities and modern web security.',
+        role: 'Security Analyst Intern',
+        org: 'CyberSapiens',
+        time: '2026',
+        location: 'Remote',
+        desc: 'Investigated technical and security issues using structured testing, troubleshooting, documentation, and verification.',
         points: [
-          'Performed manual web and API penetration testing beyond automated vulnerability scanning.',
-          'Identified API vulnerabilities including BOPLA, BFLA, and Mass Assignment.',
-          'Assessed access control weaknesses and privilege escalation scenarios.',
-          'Tested SSRF, Blind SQL Injection, CORS misconfigurations, and authentication bypasses.',
-          'Evaluated modern applications protected by WAFs and hardened authentication mechanisms.',
-          'Produced structured vulnerability reports with technical details, business impact, and remediation guidance.'
+          'Investigated reported technical and security issues.',
+          'Prepared detailed reports documenting findings, vulnerabilities, issue severity, and recommended corrective actions.',
+          'Tested and verified fixes to ensure reported issues were properly resolved.',
+          'Collaborated with analysts and mentors during issue resolution.',
+          'Maintained accurate technical documentation and project records.'
         ],
-        tech: ['Burp Suite', 'OWASP API Security', 'Nuclei', 'Postman', 'Linux'],
+        tech: ['Burp Suite', 'OWASP', 'Nuclei', 'Postman', 'Linux'],
         icon: 'ri-shield-keyhole-line'
       },
       {
         role: 'UI/UX Design Intern',
-        org: 'Sierra Learning Academy Pvt. Ltd.',
-        time: 'February 2025 – May 2025',
-        location: 'Mangaluru',
-        desc: 'Designed and developed responsive product showcase websites while creating reusable design systems and high-fidelity prototypes using Framer.',
+        org: 'Sierra Learning Academy',
+        time: '2025',
+        location: 'Mangaluru, India',
+        desc: 'Worked on web-based projects involving website interfaces, layouts, application usability, and interactive prototypes.',
         points: [
-          'Designed responsive multi-page websites using Framer.',
-          'Created reusable component libraries and lightweight design systems.',
-          'Built e-commerce and EV platform concepts.',
-          'Developed CMS-driven marketplace layouts and product showcases.',
-          'Produced interactive high-fidelity prototypes.',
-          'Delivered complete design concepts under tight project timelines.'
+          'Worked on web-based projects involving website interfaces, layouts, and application usability.',
+          'Created and maintained web design components with attention to consistency, functionality, and user requirements.',
+          'Built interactive prototypes and design concepts using Framer.',
+          'Collaborated with mentors to refine interfaces, resolve issues, and improve web-based implementations based on feedback.'
         ],
         tech: ['Framer', 'UI Design', 'UX Design', 'Design Systems', 'Prototyping', 'Responsive Design'],
         icon: 'ri-palette-line'
@@ -3857,26 +3988,19 @@
     const TIMELINE_EDUCATION = [
       {
         role: 'Bachelor of Computer Applications (BCA)',
-        org: 'Maps College, Mangalore',
-        time: 'June 2022 – June 2025',
+        org: 'MAPS - Mangalore University',
+        time: '2022 – 2025',
         field: 'Computer Programming',
         desc: 'Completed undergraduate studies with a focus on programming fundamentals, software development, databases, networking, operating systems, and web technologies.',
         icon: 'ri-graduation-cap-line'
       },
       {
-        role: 'Class XII',
-        org: 'St. Aloysius (Deemed to be University), Mangaluru',
-        time: 'May 2020 – May 2022',
+        role: 'Higher Secondary Education',
+        org: 'St. Aloysius',
+        time: '2020 – 2022',
         field: 'Computer Science',
-        desc: 'Completed higher secondary education specializing in Computer Science with a strong foundation in programming and mathematics.',
+        desc: 'Completed higher secondary education specializing in Computer Science.',
         icon: 'ri-book-open-line'
-      },
-      {
-        role: 'Secondary Education',
-        org: 'Milagres College, Mangalore',
-        time: 'April 2009 – April 2020',
-        desc: 'Completed primary and secondary education while developing a strong interest in technology, computers, and software development.',
-        icon: 'ri-school-line'
       }
     ];
 
@@ -4288,9 +4412,16 @@
     const termInput = document.getElementById('term-input');
     let termHistory = [];
     let termHistoryIdx = -1;
-    let termBusy = false;
 
-    const TERM_COMMANDS = ['clear'];
+    const TERM_COMMANDS = [
+      'help', 'whoami', 'projects', 'skills', 'experience', 'certs',
+      'resume', 'contact', 'headers', 'recon', 'ssl', 'dns', 'about', 'clear'
+    ];
+
+    let TERMINAL_BOOTED = false;
+    let termSeqChain = Promise.resolve();
+    let termVisitorCache = null;
+    let termVisitorFetch = null;
 
     function termEscape(s) {
       return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -4314,52 +4445,443 @@
       lines.forEach(l => termAppendText(l, cls));
     }
 
-    async function termTypeLines(lines, cls, delay) {
-      termBusy = true;
-      delay = delay || 18;
-      const interactiveRow = document.getElementById('term-interactive-row');
-      for (let i = 0; i < lines.length; i++) {
-        const row = document.createElement('div');
-        row.className = 'term-row';
-        termBuf.insertBefore(row, interactiveRow);
-        const text = lines[i];
-        for (let j = 0; j < text.length; j++) {
-          row.innerHTML = '<span' + (cls ? ' class="' + cls + '"' : '') + '>' + termEscape(text.substring(0, j + 1)) + '</span><span class="term-cursor"></span>';
-          termBuf.scrollTop = termBuf.scrollHeight;
-          await new Promise(r => setTimeout(r, delay));
-        }
-        row.innerHTML = '<span' + (cls ? ' class="' + cls + '"' : '') + '>' + termEscape(text) + '</span>';
-        termBuf.scrollTop = termBuf.scrollHeight;
-      }
-      termBusy = false;
+    function termDelay(ms) {
+      return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    function termSeqTask(task) {
+      termSeqChain = termSeqChain.then(task).catch(() => {});
+    }
 
+    function termSeqEmit(entries, delay) {
+      termSeqTask(async () => {
+        const interactiveRow = document.getElementById('term-interactive-row');
+        const wait = (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) ? 0 : (delay || 60);
+        for (let i = 0; i < entries.length; i++) {
+          const entry = entries[i];
+          const row = document.createElement('div');
+          row.className = 'term-row' + (wait > 0 ? ' term-line-in' : '');
+          if (entry && typeof entry === 'object') {
+            if (entry.html) {
+              row.innerHTML = '<span' + (entry.cls ? ' class="' + entry.cls + '"' : '') + '>' + entry.html + '</span>';
+            } else {
+              row.innerHTML = '<span' + (entry.cls ? ' class="' + entry.cls + '"' : '') + '>' + termEscape(entry.text) + '</span>';
+            }
+          } else {
+            row.innerHTML = '<span>' + termEscape(String(entry)) + '</span>';
+          }
+          termBuf.insertBefore(row, interactiveRow);
+          termBuf.scrollTop = termBuf.scrollHeight;
+          if (wait > 0) await termDelay(wait);
+        }
+      });
+    }
 
-    async function executeTerminalCommandSimulation(raw) {
+    function showCommandLine(cmd) {
+      termAppendHTML('<span class="term-prompt-marker">guest@shadow269:~$</span> <span class="term-output-text">' + termEscape(cmd) + '</span>');
+    }
+
+    function termLink(href, label, download) {
+      const h = termEscape(href);
+      const l = termEscape(label);
+      let attrs = download ? ' download' : ' target="_blank" rel="noopener"';
+      if (href.indexOf('mailto:') === 0) attrs = '';
+      return '<a class="term-link" href="' + h + '"' + attrs + '>' + l + '</a>';
+    }
+
+    function termDetectBrowserInfo() {
+      const ua = navigator.userAgent || '';
+      const platform = navigator.platform || '';
+      let browser = 'Unknown';
+      if (/Edg\//.test(ua)) browser = 'Edge';
+      else if (/OPR\//.test(ua) || /Opera/.test(ua)) browser = 'Opera';
+      else if (/Firefox\//.test(ua)) browser = 'Firefox';
+      else if (/Chromium/.test(ua)) browser = 'Chromium';
+      else if (/Chrome\//.test(ua)) browser = 'Chrome';
+      else if (/Safari\//.test(ua)) browser = 'Safari';
+
+      let os = 'Unknown';
+      if (/Android/.test(ua)) os = 'Android';
+      else if (/iPhone|iPad|iPod/.test(ua)) os = 'iOS';
+      else if (/Mac/.test(platform)) os = 'macOS';
+      else if (/Win/.test(platform)) os = 'Windows';
+      else if (/Linux/.test(platform)) os = 'Linux';
+
+      const isMobile = /Mobi|Android|iPhone|iPad|iPod/.test(ua) || ((navigator.maxTouchPoints || 0) > 1 && /Android|Mobile/.test(ua));
+      const formFactor = isMobile ? 'Mobile' : 'Desktop';
+
+      let tz = 'Unknown';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'Unknown'; } catch (e) {}
+
+      const lang = navigator.language || (navigator.languages && navigator.languages[0]) || 'Unknown';
+      const viewport = window.innerWidth + ' × ' + window.innerHeight;
+
+      return { browser, os, formFactor, tz, lang, viewport };
+    }
+
+    function termNetworkInfoEntries(network) {
+      const entries = [{ text: 'Network', cls: 'term-output-text' }];
+      if (network && network.error) {
+        entries.push(
+          { text: '  IP Address    Unavailable', cls: 'term-dim' },
+          { text: '  ISP           Unavailable', cls: 'term-dim' },
+          { text: '  Location      Unavailable', cls: 'term-dim' }
+        );
+      } else {
+        entries.push(
+          { text: '  IP Address    ' + (network.ip || 'Unavailable'), cls: 'term-dim' },
+          { text: '  ISP           ' + (network.isp || 'Unknown'), cls: 'term-dim' },
+          { text: '  Location      ' + (network.location || 'Unknown'), cls: 'term-dim' }
+        );
+      }
+      return entries;
+    }
+
+    function termClientInfoEntries(clientInfo) {
+      return [
+        { text: 'Client', cls: 'term-output-text' },
+        { text: '  Browser       ' + clientInfo.browser, cls: 'term-dim' },
+        { text: '  OS            ' + clientInfo.os, cls: 'term-dim' },
+        { text: '  Platform      ' + clientInfo.formFactor, cls: 'term-dim' },
+        { text: '  Timezone      ' + clientInfo.tz, cls: 'term-dim' },
+        { text: '  Language      ' + clientInfo.lang, cls: 'term-dim' },
+        { text: '  Viewport      ' + clientInfo.viewport, cls: 'term-dim' },
+        { text: '────────────────────────────────', cls: 'term-divider' }
+      ];
+    }
+
+    function termFetchVisitorNetwork(timeoutMs) {
+      if (termVisitorFetch) return termVisitorFetch;
+      if (termVisitorCache && termVisitorCache.network) return Promise.resolve(termVisitorCache.network);
+
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeoutMs || 7000);
+
+      termVisitorFetch = fetch('https://ipapi.co/json/', { signal: controller.signal })
+        .then(r => {
+          if (!r.ok) throw new Error('lookup failed');
+          return r.json();
+        })
+        .then(data => {
+          const info = {
+            ip: (data && data.ip) || 'Unavailable',
+            isp: (data && data.org) || 'Unknown',
+            location: (data && data.city) ? data.city + (data.country_code ? ', ' + data.country_code : '') : 'Unknown'
+          };
+          termVisitorFeatureCacheSet(info);
+          return info;
+        })
+        .catch(() => {
+          termVisitorFetch = null;
+          return { ip: 'Unavailable', isp: 'Unavailable', location: 'Unavailable', error: true };
+        })
+        .finally(() => clearTimeout(timer));
+
+      return termVisitorFetch;
+    }
+
+    function termVisitorFeatureCacheSet(info) {
+      termVisitorCache = termVisitorCache || {};
+      termVisitorCache.network = info;
+    }
+
+    function handleHelp() {
+      termSeqEmit([
+        { text: 'Available commands', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: '  whoami      Visitor environment', cls: 'term-dim' },
+        { text: '  projects    View projects', cls: 'term-dim' },
+        { text: '  skills      Technical skills', cls: 'term-dim' },
+        { text: '  experience  Work experience', cls: 'term-dim' },
+        { text: '  certs       Certifications', cls: 'term-dim' },
+        { text: '  resume      View/download resume', cls: 'term-dim' },
+        { text: '  contact     Contact information', cls: 'term-dim' },
+        { text: '  headers     Inspect available HTTP headers', cls: 'term-dim' },
+        { text: '  recon       Client-side environment', cls: 'term-dim' },
+        { text: '  ssl         HTTPS information', cls: 'term-dim' },
+        { text: '  dns         DNS information', cls: 'term-dim' },
+        { text: '  about       About this portfolio', cls: 'term-dim' },
+        { text: '  clear       Clear terminal', cls: 'term-dim' },
+        { text: '', cls: '' },
+        { text: 'Type a command to continue.', cls: 'term-dim' }
+      ], 30);
+    }
+
+    function handleWhoami() {
+      const clientInfo = termDetectBrowserInfo();
+      const cached = termVisitorCache && termVisitorCache.network;
+
+      if (cached) {
+        termSeqEmit([
+          { text: 'Visitor Environment', cls: 'term-header' },
+          { text: '────────────────────────────────', cls: 'term-divider' },
+          { text: '✔ Public network information retrieved.', cls: 'term-success' }
+        ], 45);
+        termSeqEmit(termNetworkInfoEntries(cached), 50);
+        termSeqEmit(termClientInfoEntries(clientInfo), 50);
+        termSeqEmit([{ text: 'ℹ Retrieved when `whoami` is executed.', cls: 'term-info' }], 30);
+        return;
+      }
+
+      termSeqEmit([
+        { text: 'Visitor Environment', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: '✔ Browser information detected', cls: 'term-success' },
+        { text: '✔ Platform information detected', cls: 'term-success' },
+        { text: '✔ Timezone detected', cls: 'term-success' },
+        { text: '• Fetching public network information...', cls: 'term-info' }
+      ], 65);
+
+      termFetchVisitorNetwork(7000).then(network => {
+        termSeqEmit(termNetworkInfoEntries(network), 50);
+        termSeqEmit(termClientInfoEntries(clientInfo), 50);
+        termSeqEmit([
+          network.error
+            ? { text: 'ℹ Public network information could not be retrieved.', cls: 'term-info' }
+            : { text: 'ℹ Retrieved when `whoami` is executed.', cls: 'term-info' }
+        ], 30);
+      });
+    }
+
+    function handleProjects() {
+      termSeqEmit([
+        { text: 'Projects', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' }
+      ], 45);
+      termSeqEmit([
+        { text: '✔ KeebForge E-commerce Platform', cls: 'term-success' },
+        { html: '  ' + termLink('https://keebforge.in/', 'https://keebforge.in/') },
+        { text: '✔ KeyDir Application', cls: 'term-success' },
+        { html: '  ' + termLink('https://app.keydir.in/', 'https://app.keydir.in/') },
+        { text: '✔ KeyDir Static Directory', cls: 'term-success' },
+        { html: '  ' + termLink('https://keydir.in/', 'https://keydir.in/') },
+        { text: '✔ KeebForge Legacy Website', cls: 'term-success' },
+        { html: '  ' + termLink('https://shop.keebforge.in/', 'https://shop.keebforge.in/') },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'Use the Projects tab for full details.', cls: 'term-dim' }
+      ], 45);
+    }
+
+    function handleSkills() {
+      termSeqEmit([
+        { text: 'Technical Skills', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'Development', cls: 'term-output-text' },
+        { text: '  JavaScript, TypeScript, Next.js', cls: 'term-dim' },
+        { text: '  PostgreSQL, Supabase, HTML, CSS', cls: 'term-dim' },
+        { text: 'Security', cls: 'term-output-text' },
+        { text: '  Burp Suite, OWASP, Web/API Security', cls: 'term-dim' },
+        { text: '  Security Testing & Bug Bounty', cls: 'term-dim' },
+        { text: 'Infrastructure', cls: 'term-output-text' },
+        { text: '  Linux, Docker, Git, Vercel', cls: 'term-dim' },
+        { text: '────────────────────────────────', cls: 'term-divider' }
+      ], 45);
+    }
+
+    function handleExperience() {
+      const entries = [
+        { text: 'Experience', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' }
+      ];
+      TIMELINE_EXPERIENCE.forEach(function (xp) {
+        entries.push(
+          { text: xp.time, cls: 'term-output-text' },
+          { text: xp.role, cls: 'term-success' },
+          { text: xp.org, cls: 'term-dim' },
+          { text: '', cls: '' }
+        );
+      });
+      entries.push(
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'Open the Experience tab for details.', cls: 'term-dim' }
+      );
+      termSeqEmit(entries, 35);
+    }
+
+    function handleCerts() {
+      const entries = [
+        { text: 'Certifications', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' }
+      ];
+      CERTIFICATIONS_METADATA.forEach(function (cert) {
+        entries.push(
+          { text: '✔ ' + cert.name, cls: 'term-success' },
+          { text: '  ' + cert.issuer + ' — ' + cert.year, cls: 'term-dim' }
+        );
+      });
+      entries.push(
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'Use the Certifications tab for full details.', cls: 'term-dim' }
+      );
+      termSeqEmit(entries, 25);
+    }
+
+    function handleResume() {
+      termSeqEmit([
+        { text: 'Resume', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'Opening resume...', cls: 'term-dim' },
+        { html: termLink('files/RESUME.pdf', 'Download Resume', true) }
+      ], 30);
+    }
+
+    function handleContact() {
+      termSeqEmit([
+        { text: 'Contact', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'Email', cls: 'term-output-text' },
+        { html: '  ' + termLink('mailto:contact@shadow269.in', 'contact@shadow269.in') },
+        { text: 'LinkedIn', cls: 'term-output-text' },
+        { html: '  ' + termLink('https://www.linkedin.com/in/sakshithshetty/', 'linkedin.com/in/sakshithshetty') },
+        { text: 'GitHub', cls: 'term-output-text' },
+        { html: '  ' + termLink('https://github.com/shadow269', 'github.com/shadow269') },
+        { text: '────────────────────────────────', cls: 'term-divider' }
+      ], 30);
+    }
+
+    function handleHeaders() {
+      termSeqEmit([
+        { text: 'HTTP Security Headers', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'ℹ Browser-side inspection is limited.', cls: 'term-info' },
+        { text: 'ℹ Some response headers cannot be read from', cls: 'term-info' },
+        { text: '   JavaScript due to browser security restrictions.', cls: 'term-info' },
+        { text: '', cls: '' },
+        { text: 'Use DevTools / curl for complete header inspection.', cls: 'term-dim' }
+      ], 40);
+    }
+
+    function handleRecon() {
+      const c = termDetectBrowserInfo();
+      const net = termVisitorCache && termVisitorCache.network;
+      const entries = [
+        { text: 'Client Environment', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'Browser      ' + c.browser, cls: 'term-dim' },
+        { text: 'Platform     ' + c.formFactor, cls: 'term-dim' },
+        { text: 'Language     ' + c.lang, cls: 'term-dim' },
+        { text: 'Timezone     ' + c.tz, cls: 'term-dim' },
+        { text: 'Viewport     ' + c.viewport, cls: 'term-dim' }
+      ];
+      if (net) entries.push({ text: 'IP Address   ' + net.ip, cls: 'term-dim' });
+      entries.push(
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'ℹ Only browser-provided information is available.', cls: 'term-info' }
+      );
+      termSeqEmit(entries, 40);
+    }
+
+    function handleSsl() {
+      const secure = (typeof location !== 'undefined' && location.protocol === 'https:');
+      termSeqEmit([
+        { text: 'HTTPS', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        secure
+          ? { text: '✓ Current page is served over HTTPS.', cls: 'term-success' }
+          : { text: '✕ Current page is not served over HTTPS.', cls: 'term-warning' },
+        { text: '', cls: '' },
+        { text: 'ℹ Detailed certificate and TLS inspection', cls: 'term-info' },
+        { text: '  is not exposed through normal browser JavaScript.', cls: 'term-info' },
+        { text: 'Use browser security information or DevTools', cls: 'term-dim' },
+        { text: 'for complete TLS details.', cls: 'term-dim' }
+      ], 40);
+    }
+
+    function handleDns() {
+      termSeqEmit([
+        { text: 'DNS', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'ℹ DNS record inspection is not directly available', cls: 'term-info' },
+        { text: '  through normal browser JavaScript.', cls: 'term-info' },
+        { text: '', cls: '' },
+        { text: 'Use `dig` / `nslookup` for authoritative DNS inspection.', cls: 'term-dim' }
+      ], 40);
+    }
+
+    function handleAbout() {
+      termSeqEmit([
+        { text: 'About', cls: 'term-header' },
+        { text: '────────────────────────────────', cls: 'term-divider' },
+        { text: 'This portfolio is a vanilla HTML/CSS/JavaScript', cls: 'term-output-text' },
+        { text: 'VS Code-style site by Sakshith C Shetty — a', cls: 'term-output-text' },
+        { text: 'security analyst and full-stack developer based', cls: 'term-output-text' },
+        { text: 'in Mangaluru, India.', cls: 'term-output-text' },
+        { text: '', cls: '' },
+        { text: 'Use the tabs to explore projects, experience,', cls: 'term-dim' },
+        { text: 'certifications, and contact information.', cls: 'term-dim' }
+      ], 35);
+    }
+
+    const TERMINAL_COMMAND_HANDLERS = {
+      help: handleHelp,
+      whoami: handleWhoami,
+      projects: handleProjects,
+      skills: handleSkills,
+      experience: handleExperience,
+      certs: handleCerts,
+      resume: handleResume,
+      contact: handleContact,
+      headers: handleHeaders,
+      recon: handleRecon,
+      ssl: handleSsl,
+      dns: handleDns,
+      about: handleAbout
+    };
+
+    function initTerminalStartupSequence() {
+      if (TERMINAL_BOOTED) return;
+      TERMINAL_BOOTED = true;
+      showCommandLine('./portfolio');
+      termSeqEmit([
+        { text: '✔ Loading portfolio', cls: 'term-success' },
+        { text: '✔ Loading projects', cls: 'term-success' },
+        { text: '✔ Loading experience', cls: 'term-success' },
+        { text: '✔ Loading certifications', cls: 'term-success' },
+        { text: '✔ Initializing terminal', cls: 'term-success' },
+        { text: '✔ Ready', cls: 'term-success' }
+      ], 70);
+      termSeqEmit([
+        { text: 'Welcome.', cls: 'term-output-text term-bold' },
+        { text: 'Type `help` for available commands.', cls: 'term-dim' }
+      ], 150);
+    }
+
+    function termClearBuffer() {
+      const interactiveRow = document.getElementById('term-interactive-row');
+      Array.from(termBuf.children).forEach(child => {
+        if (child !== interactiveRow) {
+          termBuf.removeChild(child);
+        }
+      });
+      termBuf.scrollTop = termBuf.scrollHeight;
+    }
+
+    function executeTerminalCommandSimulation(raw) {
       const cmd = raw.trim();
       if (!cmd) return;
 
-      termAppendHTML('<span class="term-prompt-marker">guest@shadow269:~$</span> <span class="term-output-text">' + termEscape(cmd) + '</span>');
+      showCommandLine(cmd);
 
       const key = cmd.toLowerCase().replace(/\s+/g, ' ');
 
       if (key === 'clear') {
-        const interactiveRow = document.getElementById('term-interactive-row');
-        Array.from(termBuf.children).forEach(child => {
-          if (child !== interactiveRow) {
-            termBuf.removeChild(child);
-          }
-        });
+        termClearBuffer();
         return;
       }
 
-      const firstWord = cmd.split(' ')[0];
-      termAppendText('bash: ' + firstWord + ': command not found');
+      const handler = TERMINAL_COMMAND_HANDLERS[key] || TERMINAL_COMMAND_HANDLERS[key.split(' ')[0]];
+      if (handler) {
+        handler();
+        return;
+      }
+
+      termSeqEmit([
+        { html: 'bash: <span class="term-error">' + termEscape(key) + '</span>: command not found', cls: 'term-error' },
+        { text: 'Type `help` for available commands.', cls: 'term-dim' }
+      ], 40);
     }
 
     termInput.addEventListener('keydown', e => {
-      if (termBusy) { e.preventDefault(); return; }
 
       if (e.key === 'Enter') {
         const val = termInput.value;
@@ -4722,11 +5244,118 @@
       ndwInitHoverListeners();
     }
 
+    function initIconCloud() {
+      const scene = document.getElementById('icon-cloud-scene');
+      if (!scene) return;
+
+      const slugs = [
+        'typescript', 'javascript', 'react', 'nextdotjs', 'nodedotjs',
+        'html5', 'css3', 'postgresql', 'docker', 'git',
+        'github', 'gitlab', 'linux', 'python', 'figma',
+        'visualstudiocode', 'nginx', 'vercel', 'supabase', 'amazonaws',
+        'arduino', 'raspberrypi', 'burpsuite', 'owasp', 'postman'
+      ];
+
+      const total = slugs.length;
+      const container = document.createElement('div');
+      container.className = 'icon-cloud-container';
+
+      const baseRadius = Math.min(scene.offsetWidth, scene.offsetHeight) / 2 - 28;
+      const items = [];
+
+      slugs.forEach((slug, i) => {
+        const phi = Math.acos(-1 + (2 * (i + 0.5)) / total);
+        const theta = Math.sqrt(total * Math.PI) * phi;
+
+        const item = document.createElement('div');
+        item.className = 'icon-cloud-item';
+
+        const img = document.createElement('img');
+        img.src = 'https://cdn.simpleicons.org/' + slug;
+        img.alt = slug;
+        img.loading = 'lazy';
+        img.onerror = function() {
+          this.style.display = 'none';
+        };
+
+        item.appendChild(img);
+        container.appendChild(item);
+        items.push({ el: item, phi, theta });
+      });
+
+      scene.appendChild(container);
+
+      let angleX = -0.35;
+      let angleY = 0.4;
+      let speedX = 0.0008;
+      let speedY = 0.0035;
+      let rotating = true;
+      let rafId = null;
+
+      scene.addEventListener('mouseenter', () => { rotating = false; });
+      scene.addEventListener('mouseleave', () => { rotating = true; });
+
+      const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function render(timestamp) {
+        if (rotating && !reduceMotion) {
+          angleX += speedX;
+          angleY += speedY;
+        }
+
+        items.forEach(function(item) {
+          const sinPX = Math.sin(item.phi);
+          const cosPX = Math.cos(item.phi);
+
+          const baseX = baseRadius * sinPX * Math.cos(item.theta);
+          const baseY = baseRadius * sinPX * Math.sin(item.theta);
+          const baseZ = baseRadius * cosPX;
+
+          const x1 = Math.cos(angleY) * baseX + Math.sin(angleY) * baseZ;
+          const z1 = -Math.sin(angleY) * baseX + Math.cos(angleY) * baseZ;
+
+          const y2 = Math.cos(angleX) * baseY - Math.sin(angleX) * z1;
+          const z2 = Math.sin(angleX) * baseY + Math.cos(angleX) * z1;
+
+          const depthNormalized = (z2 + baseRadius) / (2 * baseRadius);
+          const depthScale = 0.7 + 0.3 * depthNormalized;
+          const opacity = 0.85 + 0.15 * depthNormalized;
+
+          item.el.style.transform =
+            'translate3d(' + x1 + 'px,' + y2 + 'px,' + z2 + 'px) scale(' + depthScale + ')';
+          item.el.style.opacity = opacity.toFixed(3);
+          item.el.style.zIndex = Math.round(z2);
+        });
+
+        rafId = requestAnimationFrame(render);
+      }
+
+      if (reduceMotion) {
+        render(0);
+        cancelAnimationFrame(rafId);
+      } else {
+        render(0);
+      }
+
+      const reduceMotionObserver = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (reduceMotionObserver && reduceMotionObserver.addEventListener) {
+        reduceMotionObserver.addEventListener('change', function(e) {
+          if (e.matches) {
+            if (rafId) cancelAnimationFrame(rafId);
+          } else {
+            render(0);
+          }
+        });
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       executeWorkspaceCoreArchitectureCompilation();
       activateWorkspaceSheetTabContainerInstance('about_md');
       fetchGitHubLiveStats();
       initializeDiscordPresenceUpdater();
+      initIconCloud();
+      initTerminalStartupSequence();
 
       const formNextUrl = document.getElementById('form-next-url');
       if (formNextUrl) formNextUrl.value = window.location.href;
