@@ -39,7 +39,17 @@
 
 </div>
 
-![github activity graph](https://github-readme-activity-graph.vercel.app/graph?username=shadow269&bg_color=0d1117&color=ffffff&line=418790&point=00ff62&area=true&hide_border=true)
+<picture>
+  <source
+    srcset="https://github.pumbas.net/api/contributions/shadow269?colour=418790&bgColour=0D1117&dotColour=00FF62&days=30"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    src="https://github.pumbas.net/api/contributions/shadow269?colour=418790&bgColour=F6F8FA&dotColour=418790&days=30"
+    alt="shadow269's Contributions"
+  />
+</picture>
+
 
 <div align="left">
 <picture>
