@@ -615,10 +615,10 @@
     }
 
     .git-graph-panel {
-      background: var(--panel-dark);
-      border: 1px solid var(--border);
+      background: transparent;
+      border: none;
       border-radius: 6px;
-      padding: 12px;
+      padding: 0;
       position: relative;
       transition: border-color 0.3s;
     }
@@ -632,9 +632,9 @@
       width: 100%;
       border-radius: 4px;
       overflow: hidden;
-      background: #030712;
-      margin-bottom: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.02);
+      background: transparent;
+      margin-bottom: 0;
+      border: none;
     }
 
     .git-graph-img-wrapper img {
@@ -3150,9 +3150,19 @@
         <div class="block-heading"><i class="ri-github-line"></i> GitHub Activity</div>
         <div class="git-graph-panel">
           <div class="git-graph-img-wrapper">
-            <img
-              src="https://github-readme-activity-graph.vercel.app/graph?username=shadow269&bg_color=030712&color=10b981&line=10b981&point=06b6d4&area=true&hide_border=true"
-              alt="SHADOW269 Dynamic Contribution Graph" loading="lazy" style="width:100%; height:auto; display:block;" width="322" height="120">
+            <picture>
+              <source
+                media="(prefers-color-scheme: dark)"
+                srcset="https://github.pumbas.net/api/contributions/shadow269?colour=9B6DFF&bgColour=161B22&dotColour=418790&days=30&borderRadius=4.5"
+              />
+              <source
+                media="(prefers-color-scheme: light)"
+                srcset="https://github.pumbas.net/api/contributions/shadow269?colour=6C63FF&bgColour=161B22&dotColour=418790&days=30&borderRadius=4.5"
+              />
+              <img
+                src="https://github.pumbas.net/api/contributions/shadow269?colour=6C63FF&bgColour=161B22&dotColour=418790&days=30&borderRadius=4.5"
+                alt="shadow269's GitHub Contributions" loading="lazy" style="width:100%; height:auto; display:block;" width="322" height="120">
+            </picture>
           </div>
         </div>
       </div>
