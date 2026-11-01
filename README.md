@@ -7,7 +7,7 @@
 ```json
 {
   "alias": "SHADOW",
-  "role": "Junior Pentester (Web & API)",
+  "role": "Trainee Associate at UnifyCX | Web Developer | Security Researcher",
   "focus": "Web, API & Mobile security testing •  side projects",
   "availability": "Open to work (Remote / India 🌍)",
   "interests": [
@@ -67,91 +67,6 @@
   />
 </picture>
 
-
-### `ls -la ~/projects/`
-
-<pre>
-drwxr-xr-x  projects/
-├── <a href="[https://github.com/SHADOW269/App.Keydir.in](https://github.com/SHADOW269/App.Keydir.in)">App.KeyDir.in</a>/          [Next.js · TypeScript]   ○ In-Progress
-├── <a href="[https://github.com/SHADOW269/Keydir.in](https://github.com/SHADOW269/Keydir.in)">KeyDir.in</a>/              [Full Stack]             ● Active
-├── <a href="[https://github.com/SHADOW269/CivicEye](https://github.com/SHADOW269/CivicEye)">CivicEye</a>/               [Python · YOLOv8]        ● Stable
-├── <a href="[https://github.com/SHADOW269/HOMEPAGE](https://github.com/SHADOW269/HOMEPAGE)">Command-Center</a>/         [Docker · Proxmox]       ● Stopped
-├── <a href="[https://github.com/SHADOW269/Cybersapiens](https://github.com/SHADOW269/Cybersapiens)">Cybersapiens</a>/           [Cybersecurity · Log]    ● Completed
-└── <a href="[https://github.com/SHADOW269/Tech-Bazaar](https://github.com/SHADOW269/Tech-Bazaar)">Tech-Bazaar</a>/            [Firebase · TS]          ○ Archive
-</pre>
-
-<table>
-<tr>
-
-<td width="33%" valign="top">
-
-### `📁 CivicEye` &nbsp; *Core*
-
-```python
-# Real-time helmet detection
-model  = "YOLOv8"
-gui    = True
-mode   = "offline-capable"
-target = "edge-devices"
-```
-
-**Features:**
-- 🎯 YOLOv8-based detection
-- 🖥️ GUI with image storage & preview
-- 📦 Offline-capable
-
-[![View Repo](https://img.shields.io/badge/view-repo-58a6ff?style=flat-square&logo=github)](https://github.com/SHADOW269/CivicEye)
-
-</td>
-
-<td width="33%" valign="top">
-
-### `📁 CivicEye` &nbsp; *Server*
-
-```php
-// Robust backend ecosystem
-$auth   = "secure";
-$panel  = "admin";
-$logs   = "violation_tracking";
-$db     = "MySQL";
-```
-
-**Features:**
-- 🔐 Secure user authentication
-- 📊 Admin panel for data management
-- 📝 Centralized violation logging
-
-[![View Demo](https://img.shields.io/badge/view-demo-3fb950?style=flat-square&logo=firefox)](https://civiceye-demo.shadow269.in/)
-[![View Repo](https://img.shields.io/badge/view-repo-58a6ff?style=flat-square&logo=github)](https://github.com/SHADOW269/CivicEye-Website-Server)
-
-</td>
-
-<td width="33%" valign="top">
-
-### `📁 Command` &nbsp; *Center*
-
-```yaml
-# Homelab Infrastructure Dashboard
-services:
-  - proxmox: monitoring
-  - pihole:  dns_blocking
-  - glances: realtime_stats
-  - tunnel:  cloudflare
-```
-
-**Features:**
-- 🖥️ Proxmox & LXC Status
-- 🛡️ Pi-hole & Tunnel stats
-- 📊 Real-time Glances data
-
-[![View Repo](https://img.shields.io/badge/view-repo-58a6ff?style=flat-square&logo=github)](https://github.com/SHADOW269/HOMEPAGE)
-
-</td>
-
-</tr>
-</table>
-
----
 
 ## `cat ~/.social_links`
 
