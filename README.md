@@ -71,7 +71,7 @@
 ## `cat ~/.social_links`
 
 <p align="center">
-  <a href="https://portfolio.shadow269.in/"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/dribbble.svg" width="36"/></a>&nbsp;&nbsp;
+  <a href="https://sakshithshetty.com/"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/dribbble.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://github.com/SHADOW269"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/github.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://linkedin.com/in/shadow269"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/linkedin.svg" width="36"/></a>&nbsp;&nbsp;
   <a href="https://instagram.com/shadow269.in"><img src="https://raw.githubusercontent.com/CLorant/readme-social-icons/main/large/light/instagram.svg" width="36"/></a>&nbsp;&nbsp;
